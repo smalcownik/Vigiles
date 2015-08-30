@@ -27,7 +27,8 @@ function makeRequest(url,cb) {
     }
     http_request.onreadystatechange = function() {    if (http_request.readyState == 4) {
         if (http_request.status == 200) {
-            cb(http_request.responseText);
+            cb(http_request.responseText); // tu wchodzi cb - czyli "function(JSONstring)" w praktyce callback z loadPackage czyli "function(pack)"
+            // z wywolania loadPackage ,  za response text wchodzi obj (ktory w load package jest tworzony jsona w objekt)
         } else {
 
         }
@@ -38,13 +39,13 @@ function makeRequest(url,cb) {
 }
 
 
-function loadPackage(url,callback){
-
+function loadPackage(url,callback){ // ??ta funkcja jest po to zeby do makeRequest dorobic z jSON'a objekt,
+                                    // ??gdyby nie byl on w formie pliku json to wogole by tej funkcji nie musialo byc ??
 
     makeRequest(
         url+"/data.json",
         function(JSONstring){
-            var obj = JSON.parse(JSONstring);
+            var obj = JSON.parse(JSONstring); // robi z json objekt
             obj.url = url; // url to "data/arch1" - czyli poczatek sciezki do plku data.json, nie jest dokladna sciezka bo poczatke przyda
                             // sie jeszcze do zwracania plikow img/jpg
             callback(obj); //to jest funckja anonimowa "function(pack)" z poniższego wuwołania "loadPackage", ktora za "pack" bierze "obj"
