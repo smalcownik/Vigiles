@@ -45,8 +45,11 @@ function loadPackage(url,callback){
         url+"/data.json",
         function(JSONstring){
             var obj = JSON.parse(JSONstring);
-            obj.url = url;
-            callback(obj);
+            obj.url = url; // url to "data/arch1" - czyli poczatek sciezki do plku data.json, nie jest dokladna sciezka bo poczatke przyda
+                            // sie jeszcze do zwracania plikow img/jpg
+            callback(obj); //to jest funckja anonimowa "function(pack)" z poniższego wuwołania "loadPackage", ktora za "pack" bierze "obj"
+                            // i wywoluje funkcjer "browser.showPackage" z argumentem "obj"(->currentPackage->pack->obj)
+            //console.log (obj); //to jest object z data.json
         }
     );
 
@@ -65,7 +68,7 @@ loadPackage("data/arch1",function(pack){
 
     currentPackage = pack;
 
-    Browser.showPackage(currentPackage);
+    Browser.showPackage(currentPackage); //
 
 });
 
