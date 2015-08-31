@@ -11,7 +11,7 @@ Browser.showPackage = function(data){
 };
 
 
-Browser.getDescendants = function(node){
+Browser.getDescendants = function(node){ // f-kcja odczytuje nody wg hierarchii, szukaj¹c ich wg³¹b hierarchia ustalona w pliku json
 
     var all = [];
 
@@ -30,13 +30,15 @@ Browser.getDescendants = function(node){
     collectChildren(node);
 
     return all;
+    //console.log(all);
 
 };
 
 Browser.buildImgHtml = function(node){
 
     var imgHTML = document.createElement('img');
-    imgHTML.src=this.data.url+'/imgs/'+node.id+'.jpg';
+    imgHTML.src=this.data.url+'/imgs/'+node.id+'.jpg'; // data.url to jest "data/arch1" z wywolania loadPckage
+                // z pliku main.js - jest to sciezka do folderu
 
     if(node.pos){
 
@@ -55,8 +57,7 @@ Browser.showDescendants = function(node){
 
 };
 
-Browser.showImgsTree = function(node){
-
+Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z showPackage
 
 
     function buildNode(n,parent){
@@ -72,14 +73,14 @@ Browser.showImgsTree = function(node){
                 if(parent){
 
                     var parentW = parent.DOM.offsetWidth;
-                    var parentH = parent.DOM.height*(parentW/parent.DOM.width)
+                    var parentH = parent.DOM.height*(parentW/parent.DOM.width);
                     var parentT = parent.DOM.offsetTop;
                     var parentL = parent.DOM.offsetLeft;
 
-                    console.log(parentW,parent.DOM.src)
+                    console.log(parentW,parent.DOM.src);
 
                     var imgW = (parent.DOM.offsetWidth * n.pos.w);
-                    var imgH = imgHTML.height*(imgW/imgHTML.width)
+                    var imgH = imgHTML.height*(imgW/imgHTML.width);
 
                     imgHTML.style.width=String(imgW)+'px';
 

@@ -29,6 +29,8 @@ function makeRequest(url,cb) {
         if (http_request.status == 200) {
             cb(http_request.responseText); // tu wchodzi cb - czyli "function(JSONstring)" w praktyce callback z loadPackage czyli "function(pack)"
             // z wywolania loadPackage ,  za response text wchodzi obj (ktory w load package jest tworzony jsona w objekt)
+            // to jest miejsce gdzie wrzuca się w xmlhttprequest kod do obróbki - i dlatego u nas jest tu zmienna bo tym kodem są całe duże funkcje,
+            // które (m.in.) korzystaja z jsona itp.
         } else {
 
         }
@@ -58,13 +60,6 @@ function loadPackage(url,callback){ // ??ta funkcja jest po to zeby do makeReque
 
 var currentPackage;
 
-
-
-
-
-
-
-
 loadPackage("data/arch1",function(pack){
 
     currentPackage = pack;
@@ -72,7 +67,3 @@ loadPackage("data/arch1",function(pack){
     Browser.showPackage(currentPackage); //
 
 });
-
-
-
-
