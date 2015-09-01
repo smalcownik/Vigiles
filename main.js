@@ -36,7 +36,7 @@ function makeRequest(url,cb) {
         }
     }};
     http_request.open('GET', url, true);
-    http_request.send(null);
+    http_request.send(null); // zamiast null moze byc jakis string ale tylko w metodzie POST (nie GET)
 
 }
 
