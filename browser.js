@@ -11,7 +11,7 @@ Browser.showPackage = function(data){
 };
 
 
-Browser.getDescendants = function(node){ // f-kcja odczytuje nody wg hierarchii, szukaj¹c ich wg³¹b hierarchia ustalona w pliku json
+Browser.getDescendants = function(node){ // f-kcja odczytuje nody wg hierarchii, szukajï¿½c ich wgï¿½ï¿½b hierarchia ustalona w pliku json
 
     var all = [];
 

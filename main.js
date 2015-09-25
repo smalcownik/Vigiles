@@ -60,6 +60,8 @@ function loadPackage(url,callback){ // ??ta funkcja jest po to zeby do makeReque
 
 var currentPackage;
 
+
+
 loadPackage("data/arch1",function(pack){
 
     currentPackage = pack;
