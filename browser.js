@@ -7,7 +7,8 @@ var Browser = {
 Browser.showPackage = function(data){
     this.data = data;
     this.actualRoot = data.imgs[0];
-    this.showImgsTree(this.actualRoot);
+    //this.showImgsTree(this.actualRoot);
+    this.showPoints(this.actualRoot);
 };
 
 
@@ -57,20 +58,26 @@ Browser.showDescendants = function(node){
 
 };
 
-Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z showPackage
-
+Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z showPackage // node = data.imgs[0];
 
     function buildNode(n,parent){
 
 
-
         var imgHTML = document.createElement('img');
+        console.log('stworzony img');
+
         imgHTML.src=this.data.url+'/imgs/'+n.id+'.jpg';
+        console.log('nadany src');
+
+
 
         var that = this;
         imgHTML.onload = function(){
             (function(){
                 if(parent){
+
+                    console.log('wykonalo sie onload');
+
 
                     var parentW = parent.DOM.offsetWidth;
                     var parentH = parent.DOM.height*(parentW/parent.DOM.width);
@@ -87,7 +94,6 @@ Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana
 
                     imgHTML.style.top=String(parentT+parentH*(n.pos.y+1)*0.5-imgH*0.5)+'px';
                     imgHTML.style.left=String(parentL+parentW*(n.pos.x+1)*0.5-imgW*0.5)+'px';
-
 
 
                 }else{
@@ -114,5 +120,49 @@ Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana
     }
 
     buildNode.call(this,node);
+
+
+
+};
+
+
+Browser.showPoints = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z showPackage // node = data.imgs[0];
+
+    function insertPoint(n,parent){
+
+
+        var divPoint = document.createElement('div');
+        console.log("jest div");
+
+        var that = this;
+
+        (function(){
+
+                console.log("jest onload");
+
+                if(parent){
+
+                    console.log('jest parent');
+
+
+                }else{
+
+                    console.log('nie ma parenta');
+
+                }
+
+                document.body.appendChild(divPoint);
+                //document.body.appendChild(imgHTML);
+
+
+                for (var i = 0; i < n.children.length; i++) {
+                    insertPoint.call(this,n.children[i],n);
+
+                }
+        }).call(that)
+
+    }
+
+    insertPoint.call(this,node);
 
 };
