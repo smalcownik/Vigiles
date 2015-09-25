@@ -7,7 +7,9 @@ var Browser = {
 Browser.showPackage = function(data){
     this.data = data;
     this.actualRoot = data.imgs[0];
+    debugger;
     this.showImgsTree(this.actualRoot);
+    //this.showPoints(this.actualRoot);
 };
 
 
@@ -59,9 +61,7 @@ Browser.showDescendants = function(node){
 
 Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z showPackage
 
-
     function buildNode(n,parent){
-
 
 
         var imgHTML = document.createElement('img');
@@ -89,7 +89,6 @@ Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana
                     imgHTML.style.left=String(parentL+parentW*(n.pos.x+1)*0.5-imgW*0.5)+'px';
 
 
-
                 }else{
                     imgHTML.style.width=String(this.rootWidth)+'px';
                     imgHTML.style.top='0px';
@@ -110,6 +109,25 @@ Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana
                 }
         }).call(that);
         }
+
+    }
+
+    buildNode.call(this,node);
+    console.log()
+
+
+};
+
+
+Browser.showPoints = function(node){ // ma pokazac Points jako divy na zdjeciach
+
+
+    function buildNodePoints(n,parent){
+
+
+        var divPoint = document.createElement('div');
+
+
 
     }
 
