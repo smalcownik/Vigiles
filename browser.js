@@ -7,14 +7,10 @@ var Browser = {
 Browser.showPackage = function(data){
     this.data = data;
     this.actualRoot = data.imgs[0];
-<<<<<<< HEAD
-    //this.showImgsTree(this.actualRoot);
-    this.showPoints(this.actualRoot);
-=======
-    debugger;
+
     this.showImgsTree(this.actualRoot);
-    //this.showPoints(this.actualRoot);
->>>>>>> origin/master
+    this.showPoints(this.actualRoot);
+
 };
 
 
@@ -64,11 +60,10 @@ Browser.showDescendants = function(node){
 
 };
 
-<<<<<<< HEAD
+
 Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z showPackage // node = data.imgs[0];
-=======
-Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z showPackage
->>>>>>> origin/master
+
+
 
     function buildNode(n,parent){
 
@@ -136,16 +131,6 @@ Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana
 };
 
 
-Browser.showPoints = function(node){ // ma pokazac Points jako divy na zdjeciach
-
-
-    function buildNodePoints(n,parent){
-
-
-<<<<<<< HEAD
-
-};
-
 
 Browser.showPoints = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z showPackage // node = data.imgs[0];
 
@@ -176,7 +161,8 @@ Browser.showPoints = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z
                 //document.body.appendChild(imgHTML);
 
 
-                for (var i = 0; i < n.children.length; i++) {
+                for (var i = 0; i < n.children.length; i++) { // tu jest wszystko zle bo trzeba tak zrobic zeby kazdy points
+                                                                // byl jako dov a nie children
                     insertPoint.call(this,n.children[i],n);
 
                 }
@@ -185,14 +171,6 @@ Browser.showPoints = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z
     }
 
     insertPoint.call(this,node);
-=======
-        var divPoint = document.createElement('div');
 
-
-
-    }
-
-    buildNode.call(this,node);
->>>>>>> origin/master
 
 };
