@@ -8,7 +8,11 @@ Browser.showPackage = function(data){
     this.data = data;
     this.actualRoot = data.imgs[0];
 
+<<<<<<< HEAD
     this.showImgsTree(this.actualRoot);
+=======
+    //this.showImgsTree(this.actualRoot);
+>>>>>>> 9b2c301b94cef6e32b1d47fc7c80c9fc1500f532
     this.showPoints(this.actualRoot);
 
 };
@@ -171,6 +175,11 @@ Browser.showPoints = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z
     }
 
     insertPoint.call(this,node);
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> 9b2c301b94cef6e32b1d47fc7c80c9fc1500f532
 };
