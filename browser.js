@@ -7,8 +7,7 @@ var Browser = {
 Browser.showPackage = function(data){
     this.data = data;
     this.actualRoot = data.imgs[0];
-    //this.showImgsTree(this.actualRoot);
-
+    this.showImgsTree(this.actualRoot);
     this.showPoints(this.actualRoot);
 
 };
@@ -63,17 +62,12 @@ Browser.showDescendants = function(node){
 
 Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z showPackage // node = this.actualRoot = data.imgs[0];
 
-
-
     function buildNode(n,parent){
 
 
         var imgHTML = document.createElement('img');
-        console.log('stworzony img');
 
         imgHTML.src=this.data.url+'/imgs/'+n.id+'.jpg';
-        console.log('nadany src');
-
 
 
         var that = this;
@@ -81,13 +75,11 @@ Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana
             (function(){
                 if(parent){
 
-                    console.log('wykonalo sie onload');
 
-
-                    var parentW = parent.DOM.offsetWidth;
+                    var parentW = parent.DOM.offsetWidth; // szerokosc (wraz z padding i border), analogicznie Height
                     var parentH = parent.DOM.height*(parentW/parent.DOM.width);
-                    var parentT = parent.DOM.offsetTop;
-                    var parentL = parent.DOM.offsetLeft;
+                    var parentT = parent.DOM.offsetTop; // position top
+                    var parentL = parent.DOM.offsetLeft; // position left
 
                     console.log(parentW,parent.DOM.src);
 
@@ -125,7 +117,6 @@ Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana
     }
 
     buildNode.call(this,node);
-    console.log()
 
 
 };
@@ -135,10 +126,8 @@ Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana
 Browser.showPoints = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z showPackage // node =this.actualRoot = data.imgs[0];
 
     var divPoint = document.createElement('div');
-    debugger;
-    function insertPoint(n,parent){  // n poczatkowy to data.imgs[0],
-
-
+    //debugger;
+    function insertPoint(n,parent){  // n poczatkowy to data.imgs[0]
 
         var that = this;
 
@@ -149,31 +138,23 @@ Browser.showPoints = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z
 
                     for (var j = 0; j< n.points.length;j++){
                         divPoint= document.createElement('div');
-                        divPoint.innerHTML = n.id;
+                        divPoint.innerHTML = n.id +"."+j;
                         document.body.appendChild(divPoint);
                         console.log("jest dodany div z parentem");
-
                     }
 
+                }
+                else{
 
-                }else{
-
-                    for (var k = 0; k< n.points.length;k++){
+                    for (var j = 0; j< n.points.length;j++){
                         divPoint = document.createElement('div');
-                        divPoint.innerHTML = n.id;
+                        divPoint.innerHTML = n.id+"."+j;
                         document.body.appendChild(divPoint);
 
                         console.log("jest dodany div bez parenta");
-
                     }
 
-
-
                 }
-
-                //document.body.appendChild(divPoint);
-                //document.body.appendChild(imgHTML);
-
 
                 for (var i = 0; i < n.children.length; i++) { // tu jest wszystko zle bo trzeba tak zrobic zeby kazdy points
                                                                 // byl jako div a nie kazdy children
