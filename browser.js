@@ -1,9 +1,7 @@
 var Browser = {
     data:null,
     actualRoot:null,
-    rootWidth:512,
-    pointsClassHolder:[],
-    imgsClassHolder:[]
+    rootWidth:512
 };
 
 Browser.showPackage = function(data){
@@ -65,8 +63,6 @@ Browser.showDescendants = function(node){
 
 Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z showPackage // node = this.actualRoot = data.imgs[0];
 
-    var imgClass = this.imgsClassHolder;
-
     function buildNode(n,parent){
 
 
@@ -77,9 +73,10 @@ Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana
 
 
         var that = this;
+
+
         imgHTML.onload = function(){
 
-           // debugger;
 
             (function(){
                 if(parent){
@@ -116,10 +113,14 @@ Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana
 
 
 
+                imgHTML.addEventListener('click',function(){ // TUTAJ JESTEM TUTAJ DOPISAC EVENT Z PUNKTAMI NA HOVER
+                    n.points[2].DOM.style.background = 'black';
+                })
+
+
+
 
                 document.body.appendChild(imgHTML);
-               /* imgHTML.className= "obraz"+ n.id;
-                imgClass.push(imgHTML.className)*/;
 
 
                 for (var i = 0; i < n.children.length; i++) {
@@ -134,55 +135,49 @@ Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana
 
     buildNode.call(this,node);
 
-   // console.log(imgClass);
-
-
 };
 
 
 Browser.showPoints = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z showPackage // node =this.actualRoot = data.imgs[0];
 
-    var pointClass = this.pointsClassHolder;
-
-    //var divPoint = document.createElement('div');
-    //debugger;
-    function insertPoint(n,parent){  // n poczatkowy to data.imgs[0]
-
-        //var divPoint = document.createElement('div');
+    function insertPoint(n,parent){
 
         var that = this;
 
         (function(){
 
-
-
                 if(parent){
 
-                    for (var j = 0; j< n.points.length;j++){
+                    for (var i = 0; i< n.points.length;i++){
                         var divPoint= document.createElement('div');
-                        divPoint.innerHTML = n.id +"."+j;
+                        divPoint.innerHTML = n.id +"."+i;
                         document.body.appendChild(divPoint);
-                        divPoint.className= "point"+ n.id;
-
-                        //console.log(divPoint.className);
+                        n.points[i].DOM = divPoint;
+                        divPoint.style.top=n.points[i].x+'px';
+                        divPoint.style.left=n.points[i].y+'px';
 
                         console.log("jest dodany div z parentem");
+                        console.log(n.points[i].DOM);
+                        console.log(n.DOM)
+
                     }
-                    pointClass.push(divPoint.className);
 
-                }
-                else{
+                }else{
 
-                    for (var j = 0; j< n.points.length;j++){
+                    for (var i = 0; i< n.points.length;i++){
                         var divPoint = document.createElement('div');
-                        divPoint.innerHTML = n.id+"."+j;
+                        divPoint.innerHTML = n.id+"."+i;
                         document.body.appendChild(divPoint);
-                        divPoint.className= "point"+ n.id;
+                        n.points[i].DOM = divPoint;
+                        divPoint.style.top=n.points[i].x+'px';
+                        divPoint.style.left=n.points[i].y+'px';
 
 
                         console.log("jest dodany div bez parenta");
+                        console.log(n.points[i].DOM);
+
+                        console.log(n.DOM)
                     }
-                    pointClass.push(divPoint.className);
 
                 }
 
@@ -191,19 +186,41 @@ Browser.showPoints = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z
                     insertPoint.call(this,n.children[i],n);
 
                 }
-        }).call(that)
+        }).call(that);
+
+
 
     }
 
     insertPoint.call(this,node);
 
-   // document.getElementsByClassName(ids[2])[0].innerHTML+="!";
+
+    function hoverPoint(n,parent){  // n poczatkowy to data.imgs[0]
+
+        var that = this;
+
+        (function(){
 
 
-    console.log(pointClass);
-    console.log(Browser.pointsClassHolder); // tu kanalia dziala a trzy linijki nizej (poza funkcja) NIET
+                for (var i = 0; i< n.points.length;i++){
+                    console.log(n.points[i].DOM);
 
-    function pointsOnHover(idArray){
+
+                }
+            console.log(n.DOM)
+
+            for (var i = 0; i < n.children.length; i++) {
+                hoverPoint.call(this,n.children[i],n);
+
+            }
+        }).call(that);
+
+    }
+
+    hoverPoint.call(this,node);
+
+
+    /*function pointsOnHover(idArray){
 
         for(var i=0; i<idArray.length;i++){
 
@@ -215,9 +232,8 @@ Browser.showPoints = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z
             }
 
         }
-    }
+    }*/
 
-    pointsOnHover(pointClass);
 
 };
 
