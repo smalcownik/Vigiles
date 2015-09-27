@@ -7,9 +7,7 @@ var Browser = {
 Browser.showPackage = function(data){
     this.data = data;
     this.actualRoot = data.imgs[0];
-
-
-    this.showImgsTree(this.actualRoot);
+    //this.showImgsTree(this.actualRoot);
 
     this.showPoints(this.actualRoot);
 
@@ -63,7 +61,7 @@ Browser.showDescendants = function(node){
 };
 
 
-Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z showPackage // node = data.imgs[0];
+Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z showPackage // node = this.actualRoot = data.imgs[0];
 
 
 
@@ -134,37 +132,51 @@ Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana
 
 
 
-Browser.showPoints = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z showPackage // node = data.imgs[0];
+Browser.showPoints = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z showPackage // node =this.actualRoot = data.imgs[0];
 
-    function insertPoint(n,parent){
+    var divPoint = document.createElement('div');
+    debugger;
+    function insertPoint(n,parent){  // n poczatkowy to data.imgs[0],
 
 
-        var divPoint = document.createElement('div');
-        console.log("jest div");
 
         var that = this;
 
         (function(){
 
-                console.log("jest onload");
 
                 if(parent){
 
-                    console.log('jest parent');
+                    for (var j = 0; j< n.points.length;j++){
+                        divPoint= document.createElement('div');
+                        divPoint.innerHTML = n.id;
+                        document.body.appendChild(divPoint);
+                        console.log("jest dodany div z parentem");
+
+                    }
 
 
                 }else{
 
-                    console.log('nie ma parenta');
+                    for (var k = 0; k< n.points.length;k++){
+                        divPoint = document.createElement('div');
+                        divPoint.innerHTML = n.id;
+                        document.body.appendChild(divPoint);
+
+                        console.log("jest dodany div bez parenta");
+
+                    }
+
+
 
                 }
 
-                document.body.appendChild(divPoint);
+                //document.body.appendChild(divPoint);
                 //document.body.appendChild(imgHTML);
 
 
                 for (var i = 0; i < n.children.length; i++) { // tu jest wszystko zle bo trzeba tak zrobic zeby kazdy points
-                                                                // byl jako dov a nie children
+                                                                // byl jako div a nie kazdy children
                     insertPoint.call(this,n.children[i],n);
 
                 }
