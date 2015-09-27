@@ -1,7 +1,9 @@
 var Browser = {
     data:null,
     actualRoot:null,
-    rootWidth:512
+    rootWidth:512,
+    pointsClassHolder:[],
+    imgsClassHolder:[]
 };
 
 Browser.showPackage = function(data){
@@ -9,6 +11,7 @@ Browser.showPackage = function(data){
     this.actualRoot = data.imgs[0];
     this.showImgsTree(this.actualRoot);
     this.showPoints(this.actualRoot);
+    //this.getDescendants(this.actualRoot);
 
 };
 
@@ -32,7 +35,7 @@ Browser.getDescendants = function(node){ // f-kcja odczytuje nody wg hierarchii,
     collectChildren(node);
 
     return all;
-    //console.log(all);
+    console.log(all);
 
 };
 
@@ -47,7 +50,7 @@ Browser.buildImgHtml = function(node){
     }
 
     document.body.appendChild(imgHTML);
-};
+}; // to chyba niebyle bo f-kcja "showImgstree" to zastapila
 
 Browser.showDescendants = function(node){
 
@@ -62,16 +65,22 @@ Browser.showDescendants = function(node){
 
 Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z showPackage // node = this.actualRoot = data.imgs[0];
 
+    var imgClass = this.imgsClassHolder;
+
     function buildNode(n,parent){
 
 
-        var imgHTML = document.createElement('img');
+        var imgHTML= document.createElement('img');
+
 
         imgHTML.src=this.data.url+'/imgs/'+n.id+'.jpg';
 
 
         var that = this;
         imgHTML.onload = function(){
+
+           // debugger;
+
             (function(){
                 if(parent){
 
@@ -97,6 +106,7 @@ Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana
                     imgHTML.style.width=String(this.rootWidth)+'px';
                     imgHTML.style.top='0px';
                     imgHTML.style.left='0px';
+
                 }
 
                 imgHTML.style.border='1px dashed blue';
@@ -104,11 +114,17 @@ Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana
 
                 n.DOM = imgHTML;
 
+
+
+
                 document.body.appendChild(imgHTML);
+               /* imgHTML.className= "obraz"+ n.id;
+                imgClass.push(imgHTML.className)*/;
 
 
                 for (var i = 0; i < n.children.length; i++) {
                     buildNode.call(this,n.children[i],n);
+
 
                 }
         }).call(that);
@@ -118,41 +134,55 @@ Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana
 
     buildNode.call(this,node);
 
+   // console.log(imgClass);
+
 
 };
 
 
-
 Browser.showPoints = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z showPackage // node =this.actualRoot = data.imgs[0];
 
-    var divPoint = document.createElement('div');
+    var pointClass = this.pointsClassHolder;
+
+    //var divPoint = document.createElement('div');
     //debugger;
     function insertPoint(n,parent){  // n poczatkowy to data.imgs[0]
+
+        //var divPoint = document.createElement('div');
 
         var that = this;
 
         (function(){
 
 
+
                 if(parent){
 
                     for (var j = 0; j< n.points.length;j++){
-                        divPoint= document.createElement('div');
+                        var divPoint= document.createElement('div');
                         divPoint.innerHTML = n.id +"."+j;
                         document.body.appendChild(divPoint);
+                        divPoint.className= "point"+ n.id;
+
+                        //console.log(divPoint.className);
+
                         console.log("jest dodany div z parentem");
                     }
+                    pointClass.push(divPoint.className);
 
                 }
                 else{
 
                     for (var j = 0; j< n.points.length;j++){
-                        divPoint = document.createElement('div');
+                        var divPoint = document.createElement('div');
                         divPoint.innerHTML = n.id+"."+j;
                         document.body.appendChild(divPoint);
+                        divPoint.className= "point"+ n.id;
+
 
                         console.log("jest dodany div bez parenta");
                     }
+                    pointClass.push(divPoint.className);
 
                 }
 
@@ -167,4 +197,29 @@ Browser.showPoints = function(node){ // ta rozgryzc bo to jest f-kcja wywolana z
 
     insertPoint.call(this,node);
 
+   // document.getElementsByClassName(ids[2])[0].innerHTML+="!";
+
+
+    console.log(pointClass);
+    console.log(Browser.pointsClassHolder); // tu kanalia dziala a trzy linijki nizej (poza funkcja) NIET
+
+    function pointsOnHover(idArray){
+
+        for(var i=0; i<idArray.length;i++){
+
+            for(var j=0; j<document.getElementsByClassName(idArray[i]).length; j++){
+
+                document.getElementsByClassName(idArray[i])[j].innerHTML+="!"; // juz "inner html dziala na kazdym divie"
+                //document.getElementsByClassName(idArray[i])[j].addEventListener(""); // juz "inner html dziala na kazdym divie"
+
+            }
+
+        }
+    }
+
+    pointsOnHover(pointClass);
+
 };
+
+//console.log(Browser.pointsClassHolder); // to cholera nie dziala - tablica sie nie zapenila nie wiedziec czemu
+
