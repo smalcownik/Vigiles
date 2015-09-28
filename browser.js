@@ -113,9 +113,14 @@ Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana
 
 
 
-                imgHTML.addEventListener('click',function(){ // TUTAJ JESTEM TUTAJ DOPISAC EVENT Z PUNKTAMI NA HOVER
-                    n.points[2].DOM.style.background = 'black';
-                })
+                imgHTML.addEventListener('mouseover',function(){ // TUTAJ JESTEM TUTAJ DOPISAC EVENT Z PUNKTAMI NA HOVER
+                    for(var i =0; i< n.points.length;i++){
+                    n.points[i].DOM.style.background = 'black';}
+                });
+                imgHTML.addEventListener('mouseout',function(){ // TUTAJ JESTEM TUTAJ DOPISAC EVENT Z PUNKTAMI NA HOVER
+                    for(var i =0; i< n.points.length;i++){
+                        n.points[i].DOM.style.background = 'yellow';}
+                });
 
 
 
