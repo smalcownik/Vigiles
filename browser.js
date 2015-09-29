@@ -115,13 +115,28 @@ Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana
 
                 imgHTML.addEventListener('mouseover',function(){ // TUTAJ JESTEM TUTAJ DOPISAC EVENT Z PUNKTAMI NA HOVER
                     for(var i =0; i< n.points.length;i++){
-                    n.points[i].DOM.style.background = 'black';}
+                    n.points[i].DOM.style.background = 'black';
+                        n.points[i].DOM.style.color = 'white';}
                 });
                 imgHTML.addEventListener('mouseout',function(){ // TUTAJ JESTEM TUTAJ DOPISAC EVENT Z PUNKTAMI NA HOVER
                     for(var i =0; i< n.points.length;i++){
-                        n.points[i].DOM.style.background = 'yellow';}
+                        n.points[i].DOM.style.background = 'yellow';
+                        n.points[i].DOM.style.color = 'darkblue';}
                 });
 
+
+                imgHTML.addEventListener('dblclick',function(e){ //działa !
+                    //debugger;
+                        var divPoint= document.createElement('div');
+                        n.points[n.points.length]={x:e.clientX,y:e.clientY};
+                        divPoint.innerHTML = n.id +"."+n.points.length;
+
+                        n.points[n.points.length-1].DOM = divPoint;
+
+                        divPoint.style.top=n.points[n.points.length-1].y+'px';
+                        divPoint.style.left= n.points[n.points.length-1].x+'px';
+                        document.body.appendChild(divPoint);
+                    });
 
 
 
