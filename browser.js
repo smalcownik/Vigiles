@@ -116,12 +116,14 @@ Browser.showImgsTree = function(node){ // ta rozgryzc bo to jest f-kcja wywolana
                 imgHTML.addEventListener('mouseover',function(){ // TUTAJ JESTEM TUTAJ DOPISAC EVENT Z PUNKTAMI NA HOVER
                     for(var i =0; i< n.points.length;i++){
                     n.points[i].DOM.style.background = 'black';
-                        n.points[i].DOM.style.color = 'white';}
+                        n.points[i].DOM.style.color = 'white';
+                        n.points[i].DOM.style.opacity = 0.8;}
                 });
                 imgHTML.addEventListener('mouseout',function(){ // TUTAJ JESTEM TUTAJ DOPISAC EVENT Z PUNKTAMI NA HOVER
                     for(var i =0; i< n.points.length;i++){
                         n.points[i].DOM.style.background = 'yellow';
-                        n.points[i].DOM.style.color = 'darkblue';}
+                        n.points[i].DOM.style.color = 'darkblue';
+                        n.points[i].DOM.style.opacity = 0.1;}
                 });
 
 
