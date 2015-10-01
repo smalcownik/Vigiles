@@ -41,7 +41,7 @@ Browser.buildImgHtml = function(node){
 
     var imgHTML = document.createElement('img');
     imgHTML.src=this.data.url+'/imgs/'+node.id+'.jpg'; // data.url to jest "data/arch1" z wywolania loadPckage
-                // z pliku main.js - jest to sciezka do folderu
+                // z pliku Viewer.js - jest to sciezka do folderu
 
     if(node.pos){
 
