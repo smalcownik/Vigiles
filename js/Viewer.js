@@ -1,4 +1,4 @@
-define(["./MapDataProvider","./PatchBuilder","./PointshBuilder"], function () {
+define(["./MapDataProvider","./PatchBuilder","./PointshBuilder"], function () { //wyswietla strone i poczatkowe dane
 
             var exported = {
 

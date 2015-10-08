@@ -1,4 +1,4 @@
-define([], function () {
+define([], function () { // tworzy okbjekty zdjec (łatek),
 
         var exported = function Patch(){};
         exported.prototype.buildDOM =function(){};

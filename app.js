@@ -12,7 +12,7 @@ requirejs.config({
 });
 
 // Start the main app logic.
-requirejs(["Viewer"
+requirejs(["PointsBuilder"
     ],
     function(Viewer) {
     console.log(Viewer);
