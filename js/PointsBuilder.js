@@ -4,6 +4,9 @@ define([], function () { //tworzy objekty dodawanych punktów razem z właściow
                 test : 2
             };
 
+        exported.build = function(data){
+
+        };
 
             return exported;
         }

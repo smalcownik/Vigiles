@@ -1,8 +1,11 @@
 define([], function () { //
 
-            var exported = {};
+            var exported = function(data){
 
-            exported.loadMap = function(){};
+                //TODO: zrovic walidacje
+                console.log('tu ma byc walidacja',data);
+
+            };
 
 
             return exported;
