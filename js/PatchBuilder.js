@@ -5,9 +5,11 @@ define([], function () {
             };
 
             exported.build = function(data){
-                data.traverse(function(image){
-
-                });
+                data.traverse(
+                    function(image){
+                        console.log('visted!',image);
+                    }
+                );
             };
 
 

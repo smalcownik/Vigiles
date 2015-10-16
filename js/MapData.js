@@ -10,12 +10,13 @@ define(['./MapDataValidator'], function (MapDataValidator) {
         };
 
 
-        exported.prototype.traverse = function(visitFn){
+        exported.prototype.dig = function dig(image,visitFn){
 
-           //TODO: zaimplemetnować trawersowanie drzewa i napisac testy
-
+            visitFn(image);
 
         };
+
+
 
         exported.prototype.getAllNodes = function(){
 

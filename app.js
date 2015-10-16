@@ -12,7 +12,8 @@ requirejs.config({
 });
 
 // Start the main app logic.
-requirejs(["Viewer"
+requirejs([
+        "Viewer"
     ],
     function(Viewer) {
 

@@ -16,7 +16,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder"], function (
 
         exported.loadURL = function(url){
 
-            //TODO: dopsiać analogiczne testy argumentów w innych funkcjach
+            //TODO: dopisać analogiczne testy argumentów w innych funkcjach
             if(typeof(url)!=='string'){
                 throw Error('invalid url');
             }
