@@ -14,7 +14,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder"], function (
             //TODO: stworzyc prosty interfejs
         };
 
-        exported.loadURL = function(url){
+        exported.loadURL = function(url,afterLoad){
 
             //TODO: dopisać analogiczne testy argumentów w innych funkcjach
             if(typeof(url)!=='string'){
@@ -26,10 +26,12 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder"], function (
                 // url powinine byc adresem katalogu w ktorym jest archiwum mapy
             }
 
+
             MapDataProvider.loadData(url,
                 function(data){
                     exported.currentData = data;
-                    console.log(exported.currentData);
+                    exported.currentData.url = url;
+                    exported.showMapData(exported.currentData);
                 }
             );
         };
