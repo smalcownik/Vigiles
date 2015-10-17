@@ -1,7 +1,8 @@
 define([], function () {
 
             var exported = {
-                test : 2
+                test : 2,
+                images:[]
             };
 
 
@@ -37,11 +38,16 @@ define([], function () {
 
                 }
 
-                imgHTML.style.top=String( image.absolutePos.y-image.absolutePos.h*0.5)+'px';
-                imgHTML.style.left=String(image.absolutePos.x-image.absolutePos.w*0.5)+'px';
-                imgHTML.style.width=String(image.absolutePos.w)+'px';
-                imgHTML.style.height=String(image.absolutePos.h)+'px';
+                image.updPosition = function(){
 
+                    imgHTML.style.top=String( image.absolutePos.y-image.absolutePos.h*0.5)+'px';
+                    imgHTML.style.left=String(image.absolutePos.x-image.absolutePos.w*0.5)+'px';
+                    imgHTML.style.width=String(image.absolutePos.w)+'px';
+                    imgHTML.style.height=String(image.absolutePos.h)+'px';
+
+                };
+
+                image.updPosition();
 
                 imgHTML.style.border='1px dashed blue';
                 imgHTML.style.position='absolute';
@@ -49,6 +55,7 @@ define([], function () {
             };
 
             exported.buildImage = function(data,image,cb){
+
                 var imgHTML= document.createElement('img');
                 imgHTML.src=data.url+'/imgs/'+image.id+'.jpg';
                 image.DOM = imgHTML;
@@ -56,6 +63,8 @@ define([], function () {
                 image.DOM.addEventListener('load',function(){
                     cb();
                 });
+
+                exported.images.push(image);
 
                 document.body.appendChild(imgHTML);
             };

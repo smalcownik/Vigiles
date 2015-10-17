@@ -3,7 +3,14 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder"], function (
     ) { //wyswietla strone i poczatkowe dane
 
         var exported = {
+            zoom:1,
+            delta:{
+                x:0,
+                y:0
+            },
+            positionable:[
 
+            ]
         };
 
         exported.initializeViewer = function(){
@@ -38,6 +45,11 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder"], function (
 
         exported.showMapData = function(data){
             PatchBuilder.build(data);
+
+            PatchBuilder.images.forEach(function(img){
+                exported.positionable.push(img);
+            });
+
             PointsBuilder.build(data);
         };
         //exported.showMapData = function(){};
