@@ -70,6 +70,7 @@ define([], function () {
             };
 
             exported.build = function(data){
+                //debugger;
                 data.traverse(
                     function(image,parent){
                         exported.buildImage(data,image,function(){

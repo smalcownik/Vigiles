@@ -32,7 +32,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder"], function (
                 throw Error('invalid url');
                 // url powinine byc adresem katalogu w ktorym jest archiwum mapy
             }
-
+            //debugger;
 
             MapDataProvider.loadData(url,
                 function(data){
@@ -44,6 +44,9 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder"], function (
         };
 
         exported.showMapData = function(data){
+
+            //debugger;
+
             PatchBuilder.build(data);
 
             PatchBuilder.images.forEach(function(img){

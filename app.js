@@ -15,8 +15,8 @@ requirejs.config({
 requirejs([
         "Viewer"
     ],
-    function(Viewer) {
 
+    function(Viewer) {
         Viewer.initializeViewer();
 
         Viewer.loadURL('data/arch1');
