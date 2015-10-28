@@ -10,25 +10,25 @@ define(['./MapDataValidator'], function (MapDataValidator) {
         };
 
 
-        exported.prototype.dig = function dig(image,visitFn,parent){
+        exported.prototype.dig = function dig(image,visitFunction,parent){
             //debugger;
-            visitFn(image,parent);
-            //debugger;
+            visitFunction(image,parent);// visitFunction jest argumentem "dig'a", można tu wstawić dowolną funkcję, która jakoś wytestuje nam pozostale zmienne
+            debugger;
             image.children.forEach(
                 function(childrenImage){
 
-                    this.dig(childrenImage,visitFn,image);
+                    this.dig(childrenImage,visitFunction,image);
                 }
                 ,this);
 
         };
 
 
-        exported.prototype.traverse = function(visitFn){
+        exported.prototype.traverse = function(visitFunction){
 
            //TODO: zaimplemetnować trawersowanie drzewa i napisac testy
 
-            this.dig(this.images[0],visitFn,null);
+            this.dig(this.images[0],visitFunction,null);
         };
 
         exported.prototype.getAllNodes = function(){
