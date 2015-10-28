@@ -3,7 +3,7 @@ define(['./MapDataValidator'], function (MapDataValidator) {
         var exported = function MapData(jsonString){
             //debugger;
             var parsed = JSON.parse(jsonString);
-            MapDataValidator(parsed);
+            MapDataValidator.ValidateData(parsed);
             this.images = parsed.imgs;
             this.meta = parsed.meta;
 
@@ -11,7 +11,7 @@ define(['./MapDataValidator'], function (MapDataValidator) {
 
 
         exported.prototype.dig = function dig(image,visitFn,parent){
-            debugger;
+            //debugger;
             visitFn(image,parent);
             //debugger;
             image.children.forEach(
