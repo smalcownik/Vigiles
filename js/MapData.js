@@ -1,9 +1,10 @@
 define(['./MapDataValidator'], function (MapDataValidator) {
 
         var exported = function MapData(jsonString){
-            //debugger;
+
             var parsed = JSON.parse(jsonString);
-            MapDataValidator.ValidateData(parsed);
+            //debugger;
+            MapDataValidator.ValidateData(parsed,this.dig);
             this.images = parsed.imgs;
             this.meta = parsed.meta;
 
@@ -13,7 +14,7 @@ define(['./MapDataValidator'], function (MapDataValidator) {
         exported.prototype.dig = function dig(image,visitFunction,parent){
             //debugger;
             visitFunction(image,parent);// visitFunction jest argumentem "dig'a", można tu wstawić dowolną funkcję, która jakoś wytestuje nam pozostale zmienne
-            debugger;
+
             image.children.forEach(
                 function(childrenImage){
 

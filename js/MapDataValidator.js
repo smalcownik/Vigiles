@@ -2,11 +2,11 @@ define(['./MapData'], function (MapData) { //skorzystamy z funkcji MapData.dig d
 
          var exported ={};
 
-        exported.ValidateData = function(data){
+        exported.ValidateData = function(data,digFunction){
 
             console.log(data);
             this.DataMainTypeValidation(data);
-            this.DataContentTypeValidation(data);
+            this.DataContentTypeValidation(data,digFunction);
 
         };
 
@@ -42,9 +42,60 @@ define(['./MapData'], function (MapData) { //skorzystamy z funkcji MapData.dig d
 
             };
 
-            exported.ImagesContentValidation = function(data){
+            exported.ImageContentCheck = function(image,parent){
+
+                if(parent){
+
+                    if (Object.keys(image).length==5){
+                        console.log(image+" has good keys length of 5")
+                    }
+                    else (console.log("NOT_OK:ilosc plikow na wierzchu objektu sie nie zgadza (powinny byc dwa: main i imgs)"));
+
+                    exported.TypeValidator(image.id,'string');console.log(" ok1");
+                    exported.TypeValidator(image.size,'object');console.log(" ok2");
+                    exported.TypeValidator(image.pos,'object');console.log(" ok3");
+                    exported.ArrayValidator(image.points);console.log(" ok4");
+                    exported.ArrayValidator(image.children);console.log(" ok5");
+                }
+
+                else{
+
+                    if (Object.keys(image).length==4){
+                        console.log(image+" has good keys length of 4")
+                    }
+                    else (console.log("NOT_OK:ilosc plikow na wierzchu objektu sie nie zgadza (powinny byc dwa: main i imgs)"));
+
+                    exported.TypeValidator(image.id,'string');console.log(" ok1");
+                    exported.TypeValidator(image.size,'object');console.log(" ok2");
+                    //this.TypeValidator(data.pos,'object');console.log(" ok3");//ten tylko jesli jest parent ale mozna to zmienic
+                    exported.ArrayValidator(image.points);console.log(" ok4");
+                    exported.ArrayValidator(image.children);console.log(" ok5");
+                }
 
 
+
+            };
+
+            exported.ImagesTreeContentValidation = function(data,digFunction){
+
+                data.imgs.forEach(
+                    function(image){
+                        digFunction(image,this.ImageContentCheck,null)
+                    }
+               ,this); //TODO:tu obadać tego thisa i wogóle f-kcja dig coś nie gra
+
+                /*exported.prototype.dig = function dig(image,visitFn,parent){
+                 debugger;
+                 visitFn(image,parent); // tu ma wykonać właściwą funckję visitFn(można ją sobie osobno jakkolwiek zdefiniować) na danym elemencie
+                 //debugger;
+                 image.children.forEach(
+                 function(childrenImage){
+
+                 this.dig(childrenImage,visitFn,image);
+                 }
+                 ,this);
+
+                 };*/
             };
 
 
@@ -55,13 +106,15 @@ define(['./MapData'], function (MapData) { //skorzystamy z funkcji MapData.dig d
         };
 
 
-        exported.DataContentTypeValidation = function(data){
+        exported.DataContentTypeValidation = function(data,digFunction){
             if(data.imgs && data.meta)
             {
                 this.DataSurfaceLayerObjectsValidation(data);
-                //this.ImagesContentValidation(data);
-                //TODO: użyć dig(patrz dół pliku, z MapData) do opierdalania zawartości
+                //this.ImageContentCheck(data.imgs[0].children[0],data.imgs[0]) //test- DZIAŁA DOBRZE;
+                this.ImagesTreeContentValidation(data,digFunction);
             }
+                //TODO: użyć dig(patrz dół pliku, z MapData) do opierdalania zawartości
+
             else/*ma sprawdzić wnętrza wszystkich childrenów*/ {
                 (console.log("NOT_OK: brak objektu data.imgs lub data.meta"));};
 
@@ -76,15 +129,4 @@ define(['./MapData'], function (MapData) { //skorzystamy z funkcji MapData.dig d
     );
 //TODO: robić walidacje ino roz
 
-/*exported.prototype.dig = function dig(image,visitFn,parent){
-    debugger;
-    visitFn(image,parent); // tu ma wykonać właściwą funckję visitFn(można ją sobie osobno jakkolwiek zdefiniować) na danym elemencie
-    //debugger;
-    image.children.forEach(
-        function(childrenImage){
 
-            this.dig(childrenImage,visitFn,image);
-        }
-        ,this);
-
-};*/
