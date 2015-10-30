@@ -4,7 +4,7 @@ define(['./MapDataValidator'], function (MapDataValidator) {
 
             var parsed = JSON.parse(jsonString);
             //debugger;
-            MapDataValidator.ValidateData(parsed,this.dig);
+            MapDataValidator.ValidateData(parsed);
             this.images = parsed.imgs;
             this.meta = parsed.meta;
 

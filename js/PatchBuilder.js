@@ -29,7 +29,7 @@ define([], function () {
                     };
 
                 }else{
-                    image.absolutePos = {
+                    image.absolutePos = { //TODO: tu jestem, ogarniam co to absolutePos
                         y:window.innerWidth * 0.5 * image.size.h / image.size.w,
                         x:window.innerWidth/2,
                         w:window.innerWidth,
@@ -70,8 +70,8 @@ define([], function () {
             };
 
             exported.build = function(data){
-                //debugger;
-                data.traverse(
+                debugger;
+                data.traverse( //TODO: a to traverse to z kąd - z MapData?? w jaki sposób tu jest odniesienie do map data - ahaaaa data:MapData
                     function(image,parent){
                         exported.buildImage(data,image,function(){
                         });
