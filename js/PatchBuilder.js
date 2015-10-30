@@ -70,7 +70,7 @@ define([], function () {
             };
 
             exported.build = function(data){
-                debugger;
+              //  debugger;
                 data.traverse( //TODO: a to traverse to z kąd - z MapData?? w jaki sposób tu jest odniesienie do map data - ahaaaa data:MapData
                     function(image,parent){
                         exported.buildImage(data,image,function(){

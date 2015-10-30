@@ -10,17 +10,22 @@ define([/*'./MapData'*/], function (/*MapData*/) {
 
         };
 
-            exported.TypeValidator = function (data,type){
+            exported.TypeValidator = function (obj,type,propName){
+                var data = obj[propName];
+
+
                 if(typeof(data)!==type){
-                    throw Error('invalid data -'+data+'  is not "'+ type+'" type');
+                    console.warn('invalid data -'+'image'+'-"'+propName+'"  is not "'+ type+'" type');
                 }
                 else {/*console.log('OK: '+data+'  is '+ type+' type')*/};
 
             };
 
-            exported.ArrayValidator = function (data){
+            exported.ArrayValidator = function (obj,propName){
+                var data = obj[propName];
+
                 if( typeof(data.length)=='number' && typeof(data)!=='string' ){/*console.log("OK jest arrayem");*/}
-                else console.log("huj wie co to jest"+data+" ale nie array");
+                else console.log("huj wie czym " +propName+"imagesa o id:" +obj.id+"  jest ale nie array");
 
             };
 
@@ -28,7 +33,7 @@ define([/*'./MapData'*/], function (/*MapData*/) {
                 var imgs = data.imgs;
                 var meta = data.meta;
 
-                this.ArrayValidator(data.imgs);
+               // this.ArrayValidator(data.imgs,dataName,dataId);
 
 
                 if (Object.keys(data).length==2){
@@ -47,29 +52,37 @@ define([/*'./MapData'*/], function (/*MapData*/) {
                 if(parent){
 
                     if (Object.keys(image).length==5){
-                        console.log(image+" has good keys length of 5")
+                        console.log(image+"o id: "+image.id+" has good keys length of 5")
                     }
-                    else (console.log("NOT_OK:ilosc plikow sie nie zgadza"));
+                    else (console.log("NOT_OK:ilosc keys objektu o id= "+image.id+" sie nie zgadza"));
 
-                    exported.TypeValidator(image.id,'string');console.log(" ok1");
-                    exported.TypeValidator(image.size,'object');console.log(" ok2");
-                    exported.TypeValidator(image.pos,'object');console.log(" ok3");
-                    exported.ArrayValidator(image.points);console.log(" ok4");
-                    exported.ArrayValidator(image.children);console.log(" ok5");
+                    exported.TypeValidator(image,'string','id');console.log(" ok1");
+                    exported.TypeValidator(image,'object','size');console.log(" ok2");
+                    exported.TypeValidator(image,'object','pos');console.log(" ok3");
+                    exported.ArrayValidator(image,"points");console.log(" ok4");
+                    exported.ArrayValidator(image,"children");console.log(" ok5");
                 }
 
                 else{
 
                     if (Object.keys(image).length==4){
-                        console.log(image+" has good keys length of 4")
+                        console.log(image+"o id: "+image.id+" has good keys length of 4")
                     }
-                    else (console.log("NOT_OK:ilosc plikow sie nie zgadza)"));
+                    else (console.log("NOT_OK:ilosc keys objektu o id= "+image.id+" sie nie zgadza"));
 
-                    exported.TypeValidator(image.id,'string');console.log(" ok1");
-                    exported.TypeValidator(image.size,'object');console.log(" ok2");
+                    [
+                        ['id','string'],
+                        ['size','object']
+                    ].forEach(function(arr){
+                            exported.TypeValidator(image,arr[1],arr[0]);console.log(" ok1");
+                        });
+
+
+                    //exported.TypeValidator(image,'string',"id");console.log(" ok1");
+                   // exported.TypeValidator(image,'object',"size");console.log(" ok2");
                     //this.TypeValidator(data.pos,'object');console.log(" ok3");//ten tylko jesli jest parent ale mozna to zmienic GDY NIE MA PARENTA, NIE MA DATA.POS
-                    exported.ArrayValidator(image.points);console.log(" ok4");
-                    exported.ArrayValidator(image.children);console.log(" ok5");
+                    exported.ArrayValidator(image,"points");console.log(" ok4");
+                    exported.ArrayValidator(image,"children");console.log(" ok5");
                 }
 
 

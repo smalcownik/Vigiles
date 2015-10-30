@@ -47,7 +47,7 @@ define(['./MapData'], function (MapData) {
 //debugger;
             exported.loadData = function(url,cb){
 //debugger;
-                makeRequest(url+'/data.json',
+                makeRequest(url+'/data1.json',
                     function(response){
                         cb(new MapData(response));
                     }
