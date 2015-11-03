@@ -70,12 +70,13 @@ define([], function () {
             };
 
             exported.build = function(data){
-              //  debugger;
+
                 data.traverse( //TODO: a to traverse to z kąd - z MapData?? w jaki sposób tu jest odniesienie do map data - ahaaaa data:MapData
                     function(image,parent){
-                        exported.buildImage(data,image,function(){
+                        //debugger;
+                        exported.buildImage(data,image,function(){ //image - to pochodzi z traverse->dig (MapData) , gdzie image jest na siłę wstawiony this.images[0]
                         });
-                        exported.placeImage(image,parent);
+                        exported.placeImage(image,parent); // parent - tak samo jak komentarz wyżej - pochodzi z f-kcji dig
                     }
                 );
             };

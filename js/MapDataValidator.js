@@ -3,29 +3,32 @@ define([/*'./MapData'*/], function (/*MapData*/) {
          var exported ={};
 
         exported.ValidateData = function(data){
-
-            console.log(data);
+            /*console.log("W walidatorze data to:");
+            console.log(data);*/
             this.DataMainTypeValidation(data);
             this.DataContentTypeValidation(data,this.Digger);
 
         };
 
             exported.TypeValidator = function (obj,type,propName){
-                var data = obj[propName];
+                if(propName!==null)
+                    {var data = obj[propName]}
+                else
+                    {var data = obj};
 
 
                 if(typeof(data)!==type){
-                    console.warn('invalid data -'+'image'+'-"'+propName+'"  is not "'+ type+'" type');
+                    console.warn('invalid data: property "'+propName+'" of the object with id:'+obj.id+'  is not "'+ type+'" type');
                 }
-                else {/*console.log('OK: '+data+'  is '+ type+' type')*/};
+                else {/*console.log('OK: "'+propName+'"  is "'+ type+'" type')*/};
 
             };
 
             exported.ArrayValidator = function (obj,propName){
                 var data = obj[propName];
 
-                if( typeof(data.length)=='number' && typeof(data)!=='string' ){/*console.log("OK jest arrayem");*/}
-                else console.log("huj wie czym " +propName+"imagesa o id:" +obj.id+"  jest ale nie array");
+                if( typeof(data.length)=='number' && typeof(data)!=='string' ){/*console.log("OK: '"+propName+"' o id:"+ obj.id+"  jest arrayem");*/}
+                else console.log('invalid data:' +propName+" of image with id:" +obj.id+"  is not array");
 
             };
 
@@ -47,26 +50,38 @@ define([/*'./MapData'*/], function (/*MapData*/) {
 
             };
 
-            exported.ImageContentCheck = function(image,parent){
+            exported.ImageContentCheck = function(image,parent){ //
 
                 if(parent){
 
                     if (Object.keys(image).length==5){
-                        console.log(image+"o id: "+image.id+" has good keys length of 5")
+                        /*console.log("Object o id: "+image.id+" has good keys length of 5")*/
                     }
                     else (console.log("NOT_OK:ilosc keys objektu o id= "+image.id+" sie nie zgadza"));
 
-                    exported.TypeValidator(image,'string','id');console.log(" ok1");
-                    exported.TypeValidator(image,'object','size');console.log(" ok2");
-                    exported.TypeValidator(image,'object','pos');console.log(" ok3");
-                    exported.ArrayValidator(image,"points");console.log(" ok4");
-                    exported.ArrayValidator(image,"children");console.log(" ok5");
+                    [
+                        ['id','string'],
+                        ['size','object'],
+                        ['pos','object']
+                    ].forEach(function(arr){
+                            exported.TypeValidator(image,arr[1],arr[0]);
+                            /*console.log("5ok");*/
+                        });
+
+                    [
+                        'points',
+                        'children'
+                    ].forEach(function(propName){
+                            exported.ArrayValidator(image,propName);
+                            /*console.log("5ok0");*/
+                        });
+
                 }
 
                 else{
 
                     if (Object.keys(image).length==4){
-                        console.log(image+"o id: "+image.id+" has good keys length of 4")
+                       /* console.log("Object o id: "+image.id+" has good keys length of 4")*/
                     }
                     else (console.log("NOT_OK:ilosc keys objektu o id= "+image.id+" sie nie zgadza"));
 
@@ -74,15 +89,19 @@ define([/*'./MapData'*/], function (/*MapData*/) {
                         ['id','string'],
                         ['size','object']
                     ].forEach(function(arr){
-                            exported.TypeValidator(image,arr[1],arr[0]);console.log(" ok1");
+                            exported.TypeValidator(image,arr[1],arr[0]);
+                            /*console.log("4ok");*/
+                        });
+
+                    [
+                        'points',
+                        'children'
+                    ].forEach(function(propName){
+                            exported.ArrayValidator(image,propName);
+                            /*console.log("4ok0");*/
                         });
 
 
-                    //exported.TypeValidator(image,'string',"id");console.log(" ok1");
-                   // exported.TypeValidator(image,'object',"size");console.log(" ok2");
-                    //this.TypeValidator(data.pos,'object');console.log(" ok3");//ten tylko jesli jest parent ale mozna to zmienic GDY NIE MA PARENTA, NIE MA DATA.POS
-                    exported.ArrayValidator(image,"points");console.log(" ok4");
-                    exported.ArrayValidator(image,"children");console.log(" ok5");
                 }
 
 
@@ -96,7 +115,7 @@ define([/*'./MapData'*/], function (/*MapData*/) {
              image.children.forEach(
              function(childrenImage){
 
-             exported.Digger(childrenImage,visitFunction,image);
+             exported.Digger(childrenImage,visitFunction,image); //TODO:obadać: chciałbym dać this zamiast exported ale wtedy nie działa
              }
              ,this);
 
@@ -105,11 +124,12 @@ define([/*'./MapData'*/], function (/*MapData*/) {
 
              exported.ImagesTreeContentValidation = function(data,digFunction){
 
+
              data.imgs.forEach(
              function(image){
              digFunction(image,this.ImageContentCheck,null)
              }
-             ,this); //TODO:tu obadać tego thisa i wogóle f-kcja dig coś nie gra
+             ,this); //TODO:obadać: tego thisa dla własnej satysfakcji
 
 
              };
@@ -119,7 +139,7 @@ define([/*'./MapData'*/], function (/*MapData*/) {
 
         exported.DataMainTypeValidation = function(data){
             /*console.log('ok');*/
-            this.TypeValidator(data,'object');
+            this.TypeValidator(data,'object',null);
 
         };
 
@@ -143,16 +163,3 @@ define([/*'./MapData'*/], function (/*MapData*/) {
 
     }
     );
-
- /**exported.prototype.dig = function dig(image,visitFn,parent){
- debugger;
- visitFn(image,parent); // tu ma wykonać właściwą funckję visitFn(można ją sobie osobno jakkolwiek zdefiniować) na danym elemencie
- //debugger;
- image.children.forEach(
- function(childrenImage){
-
- this.dig(childrenImage,visitFn,image);
- }
- ,this);
-
- };*/
