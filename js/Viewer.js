@@ -1,20 +1,18 @@
-define(["./MapDataProvider","./PatchBuilder","./PointsBuilder"], function (
-        MapDataProvider,PatchBuilder,PointsBuilder
+define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], function (
+        MapDataProvider,PatchBuilder,PointsBuilder,Camera
     ) { //wyswietla strone i poczatkowe dane
 
         var exported = {
-            zoom:1,
-            delta:{
-                x:0,
-                y:0
-            },
             positionable:[
 
-            ]
+            ],
+            camera:Camera
         };
 
         exported.initializeViewer = function(){
             exported.buildDOM();
+
+            PatchBuilder.viever = this;
         };
 
         exported.buildDOM = function(){

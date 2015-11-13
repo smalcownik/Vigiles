@@ -8,6 +8,8 @@ define([], function () {
 
             exported.placeImage = function(image,parent){
 
+                var camera = this.viewer.camera;
+
                 var imgHTML =  image.DOM;
 
                 if(parent){
