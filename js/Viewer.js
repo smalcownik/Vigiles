@@ -12,7 +12,9 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], func
         exported.initializeViewer = function(){
             exported.buildDOM();
 
-            PatchBuilder.viever = this;
+            PatchBuilder.viewer = this;
+
+            //console.log(PatchBuilder); - to wyświetla
         };
 
         exported.buildDOM = function(){

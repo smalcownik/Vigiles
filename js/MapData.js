@@ -27,7 +27,6 @@ define(['./MapDataValidator'], function (MapDataValidator) {
 
         exported.prototype.traverse = function(visitFunction){
 
-           //TODO: zaimplemetnować trawersowanie drzewa i napisac testy
 
             this.dig(this.images[0],visitFunction,null);
         };

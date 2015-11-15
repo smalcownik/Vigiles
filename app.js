@@ -17,6 +17,7 @@ requirejs([
     ],
 
     function(Viewer) {
+
         Viewer.initializeViewer();
 
         Viewer.loadURL('data/arch1');
