@@ -51,6 +51,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], func
 
             PatchBuilder.images.forEach(function(img){
                 exported.positionable.push(img);
+                //console.log(img); // wyświtla imgsy -
             });
 
             PointsBuilder.build(data);

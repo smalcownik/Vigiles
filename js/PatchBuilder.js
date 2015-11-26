@@ -10,9 +10,10 @@ define([], function () {
 
                 var camera = this.viewer.camera;
 
+
                 var imgHTML =  image.DOM;
 
-                imgHTML.onload = function(){ //TODO: tu jestem, nie mogę odpalić tego addEventListenera ale teraz trzeba odblokować pointsBuildera (tz go wziać onloAD)
+                //imgHTML.onload = function(){ //TODO: tu jestem, nie mogę odpalić tego addEventListenera ale teraz trzeba odblokować pointsBuildera (tz go wziać onloAD)
 
                     if (parent) {
 
@@ -59,13 +60,39 @@ define([], function () {
 
                     //TODO: tutaj napisać zblizanie i przesuwanie kamery (przeliczanie współrzędnych) na eventy (arrows i +/-);
 
+                //console.log(exported.images);
+
 
                     image.DOM.addEventListener('load', function () {
-                        console.log("dupa");
+                        document.onkeydown = function(e) {
+                            switch (e.keyCode) {
+                                case 37://left
+                                    alert('left');
+                                    console.log(exported.images);
+                                    image.absolutePos.x =+ camera.delta.x;
+                                    console.log(exported.images);
+                                    break;
+                                case 38://up
+                                    alert('up');
+                                    break;
+                                case 39 ://right
+                                    alert('right');
+                                    break;
+                                case 40://down
+                                    alert('down');
+                                    break;
+                                case 189 ://minus
+                                    alert('minus');
+                                    break;
+                                case 187://plus
+                                    alert('plus');
+                                    break;
+                            }
+                        };
                     });
 
-                }
-            };
+                };
+           // };
 
 
 
@@ -76,7 +103,7 @@ define([], function () {
                 imgHTML.src=data.url+'/imgs/'+image.id+'.jpg';
                 image.DOM = imgHTML;
 
-                //console.log(image);
+                console.log(image);
 
 
 
@@ -97,7 +124,7 @@ define([], function () {
                 data.traverse( //TODO: a to traverse to z kąd - z MapData?? w jaki sposób tu jest odniesienie do map data - ahaaaa data:MapData
                     function(image,parent){
                         //debugger;
-                        exported.buildImage(data,image,function(){} //image - to pochodzi z traverse->dig (MapData) , gdzie image jest na siłę wstawiony this.images[0]
+                        exported.buildImage(data,image,function(){console.log(" w buildImage callback")} //image - to pochodzi z traverse->dig (MapData) , gdzie image jest na siłę wstawiony this.images[0]
                         );
                         exported.placeImage(image,parent); // parent - tak samo jak komentarz wyżej - pochodzi z f-kcji dig
                     }
