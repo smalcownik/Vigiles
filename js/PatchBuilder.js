@@ -62,33 +62,74 @@ define([], function () {
 
                 //console.log(exported.images);
 
+                function move(direction){
+
+                    if(direction == "left"){
+                        exported.images.forEach(function(image){image.absolutePos.x -= camera.delta.x;});
+                    }
+
+                    else if(direction == "up"){
+                        exported.images.forEach(function(image){image.absolutePos.y -= camera.delta.y});
+                    }
+
+                    else if(direction == "right"){
+                        exported.images.forEach(function(image){image.absolutePos.x += camera.delta.x});
+                    }
+
+                    else if(direction == "down"){
+                        exported.images.forEach(function(image){image.absolutePos.y += camera.delta.y});
+                    }
+
+                    exported.images.forEach(function(image){image.updPosition()});
+
+                };
+                function zoom(direction){ //TODO: prawdopodobnie trzeba pozmieniać image.size , ale tylko pierwszego parentsa (i wtedy wyjdzie czy dzieci od razu "odziedziczą")
+                    if(direction == "plus"){console.log("plus")}
+                    else if (direction =="minus"){console.log("minus")};
+
+                };
+
+
 
                 imgHTML.addEventListener('load', function () {
                         document.onkeydown = function(e) {
                             switch (e.keyCode) {
                                 case 37://left
-                                    alert('left');
-                                    console.log(exported.images);
-                                    image.absolutePos.x =+ camera.delta.x; //TODO: tu nie ma sie odnosić do image - tylko jakos inaczej to nazwać zeby dotrzec do objektu
-                                    console.log(exported.images);
+                                    //alert('left');
+                                    //console.log(exported.images);
+                                    move("left");
+                                    //exported.images.forEach(function(image){image.absolutePos.x -= camera.delta.x; image.updPosition()});// to działa
+                                    //image.absolutePos.x += camera.delta.x; //TODO: tu nie ma sie odnosić do image - tylko jakos inaczej to nazwać zeby dotrzec do objektu
+                                    //console.log(exported.images);
                                     break;
                                 case 38://up
-                                    alert('up');
+                                    //alert('up');
+                                    move("up");
+                                    //exported.images.forEach(function(image){image.absolutePos.y -= camera.delta.y});
                                     break;
                                 case 39 ://right
-                                    alert('right');
+                                    //alert('right');
+                                    move("right");
+                                    //exported.images.forEach(function(image){image.absolutePos.x += camera.delta.x});
                                     break;
                                 case 40://down
-                                    alert('down');
+                                    //alert('down');
+                                    move("down");
+                                    //exported.images.forEach(function(image){image.absolutePos.y += camera.delta.y});
                                     break;
                                 case 189 ://minus
-                                    alert('minus');
+                                    //alert('minus');
+                                    zoom("minus")
                                     break;
                                 case 187://plus
-                                    alert('plus');
+                                    //alert('plus');
+                                    zoom("plus")
                                     break;
                             }
+
+                            //image.updPosition();
                         };
+
                     });
 
                 };
@@ -103,7 +144,7 @@ define([], function () {
                 imgHTML.src=data.url+'/imgs/'+image.id+'.jpg';
                 image.DOM = imgHTML;
 
-                console.log(image);
+                //console.log(image);
 
 
 
