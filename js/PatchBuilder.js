@@ -11,7 +11,7 @@ define([], function () {
                 var camera = this.viewer.camera;
 
 
-                var imgHTML =  image.DOM;
+                var imgHTML =  image.DOM; // referencja do DOM objektu
 
                 //imgHTML.onload = function(){ //TODO: tu jestem, nie mogę odpalić tego addEventListenera ale teraz trzeba odblokować pointsBuildera (tz go wziać onloAD)
 
@@ -19,8 +19,8 @@ define([], function () {
 
                         var parentW = parent.absolutePos.w; // szerokosc (wraz z padding i border), analogicznie Height
                         var parentH = parent.absolutePos.h;
-                        var parentT = parent.absolutePos.y; // position top
-                        var parentL = parent.absolutePos.x; // position left
+                        var parentT = parent.absolutePos.y; // position top srodka parenta ??
+                        var parentL = parent.absolutePos.x; // position left srodka parenta ??
 
 
                         var imSizeW = parentW * image.pos.w;
@@ -28,17 +28,17 @@ define([], function () {
 
                         image.absolutePos = {
                             y: parentT + parentH * (image.pos.y) * 0.5, // odleglosc od gory storny do strodka zdjecia
-                            x: parentL + parentW * (image.pos.x) * 0.5,// odleglosc od lewej krawedzi strony do strodka zdjecia
+                            x: parentL + parentW * (image.pos.x) * 0.5,// odleglosc od lewej krawedzi strony do srodka zdjecia
                             w: imSizeW,
                             h: imSizeH
                         };
 
                     } else {
                         image.absolutePos = { //TODO: tu jestem, ogarniam co to absolutePos
-                            y: window.innerWidth * 0.5 * image.size.h / image.size.w,
-                            x: window.innerWidth / 2,
-                            w: window.innerWidth,
-                            h: window.innerWidth * image.size.h / image.size.w
+                            y: window.innerWidth * 0.5 * image.size.h / image.size.w,  // srodek zdjęcia : y
+                            x: window.innerWidth / 2, // srodek zdjęcia: x
+                            w: window.innerWidth, //szerokość okna przegladarki www
+                            h: window.innerWidth * image.size.h / image.size.w // wymiar zdjęcia y, w zasadzie 2*y
                         };
 
                     }
@@ -63,13 +63,13 @@ define([], function () {
                 //console.log(exported.images);
 
 
-                    image.DOM.addEventListener('load', function () {
+                imgHTML.addEventListener('load', function () {
                         document.onkeydown = function(e) {
                             switch (e.keyCode) {
                                 case 37://left
                                     alert('left');
                                     console.log(exported.images);
-                                    image.absolutePos.x =+ camera.delta.x;
+                                    image.absolutePos.x =+ camera.delta.x; //TODO: tu nie ma sie odnosić do image - tylko jakos inaczej to nazwać zeby dotrzec do objektu
                                     console.log(exported.images);
                                     break;
                                 case 38://up
