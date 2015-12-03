@@ -15,7 +15,9 @@ define([], function () {
 
                 //imgHTML.onload = function(){ //TODO: tu jestem, nie mogę odpalić tego addEventListenera ale teraz trzeba odblokować pointsBuildera (tz go wziać onloAD)
 
-                    if (parent) {
+                //function place(){};
+
+                if (parent) {
 
                         var parentW = parent.absolutePos.w; // szerokosc (wraz z padding i border), analogicznie Height
                         var parentH = parent.absolutePos.h;
@@ -42,6 +44,8 @@ define([], function () {
                         };
 
                     }
+
+
 
                     image.updPosition = function () {
 
@@ -83,11 +87,39 @@ define([], function () {
                     exported.images.forEach(function(image){image.updPosition()});
 
                 };
-                function zoom(direction){ //TODO: prawdopodobnie trzeba pozmieniać image.size , ale tylko pierwszego parentsa (i wtedy wyjdzie czy dzieci od razu "odziedziczą")
-                    if(direction == "plus"){console.log("plus")}
-                    else if (direction =="minus"){console.log("minus")};
+
+
+                function zoom(direction){ //TODO:
+                    if(direction == "plus"){
+                        //debugger;
+                        console.log("plus");
+                        exported.images.forEach(function(image){
+                            image.absolutePos.w *= camera.zoom;
+                            image.absolutePos.h *= camera.zoom;
+                            image.absolutePos.x *= camera.zoom;
+                            image.absolutePos.y *= camera.zoom;
+                        });
+                    }
+
+
+
+                    else if (direction =="minus"){
+
+                        console.log("minus");
+                        exported.images.forEach(function(image){
+                            image.absolutePos.w /= camera.zoom;
+                            image.absolutePos.h /= camera.zoom;
+                            image.absolutePos.x /= camera.zoom;
+                            image.absolutePos.y /= camera.zoom;
+                        });
+                    };
+
+                    exported.images.forEach(function(image){image.updPosition()});
 
                 };
+
+
+
 
 
 

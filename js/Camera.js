@@ -1,7 +1,7 @@
 define([], function () {
 
         var exported = {
-            zoom:1,
+            zoom:1.1,
             delta:{
                 x:30,
                 y:30
