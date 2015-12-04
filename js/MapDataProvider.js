@@ -49,7 +49,13 @@ define(['./MapData'], function (MapData) {
 //debugger;
                 makeRequest(url+'/data1.json',
                     function(response){
-                        cb(new MapData(response));
+                        cb(new MapData(response)); // to cb jest użyte w pliku Viewer w "MapDataProvider.loadData(url,
+                                                    //function(data){  // function to jest 'cb' a data to "new MapData(response)"
+                                                    //  exported.currentData = data;
+                                                    //   exported.currentData.url = url;
+                                                    //  exported.showMapData(exported.currentData);
+                                                    // }
+                                                    // );"
                     }
                 )
 

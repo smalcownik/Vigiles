@@ -36,9 +36,9 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], func
 
             MapDataProvider.loadData(url,
                 function(data){
-                    exported.currentData = data;
+                    exported.currentData = data; //TODO: tu by trzeba aktualizować żeby zoom działał na pliki ?? lub w showMapData - żeby zmieniał positionable
                     exported.currentData.url = url;
-                    exported.showMapData(exported.currentData);
+                    exported.showMapData(exported.currentData); // tu będzie dopiero wołany PatchBuilder czyli cały widok (patzr 'to do' 2 linijki wyżej)
                 }
             );
         };
