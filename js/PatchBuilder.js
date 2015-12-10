@@ -181,7 +181,7 @@ define([], function () {
 
 
                 image.DOM.addEventListener('load',function(){
-                    cb();
+                    //cb();
                 });
 
 
@@ -197,7 +197,7 @@ define([], function () {
                 data.traverse( //TODO: a to traverse to z kąd - z MapData?? w jaki sposób tu jest odniesienie do map data - ahaaaa data:MapData
                     function(image,parent){
                         //debugger;
-                        exported.buildImage(data,image,function(){console.log(" w buildImage callback")} //image - to pochodzi z traverse->dig (MapData) , gdzie image jest na siłę wstawiony this.images[0]
+                        exported.buildImage(data,image/*,function(){console.log(" w buildImage callback")}*/ //image - to pochodzi z traverse->dig (MapData) , gdzie image jest na siłę wstawiony this.images[0]
                         );
                         exported.placeImage(image,parent); // parent - tak samo jak komentarz wyżej - pochodzi z f-kcji dig
                     }

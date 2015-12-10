@@ -50,8 +50,8 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], func
             PatchBuilder.build(data);
 
             PatchBuilder.images.forEach(function(img){
-                exported.positionable.push(img);
-                //console.log(img); // wyświtla imgsy -
+                exported.positionable.push(img); // tu do budowania positionable korzysta z patchBuidera.build - to może w ramach tej f-kcji by też mówił, czy i kto jest parent, bo to jest potrzebne do pozycjonowania
+                console.log(exported.positionable); // wyświtla imgsy -
             });
 
             PointsBuilder.build(data);
