@@ -36,14 +36,15 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], func
 
             MapDataProvider.loadData(url,
                 function(data){
-                    exported.currentData = data; //TODO: tu by trzeba aktualizować żeby zoom działał na pliki ?? lub w showMapData - żeby zmieniał positionable
+                    exported.currentData = data;
                     exported.currentData.url = url;
-                    exported.showMapData(exported.currentData); // tu będzie dopiero wołany PatchBuilder czyli cały widok (patzr 'to do' 2 linijki wyżej)
+                    exported.showMapData(exported.currentData); // w tej f-kcji będzie dopiero wołany PatchBuilder czyli cały widok
                 }
             );
         };
 
-        exported.showMapData = function(data){
+        exported.showMapData = function(data){ // tutaj jest określone, że data to dane, które wchodzą do PatchBuidera ( a to jest exported.currentData,  to prowadzi do MapDataProvider ->
+        //gdzie argumentem drugiego argumentu jest new MapData(response) - czyli objekt- no właśnie jaki??? )
 
             //debugger;
 
@@ -51,8 +52,16 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], func
 
             PatchBuilder.images.forEach(function(img){
                 exported.positionable.push(img); // tu do budowania positionable korzysta z patchBuidera.build - to może w ramach tej f-kcji by też mówił, czy i kto jest parent, bo to jest potrzebne do pozycjonowania
-                console.log(exported.positionable); // wyświtla imgsy -
-            });
+
+            }
+            );
+
+            //exported.positionable[0].absolutePos.x = 400;// - to działa na positionable i images - więc one są powiazane referencją
+            // (czy nie stanowią dwóch osobnych obiektów, wystarczy zmienic jeden i drugi notuje zmiany), żeby przenieść jakiś obiekt bez referencji trzeba ?? no właśnie co trzeba ??
+            console.log(exported.positionable);// wyświtla imgsy -
+            console.log(PatchBuilder.images);
+            console.log(PatchBuilder.images[0].dig);
+
 
             PointsBuilder.build(data);
         };

@@ -13,7 +13,9 @@ define(['./MapDataValidator'], function (MapDataValidator) {
 
         exported.prototype.dig = function dig(image,visitFunction,parent){
             //debugger;
-            visitFunction(image,parent);// visitFunction jest argumentem "dig'a", można tu wstawić dowolną funkcję, która jakoś wytestuje nam pozostale zmienne
+            visitFunction(image,parent);// visitFunction jest argumentem "dig'a",
+            // można tu wstawić dowolną funkcję, która jakoś wytestuje nam pozostale
+            // zmienne
 
             image.children.forEach(
                 function(childrenImage){
