@@ -9,16 +9,59 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], func
             camera:Camera
         };
 
+
         exported.initializeViewer = function(){
             exported.buildDOM();
+            exported.registerEventListeners();
 
             PatchBuilder.viewer = this;
 
-            //console.log(PatchBuilder); - to wyświetla
         };
 
         exported.buildDOM = function(){
             //TODO: stworzyc prosty interfejs
+        };
+
+        exported.updateAllPositionables = function(){
+
+            this.positionable.forEach(function(p){
+                p.updateMyPosition(this.camera);
+            },this);
+        };
+
+        exported.registerEventListeners = function(){
+
+
+            var moveKeyActions = {
+                37:[1,0],
+                38:[0,1],
+                39:[-1,0],
+                40:[0,-1]
+            };
+
+            var zoomKeyActions = {
+                189:-1,
+                187: 1
+            };
+
+            var viewer = this;
+
+                document.body.addEventListener('keydown',function(e) {
+
+                    if(e.keyCode in moveKeyActions){
+                        viewer.camera.move.apply(viewer.camera,moveKeyActions[e.keyCode])
+                    }
+
+                    if(e.keyCode in zoomKeyActions){
+                        viewer.camera.zoom(zoomKeyActions[e.keyCode])
+                    }
+
+                    viewer.updateAllPositionables();
+
+                });
+
+
+
         };
 
         exported.loadURL = function(url,afterLoad){
@@ -50,20 +93,12 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], func
 
             PatchBuilder.build(data);
 
-            PatchBuilder.images.forEach(function(img){
-                exported.positionable.push(img); // tu do budowania positionable korzysta z patchBuidera.build - to może w ramach tej f-kcji by też mówił, czy i kto jest parent, bo to jest potrzebne do pozycjonowania
-
-            }
-            );
-
-            //exported.positionable[0].absolutePos.x = 400;// - to działa na positionable i images - więc one są powiazane referencją
-            // (czy nie stanowią dwóch osobnych obiektów, wystarczy zmienic jeden i drugi notuje zmiany), żeby przenieść jakiś obiekt bez referencji trzeba ?? no właśnie co trzeba ??
-            console.log(exported.positionable);// wyświtla imgsy -
-            console.log(PatchBuilder.images);
-            console.log(PatchBuilder.images[0].dig);
+            this.updateAllPositionables();
 
 
-            PointsBuilder.build(data);
+
+
+           // PointsBuilder.build(data);
         };
         //exported.showMapData = function(){};
 
