@@ -4,7 +4,7 @@ define(["./PatchBuilder"], function (PatchBuilder) { //tworzy objekty dodawanych
                 test : 2
             };
 
-        exported.buildPoint = function(data,image,point,i) {
+        exported.Point = function(image,point) {
             var divPoint= document.createElement('div');
             //divPoint.innerHTML = image.id +"."+i;
             document.body.appendChild(divPoint);
@@ -32,16 +32,16 @@ define(["./PatchBuilder"], function (PatchBuilder) { //tworzy objekty dodawanych
 
         };
 
-        exported.buildPoints = function(data,image,cb){
-            image.points.forEach(function(point,i){
-                exported.buildPoint(data,image,point,i);
+        exported.buildPoints = function(image){
+            image.points.forEach(function(point){
+                exported.Point(image,point);  //TODO: tu zrobić żeby dodawało do positionable new Point i dorobić update my position dla point + cała f-kcja Point i points builder analogicznie do patch
             })
         };
 
         exported.build = function(data){
             data.traverse(
-                function(image,parent){
-                    exported.buildPoints(data,image);
+                function(image){
+                    exported.buildPoints(image);
                 }
             );
         };

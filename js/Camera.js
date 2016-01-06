@@ -2,10 +2,10 @@ define([], function () {
 
         var exported = {
             scale:1,
-            scaleDelta:0.1,
+            scaleDelta:0.4,
             delta:{
-                x:30,
-                y:30
+                x:100,
+                y:100
             },
             position:{
                 x:0,

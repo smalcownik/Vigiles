@@ -124,7 +124,6 @@ define([/*'./MapData'*/], function (/*MapData*/) {
 
              exported.ImagesTreeContentValidation = function(data,digFunction){
 
-
              data.imgs.forEach(
              function(image){
              digFunction(image,this.ImageContentCheck,null)

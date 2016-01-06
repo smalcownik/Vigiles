@@ -3,7 +3,7 @@ define([], function () { // tworzy objekty zdjec (łatek),
         var exported = function Patch(image,parent,data){
 
             var imgHTML= document.createElement('img');
-            imgHTML.src=data.url+'/imgs/'+image.id+'.jpg';
+            imgHTML.src=data.url+'/imgs/'+image.id+'.jpg'; //  tu jest odniesienie do plików jpg (jedyne!!)
             this.DOM = imgHTML;
             image.patch = this;
             this.image = image;
@@ -29,7 +29,7 @@ define([], function () { // tworzy objekty zdjec (łatek),
                 };
 
             } else {
-                image.absolutePos = { //TODO: tu jestem, ogarniam co to absolutePos
+                image.absolutePos = {
                     y: window.innerWidth * 0.5 * image.size.h / image.size.w,  // srodek zdjęcia : y
                     x: window.innerWidth / 2, // srodek zdjęcia: x
                     w: window.innerWidth, //szerokość okna przegladarki www

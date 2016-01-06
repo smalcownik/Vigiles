@@ -6,11 +6,13 @@ define(["./Patch"], function (Patch) {
             };
 
 
-            exported.build = function(data){
+            exported.build = function(data){ // data to new MapData(response//jsonString//)
 
                 var viewer = this.viewer;
 
-                data.traverse( //TODO: a to traverse to z kąd - z MapData?? w jaki sposób tu jest odniesienie do map data - ahaaaa data:MapData
+                data.traverse(  // traverse z new MapData(response//jsonString),
+                                // trawersowanie zawsze na początku ma argument jako image: MapData.images[0]
+
                     function(image,parent){
 
                         viewer.positionable.push(new Patch(image,parent,data))
@@ -22,4 +24,4 @@ define(["./Patch"], function (Patch) {
 
             return exported;
         }
-    );
+    );''

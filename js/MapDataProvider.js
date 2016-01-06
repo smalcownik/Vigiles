@@ -40,22 +40,17 @@ define(['./MapData'], function (MapData) {
                 }
             }};
             http_request.open('GET', url, true);
-            http_request.send(null); // zamiast null moze byc jakis string ale tylko w metodzie POST (nie GET)
+            http_request.send(null);
 
         }
 
 //debugger;
-            exported.loadData = function(url,cb){
+            exported.loadData = function(url,cb){ // to cb jest z Viever.loadURL()
 //debugger;
                 makeRequest(url+'/data1.json',
-                    function(response){
-                        cb(new MapData(response)); // to cb jest użyte w pliku Viewer w "MapDataProvider.loadData(url,
-                                                    //function(data){  // function to jest 'cb' a data to "new MapData(response)"
-                                                    //  exported.currentData = data;
-                                                    //   exported.currentData.url = url;
-                                                    //  exported.showMapData(exported.currentData);
-                                                    // }
-                                                    // );"
+                    function(response){ // response to (http_request.responseText)
+                        cb(new MapData(response)); // czyli new MapData(response)
+                                                   // wchodzi jako data do MDP.loadData w View.loadURL
                     }
                 )
 

@@ -11,8 +11,8 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], func
 
 
         exported.initializeViewer = function(){
-            exported.buildDOM();
-            exported.registerEventListeners();
+            exported.buildDOM();                // na razie nic tu nie ma - to ma być stworzenie interfejsu
+            exported.registerEventListeners();  // reakcja na przyciski
 
             PatchBuilder.viewer = this;
 
@@ -22,7 +22,8 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], func
             //TODO: stworzyc prosty interfejs
         };
 
-        exported.updateAllPositionables = function(){
+        exported.updateAllPositionables = function(){ // ta funckja zachodzi przy: 1. Viewer.showMapData (czyli budowanie widoku przez PatchBuilder)
+                                                                                // 2. po kazdym Viewer.registerEventListeners
 
             this.positionable.forEach(function(p){
                 p.updateMyPosition(this.camera);
@@ -30,7 +31,6 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], func
         };
 
         exported.registerEventListeners = function(){
-
 
             var moveKeyActions = {
                 37:[1,0],
@@ -46,7 +46,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], func
 
             var viewer = this;
 
-                document.body.addEventListener('keydown',function(e) {
+                document.body.addEventListener('keydown',function(e) {  // event dla camery/obrazków
 
                     if(e.keyCode in moveKeyActions){
                         viewer.camera.move.apply(viewer.camera,moveKeyActions[e.keyCode])
@@ -59,46 +59,43 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], func
                     viewer.updateAllPositionables();
 
                 });
-
-
-
         };
 
-        exported.loadURL = function(url,afterLoad){
 
-            //TODO: dopisać analogiczne testy argumentów w innych funkcjach
-            if(typeof(url)!=='string'){
-                throw Error('invalid url');
-            }
+        exported.loadURL = function(url){ // ta fkcja jest odpalmana na początku z app.js z argumentem ('data/arch1')
 
-            if(url.match(/\.json/)){
-                throw Error('invalid url');
-                // url powinine byc adresem katalogu w ktorym jest archiwum mapy
-            }
-            //debugger;
+            {
+                if (typeof(url) !== 'string') {
+                    throw Error('invalid url');
+                }
+
+                if (url.match(/\.json/)) {
+                    throw Error('invalid url');
+                    // url powinine byc adresem katalogu w ktorym jest archiwum mapy
+                }
+                //debugger;
+            }//TODO: dopisać analogiczne testy argumentów w innych funkcjach
 
             MapDataProvider.loadData(url,
-                function(data){
-                    exported.currentData = data;
+                function(data){ // cb w MDP.loadData
+                    exported.currentData = data; // jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a
                     exported.currentData.url = url;
-                    exported.showMapData(exported.currentData); // w tej f-kcji będzie dopiero wołany PatchBuilder czyli cały widok
+                    exported.showMapData(exported.currentData); // w tej f-kcji będzie dopiero wołany PatchBuilder czyli cały widok, a currentData to obiekt new MapData(response)
                 }
             );
+
         };
 
-        exported.showMapData = function(data){ // tutaj jest określone, że data to dane, które wchodzą do PatchBuidera ( a to jest exported.currentData,  to prowadzi do MapDataProvider ->
-        //gdzie argumentem drugiego argumentu jest new MapData(response) - czyli objekt- no właśnie jaki??? )
+        exported.showMapData = function(data){ // jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a
 
             //debugger;
 
-            PatchBuilder.build(data);
+            PatchBuilder.build(data); //// jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a;  PatchBuilder traversuje całego JSON'a
+
+            PointsBuilder.build(data);
 
             this.updateAllPositionables();
 
-
-
-
-           // PointsBuilder.build(data);
         };
         //exported.showMapData = function(){};
 
