@@ -44,18 +44,20 @@ define([], function () { // tworzy objekty zdjec (łatek),
 
 
         };
-        exported.prototype.buildDOM =function(){
+        /*exported.prototype.buildDOM =function(){ //to na razie nic nie robi
 
         };
-        exported.prototype.attachEvents =function(){
+        exported.prototype.attachEvents =function(){ // to na razie nic nie robi
 
-        };
+        };*/
 
         exported.prototype.updateMyPosition =function(camera){
 
             var imgHTML = this.DOM;
 
             var image = this.image;
+
+            //debugger
 
             imgHTML.style.top = String(window.innerHeight/2+(image.absolutePos.y - image.absolutePos.h * 0.5 + camera.position.y - window.innerHeight/2)*camera.scale) + 'px';
             imgHTML.style.left = String(window.innerWidth/2+(image.absolutePos.x - image.absolutePos.w * 0.5 + camera.position.x - window.innerWidth/2)*camera.scale) + 'px';

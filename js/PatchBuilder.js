@@ -24,4 +24,4 @@ define(["./Patch"], function (Patch) {
 
             return exported;
         }
-    );''
+    );

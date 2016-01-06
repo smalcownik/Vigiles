@@ -1,5 +1,5 @@
-define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], function (
-        MapDataProvider,PatchBuilder,PointsBuilder,Camera
+define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"/*,"./CameraEventListeners"*/], function (
+        MapDataProvider,PatchBuilder,PointsBuilder,Camera/*,CameraEventListeners*/
     ) { //wyswietla strone i poczatkowe dane
 
         var exported = {
@@ -15,6 +15,8 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], func
             exported.registerEventListeners();  // reakcja na przyciski
 
             PatchBuilder.viewer = this;
+            PointsBuilder.viewer = this;
+           // CameraEventListeners.viewer = this;
 
         };
 
@@ -23,12 +25,18 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], func
         };
 
         exported.updateAllPositionables = function(){ // ta funckja zachodzi przy: 1. Viewer.showMapData (czyli budowanie widoku przez PatchBuilder)
-                                                                                // 2. po kazdym Viewer.registerEventListeners
+
+                                                      // 2. po kazdym Viewer.registerEventListeners
 
             this.positionable.forEach(function(p){
                 p.updateMyPosition(this.camera);
             },this);
         };
+
+        /*exported.cameraEvents = function(){
+
+            };*/
+
 
         exported.registerEventListeners = function(){
 
@@ -46,19 +54,25 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], func
 
             var viewer = this;
 
-                document.body.addEventListener('keydown',function(e) {  // event dla camery/obrazków
+            document.body.addEventListener('keydown',function(e) {  // event dla camery/obrazków
 
-                    if(e.keyCode in moveKeyActions){
-                        viewer.camera.move.apply(viewer.camera,moveKeyActions[e.keyCode])
-                    }
+                if(e.keyCode in moveKeyActions){
+                    viewer.camera.move.apply(viewer.camera,moveKeyActions[e.keyCode])
+                }
 
-                    if(e.keyCode in zoomKeyActions){
-                        viewer.camera.zoom(zoomKeyActions[e.keyCode])
-                    }
+                if(e.keyCode in zoomKeyActions){
+                    viewer.camera.zoom(zoomKeyActions[e.keyCode])
+                }
 
-                    viewer.updateAllPositionables();
+                viewer.updateAllPositionables();
 
-                });
+            });
+
+            //CameraEventListeners.cameraEvents();
+
+
+            //this.updateAllPositionables();
+
         };
 
 
@@ -97,7 +111,6 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"], func
             this.updateAllPositionables();
 
         };
-        //exported.showMapData = function(){};
 
 
             return exported;
