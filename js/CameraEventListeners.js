@@ -35,9 +35,12 @@ define(['./Camera'], function (Camera) {
             if (e.keyCode in zoomKeyActions) {
                 Camera.zoom(zoomKeyActions[e.keyCode])
             }
-            console.log(Camera.scale);
+            //console.log(Camera.scale);
 
            viewer.updateAllPositionables(); //
+
+
+           //console.log(viewer.positionable);
 
         });
     }

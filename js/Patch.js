@@ -8,9 +8,15 @@ define([], function () { // tworzy objekty zdjec (łatek),
             image.patch = this;
             this.image = image;
 
+            image.parent = parent;
+
+            this.defaultOpacity = 0.1;
+
             document.body.appendChild(imgHTML);
 
             if (parent) {
+
+                var parentDOM = parent.patch.DOM;
 
                 var parentW = parent.absolutePos.w; // szerokosc (wraz z padding i border), analogicznie Height
                 var parentH = parent.absolutePos.h;
@@ -28,6 +34,16 @@ define([], function () { // tworzy objekty zdjec (łatek),
                     h: imSizeH
                 };
 
+               // console.log(parent);
+
+                //parentDOM.style.opacity = 1;
+                imgHTML.style.opacity = this.defaultOpacity; // jesli ma parenta to widac go słabiej (a f-kcja updateMyPosition zrobi tak):
+
+                //TODO: zrobić tak żeby UpdateMyPosition- jeśli parent wykracza poza obraz windowWidth/heigth
+                //to wtedy jego children będzie mocniej widoczny
+
+                //debugger;
+
             } else {
                 image.absolutePos = {
                     y: window.innerWidth * 0.5 * image.size.h / image.size.w,  // srodek zdjęcia : y
@@ -36,10 +52,14 @@ define([], function () { // tworzy objekty zdjec (łatek),
                     h: window.innerWidth * image.size.h / image.size.w // wymiar zdjęcia y, w zasadzie 2*y
                 };
 
+                imgHTML.style.opacity = 1; // jesli nie ma parenta to widac do mocno
+
             }
 
             imgHTML.style.border = '1px dashed blue';
             imgHTML.style.position = 'absolute';
+
+
 
 
 
@@ -56,6 +76,14 @@ define([], function () { // tworzy objekty zdjec (łatek),
             var imgHTML = this.DOM;
 
             var image = this.image;
+            console.log(this);
+            var defaultOpacity = this.defaultOpacity;
+
+            if (image.parent!== null){
+
+                var parentDOM = image.parent.patch.DOM;
+            }
+
 
             //debugger
 
@@ -63,6 +91,27 @@ define([], function () { // tworzy objekty zdjec (łatek),
             imgHTML.style.left = String(window.innerWidth/2+(image.absolutePos.x - image.absolutePos.w * 0.5 + camera.position.x - window.innerWidth/2)*camera.scale) + 'px';
             imgHTML.style.width = String(image.absolutePos.w*camera.scale) + 'px';
             imgHTML.style.height = String(image.absolutePos.h*camera.scale) + 'px';
+
+            //console.log(image);
+
+            if(image.absolutePos.w*camera.scale/*imgHTML.style.width ale BEZ PIKSELI*/ > window.innerWidth ) {
+
+               // console.log(image);
+
+                if (image.children.length > 0) {
+
+                    image.children.forEach(function(element){element.patch.DOM.style.opacity = 1});
+                }
+
+            }else{
+                if (image.children.length > 0) {
+
+                    image.children.forEach(function(element){element.patch.DOM.style.opacity = defaultOpacity});
+                }
+
+            }
+
+
         };
 
 

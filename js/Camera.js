@@ -2,7 +2,7 @@ define([], function () {
 
         var exported = {
             scale:1,
-            scaleDelta:0.4,
+            scaleDelta:0.2,
             delta:{
                 x:100,
                 y:100
