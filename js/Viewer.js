@@ -1,5 +1,5 @@
-define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"/*,"./CameraEventListeners"*/], function (
-        MapDataProvider,PatchBuilder,PointsBuilder,Camera/*,CameraEventListeners*/
+define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./CameraEventListeners","./PointEventListeners"], function (
+        MapDataProvider,PatchBuilder,PointsBuilder,Camera,CameraEventListeners,PointEventListeners
     ) { //wyswietla strone i poczatkowe dane
 
         var exported = {
@@ -12,11 +12,14 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"/*,"./C
 
         exported.initializeViewer = function(){
             exported.buildDOM();                // na razie nic tu nie ma - to ma być stworzenie interfejsu
-            exported.registerEventListeners();  // reakcja na przyciski
+
 
             PatchBuilder.viewer = this;
             PointsBuilder.viewer = this;
-           // CameraEventListeners.viewer = this;
+            CameraEventListeners.viewer = this; // TRZEBA TO WSTRZYKNĄĆ PRZED F_KCJĄ registerEventListeners(), bo inaczej ona nie widzi viewera
+            PointEventListeners.viewer = this;
+
+            exported.registerEventListeners();  // reakcja na przyciski MUSIAŁEM NAJPIERW
 
         };
 
@@ -40,7 +43,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"/*,"./C
 
         exported.registerEventListeners = function(){
 
-            var moveKeyActions = {
+           /* var moveKeyActions = {
                 37:[1,0],
                 38:[0,1],
                 39:[-1,0],
@@ -66,12 +69,12 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera"/*,"./C
 
                 viewer.updateAllPositionables();
 
-            });
+            });*/
 
-            //CameraEventListeners.cameraEvents();
+            CameraEventListeners.cameraEvents();
+            PointEventListeners.addPoint();
 
 
-            //this.updateAllPositionables();
 
         };
 

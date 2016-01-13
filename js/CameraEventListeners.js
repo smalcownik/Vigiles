@@ -1,9 +1,13 @@
-/*
-define(['./Camera','./Viewer'], function (Camera,Viewer) {
+define(['./Camera'], function (Camera) {
 
     var exported = {};
 
     exported.cameraEvents = function() {
+
+        var viewer = this.viewer; // jest widoczny jako objekt dopiero gdy wstrzyknąłem viewera przed wykonaniem F-KCJI: registerEventListeners()
+
+
+      // debugger;
 
         var moveKeyActions = {
             37: [1, 0],
@@ -18,11 +22,9 @@ define(['./Camera','./Viewer'], function (Camera,Viewer) {
         };
 
 
-
         document.body.addEventListener('keydown', function (e) {  // event dla camery/obrazków
 
-            var viewer = this.viewer;
-            viewer = this;
+
 
             //debugger;
 
@@ -33,13 +35,13 @@ define(['./Camera','./Viewer'], function (Camera,Viewer) {
             if (e.keyCode in zoomKeyActions) {
                 Camera.zoom(zoomKeyActions[e.keyCode])
             }
-console.log(Camera.scale);
+            console.log(Camera.scale);
 
-            this.updateAllPositionables();
+           viewer.updateAllPositionables(); //
 
         });
     }
 
     return exported;
 
-});*/
+});
