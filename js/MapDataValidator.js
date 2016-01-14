@@ -115,7 +115,7 @@ define([/*'./MapData'*/], function (/*MapData*/) {
              image.children.forEach(
              function(childrenImage){
 
-             exported.Digger(childrenImage,visitFunction,image); //TODO:obadać: chciałbym dać this zamiast exported ale wtedy nie działa
+             exported.Digger(childrenImage,visitFunction,image); //obadać: chciałbym dać this zamiast exported ale wtedy nie działa
              }
              ,this);
 
@@ -128,7 +128,7 @@ define([/*'./MapData'*/], function (/*MapData*/) {
              function(image){
              digFunction(image,this.ImageContentCheck,null)
              }
-             ,this); //TODO:obadać: tego thisa dla własnej satysfakcji
+             ,this); //obadać: tego thisa dla własnej satysfakcji (patrz komentarz 13 linijek wyżej(w digger))
 
 
              };

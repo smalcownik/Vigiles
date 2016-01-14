@@ -34,13 +34,8 @@ define([], function () { // tworzy objekty zdjec (łatek),
                     h: imSizeH
                 };
 
-               // console.log(parent);
-
-                //parentDOM.style.opacity = 1;
                 imgHTML.style.opacity = this.defaultOpacity; // jesli ma parenta to widac go słabiej (a f-kcja updateMyPosition zrobi tak):
-
-                //TODO: zrobić tak żeby UpdateMyPosition- jeśli parent wykracza poza obraz windowWidth/heigth
-                //to wtedy jego children będzie mocniej widoczny
+                                                            // jeśli parent wykracza poza obraz windowWidth/heigth to wtedy jego children będzie mocniej widoczny
 
                 //debugger;
 
@@ -72,11 +67,10 @@ define([], function () { // tworzy objekty zdjec (łatek),
         };*/
 
         exported.prototype.updateMyPosition =function(camera){
-
             var imgHTML = this.DOM;
 
             var image = this.image;
-            console.log(this);
+
             var defaultOpacity = this.defaultOpacity;
 
             if (image.parent!== null){

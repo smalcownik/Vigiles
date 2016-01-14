@@ -8,7 +8,7 @@ var exported = {};
             var viewer = this.viewer;
 
             image.points.forEach(function(point){
-                //exported.Point(image,point);  //TODO: tu zrobić żeby dodawało do positionable new Point i dorobić update my position dla point + cała f-kcja Point i points builder analogicznie do patch
+
                 viewer.positionable.push(new Point(image,point))
             })
         };

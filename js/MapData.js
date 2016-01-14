@@ -11,7 +11,7 @@ define(['./MapDataValidator'], function (MapDataValidator) {
 
         };
 
-        exported.prototype.dig = function dig(image,visitFunction,parent){  //TODO: czy f-kcja dig i traverse są potrzebne OBIE czy nie wystarczy delikatnie przerobiona jedna
+        exported.prototype.dig = function dig(image,visitFunction,parent){  //czy f-kcja dig i traverse są potrzebne OBIE czy nie wystarczy delikatnie przerobiona jedna
             //debugger;
             visitFunction(image,parent); // ta funckja może robić co chce używając image i parent (to jej argumenty)
                                          // i w ten sposób robi coś na wsystkich imgs'ach - patrz PatchBuilder.build
