@@ -1,15 +1,12 @@
 define([], function () {
 
-
         var exported = function Point(image, point) {
             var divPoint = document.createElement('div');
 
             document.body.appendChild(divPoint);
             this.DOM = divPoint;
 
-           this.point = point;
-
-           //debugger;
+            this.point = point;
 
             this.image = image;
 
@@ -33,7 +30,6 @@ define([], function () {
             divPoint.style.borderWidth = '3px';
             divPoint.style.borderStyle = 'solid';
 
-
         };
 
         exported.prototype.updateMyPosition = function (camera) {
@@ -42,17 +38,14 @@ define([], function () {
 
             var image = this.image;
 
-            divPoint.style.top = String(window.innerHeight/2 + (image.absolutePos.y +
-                    (image.absolutePos.h * 0.5 * this.point.y) + camera.position.y - window.innerHeight/2)*camera.scale) + "px";
+            divPoint.style.top = String( window.innerHeight/2 + (image.absolutePos.y +
+                    (image.absolutePos.h * 0.5 * this.point.y) + camera.position.y - window.innerHeight/2) * camera.scale) + "px";
+//debugger;
 
-
-            divPoint.style.left =String(window.innerWidth/2 + (image.absolutePos.x +
-                    (image.absolutePos.w * 0.5 * this.point.x) + camera.position.x - window.innerWidth/2)*camera.scale) + 'px';
-
-
+            divPoint.style.left = String( window.innerWidth/2 + (image.absolutePos.x +
+                    (image.absolutePos.w * 0.5 * this.point.x) + camera.position.x - window.innerWidth/2) * camera.scale) + 'px';
 
         };
-
 
         return exported;
     }
