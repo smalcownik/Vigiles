@@ -82,7 +82,9 @@ define([], function () { // tworzy objekty zdjec (łatek),
             //debugger
 
             imgHTML.style.top = String(window.innerHeight/2+(image.absolutePos.y - image.absolutePos.h * 0.5 + camera.position.y - window.innerHeight/2)*camera.scale) + 'px';
-            imgHTML.style.left = String(window.innerWidth/2+(image.absolutePos.x - image.absolutePos.w * 0.5 + camera.position.x - window.innerWidth/2)*camera.scale) + 'px';
+
+            imgHTML.style.left = String(window.innerWidth/2+(image.absolutePos.x - image.absolutePos.w * 0.5 + camera.position.x - window.innerWidth/2)*camera.scale) + 'px';/*image.absolutePos.x - image.absolutePos.w * 0.5 +*/
+
             imgHTML.style.width = String(image.absolutePos.w*camera.scale) + 'px';
             imgHTML.style.height = String(image.absolutePos.h*camera.scale) + 'px';
 

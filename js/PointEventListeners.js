@@ -13,6 +13,8 @@ define(['./Camera','./Point'], function (Camera, Point) {
             var x = event.clientX;     // Get the horizontal coordinate
             var y = event.clientY;
 
+            //console.log(x,y);
+
             var clickedPicture = document.elementFromPoint(x, y); // to jest tylko img - zaraz znajdziemy dla niego Patch'a
 
 
@@ -112,21 +114,19 @@ define(['./Camera','./Point'], function (Camera, Point) {
 
             //console.log(selectedImage);
 
-            // TODO: tutaj policzyć dane punktu, na podstawie image i miejsca kliknięcia
+            //TODO: tutaj policzyć dane punktu, na podstawie image i miejsca kliknięcia
 
             function countPointCoordinates(image,clickX,clickY ){
-            var point = {x:0,y:0};
+            var point = {x:null,y:null};
 
-
-//TODO: ten point.y coś liczy ale zupełnie źle, trzeba to rozkminić geometrycznie, może sam HTML trzeba obadać
 
 
                 // na podstawie Point.updateMyPoisition(), dodoałem tylko "na pałe" 103 tutaj
-                point.y = (((clickY-window.innerHeight/2)/viewer.camera.scale)+ (window.innerWidth/2) - image.absolutePos.y +103 -viewer.camera.position.y )/(image.absolutePos.h/2);
+                point.y = (((clickY-window.innerHeight/2)/viewer.camera.scale) + (window.innerHeight/2) - image.absolutePos.y /*+103*/ -viewer.camera.position.y )/(image.absolutePos.h/2);
 
                 // na podstawie Point.updateMyPoisition(), po przekszatłceniu
 
-                point.x = (((clickX - window.innerWidth/2)/viewer.camera.scale)+window.innerWidth/2 - image.absolutePos.x  - viewer.camera.position.x)/(image.absolutePos.w/2);
+                point.x = (((clickX - window.innerWidth/2)/viewer.camera.scale) + window.innerWidth/2 - image.absolutePos.x  - viewer.camera.position.x)/(image.absolutePos.w/2);
 
 
                 return point;
@@ -141,6 +141,7 @@ define(['./Camera','./Point'], function (Camera, Point) {
             //viewer.positionable.push(new Point(clickedImagePatch.image,pointXY)); // WERSJA Z POINTEM NA POWIERZCHNI wszystkich patchów
 
             viewer.updateAllPositionables();
+            console.log(viewer);
         });
     };
 
