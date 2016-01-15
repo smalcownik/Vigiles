@@ -110,7 +110,7 @@ define(['./Camera','./Point'], function (Camera, Point) {
 
             var selectedImage = pointAllocate(clickedAndItsParents); // z rodziców wybiera ten, na którym ma osadzić punkt
 
-            console.log(selectedImage);
+            //console.log(selectedImage);
 
             // TODO: tutaj policzyć dane punktu, na podstawie image i miejsca kliknięcia
 
@@ -119,22 +119,28 @@ define(['./Camera','./Point'], function (Camera, Point) {
 
 
 //TODO: ten point.y coś liczy ale zupełnie źle, trzeba to rozkminić geometrycznie, może sam HTML trzeba obadać
-                point.y = (((clickY-window.innerHeight/2)/viewer.camera.scale)+ window.innerWidth/2 - image.absolutePos.y -viewer.camera.position.y )/(image.absolutePos.h/2);
-
-                /*divPoint.style.top = String( window.innerHeight/2 + (image.absolutePos.y +
-                        (image.absolutePos.h * 0.5 * this.point.y) + camera.position.y - window.innerHeight/2) * camera.scale) + "px";
 
 
-                divPoint.style.left = String( window.innerWidth/2 + (image.absolutePos.x +
-                        (image.absolutePos.w * 0.5 * this.point.x) + camera.position.x - window.innerWidth/2) * camera.scale) + 'px';*/
+                // na podstawie Point.updateMyPoisition(), dodoałem tylko "na pałe" 103 tutaj
+                point.y = (((clickY-window.innerHeight/2)/viewer.camera.scale)+ (window.innerWidth/2) - image.absolutePos.y +103 -viewer.camera.position.y )/(image.absolutePos.h/2);
 
-            return point;
+                // na podstawie Point.updateMyPoisition(), po przekszatłceniu
+
+                point.x = (((clickX - window.innerWidth/2)/viewer.camera.scale)+window.innerWidth/2 - image.absolutePos.x  - viewer.camera.position.x)/(image.absolutePos.w/2);
+
+
+                return point;
             };
 
-            console.log(countPointCoordinates(selectedImage,x,y));
+            //console.log(countPointCoordinates(selectedImage,x,y));
 
-            //viewer.positionable.push(new Point(image,point)) // point(Pattern) = {"x":0,"y":0}
+            var pointXY =countPointCoordinates(selectedImage,x,y);              // WERSJA Z POINTEM NA patchu, który jest odsłonięty
+            //var pointXY =countPointCoordinates(clickedImagePatch.image,x,y);  // WERSJA Z POINTEM NA POWIERZCHNI wszystkich patchów
 
+            viewer.positionable.push(new Point(selectedImage,pointXY));             // WERSJA Z POINTEM NA patchu, który jest odsłonięty
+            //viewer.positionable.push(new Point(clickedImagePatch.image,pointXY)); // WERSJA Z POINTEM NA POWIERZCHNI wszystkich patchów
+
+            viewer.updateAllPositionables();
         });
     };
 

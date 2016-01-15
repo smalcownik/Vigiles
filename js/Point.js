@@ -26,8 +26,8 @@ define([], function () {
             divPoint.style.width = '6px';
             divPoint.style.backgroundColor = '#000000';
             divPoint.style.borderColor = '#ffffff';
-            divPoint.style.borderRadius = '50%';
-            divPoint.style.borderWidth = '3px';
+            //divPoint.style.borderRadius = '50%';
+            //divPoint.style.borderWidth = '3px';
             divPoint.style.borderStyle = 'solid';
 
         };
@@ -39,7 +39,7 @@ define([], function () {
             var image = this.image;
 
             divPoint.style.top = String( window.innerHeight/2 + (image.absolutePos.y +
-                    (image.absolutePos.h * 0.5 * this.point.y) + camera.position.y - window.innerHeight/2) * camera.scale) + "px";
+                    (image.absolutePos.h * 0.5 * this.point.y) + camera.position.y - window.innerHeight/2) * camera.scale) +"px";
 //debugger;
 
             divPoint.style.left = String( window.innerWidth/2 + (image.absolutePos.x +
