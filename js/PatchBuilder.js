@@ -15,9 +15,11 @@ define(["./Patch"], function (Patch) {
                 data.traverse(  // traverse z new MapData(response//jsonString),
                                 // trawersowanie zawsze na początku ma argument jako image: MapData.images[0]
 
-                    function(image,parent){
 
-                        viewer.positionable.push(new Patch(image,parent,data))
+                    function(image,i,parent){
+
+
+                        viewer.positionable.push(new Patch(image,parent,data,i))
 
                     }
                 );

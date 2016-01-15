@@ -60,7 +60,7 @@ define(['./Camera','./Point'], function (Camera, Point) {
 
             parentsDigger(clickedImagePatch, clickedAndItsParents);
 
-            //console.log(clickedAndItsParents);
+            console.log(clickedAndItsParents);
 
 
 

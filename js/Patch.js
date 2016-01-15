@@ -1,12 +1,14 @@
 define([], function () { // tworzy objekty zdjec (łatek),
 
-        var exported = function Patch(image,parent,data){
+        var exported = function Patch(image,parent,data,i){
 
             var imgHTML= document.createElement('img');
-            imgHTML.src=data.url+'/imgs/'+image.id+'.jpg'; //  tu jest odniesienie do plików jpg (jedyne!!)
+            imgHTML.src=data.url+'/imgs/imgs['+i+']/'+image.id+'.jpg'; //  tu jest odniesienie do plików jpg (jedyne!!)
             this.DOM = imgHTML;
             image.patch = this;
             this.image = image;
+
+            //console.log(image);
 
             image.parent = parent;
 
@@ -40,6 +42,9 @@ define([], function () { // tworzy objekty zdjec (łatek),
                 //debugger;
 
             } else {
+
+
+
                 image.absolutePos = {
                     y: window.innerWidth * 0.5 * image.size.h / image.size.w,  // srodek zdjęcia : y
                     x: window.innerWidth / 2, // srodek zdjęcia: x
