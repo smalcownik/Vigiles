@@ -103,9 +103,6 @@ define(['./Camera','./Point'], function (Camera, Point) {
                                             // zwraca image, na którym ma być osadzony dodawany punkt
 
                 var initPosition = array.length - 1;
-
-                //debugger;
-
                 return selectPointedImage(array, initPosition);
 
             }
@@ -141,7 +138,7 @@ define(['./Camera','./Point'], function (Camera, Point) {
             //viewer.positionable.push(new Point(clickedImagePatch.image,pointXY)); // WERSJA Z POINTEM NA POWIERZCHNI wszystkich patchów
 
             viewer.updateAllPositionables();
-            console.log(viewer);
+            //console.log(viewer);
         });
     };
 
