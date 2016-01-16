@@ -22,8 +22,8 @@ define([], function () {
             divPoint.style.position = 'absolute';
 
             divPoint.style.zIndex = '1000';
-            divPoint.style.height = '6px';
-            divPoint.style.width = '6px';
+            divPoint.style.height = '6px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
+            divPoint.style.width = '6px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
             divPoint.style.backgroundColor = '#000000';
             divPoint.style.borderColor = '#ffffff';
             //divPoint.style.borderRadius = '50%';
@@ -38,11 +38,11 @@ define([], function () {
 
             var image = this.image;
 
-            divPoint.style.top = String( window.innerHeight/2 + (image.absolutePos.y +
+            divPoint.style.top = String(window.innerHeight/2 + ( image.absolutePos.y +
                     (image.absolutePos.h * 0.5 * this.point.y) + camera.position.y - window.innerHeight/2) * camera.scale) +"px";
 //debugger;
 
-            divPoint.style.left = String( window.innerWidth/2 + (image.absolutePos.x +
+            divPoint.style.left = String( window.innerWidth/2 + (/* 0.5 *style.width + 2* border.width */ image.absolutePos.x +
                     (image.absolutePos.w * 0.5 * this.point.x) + camera.position.x - window.innerWidth/2) * camera.scale) + 'px';
 
         };

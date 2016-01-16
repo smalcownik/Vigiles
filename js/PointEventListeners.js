@@ -119,11 +119,11 @@ define(['./Camera','./Point'], function (Camera, Point) {
 
 
                 // na podstawie Point.updateMyPoisition(), dodoałem tylko "na pałe" 103 tutaj
-                point.y = (((clickY-window.innerHeight/2)/viewer.camera.scale) + (window.innerHeight/2) - image.absolutePos.y /*+103*/ -viewer.camera.position.y )/(image.absolutePos.h/2);
+                point.y = (((clickY-6/* 0.5 *style.width + 2* border.width */ -window.innerHeight/2)/viewer.camera.scale) + (window.innerHeight/2) - image.absolutePos.y /*+103*/ -viewer.camera.position.y )/(image.absolutePos.h/2);
 
                 // na podstawie Point.updateMyPoisition(), po przekszatłceniu
 
-                point.x = (((clickX - window.innerWidth/2)/viewer.camera.scale) + window.innerWidth/2 - image.absolutePos.x  - viewer.camera.position.x)/(image.absolutePos.w/2);
+                point.x = (((clickX-6/* 0.5 *style.width + 2* border.width */ - window.innerWidth/2)/viewer.camera.scale) + window.innerWidth/2 - image.absolutePos.x  - viewer.camera.position.x)/(image.absolutePos.w/2);
 
 
                 return point;

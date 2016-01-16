@@ -43,20 +43,31 @@ define([], function () { // tworzy objekty zdjec (łatek),
 
             } else {
 
+                //if(i===0){
 
-
-                image.absolutePos = {
+                    image.absolutePos = {
                     y: window.innerWidth * 0.5 * image.size.h / image.size.w,  // srodek zdjęcia : y
-                    x: window.innerWidth / 2, // srodek zdjęcia: x
+                    x: window.innerWidth * (0.5 + 1.10 *i), // srodek zdjęcia: x
                     w: window.innerWidth, //szerokość okna przegladarki www
                     h: window.innerWidth * image.size.h / image.size.w // wymiar zdjęcia y, w zasadzie 2*y
                 };
+
+               /* }else{}
+
+                image.absolutePos = {
+                    y: window.innerWidth * 0.5 * image.size.h / image.size.w,  // srodek zdjęcia : y
+                    x: window.innerWidth * (0.5 + 1.25 *i) , // srodek zdjęcia: x
+                    w: window.innerWidth, //szerokość okna przegladarki www
+                    h: window.innerWidth * image.size.h / image.size.w // wymiar zdjęcia y, w zasadzie 2*y
+                };*/
 
                 imgHTML.style.opacity = 1; // jesli nie ma parenta to widac do mocno
 
             }
 
-            imgHTML.style.border = '1px dashed blue';
+            //imgHTML.style.border = '1px dashed blue';
+            imgHTML.style.border = '5px solid rgba(255, 255, 255, .2)';
+            imgHTML.style.borderRadius = '5px';
             imgHTML.style.position = 'absolute';
 
 
@@ -84,7 +95,7 @@ define([], function () { // tworzy objekty zdjec (łatek),
             }
 
 
-            //debugger
+           // UPDATE POSITION:
 
             imgHTML.style.top = String(window.innerHeight/2+(image.absolutePos.y - image.absolutePos.h * 0.5 + camera.position.y - window.innerHeight/2)*camera.scale) + 'px';
 
@@ -94,6 +105,8 @@ define([], function () { // tworzy objekty zdjec (łatek),
             imgHTML.style.height = String(image.absolutePos.h*camera.scale) + 'px';
 
             //console.log(image);
+
+            // UPDATE OPACITY:
 
             if(image.absolutePos.w*camera.scale/*imgHTML.style.width ale BEZ PIKSELI*/ > window.innerWidth ) {
 
