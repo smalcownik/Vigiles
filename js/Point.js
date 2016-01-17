@@ -6,6 +6,8 @@ define([], function () {
             document.body.appendChild(divPoint);
             this.DOM = divPoint;
 
+            divPoint.classList.add("point"); // użyte później w index2.html
+
             this.point = point;
 
             this.image = image;
@@ -29,6 +31,12 @@ define([], function () {
             //divPoint.style.borderRadius = '50%';
             //divPoint.style.borderWidth = '3px';
             divPoint.style.borderStyle = 'solid';
+
+            /*divPoint.addEventListener("click", function( ) {
+                // display the current click count inside the clicked div
+                console.log("clicked!");
+
+            }, false);*/
 
         };
 

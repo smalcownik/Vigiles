@@ -73,6 +73,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
 
             CameraEventListeners.cameraEvents();
             PointEventListeners.addPoint();
+            PointEventListeners.showPointContent();
 
 
 
