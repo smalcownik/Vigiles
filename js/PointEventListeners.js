@@ -180,12 +180,47 @@ define(['./Camera', './Point'], function (Camera, Point) {
                         }
                     }
                 );
-            }
-            ;
+            }'';
 
             if (clickedElementPoint) {
 
-                console.log(clickedElementPoint);
+                if (clickedElement.hasChildNodes()) {
+
+                    //debugger;
+
+                    if (clickedElement.childNodes[0].style.display !== "none") {
+                        clickedElement.childNodes[0].style.display = "none";
+                    }
+                    else {
+                        clickedElement.childNodes[0].style.display = "block";
+                    }
+
+                }
+
+                else {
+
+                    console.log(clickedElementPoint.originalTextValue);
+
+                    var inDiv = document.createElement('div');
+
+                    clickedElement.appendChild(inDiv);
+                    inDiv.innerHTML = clickedElementPoint.originalTextValue;
+                    inDiv.style.position = 'relative';
+                    inDiv.style.left = '10px';
+                    inDiv.style.top = '10px';
+                    inDiv.style.color="red";
+                    inDiv.style.textAlign = 'center';
+                   // inDiv.style.background = ""
+
+                    inDiv.style.height = '22px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
+                    inDiv.style.width = '120px';
+                    inDiv.style.border = '3px solid rgba(255, 255, 255, .8)';
+                    inDiv.style.borderRadius = '5px';
+                    inDiv.style.zIndex = '1001';
+
+
+                }
+
             }
 
 

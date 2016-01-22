@@ -17,6 +17,8 @@ define([], function () {
                 y: image.absolutePos.y + 0.5 * image.absolutePos.h * point.y
             };
 
+            this.originalTextValue = point.textInit;
+
             divPoint.style.top = this.absolutePos.y + 'px';
             divPoint.style.left = this.absolutePos.x + 'px';
 
@@ -31,6 +33,8 @@ define([], function () {
             //divPoint.style.borderRadius = '50%';
             //divPoint.style.borderWidth = '3px';
             divPoint.style.borderStyle = 'solid';
+
+
 
             /*divPoint.addEventListener("click", function( ) {
                 // display the current click count inside the clicked div
