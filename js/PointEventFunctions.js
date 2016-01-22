@@ -1,19 +1,18 @@
-define(['./Point','./PointEventFunctions'], function (Point,PointEventFunctions) {
+/**
+ * Created by marek on 22.01.16.
+ */
+define(['./Camera','./Point'], function (Camera,Point) { //tworzy objekty dodawanych punktów razem z właściowściami DOM
 
-    var exported = {};
+        var exported = {};
 
-    exported.addPoint = function () {
+        exported.toAddPoint = function (event) {// event dla camery/obrazków
 
-        //var viewer = this.viewer; // jest widoczny jako objekt dopiero gdy wstrzyknąłem viewera przed wykonaniem F-KCJI: registerEventListeners()
-
-        //console.log(viewer);
-
-        document.body.addEventListener('dblclick',  PointEventFunctions.toAddPoint  /*function (event) {  // event dla camery/obrazków
+            var viewer = exported.viewer;
 
             var x = event.clientX;     // Get the horizontal coordinate
             var y = event.clientY;
 
-            //console.log(x,y);
+            console.log(viewer);
 
             // console.log(event.target);
 
@@ -28,7 +27,7 @@ define(['./Point','./PointEventFunctions'], function (Point,PointEventFunctions)
 
             if (clickedPicture.tagName === "IMG") {
 
-
+//debugger;
                 viewer.positionable.forEach(
                     function (element) {
 
@@ -80,10 +79,10 @@ define(['./Point','./PointEventFunctions'], function (Point,PointEventFunctions)
 
                     if (position > 0) {
 
-                        if (array[position].absolutePos.w * Camera.scale /!*imgHTML.style.width ale BEZ PIKSELI*!/ > window.innerWidth) {
+                        if (array[position].absolutePos.w * Camera.scale /*imgHTML.style.width ale BEZ PIKSELI*/ > window.innerWidth) {
 
 
-                            if (array[position - 1].absolutePos.w * Camera.scale /!*imgHTML.style.width ale BEZ PIKSELI*!/ < window.innerWidth) {
+                            if (array[position - 1].absolutePos.w * Camera.scale /*imgHTML.style.width ale BEZ PIKSELI*/ < window.innerWidth) {
 
                                 result = array[position - 1];
 
@@ -126,11 +125,11 @@ define(['./Point','./PointEventFunctions'], function (Point,PointEventFunctions)
 
 
                     // na podstawie Point.updateMyPoisition(), dodoałem tylko "na pałe" 103 tutaj
-                    point.y = (((clickY - 6/!* 0.5 *style.width + 2* border.width *!/ - window.innerHeight / 2) / viewer.camera.scale) + (window.innerHeight / 2) - image.absolutePos.y /!*+103*!/ - viewer.camera.position.y ) / (image.absolutePos.h / 2);
+                    point.y = (((clickY - 6/* 0.5 *style.width + 2* border.width */ - window.innerHeight / 2) / viewer.camera.scale) + (window.innerHeight / 2) - image.absolutePos.y /*+103*/ - viewer.camera.position.y ) / (image.absolutePos.h / 2);
 
                     // na podstawie Point.updateMyPoisition(), po przekszatłceniu
 
-                    point.x = (((clickX - 6/!* 0.5 *style.width + 2* border.width *!/ - window.innerWidth / 2) / viewer.camera.scale) + window.innerWidth / 2 - image.absolutePos.x - viewer.camera.position.x) / (image.absolutePos.w / 2);
+                    point.x = (((clickX - 6/* 0.5 *style.width + 2* border.width */ - window.innerWidth / 2) / viewer.camera.scale) + window.innerWidth / 2 - image.absolutePos.x - viewer.camera.position.x) / (image.absolutePos.w / 2);
 
 
                     return point;
@@ -156,15 +155,11 @@ define(['./Point','./PointEventFunctions'], function (Point,PointEventFunctions)
 
             }
 
-        }*/);
-    };
+        };
 
+        exported.toShowPointContent = function(event) {    // event dla camery/obrazków
 
-    exported.showPointContent = function () {
-
-        //var viewer = this.viewer;
-
-        document.body.addEventListener('click',PointEventFunctions.toShowPointContent /*function (event) {    // event dla camery/obrazków
+            var viewer = exported.viewer;
 
             var clickedElement = event.target; // to jest tylko element - zaraz znajdziemy dla niego Patch'a/Pointa
 
@@ -211,7 +206,7 @@ define(['./Point','./PointEventFunctions'], function (Point,PointEventFunctions)
                     inDiv.style.top = '10px';
                     inDiv.style.color="red";
                     inDiv.style.textAlign = 'center';
-                   // inDiv.style.background = ""
+                    // inDiv.style.background = ""
 
                     inDiv.style.height = '22px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
                     inDiv.style.width = '120px';
@@ -225,9 +220,8 @@ define(['./Point','./PointEventFunctions'], function (Point,PointEventFunctions)
             }
 
 
-        }*/);
-    };
+        };
 
-    return exported;
-
-});
+        return exported;
+    }
+);

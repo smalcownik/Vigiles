@@ -1,5 +1,5 @@
-define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./CameraEventListeners","./PointEventListeners"], function (
-        MapDataProvider,PatchBuilder,PointsBuilder,Camera,CameraEventListeners,PointEventListeners
+define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./CameraEventListeners","./PointEventListeners",'./PointEventFunctions'], function (
+        MapDataProvider,PatchBuilder,PointsBuilder,Camera,CameraEventListeners,PointEventListeners,PointEventFunctions
     ) { //wyswietla strone i poczatkowe dane
 
         var exported = {
@@ -17,7 +17,8 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
             PatchBuilder.viewer = this;
             PointsBuilder.viewer = this;
             CameraEventListeners.viewer = this; // TRZEBA TO WSTRZYKNĄĆ PRZED F_KCJĄ registerEventListeners(), bo inaczej ona nie widzi viewera
-            PointEventListeners.viewer = this;
+            //PointEventListeners.viewer = this;
+            PointEventFunctions.viewer = this;
 
             exported.registerEventListeners();  // reakcja na przyciski MUSIAŁEM NAJPIERW
 
