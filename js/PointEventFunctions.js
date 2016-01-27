@@ -12,7 +12,7 @@ define(['./Camera','./Point'], function (Camera,Point) { //tworzy objekty dodawa
             var x = event.clientX;     // Get the horizontal coordinate
             var y = event.clientY;
 
-            console.log(viewer);
+            //console.log(viewer);
 
             // console.log(event.target);
 
@@ -151,13 +151,11 @@ define(['./Camera','./Point'], function (Camera,Point) { //tworzy objekty dodawa
                 //console.log(viewer.positionable[0]);
 
 
-                //TODO: function createPointInitialContent
-
             }
 
         };
 
-        exported.toShowPointContent = function(event) {    // event dla camery/obrazków
+        exported.toShowPointContent = function(event){    // event dla camery/obrazków
 
             var viewer = exported.viewer;
 
@@ -180,27 +178,36 @@ define(['./Camera','./Point'], function (Camera,Point) { //tworzy objekty dodawa
 
             if (clickedElementPoint) {
 
-                if (clickedElement.hasChildNodes()) {
+                //debugger;
+
+                //console.log(clickedElement.hasChildNodes());
+                console.log(clickedElementPoint);
+                console.log(clickedElement);
+
+
+                if (clickedElement.hasChildNodes()){
 
                     //debugger;
 
-                    if (clickedElement.childNodes[0].style.display !== "none") {
+                    if(clickedElement.childNodes[0].style.display !== "none") {
                         clickedElement.childNodes[0].style.display = "none";
                     }
-                    else {
+                    else{
                         clickedElement.childNodes[0].style.display = "block";
                     }
 
                 }
 
-                else {
+                else{
 
                     console.log(clickedElementPoint.originalTextValue);
 
                     var inDiv = document.createElement('div');
 
                     clickedElement.appendChild(inDiv);
-                    inDiv.innerHTML = clickedElementPoint.originalTextValue;
+
+
+                    inDiv.className = "pointContent";
                     inDiv.style.position = 'relative';
                     inDiv.style.left = '10px';
                     inDiv.style.top = '10px';
@@ -208,20 +215,66 @@ define(['./Camera','./Point'], function (Camera,Point) { //tworzy objekty dodawa
                     inDiv.style.textAlign = 'center';
                     // inDiv.style.background = ""
 
-                    inDiv.style.height = '22px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
-                    inDiv.style.width = '120px';
+                    inDiv.style.height = '102px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
+                    inDiv.style.width = '150px';
                     inDiv.style.border = '3px solid rgba(255, 255, 255, .8)';
                     inDiv.style.borderRadius = '5px';
                     inDiv.style.zIndex = '1001';
 
 
+                    var divPar1 = document.createElement('p');
+                    inDiv.appendChild(divPar1);
+                    divPar1.innerHTML = clickedElementPoint.originalTextValue;
+                    divPar1.style.wordWrap = 'break-word';
+                    divPar1.style.position = 'relative';
+                    divPar1.style.left = '0px';
+                    divPar1.style.top = '-18px';
+                    divPar1.style.border = '1px solid rgba(255, 255, 255, .8)';
+                    divPar1.style.height = '33px';
+
+                    //TODO: par1 zrobić initial content na wypadek gdy jest undefined
+
+
+                    var divPar2 = document.createElement('p');
+                    divPar2.innerHTML = "EDIT POINT";
+                    inDiv.appendChild(divPar2);
+                    divPar2.style.wordWrap = 'break-word';
+                    divPar2.style.position = 'relative';
+                    divPar2.style.left = '0px';
+                    divPar2.style.top = '-34px';
+                    divPar2.style.border = '1px solid rgba(255, 255, 255, .8)';
+                    divPar2.style.height = '33px';
+
+                    //TODO: par2 zrobić event, który zmienia zawrtość par1
+
+                    var divPar3 = document.createElement('p');
+                    divPar3.innerHTML = "DELETE POINT";
+                    inDiv.appendChild(divPar3);
+                    divPar3.style.wordWrap = 'break-word';
+                    divPar3.style.position = 'relative';
+                    divPar3.style.left = '0px';
+                    divPar3.style.top = '-50px';
+                    divPar3.style.border = '1px solid rgba(255, 255, 255, .8)';
+                    divPar3.style.height = '33px';
+
+                    //TODO: par3 zrobić event, który usuwa cały point
+
+                   // var node = document.createTextNode("This is new.");
+
+
                 }
 
             }
+            else if(clickedElement.className === "pointContent" || clickedElement.parentNode.className === "pointContent"){ //TODO: tu posrało się
 
+             //console.log("kliknąłem w listęPodPunktem");
+                clickedElement.style.display = "none";
+            };
 
         };
 
         return exported;
+
     }
+
 );

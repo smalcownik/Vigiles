@@ -8,7 +8,7 @@ define(['./Point','./PointEventFunctions'], function (Point,PointEventFunctions)
 
         //console.log(viewer);
 
-        document.body.addEventListener('dblclick',  PointEventFunctions.toAddPoint  /*function (event) {  // event dla camery/obrazków
+        document.body.addEventListener('click',  PointEventFunctions.toAddPoint  /*function (event) {  // event dla camery/obrazków
 
             var x = event.clientX;     // Get the horizontal coordinate
             var y = event.clientY;
