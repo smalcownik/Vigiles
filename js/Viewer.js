@@ -25,7 +25,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
         };
 
         exported.buildDOM = function(){
-            //TODO: stworzyc prosty interfejs
+            // TU MA BYC INTERFEJS
         };
 
         exported.updateAllPositionables = function(){ // ta funckja zachodzi przy: 1. Viewer.showMapData (czyli budowanie widoku przez PatchBuilder)
@@ -94,7 +94,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
                     // url powinine byc adresem katalogu w ktorym jest archiwum mapy
                 }
                 //debugger;
-            }//TODO: dopisać analogiczne testy argumentów w innych funkcjach
+            }
 
             MapDataProvider.loadData(url,
                 function(data){ // cb w MDP.loadData

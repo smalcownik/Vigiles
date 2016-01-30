@@ -177,13 +177,14 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
             }
             ;
 
+
             if (clickedElementPoint) {
 
                 //debugger;
 
                 //console.log(clickedElement.hasChildNodes());
-                console.log(clickedElementPoint);
-                console.log(clickedElement);
+                //console.log(clickedElementPoint);
+                //console.log(clickedElement);
 
 
                 if (clickedElement.hasChildNodes()) {
@@ -201,7 +202,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
                 else {
 
-                    console.log(clickedElementPoint.originalTextValue);
+                    //console.log(clickedElementPoint.originalTextValue);
 
                     var inDiv = document.createElement('div');
 
@@ -210,10 +211,12 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
                     inDiv.className = "pointContent";
                     inDiv.style.position = 'relative';
+                    inDiv.style.background = '#0000A0';//'#6960EC';//#737CA1 ,
                     inDiv.style.left = '10px';
                     inDiv.style.top = '10px';
                     inDiv.style.color = "red";
                     inDiv.style.textAlign = 'center';
+                    inDiv.style.color = 'white';
                     // inDiv.style.background = ""
 
                     inDiv.style.height = '102px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
@@ -226,13 +229,22 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                     var divPar1 = document.createElement('p');
                     inDiv.appendChild(divPar1);
                     divPar1.className = "pointContentTextValue";
-                    divPar1.innerHTML = clickedElementPoint.originalTextValue;
+
+
+                    if (!clickedElementPoint.originalTextValue) { // jesli nie ma początkowej wartości pole "originalTextValue"
+                        // to pisze żeby je wprowadzić, w innym razie wyswietla zawartość pola
+                        divPar1.innerHTML = "To insert point value, click &quot;EditPoint&quot; just below";
+                    }
+                    else {
+                        divPar1.innerHTML = clickedElementPoint.originalTextValue
+                    }
+
                     divPar1.style.wordWrap = 'break-word';
                     divPar1.style.position = 'relative';
                     divPar1.style.left = '0px';
                     divPar1.style.top = '-18px';
                     divPar1.style.border = '1px solid rgba(255, 255, 255, .8)';
-                    divPar1.style.height = '33px';
+                    divPar1.style.height = '53px';
 
                     //TODO: par1 zrobić initial content na wypadek gdy jest undefined
 
@@ -246,7 +258,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                     divPar2.style.left = '0px';
                     divPar2.style.top = '-34px';
                     divPar2.style.border = '1px solid rgba(255, 255, 255, .8)';
-                    divPar2.style.height = '33px';
+                    divPar2.style.height = '23px';
 
 
                     var divPar3 = document.createElement('p');
@@ -258,7 +270,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                     divPar3.style.left = '0px';
                     divPar3.style.top = '-50px';
                     divPar3.style.border = '1px solid rgba(255, 255, 255, .8)';
-                    divPar3.style.height = '33px';
+                    divPar3.style.height = '23px';
 
 
                 }
@@ -266,14 +278,14 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
             }
 
 
-            else if (clickedElement.className === "pointContentTextValue" || clickedElement.parentNode.className === "pointContentTextValue") { //TODO: tu posrało się
+            else if (clickedElement.className === "pointContentTextValue" || clickedElement.parentNode.className === "pointContentTextValue") {
 
                 //console.log("kliknąłem w listęPodPunktem");
                 clickedElement.parentNode.style.display = "none";
             }
 
 
-            else if (clickedElement.className === "pointContentEDIT" || clickedElement.parentNode.className === "pointContentEDIT") { //TODO: tu posrało się
+            else if (clickedElement.className === "pointContentEDIT" || clickedElement.parentNode.className === "pointContentEDIT") {
 
                 //console.log("kliknąłem w listęPodPunktem");
                 //alert("EDIT! EDIT!");
@@ -282,30 +294,43 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
             }
 
-            else if (clickedElement.className === "pointContentDELETE" || clickedElement.parentNode.className === "pointContentDELETE") { //TODO: tu posrało się
+            else if (clickedElement.className === "pointContentDELETE" || clickedElement.parentNode.className === "pointContentDELETE") {
 
 
-                console.log(viewer.positionable);
+                //console.log(viewer.positionable);
 
+                var answer = confirm("Are you sure you wan't to delete point and it content?");
 
-                viewer.positionable.forEach(
-                    function (element, i) {
+                if (answer == true) {
+                    viewer.positionable.forEach(
+                        function (element, i) {
 
-                        if (element.DOM === clickedElement.parentNode.parentNode) {
+                            if (element.DOM === clickedElement.parentNode.parentNode) {
 
-                            console.log(i);
+                                //console.log(i);
 
-                            var a = clickedElement.parentNode.parentNode;
+                                var a = clickedElement.parentNode.parentNode;
 
-                            a.parentNode.removeChild(a);
+                                a.parentNode.removeChild(a);
 
-                            if (i > -1) {
-                                viewer.positionable.splice(i, 1); // usunięto pointa z posositionable ale został jeszcze div.point w htmlu, może jego najpierw usunąć
+                                if (i > -1) {
+                                    viewer.positionable.splice(i, 1); // usunięto pointa z posositionable ale został jeszcze div.point w htmlu, może jego najpierw usunąć
+                                }
+
                             }
-
                         }
-                    }
-                );
+                    );
+                }
+
+            }
+
+            else { // sytuacja gdy kikniemy poza jakimkolwiek pointem (wtedy maja zniknąć otwarte okna "pointContent")
+
+                var x = document.getElementsByClassName("pointContent");
+                var i;
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
 
 
             };
