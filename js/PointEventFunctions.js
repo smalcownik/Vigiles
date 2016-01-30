@@ -1,7 +1,7 @@
 /**
  * Created by marek on 22.01.16.
  */
-define(['./Camera','./Point'], function (Camera,Point) { //tworzy objekty dodawanych punktów razem z właściowściami DOM
+define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty dodawanych punktów razem z właściowściami DOM
 
         var exported = {};
 
@@ -155,13 +155,13 @@ define(['./Camera','./Point'], function (Camera,Point) { //tworzy objekty dodawa
 
         };
 
-        exported.toShowPointContent = function(event){    // event dla camery/obrazków
+        exported.toShowPointContent = function (event) {    // event dla camery/obrazków
 
             var viewer = exported.viewer;
 
             var clickedElement = event.target; // to jest tylko element - zaraz znajdziemy dla niego Patch'a/Pointa
 
-            if (clickedElement.className === "point"){
+            if (clickedElement.className === "point") {
 
                 var clickedElementPoint; // tu będzie Patch, który zawiera clickedPicture(img)
 
@@ -174,7 +174,8 @@ define(['./Camera','./Point'], function (Camera,Point) { //tworzy objekty dodawa
                         }
                     }
                 );
-            };
+            }
+            ;
 
             if (clickedElementPoint) {
 
@@ -185,20 +186,20 @@ define(['./Camera','./Point'], function (Camera,Point) { //tworzy objekty dodawa
                 console.log(clickedElement);
 
 
-                if (clickedElement.hasChildNodes()){
+                if (clickedElement.hasChildNodes()) {
 
                     //debugger;
 
-                    if(clickedElement.childNodes[0].style.display !== "none") {
+                    if (clickedElement.childNodes[0].style.display !== "none") {
                         clickedElement.childNodes[0].style.display = "none";
                     }
-                    else{
+                    else {
                         clickedElement.childNodes[0].style.display = "block";
                     }
 
                 }
 
-                else{
+                else {
 
                     console.log(clickedElementPoint.originalTextValue);
 
@@ -211,7 +212,7 @@ define(['./Camera','./Point'], function (Camera,Point) { //tworzy objekty dodawa
                     inDiv.style.position = 'relative';
                     inDiv.style.left = '10px';
                     inDiv.style.top = '10px';
-                    inDiv.style.color="red";
+                    inDiv.style.color = "red";
                     inDiv.style.textAlign = 'center';
                     // inDiv.style.background = ""
 
@@ -224,6 +225,7 @@ define(['./Camera','./Point'], function (Camera,Point) { //tworzy objekty dodawa
 
                     var divPar1 = document.createElement('p');
                     inDiv.appendChild(divPar1);
+                    divPar1.className = "pointContentTextValue";
                     divPar1.innerHTML = clickedElementPoint.originalTextValue;
                     divPar1.style.wordWrap = 'break-word';
                     divPar1.style.position = 'relative';
@@ -238,6 +240,7 @@ define(['./Camera','./Point'], function (Camera,Point) { //tworzy objekty dodawa
                     var divPar2 = document.createElement('p');
                     divPar2.innerHTML = "EDIT POINT";
                     inDiv.appendChild(divPar2);
+                    divPar2.className = "pointContentEDIT";
                     divPar2.style.wordWrap = 'break-word';
                     divPar2.style.position = 'relative';
                     divPar2.style.left = '0px';
@@ -245,11 +248,11 @@ define(['./Camera','./Point'], function (Camera,Point) { //tworzy objekty dodawa
                     divPar2.style.border = '1px solid rgba(255, 255, 255, .8)';
                     divPar2.style.height = '33px';
 
-                    //TODO: par2 zrobić event, który zmienia zawrtość par1
 
                     var divPar3 = document.createElement('p');
                     divPar3.innerHTML = "DELETE POINT";
                     inDiv.appendChild(divPar3);
+                    divPar3.className = "pointContentDELETE";
                     divPar3.style.wordWrap = 'break-word';
                     divPar3.style.position = 'relative';
                     divPar3.style.left = '0px';
@@ -257,24 +260,60 @@ define(['./Camera','./Point'], function (Camera,Point) { //tworzy objekty dodawa
                     divPar3.style.border = '1px solid rgba(255, 255, 255, .8)';
                     divPar3.style.height = '33px';
 
-                    //TODO: par3 zrobić event, który usuwa cały point
-
-                   // var node = document.createTextNode("This is new.");
-
 
                 }
 
             }
-            else if(clickedElement.className === "pointContent" || clickedElement.parentNode.className === "pointContent"){ //TODO: tu posrało się
 
-             //console.log("kliknąłem w listęPodPunktem");
-                clickedElement.style.display = "none";
+
+            else if (clickedElement.className === "pointContentTextValue" || clickedElement.parentNode.className === "pointContentTextValue") { //TODO: tu posrało się
+
+                //console.log("kliknąłem w listęPodPunktem");
+                clickedElement.parentNode.style.display = "none";
+            }
+
+
+            else if (clickedElement.className === "pointContentEDIT" || clickedElement.parentNode.className === "pointContentEDIT") { //TODO: tu posrało się
+
+                //console.log("kliknąłem w listęPodPunktem");
+                //alert("EDIT! EDIT!");
+
+                clickedElement.parentNode.childNodes[0].innerHTML = prompt("Please write equipment note here");
+
+            }
+
+            else if (clickedElement.className === "pointContentDELETE" || clickedElement.parentNode.className === "pointContentDELETE") { //TODO: tu posrało się
+
+
+                console.log(viewer.positionable);
+
+
+                viewer.positionable.forEach(
+                    function (element, i) {
+
+                        if (element.DOM === clickedElement.parentNode.parentNode) {
+
+                            console.log(i);
+
+                            var a = clickedElement.parentNode.parentNode;
+
+                            a.parentNode.removeChild(a);
+
+                            if (i > -1) {
+                                viewer.positionable.splice(i, 1); // usunięto pointa z posositionable ale został jeszcze div.point w htmlu, może jego najpierw usunąć
+                            }
+
+                        }
+                    }
+                );
+
+
             };
+
 
         };
 
         return exported;
 
     }
-
 );
