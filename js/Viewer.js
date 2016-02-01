@@ -1,5 +1,5 @@
-define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./CameraEventListeners","./PointEventListeners",'./PointEventFunctions'], function (
-        MapDataProvider,PatchBuilder,PointsBuilder,Camera,CameraEventListeners,PointEventListeners,PointEventFunctions
+define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./CameraEventListeners","./PointEventListeners",'./PointEventFunctions'/*,'./JsonBuilder'*/], function (
+        MapDataProvider,PatchBuilder,PointsBuilder,Camera,CameraEventListeners,PointEventListeners,PointEventFunctions/*,JsonBuilder*/
     ) { //wyswietla strone i poczatkowe dane
 
         var exported = {
@@ -11,16 +11,20 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
 
 
         exported.initializeViewer = function(){
-            exported.buildDOM();                // na razie nic tu nie ma - to ma być stworzenie interfejsu
 
+            //exported.buildDOM();                // na razie nic tu nie ma - to ma być stworzenie interfejsu
 
             PatchBuilder.viewer = this;
             PointsBuilder.viewer = this;
             CameraEventListeners.viewer = this; // TRZEBA TO WSTRZYKNĄĆ PRZED F_KCJĄ registerEventListeners(), bo inaczej ona nie widzi viewera
             //PointEventListeners.viewer = this;
             PointEventFunctions.viewer = this;
+            /*JsonBuilder.viewer = this;*/
 
             exported.registerEventListeners();  // reakcja na przyciski MUSIAŁEM NAJPIERW
+
+
+
 
         };
 
@@ -37,9 +41,6 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
             },this);
         };
 
-        /*exported.cameraEvents = function(){
-
-            };*/
 
 
         exported.registerEventListeners = function(){
@@ -79,6 +80,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
 
 
 
+
         };
 
 
@@ -104,6 +106,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
                 }
             );
 
+
         };
 
         exported.showMapData = function(data){ // jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a
@@ -115,6 +118,9 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
             PointsBuilder.build(data);
 
             this.updateAllPositionables();
+
+
+
 
         };
 

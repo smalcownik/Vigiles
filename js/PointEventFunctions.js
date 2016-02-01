@@ -5,6 +5,8 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
         var exported = {};
 
+
+
         exported.toAddPoint = function (event) {// event dla camery/obrazków
 
             var viewer = exported.viewer;
@@ -145,13 +147,89 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                 viewer.positionable.push(new Point(selectedImage, pointXY));             // WERSJA Z POINTEM NA patchu, który jest odsłonięty
                 //viewer.positionable.push(new Point(clickedImagePatch.image,pointXY)); // WERSJA Z POINTEM NA POWIERZCHNI wszystkich patchów
 
-                viewer.updateAllPositionables();
 
-
-                //console.log(viewer.positionable[0]);
+               exported.makePointOptions(viewer.positionable[viewer.positionable.length-1].DOM, viewer.positionable[viewer.positionable.length-1]);
 
 
             }
+
+        };
+
+        exported.makePointOptions = function(ElementDOM,ObjectElement){
+
+            var viewer = exported.viewer;
+
+
+            var inDiv = document.createElement('div');
+            ElementDOM.appendChild(inDiv);
+
+
+            inDiv.className = "pointContent";
+            inDiv.style.position = 'relative';
+            inDiv.style.background = '#0000A0';//'#6960EC';//#737CA1 ,
+            inDiv.style.left = '10px';
+            inDiv.style.top = '10px';
+            inDiv.style.color = "red";
+            inDiv.style.textAlign = 'center';
+            inDiv.style.color = 'white';
+            // inDiv.style.background = ""
+
+            inDiv.style.height = '102px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
+            inDiv.style.width = '150px';
+            inDiv.style.border = '3px solid rgba(255, 255, 255, .8)';
+            inDiv.style.borderRadius = '5px';
+            inDiv.style.zIndex = '1001';
+
+
+            var divPar1 = document.createElement('p');
+            inDiv.appendChild(divPar1);
+            divPar1.className = "pointContentTextValue";
+
+
+            if (!ObjectElement.originalTextValue) { // jesli nie ma początkowej wartości pole "originalTextValue"
+                // to pisze żeby je wprowadzić, w innym razie wyswietla zawartość pola
+                var initialTextValue = "To insert point value, click &quot;EditPoint&quot; just below";
+
+                divPar1.innerHTML = initialTextValue;
+            }
+            else {
+                divPar1.innerHTML = ObjectElement.originalTextValue
+            }
+
+            divPar1.style.wordWrap = 'break-word';
+            divPar1.style.position = 'relative';
+            divPar1.style.left = '0px';
+            divPar1.style.top = '-18px';
+            divPar1.style.border = '1px solid rgba(255, 255, 255, .8)';
+            divPar1.style.height = '53px';
+
+
+
+
+            var divPar2 = document.createElement('p');
+            divPar2.innerHTML = "EDIT POINT";
+            inDiv.appendChild(divPar2);
+            divPar2.className = "pointContentEDIT";
+            divPar2.style.wordWrap = 'break-word';
+            divPar2.style.position = 'relative';
+            divPar2.style.left = '0px';
+            divPar2.style.top = '-34px';
+            divPar2.style.border = '1px solid rgba(255, 255, 255, .8)';
+            divPar2.style.height = '23px';
+
+
+            var divPar3 = document.createElement('p');
+            divPar3.innerHTML = "DELETE POINT";
+            inDiv.appendChild(divPar3);
+            divPar3.className = "pointContentDELETE";
+            divPar3.style.wordWrap = 'break-word';
+            divPar3.style.position = 'relative';
+            divPar3.style.left = '0px';
+            divPar3.style.top = '-50px';
+            divPar3.style.border = '1px solid rgba(255, 255, 255, .8)';
+            divPar3.style.height = '23px';
+
+            viewer.updateAllPositionables();
 
         };
 
@@ -160,10 +238,11 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
             var viewer = exported.viewer;
 
             var clickedElement = event.target; // to jest tylko element - zaraz znajdziemy dla niego Patch'a/Pointa
+            var clickedElementPoint; // tu będzie Patch, który zawiera clickedPicture(img)
 
             if (clickedElement.className === "point") {
 
-                var clickedElementPoint; // tu będzie Patch, który zawiera clickedPicture(img)
+
 
                 viewer.positionable.forEach(
                     function (element) {
@@ -174,8 +253,8 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                         }
                     }
                 );
-            }
-            ;
+            };
+
 
 
             if (clickedElementPoint) {
@@ -204,75 +283,9 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
                     //console.log(clickedElementPoint.originalTextValue);
 
-                    var inDiv = document.createElement('div');
-
-                    clickedElement.appendChild(inDiv);
 
 
-                    inDiv.className = "pointContent";
-                    inDiv.style.position = 'relative';
-                    inDiv.style.background = '#0000A0';//'#6960EC';//#737CA1 ,
-                    inDiv.style.left = '10px';
-                    inDiv.style.top = '10px';
-                    inDiv.style.color = "red";
-                    inDiv.style.textAlign = 'center';
-                    inDiv.style.color = 'white';
-                    // inDiv.style.background = ""
-
-                    inDiv.style.height = '102px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
-                    inDiv.style.width = '150px';
-                    inDiv.style.border = '3px solid rgba(255, 255, 255, .8)';
-                    inDiv.style.borderRadius = '5px';
-                    inDiv.style.zIndex = '1001';
-
-
-                    var divPar1 = document.createElement('p');
-                    inDiv.appendChild(divPar1);
-                    divPar1.className = "pointContentTextValue";
-
-
-                    if (!clickedElementPoint.originalTextValue) { // jesli nie ma początkowej wartości pole "originalTextValue"
-                        // to pisze żeby je wprowadzić, w innym razie wyswietla zawartość pola
-                        divPar1.innerHTML = "To insert point value, click &quot;EditPoint&quot; just below";
-                    }
-                    else {
-                        divPar1.innerHTML = clickedElementPoint.originalTextValue
-                    }
-
-                    divPar1.style.wordWrap = 'break-word';
-                    divPar1.style.position = 'relative';
-                    divPar1.style.left = '0px';
-                    divPar1.style.top = '-18px';
-                    divPar1.style.border = '1px solid rgba(255, 255, 255, .8)';
-                    divPar1.style.height = '53px';
-
-                    //TODO: par1 zrobić initial content na wypadek gdy jest undefined
-
-
-                    var divPar2 = document.createElement('p');
-                    divPar2.innerHTML = "EDIT POINT";
-                    inDiv.appendChild(divPar2);
-                    divPar2.className = "pointContentEDIT";
-                    divPar2.style.wordWrap = 'break-word';
-                    divPar2.style.position = 'relative';
-                    divPar2.style.left = '0px';
-                    divPar2.style.top = '-34px';
-                    divPar2.style.border = '1px solid rgba(255, 255, 255, .8)';
-                    divPar2.style.height = '23px';
-
-
-                    var divPar3 = document.createElement('p');
-                    divPar3.innerHTML = "DELETE POINT";
-                    inDiv.appendChild(divPar3);
-                    divPar3.className = "pointContentDELETE";
-                    divPar3.style.wordWrap = 'break-word';
-                    divPar3.style.position = 'relative';
-                    divPar3.style.left = '0px';
-                    divPar3.style.top = '-50px';
-                    divPar3.style.border = '1px solid rgba(255, 255, 255, .8)';
-                    divPar3.style.height = '23px';
-
-
+                    exported.makePointOptions(clickedElement,clickedElementPoint);
                 }
 
             }
@@ -290,14 +303,41 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                 //console.log("kliknąłem w listęPodPunktem");
                 //alert("EDIT! EDIT!");
 
-                clickedElement.parentNode.childNodes[0].innerHTML = prompt("Please write equipment note here");
+                var editResult = prompt("Please write equipment note here","");
+
+                var clickedPoint;
+
+                if(editResult != "" && editResult !== null){ // przypadke, gdy nic nie wpiszemy w prompta, albo damy "Cancel"
+
+                    viewer.positionable.forEach(
+                        function (element, i) {
+
+                            if (element.DOM === clickedElement.parentNode.parentNode) {
+
+                                clickedPoint = element;
+
+                                clickedPoint.originalTextValue = editResult;
+
+
+
+                            }
+                        }
+                    );
+
+                    console.log(clickedPoint);
+
+
+                    clickedElement.parentNode.childNodes[0].innerHTML = clickedPoint.originalTextValue;
+
+
+                    viewer.updateAllPositionables();
+                    console.log(viewer.positionable);
+                }
 
             }
 
             else if (clickedElement.className === "pointContentDELETE" || clickedElement.parentNode.className === "pointContentDELETE") {
 
-
-                //console.log(viewer.positionable);
 
                 var answer = confirm("Are you sure you wan't to delete point and it content?");
 
@@ -320,6 +360,8 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                             }
                         }
                     );
+                    viewer.updateAllPositionables();
+                    console.log(viewer.positionable);
                 }
 
             }
@@ -334,6 +376,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
 
             };
+
 
 
         };

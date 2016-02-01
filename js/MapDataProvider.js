@@ -29,6 +29,7 @@ define(['./MapData'], function (MapData) {
                 alert('Poddaję się :( Nie mogę stworzyć instancji obiektu XMLHTTP');
                 return false;
             }
+
             http_request.onreadystatechange = function() {    if (http_request.readyState == 4) {
                 if (http_request.status == 200) {
                     cb(http_request.responseText); // tu wchodzi cb - czyli "function(JSONstring)" w praktyce callback z loadPackage czyli "function(pack)"
