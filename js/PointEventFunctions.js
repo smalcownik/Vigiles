@@ -126,12 +126,12 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                     var point = {x: null, y: null};
 
 
-                    // na podstawie Point.updateMyPoisition(), dodoałem tylko "na pałe" 103 tutaj
-                    point.y = (((clickY - 6/* 0.5 *style.width + 2* border.width */ - window.innerHeight / 2) / viewer.camera.scale) + (window.innerHeight / 2) - image.absolutePos.y /*+103*/ - viewer.camera.position.y ) / (image.absolutePos.h / 2);
 
-                    // na podstawie Point.updateMyPoisition(), po przekszatłceniu
+                    point.y = (((clickY - 6/*:to jest: 0.5 *style.width + 2* border.width */ - window.innerHeight / 2) / viewer.camera.scale) + (window.innerHeight / 2) - image.absolutePos.y - viewer.camera.position.y ) / (image.absolutePos.h / 2);
 
-                    point.x = (((clickX - 6/* 0.5 *style.width + 2* border.width */ - window.innerWidth / 2) / viewer.camera.scale) + window.innerWidth / 2 - image.absolutePos.x - viewer.camera.position.x) / (image.absolutePos.w / 2);
+
+
+                    point.x = (((clickX - 6/*:to jest: 0.5 *style.width + 2* border.width */ - window.innerWidth / 2) / viewer.camera.scale) + window.innerWidth / 2 - image.absolutePos.x - viewer.camera.position.x) / (image.absolutePos.w / 2);
 
 
                     return point;
@@ -142,10 +142,11 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                 var pointXY = countPointCoordinates(selectedImage, x, y);              // WERSJA Z POINTEM NA patchu, który jest odsłonięty
                 //var pointXY =countPointCoordinates(clickedImagePatch.image,x,y);  // WERSJA Z POINTEM NA POWIERZCHNI wszystkich patchów
 
-                //debugger;
+                console.log(selectedImage);
 
                 viewer.positionable.push(new Point(selectedImage, pointXY));             // WERSJA Z POINTEM NA patchu, który jest odsłonięty
                 //viewer.positionable.push(new Point(clickedImagePatch.image,pointXY)); // WERSJA Z POINTEM NA POWIERZCHNI wszystkich patchów
+
 
 
                exported.makePointOptions(viewer.positionable[viewer.positionable.length-1].DOM, viewer.positionable[viewer.positionable.length-1]);
@@ -360,7 +361,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                             }
                         }
                     );
-                    viewer.updateAllPositionables();
+                    //viewer.updateAllPositionables();
                     console.log(viewer.positionable);
                 }
 
