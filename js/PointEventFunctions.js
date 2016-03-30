@@ -144,9 +144,10 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
                 console.log(selectedImage);
 
+
                 viewer.positionable.push(new Point(selectedImage, pointXY));             // WERSJA Z POINTEM NA patchu, który jest odsłonięty
                 //viewer.positionable.push(new Point(clickedImagePatch.image,pointXY)); // WERSJA Z POINTEM NA POWIERZCHNI wszystkich patchów
-
+                //console.log(viewer.positionable);
 
 
                exported.makePointOptions(viewer.positionable[viewer.positionable.length-1].DOM, viewer.positionable[viewer.positionable.length-1]);
@@ -173,7 +174,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
             inDiv.style.color = "red";
             inDiv.style.textAlign = 'center';
             inDiv.style.color = 'white';
-            // inDiv.style.background = ""
+            // inDiv.style.background = "";
 
             inDiv.style.height = '102px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
             inDiv.style.width = '150px';

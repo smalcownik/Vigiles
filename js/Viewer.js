@@ -1,5 +1,5 @@
-define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./CameraEventListeners","./PointEventListeners",'./PointEventFunctions'/*,'./JsonBuilder'*/], function (
-        MapDataProvider,PatchBuilder,PointsBuilder,Camera,CameraEventListeners,PointEventListeners,PointEventFunctions/*,JsonBuilder*/
+define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./CameraEventListeners","./PointEventListeners",'./PointEventFunctions','./JsonBuilder'], function (
+        MapDataProvider,PatchBuilder,PointsBuilder,Camera,CameraEventListeners,PointEventListeners,PointEventFunctions,JsonBuilder
     ) { //wyswietla strone i poczatkowe dane
 
         var exported = {
@@ -19,11 +19,9 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
             CameraEventListeners.viewer = this; // TRZEBA TO WSTRZYKNĄĆ PRZED F_KCJĄ registerEventListeners(), bo inaczej ona nie widzi viewera
             //PointEventListeners.viewer = this;
             PointEventFunctions.viewer = this;
-            /*JsonBuilder.viewer = this;*/
+            JsonBuilder.viewer = this;
 
             exported.registerEventListeners();  // reakcja na przyciski MUSIAŁEM NAJPIERW
-
-
 
 
         };
@@ -76,6 +74,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
             CameraEventListeners.cameraEvents();
             PointEventListeners.addPoint();
             PointEventListeners.showPointContent();
+            JsonBuilder.buildJSON();
 
 
 
