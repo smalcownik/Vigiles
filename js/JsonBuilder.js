@@ -58,24 +58,6 @@ define(["./Camera"], function (Camera) {
             saveJsonButton.appendChild(saveButtonParagraph);
 
 
-            var clickedElement = event.target; // to jest tylko element - zaraz znajdziemy dla niego Patch'a/Pointa
-            var clickedElementPoint; // tu będzie Patch, który zawiera clickedPicture(img)
-
-            if (clickedElement.className === "point") {
-
-
-
-                viewer.positionable.forEach(
-                    function (element) {
-
-                        if (element.DOM === clickedElement) {
-
-                            clickedElementPoint = element;
-                        }
-                    }
-                );
-            };
-
 
 
 
@@ -97,6 +79,98 @@ define(["./Camera"], function (Camera) {
 
             // jeszcze sie zastanowić czy dodawać dane kazdego nowego pointa do image i przy usuwaniu pointa je usuwać czy raczej budować drzewo tylko na podstawie positionables
         };
+
+        exported.updateJsonContent = function () {
+
+            //var viewer = this.viewer;
+
+            document.body.addEventListener('click',this.updateJson /*function (event) {    // event dla camery/obrazków
+
+             var clickedElement = event.target; // to jest tylko element - zaraz znajdziemy dla niego Patch'a/Pointa
+
+             if (clickedElement.className === "point"){
+
+             var clickedElementPoint; // tu będzie Patch, który zawiera clickedPicture(img)
+
+             viewer.positionable.forEach(
+             function (element) {
+
+             if (element.DOM === clickedElement) {
+
+             clickedElementPoint = element;
+             }
+             }
+             );
+             };
+
+             if (clickedElementPoint) {
+
+             if (clickedElement.hasChildNodes()) {
+
+             //debugger;
+
+             if (clickedElement.childNodes[0].style.display !== "none") {
+             clickedElement.childNodes[0].style.display = "none";
+             }
+             else {
+             clickedElement.childNodes[0].style.display = "block";
+             }
+
+             }
+
+             else {
+
+             console.log(clickedElementPoint.originalTextValue);
+
+             var inDiv = document.createElement('div');
+
+             clickedElement.appendChild(inDiv);
+             inDiv.innerHTML = clickedElementPoint.originalTextValue;
+             inDiv.style.position = 'relative';
+             inDiv.style.left = '10px';
+             inDiv.style.top = '10px';
+             inDiv.style.color="red";
+             inDiv.style.textAlign = 'center';
+             // inDiv.style.background = ""
+
+             inDiv.style.height = '22px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
+             inDiv.style.width = '120px';
+             inDiv.style.border = '3px solid rgba(255, 255, 255, .8)';
+             inDiv.style.borderRadius = '5px';
+             inDiv.style.zIndex = '1001';
+
+
+             }
+
+             }
+
+
+             }*/);
+        };
+
+        exported.updateJson = function(event){
+
+            var clickedElement = event.target; // to jest tylko element - zaraz znajdziemy dla niego Patch'a/Pointa
+            var clickedElementPoint; // tu będzie Patch, który zawiera clickedPicture(img)
+
+            if (clickedElement.className === "saveJsonButton") {
+
+//TODO: tutaj 1. stworzyć z positionables objekt na wzór Jsona 2. zrobić z niego Jsona 3. zapisać tego Jsona do pliku w miejsce starego Jsona
+
+                viewer.positionable.forEach(
+                    function (element) {
+
+                        if (element.DOM === clickedElement) {
+
+                            clickedElementPoint = element;
+                        }
+                    }
+                );
+            };
+        };
+
+
+        return exported;
 
         return exported;
     }

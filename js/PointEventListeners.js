@@ -80,6 +80,7 @@ define(['./Point','./PointEventFunctions'], function (Point,PointEventFunctions)
         }*/);
     };
 
+
     return exported;
 
 });
