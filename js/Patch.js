@@ -14,6 +14,8 @@ define([], function () { // tworzy objekty zdjec (łatek),
 
             image.parent = parent;
 
+            this.originalParent = i;
+
             this.defaultOpacity = 0.1;
 
             document.body.appendChild(imgHTML);
@@ -49,7 +51,8 @@ define([], function () { // tworzy objekty zdjec (łatek),
 
                     image.absolutePos = {
                     y: window.innerWidth * 0.5 * image.size.h / image.size.w,  // srodek zdjęcia : y
-                    x: window.innerWidth * (0.5 + 1.10 *i), // srodek zdjęcia: x
+                    x: window.innerWidth * (0.5 + 1.10 *i), // srodek zdjęcia: x //TODO: tutaj jest odniesienie do "original parent"
+                    // numeru parenta pierwotnego od tej liczby zależy w jakiej odległości będą parenty i tylko na jej podstawie można je identyfikować
                     w: window.innerWidth, //szerokość okna przegladarki www
                     h: window.innerWidth * image.size.h / image.size.w // wymiar zdjęcia y, w zasadzie 2*y
                 };

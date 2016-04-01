@@ -6,7 +6,7 @@ define(['./MapDataValidator'], function (MapDataValidator) {
 
             //debugger;
             MapDataValidator.ValidateData(parsed);
-            this.images = parsed.imgs;
+            this.images = parsed.images;
             this.meta = parsed.meta;
 
         };

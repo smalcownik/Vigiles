@@ -10,7 +10,6 @@ define(['./Point','./PointEventFunctions'], function (Point,PointEventFunctions)
 
         document.body.addEventListener('dblclick',  PointEventFunctions.toAddPoint );
     };
-     //TODO: tutaj zrobić event po kliknięciu w save (plik JsonBuilder)
 
     exported.showPointContent = function () {
 

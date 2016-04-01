@@ -33,17 +33,17 @@ define([/*'./MapData'*/], function (/*MapData*/) {
             };
 
             exported.DataSurfaceLayerObjectsValidation = function (data){ // sprawdza na siłę czy w katalogu głównym są 2 objekty i czy są to objekty "meta" i "imgs"
-                var imgs = data.imgs;
+                var images = data.images;
                 var meta = data.meta;
 
-               // this.ArrayValidator(data.imgs,dataName,dataId);
+               // this.ArrayValidator(data.images,dataName,dataId);
 
 
                 if (Object.keys(data).length==2){
-                    if(Object.keys(data)[0]=='meta' &&  Object.keys(data)[1]=='imgs'){/*console.log("ok:jest meta i imgs")*/}
-                    else (console.log("NOT_OK:cos nie tak z meta i imgs"));
+                    if(Object.keys(data)[0]=='meta' &&  Object.keys(data)[1]=='images'){/*console.log("ok:jest meta i images")*/}
+                    else (console.log("NOT_OK:cos nie tak z meta i images"));
                 }
-                else (console.log("NOT_OK:ilosc plikow na wierzchu objektu sie nie zgadza (powinny byc dwa: main i imgs)"));
+                else (console.log("NOT_OK:ilosc plikow na wierzchu objektu sie nie zgadza (powinny byc dwa: main i images)"));
 
                 if(Object.keys(meta).length==0){/*console.log("OK meta jest pustym objektem")*/}
                 else {console.log("NOT_OK data.meta powinien byc a nie jest pustym objektem",Object.keys(meta).length)}
@@ -124,7 +124,7 @@ define([/*'./MapData'*/], function (/*MapData*/) {
 
              exported.ImagesTreeContentValidation = function(data,digFunction){
 
-             data.imgs.forEach(
+             data.images.forEach(
              function(image){
              digFunction(image,this.ImageContentCheck,null)
              }
@@ -144,15 +144,15 @@ define([/*'./MapData'*/], function (/*MapData*/) {
 
 
         exported.DataContentTypeValidation = function(data,digFunction){
-            if(data.imgs && data.meta)
+            if(data.images && data.meta)
             {
                 this.DataSurfaceLayerObjectsValidation(data);
-                //this.ImageContentCheck(data.imgs[0].children[0],data.imgs[0]) //test- DZIAŁA DOBRZE;
+                //this.ImageContentCheck(data.images[0].children[0],data.images[0]) //test- DZIAŁA DOBRZE;
                 this.ImagesTreeContentValidation(data,digFunction);
             }
 
             else/*ma sprawdzić wnętrza wszystkich childrenów*/ {
-                (console.log("NOT_OK: brak objektu data.imgs lub data.meta"));};
+                (console.log("NOT_OK: brak objektu data.images lub data.meta"));};
 
             };
 
