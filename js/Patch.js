@@ -47,7 +47,7 @@ define([], function () { // tworzy objekty zdjec (łatek),
 
             } else {
 
-                //if(i===0){
+                //debugger;
 
                     image.absolutePos = {
                     y: window.innerWidth * 0.5 * image.size.h / image.size.w,  // srodek zdjęcia : y

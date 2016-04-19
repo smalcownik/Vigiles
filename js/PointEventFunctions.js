@@ -150,14 +150,16 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                 //console.log(viewer.positionable);
 
 
-               exported.makePointOptions(viewer.positionable[viewer.positionable.length-1].DOM, viewer.positionable[viewer.positionable.length-1]);
+                //TODO: tutaj dodać tez do image info o dodaniu w nim punkta z danymi tej funkcji (jako kolejny argument fkcji makePointDefaultOptions dodać pointXY)
+
+               exported.makePointDefaultOptions(viewer.positionable[viewer.positionable.length-1].DOM, viewer.positionable[viewer.positionable.length-1]);
 
 
             }
 
         };
 
-        exported.makePointOptions = function(ElementDOM,ObjectElement){
+        exported.makePointDefaultOptions = function(ElementDOM,ObjectElement){
 
             var viewer = exported.viewer;
 
@@ -187,6 +189,8 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
             inDiv.appendChild(divPar1);
             divPar1.className = "pointContentTextValue";
 
+
+            //TODO: w fkcji poniżej ten text value dodać
 
             if (!ObjectElement.originalTextValue) { // jesli nie ma początkowej wartości pole "originalTextValue"
                 // to pisze żeby je wprowadzić, w innym razie wyswietla zawartość pola
@@ -287,7 +291,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
 
 
-                    exported.makePointOptions(clickedElement,clickedElementPoint);
+                    exported.makePointDefaultOptions(clickedElement,clickedElementPoint);
                 }
 
             }
