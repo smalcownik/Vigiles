@@ -51,12 +51,12 @@ define(['./Point','./PointEventFunctions'], function (Point,PointEventFunctions)
 
                 else {
 
-                    console.log(clickedElementPoint.originalTextValue);
+                    console.log(clickedElementPoint.textInit);
 
                     var inDiv = document.createElement('div');
 
                     clickedElement.appendChild(inDiv);
-                    inDiv.innerHTML = clickedElementPoint.originalTextValue;
+                    inDiv.innerHTML = clickedElementPoint.textInit;
                     inDiv.style.position = 'relative';
                     inDiv.style.left = '10px';
                     inDiv.style.top = '10px';

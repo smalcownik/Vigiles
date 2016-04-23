@@ -7,7 +7,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
 
 
-        exported.toAddPoint = function (event) {// event dla camery/obrazków
+        exported.toAddPoint = function (event) {// event dla camery/obrazków // wywoływana w PointEventListeners.js
 
             var viewer = exported.viewer;
 
@@ -123,7 +123,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                 //console.log(selectedImage);
 
                 function countPointCoordinates(image, clickX, clickY) {
-                    var point = {x: null, y: null};
+                    var point = {x: null, y: null, textInit:null, isNew:true};
 
 
 
@@ -161,6 +161,10 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
         exported.makePointDefaultOptions = function(ElementDOM,ObjectElement){
 
+            //console.log(ObjectElement);
+
+            //ObjectElement.isNew = true; //  tu jakoś zasrywało patch'e
+
             var viewer = exported.viewer;
 
 
@@ -192,14 +196,14 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
             //TODO: w fkcji poniżej ten text value dodać
 
-            if (!ObjectElement.originalTextValue) { // jesli nie ma początkowej wartości pole "originalTextValue"
+            if (!ObjectElement.textInit) { // jesli nie ma początkowej wartości pole "textInit"
                 // to pisze żeby je wprowadzić, w innym razie wyswietla zawartość pola
                 var initialTextValue = "To insert point value, click &quot;EditPoint&quot; just below";
 
                 divPar1.innerHTML = initialTextValue;
             }
             else {
-                divPar1.innerHTML = ObjectElement.originalTextValue
+                divPar1.innerHTML = ObjectElement.textInit
             }
 
             divPar1.style.wordWrap = 'break-word';
@@ -287,7 +291,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
                 else {
 
-                    //console.log(clickedElementPoint.originalTextValue);
+                    //console.log(clickedElementPoint.textInit);
 
 
 
@@ -322,7 +326,8 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
                                 clickedPoint = element;
 
-                                clickedPoint.originalTextValue = editResult;
+                                clickedPoint.point.textInit = editResult;
+                                clickedPoint.point.isNew = true;
 
 
 
@@ -333,7 +338,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                     console.log(clickedPoint);
 
 
-                    clickedElement.parentNode.childNodes[0].innerHTML = clickedPoint.originalTextValue;
+                    clickedElement.parentNode.childNodes[0].innerHTML = clickedPoint.point.textInit;
 
 
                     viewer.updateAllPositionables();

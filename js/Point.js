@@ -10,6 +10,10 @@ define([], function () {
 
             this.point = point;
 
+            if(this.point.isNew !== true){
+                this.point.isNew = false
+            }
+
             this.image = image;
 
             this.absolutePos = {
@@ -17,7 +21,9 @@ define([], function () {
                 y: image.absolutePos.y + 0.5 * image.absolutePos.h * point.y
             };
 
-            this.originalTextValue = point.textInit;
+
+
+            this.point.textInit = point.textInit;
 
             divPoint.style.top = this.absolutePos.y + 'px';
             divPoint.style.left = this.absolutePos.x + 'px';

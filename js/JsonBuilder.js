@@ -15,21 +15,8 @@ define(["./Camera"], function (Camera) {
 
 
             this.addSaveButton();
-            this.updateJsonContent();
+            this.updateJsonEventListener();
 
-
-            //TODO: tu teraz rozkminić jakies budowanie JSONA z positionables,
-
-
-            //każdy patch image ma swój parent, kazdy point ma swój image, na podstawie tych dwóch danych zrobić drzewo
-
-            // potrzebne dane: patch: originalParent:"", id:"", size:{}, points:[], points.textInit, children:[], pos(tylko jeśli jest childrenem):{}, parent:{}
-
-            // a może wymazać tylko te dane, które powodują "circle" tj(w patch.image): parent, patch,
-            //  w point usunąć .DOM i .image, (zostawić point.point i point.absolutePos)
-            //przy usuwaniu pointa trzeba też usuwac jego dane z image
-
-            //  budować drzewo tylko na podstawie positionables
         };
 
         exported.addSaveButton = function () {
@@ -47,7 +34,7 @@ define(["./Camera"], function (Camera) {
              y: image.absolutePos.y + 0.5 * image.absolutePos.h * point.y
              };
 
-             this.originalTextValue = point.textInit;*/
+             this.textInit = point.textInit;*/
 
             saveJsonButton.style.top = Camera.position.x + 20 + 'px';
             saveJsonButton.style.left = Camera.position.y + 20 + 'px';
@@ -80,111 +67,74 @@ define(["./Camera"], function (Camera) {
 
         };
 
-        exported.updateJsonContent = function () {
+        exported.updateJsonEventListener = function () {
 
             //debugger;
 
             document.body.addEventListener('click', this.updateJson);
+        }; // te f-kcje są wywołane wyżej (w buildJSON)
+
+        exported.addNewPointsToPatches = function(){
+
+        // wywołanie w updateJson
+        // funkcja bierze każdego nowego pointa (z positionables) i dodaje je do należytych patchów
+
+            exported.viewer.positionable.forEach(function(element){
+                if(element.DOM.tagName === "DIV"){
+                    //console.log(element);
+                    if(element.point.isNew === true){
+                        console.log(element);
+
+            //TODO: od tego miejsca trzeba kontynuować, czyli te nowe elementy żeby się dodawały do 'swoich starych'
+
+
+
+
+
+
+                    }
+                }
+            })
+
+
+        };
+
+        exported.cleanPatchBeforeAddingToObject = function(patch){ //ogołocenie patcha przed dodanie do objektu
+
+            var result = {};
+
+            result.id = patch.image.id;
+            result.size = patch.image.size;
+            result.points = patch.image.points;
+
+            result.children = patch.image.children.forEach(makeObject);
+
+            return result;
+
         };
 
         exported.updateJson = function (event) {
 
-
             var viewer = exported.viewer; // tu nie mogłem dać "this.viewer" bo this tutaj to "body"
-
             var clickedElement = event.target; // to jest tylko element - zaraz znajdziemy dla niego Patch'a/Pointa
-            var clickedElementPoint; // tu będzie Patch, który zawiera clickedPicture(img)
-
 
             if (clickedElement.className === "saveJsonButton") {
 
-//TODO: tutaj  1. stworzyć z positionables objekt na wzór Jsona
-                // 2. zrobić z niego Jsona
-                // 3. zapisać tego Jsona do pliku w miejsce starego Jsona
 
-                var patchParentArr = [];
-                var pointArr = [];
-                var resultObject = {
-                    meta: {},
-                    images: []
-                };
+                //console.log("this: ", this);
+                exported.addNewPointsToPatches();
 
 
-                viewer.positionable.forEach(
-                    function (element) {
-
-                        if (element.DOM.tagName === "IMG") {
-
-                            //if(element.image.parent === null)
-
-                            patchParentArr.push(element);
-
-                        }
-                        else {
-
-                            pointArr.push(element)
-                        }
+                //TODO: tutaj przepis co po addNewPointsToPatch robić przy updateJson
+                // a. napisać f-kcję addNewPointsToPatch - dodająca nowe punkty do patchów i edytująca stare
+                // b. napisać  fkcję, która zbuduje drzewo genealogiczne z patchów
+                // c. przed upchaniem w drzewo każdy patch zostanie ogołocany f-kcją z pkt. d
+                // d. napisać f-kcję, która ogołoci wszystkie imagesy do tego co niezbędne (zmienną będzie patch a returnem ogolocony patch)
 
 
-                    }
-                );
-
-                console.log(patchParentArr, pointArr);
 
 
-                function makeObject(patch) {
-
-                    var result = {};
-
-                    result.id = patch.image.id;
-                    result.size = patch.image.size;
-                    result.points = patch.image.points;
-
-                    result.children = patch.image.children.forEach(makeObject);
-
-                    return result;
-
-                }
-
-                function BuildImagesArray(parent) {
-
-                    var result = makeObject(parent);
-
-                    parent.image.children.forEach(BuildImagesArray);
-
-
-                }
-
-                /*exported.prototype.dig = function dig(image,i, visitFunction, parent) {  //czy f-kcja dig i traverse są potrzebne OBIE czy nie wystarczy delikatnie przerobiona jedna
-                 //debugger;
-                 visitFunction(image,i,parent); // ta funckja może robić co chce używając image i parent (to jej argumenty)
-                 // i w ten sposób robi coś na wsystkich imgs'ach - patrz PatchBuilder.build
-                 image.children.forEach(
-                 function (childrenImage) {
-
-                 this.dig(childrenImage,i, visitFunction, image);
-                 }
-                 , this);
-                 };
-
-
-                 exported.prototype.traverse = function (visitFunction) {// ta funckja może robić co chce używając image i parent (to jej argumenty)
-                 // i w ten sposób robi coś na wsystkich imgs'ach - patrz PatchBuilder.build
-
-                 //debugger;
-                 //console.log(this.images);
-                 for (var i = 0; i < this.images.length; i++) {
-                 this.dig(this.images[i],i, visitFunction, null); //argumenty f-kcji dig
-                 // jak trawersuje (gdziekowliek by nie było wywołane) to zawsze zaczyna od this.images[0]
-                 // gdzie this to objekt z jSON'a
-                 }
-                 };*/
-
-
-            }
-            ;
-
-
+            };
         };
 
 

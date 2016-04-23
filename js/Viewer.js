@@ -120,7 +120,6 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
 
 
 
-
         };
 
 
