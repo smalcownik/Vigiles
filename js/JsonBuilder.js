@@ -74,7 +74,7 @@ define(["./Camera"], function (Camera) {
             document.body.addEventListener('click', this.updateJson);
         }; // te f-kcje są wywołane wyżej (w buildJSON)
 
-        exported.addNewPointsToPatches = function(){
+        exported.addNewPointsToPatches = function(){ // f-kcja działa poprawnie - po kliknięcu save patche mają dodane nowe(lub edytowne) punkty
 
         // wywołanie w updateJson
         // funkcja bierze każdego nowego pointa (z positionables) i dodaje je do należytych patchów
@@ -85,19 +85,57 @@ define(["./Camera"], function (Camera) {
                     if(element.point.isNew === true){
                         console.log(element);
 
-            //TODO: od tego miejsca trzeba kontynuować, czyli te nowe elementy żeby się dodawały do 'swoich starych'
-
-
-
-
-
+                        element.image.points.push(element.point);
 
                     }
                 }
-            })
+            });
+
+            exported.viewer.updateAllPositionables();
+
+        };
+
+        exported.buildPatchesTree = function(){
+            // 0.stworzyć szblon objektu, z którego ma być jSON
+            // 1. znaleźć te patche, których parent === null
+            // 2. na każdym z nich zastosować funkcję kopiącą, taką, że:
+            //      a. samego patcha ogołoci fkcją cleanPatch i każde z jego children gołoci i doda do jego array'a children
+
+
+
+           // visitFunction poniżej to ma być "cleanPatchBeforeAddingToObject"
+            console.log(this);
+
+            //TODO: tutaj trzeba tak zrobić, żeby traverse,dig i cleanPatches przebudować tak, zeby się razem zgrały z patchami (najpierw zrobić pkty 0 i 1)
+             this.traverse(this.cleanPatchBeforeAddingToObject);
 
 
         };
+
+        /*exported.dig = function(image, visitFunction, parent) {  //czy f-kcja dig i traverse są potrzebne OBIE czy nie wystarczy delikatnie przerobiona jedna
+            //debugger;
+            visitFunction(image,parent); // ta funckja może robić co chce używając image i parent (to jej argumenty)
+            // i w ten sposób robi coś na wsystkich imgs'ach - patrz PatchBuilder.build
+            image.children.forEach(
+                function (childrenImage) {
+
+                    this.dig(childrenImage, visitFunction, image);
+                }
+                , this);
+        };
+
+
+        exported.traverse = function(visitFunction) {// ta funckja może robić co chce używając image i parent (to jej argumenty)
+            // i w ten sposób robi coś na wsystkich imgs'ach - patrz PatchBuilder.build
+
+            //debugger;
+            //console.log(this.images);
+            for (var i = 0; i < this.images.length; i++) {
+                this.dig(this.images[i],i, visitFunction, null); //argumenty f-kcji dig
+                // jak trawersuje (gdziekowliek by nie było wywołane) to zawsze zaczyna od this.images[0]
+                // gdzie this to objekt z jSON'a
+            }
+        };*/
 
         exported.cleanPatchBeforeAddingToObject = function(patch){ //ogołocenie patcha przed dodanie do objektu
 
@@ -107,11 +145,10 @@ define(["./Camera"], function (Camera) {
             result.size = patch.image.size;
             result.points = patch.image.points;
 
-            result.children = patch.image.children.forEach(makeObject);
-
+            result.children = [];
             return result;
 
-        };
+        };//gotowa funkcja tylko w miejsce children nic nie daje
 
         exported.updateJson = function (event) {
 
@@ -120,15 +157,14 @@ define(["./Camera"], function (Camera) {
 
             if (clickedElement.className === "saveJsonButton") {
 
-
-                //console.log("this: ", this);
                 exported.addNewPointsToPatches();
+                exported.buildPatchesTree();
 
 
                 //TODO: tutaj przepis co po addNewPointsToPatch robić przy updateJson
                 // a. napisać f-kcję addNewPointsToPatch - dodająca nowe punkty do patchów i edytująca stare
                 // b. napisać  fkcję, która zbuduje drzewo genealogiczne z patchów
-                // c. przed upchaniem w drzewo każdy patch zostanie ogołocany f-kcją z pkt. d
+                // c. przed upchaniem w drzewo każdy patch zostanie ogołocany f-kcją (cleanPatchBeforeAddingToObject)
                 // d. napisać f-kcję, która ogołoci wszystkie imagesy do tego co niezbędne (zmienną będzie patch a returnem ogolocony patch)
 
 
