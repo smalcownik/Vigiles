@@ -150,8 +150,6 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                 //console.log(viewer.positionable);
 
 
-                //TODO: tutaj dodać tez do image info o dodaniu w nim punkta z danymi tej funkcji (jako kolejny argument fkcji makePointDefaultOptions dodać pointXY)
-
                exported.makePointDefaultOptions(viewer.positionable[viewer.positionable.length-1].DOM, viewer.positionable[viewer.positionable.length-1]);
 
 

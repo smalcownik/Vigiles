@@ -14,7 +14,7 @@ define([], function () { // tworzy objekty zdjec (łatek),
 
             image.parent = parent;
 
-            this.originalParent = i;
+            this.originalParent = i; // to jest pozycja w tablicy images w data.json, żeby było wiadomo w którym zdjęciu ląduje dany Patch
 
             this.defaultOpacity = 0.1;
 

@@ -3,15 +3,15 @@
  */
 define(["./Camera"], function (Camera) {
 
-        var exported = {};
+        var exported = {
+        };
 
 
         exported.buildJSON = function () { // f-kcja wywoływana w Viewer.registerEventListeners
 
-            var viewer = this.viewer;
-            console.log(viewer.positionable);
+            //var viewer = this.viewer;
+           // console.log(viewer.positionable);
 
-            console.log("test");
 
 
             this.addSaveButton();
@@ -82,7 +82,7 @@ define(["./Camera"], function (Camera) {
             exported.viewer.positionable.forEach(function(element){
                 if(element.DOM.tagName === "DIV"){
                     //console.log(element);
-                    if(element.point.isNew === true){
+                    if(element.point.isNew === true){ // isNew występuje w ./PointEventFunctions i w ./Point
                         console.log(element);
 
                         element.image.points.push(element.point);
@@ -93,81 +93,116 @@ define(["./Camera"], function (Camera) {
 
             exported.viewer.updateAllPositionables();
 
-        };
+        }; // f-kcja dodaje nowe/edytowane pointy do patchów (elementów viewer.positionable)
+
+    exported.dig = function(image, visitFunction, parentImage) {
+    //debugger;
+
+        visitFunction(image,parentImage);
+
+        //tutaj zrobić, zeby visit function dostawało jako parent Image już objekt parentsa z objScheme
+        // czyli : jak dojść żeby na podstawie kiedy mamy dany patch, określić, który image z objektu objScheme.images... jest jego parentem - to było trudne, rozwiązaniem
+        // jest funkcja addCleanedPatchesToObject i w niej dodanie do patchów swoich adresów w objekcie objScheme
+
+        if(image.children.length>0){
+            image.children.forEach(
+            function (childrenImage) {
+
+                exported.dig(childrenImage, visitFunction, image);
+            });
+        }
+    };
+
+    exported.traverse = function(visitFunction) {
+
+
+        for (var i = 0; i < this.patchesWithoutParent.length; i++) {
+            this.dig(this.patchesWithoutParent[i], visitFunction, null);
+        }
+    };
+
+    exported.cleanPatchBeforeAddingToObject = function(image){ //ogołocenie patcha przed dodanie do objektu
+
+        var result = {};
+
+            result.id = image.id;
+            result.size = image.size;
+            result.points = image.points;
+            result.children = [];
+
+            if (image.pos) {
+                result.pos = image.pos
+            }
+
+
+        return result;
+    };
+
+
+    exported.addCleanedPatchesToObject = function(image,parentImage){
+
+
+        var img = exported.cleanPatchBeforeAddingToObject(image);
+
+        if(parentImage){
+
+            parentImage.jsonAddress.children.push(img);
+            image.jsonAddress = parentImage.jsonAddress.children[parentImage.jsonAddress.children.length-1]; // to ważna linijka, na niej zakończyłem tworzenie objektu (plus 5 linijek niżej)
+
+        }
+
+        else {
+
+            exported.objScheme.images.push(img);
+            image.jsonAddress = exported.objScheme.images[exported.objScheme.images.length-1]; // to ważna linijka, na niej zakończyłem tworzenie objektu (plus 5 linijek wyżej)
+        }
+        //console.log(image);
+
+
+    };
 
         exported.buildPatchesTree = function(){
-            // 0.stworzyć szblon objektu, z którego ma być jSON
-            // 1. znaleźć te patche, których parent === null
-            // 2. na każdym z nich zastosować funkcję kopiącą, taką, że:
-            //      a. samego patcha ogołoci fkcją cleanPatch i każde z jego children gołoci i doda do jego array'a children
 
+            this.objScheme = {
+                meta:{},
+                images:[]
+            };
 
+            this.patchesWithoutParent =[];
 
-           // visitFunction poniżej to ma być "cleanPatchBeforeAddingToObject"
-            console.log(this);
-
-            //TODO: tutaj trzeba tak zrobić, żeby traverse,dig i cleanPatches przebudować tak, zeby się razem zgrały z patchami (najpierw zrobić pkty 0 i 1)
-             this.traverse(this.cleanPatchBeforeAddingToObject);
-
-
-        };
-
-        /*exported.dig = function(image, visitFunction, parent) {  //czy f-kcja dig i traverse są potrzebne OBIE czy nie wystarczy delikatnie przerobiona jedna
-            //debugger;
-            visitFunction(image,parent); // ta funckja może robić co chce używając image i parent (to jej argumenty)
-            // i w ten sposób robi coś na wsystkich imgs'ach - patrz PatchBuilder.build
-            image.children.forEach(
-                function (childrenImage) {
-
-                    this.dig(childrenImage, visitFunction, image);
+            this.viewer.positionable.forEach(function (element) {
+                if (element.DOM.tagName === "IMG" && element.image.parent === null) {
+                    exported.patchesWithoutParent.push(element.image);
                 }
-                , this);
+            });
+
+          //console.log(this.patchesWithoutParent); // są gotowe objekty "ultimate parents"
+
+            this.traverse(this.addCleanedPatchesToObject);
+
+
         };
 
-
-        exported.traverse = function(visitFunction) {// ta funckja może robić co chce używając image i parent (to jej argumenty)
-            // i w ten sposób robi coś na wsystkich imgs'ach - patrz PatchBuilder.build
-
-            //debugger;
-            //console.log(this.images);
-            for (var i = 0; i < this.images.length; i++) {
-                this.dig(this.images[i],i, visitFunction, null); //argumenty f-kcji dig
-                // jak trawersuje (gdziekowliek by nie było wywołane) to zawsze zaczyna od this.images[0]
-                // gdzie this to objekt z jSON'a
-            }
-        };*/
-
-        exported.cleanPatchBeforeAddingToObject = function(patch){ //ogołocenie patcha przed dodanie do objektu
-
-            var result = {};
-
-            result.id = patch.image.id;
-            result.size = patch.image.size;
-            result.points = patch.image.points;
-
-            result.children = [];
-            return result;
-
-        };//gotowa funkcja tylko w miejsce children nic nie daje
 
         exported.updateJson = function (event) {
 
             var viewer = exported.viewer; // tu nie mogłem dać "this.viewer" bo this tutaj to "body"
+
             var clickedElement = event.target; // to jest tylko element - zaraz znajdziemy dla niego Patch'a/Pointa
 
             if (clickedElement.className === "saveJsonButton") {
 
+                //console.log(viewer.positionable);
+
                 exported.addNewPointsToPatches();
+
                 exported.buildPatchesTree();
 
+                console.log(exported.objScheme);
 
-                //TODO: tutaj przepis co po addNewPointsToPatch robić przy updateJson
-                // a. napisać f-kcję addNewPointsToPatch - dodająca nowe punkty do patchów i edytująca stare
-                // b. napisać  fkcję, która zbuduje drzewo genealogiczne z patchów
-                // c. przed upchaniem w drzewo każdy patch zostanie ogołocany f-kcją (cleanPatchBeforeAddingToObject)
-                // d. napisać f-kcję, która ogołoci wszystkie imagesy do tego co niezbędne (zmienną będzie patch a returnem ogolocony patch)
+                exported.updatedJSON = JSON.stringify(exported.objScheme);
 
-
+               // console.log(exported.updatedJSON);
 
 
             };
@@ -175,6 +210,6 @@ define(["./Camera"], function (Camera) {
 
 
         return exported;
-    }
-);
+
+    });
 
