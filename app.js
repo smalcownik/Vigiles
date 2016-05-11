@@ -20,6 +20,6 @@ requirejs([
 
         Viewer.initializeViewer();
 
-        Viewer.loadURL('data/arch1'); // możnaby od razu dodać '/data1.json', ale jest w MapDataProvider to zrobione dla ogólności
+        Viewer.loadURL('data/test_arch'); // możnaby od razu dodać '/data1.json', ale jest w MapDataProvider to zrobione dla ogólności
 
     });
