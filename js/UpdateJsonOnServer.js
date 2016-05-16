@@ -11,7 +11,7 @@ define([], function () {
         console.log(json);
 
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "http://localhost:8000/");
+        xmlhttp.open("POST", "http://localhost:8000/"); // TODO: tutaj zmienić url na odpalony serwer na amazonie
         xmlhttp.setRequestHeader("Content-Type","application/json;charset=UTF-8");
 
         /*xmlhttp.onload = function(){ console.log("as as asas a");};*/ // to też może byc ale bez tego działa
