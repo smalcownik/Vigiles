@@ -11,7 +11,10 @@ define([], function () {
         console.log(json);
 
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "http://localhost:8000/"); // TODO: tutaj zmienić url na odpalony serwer na amazonie
+        xmlhttp.open("POST", "http://52.30.81.203/"); // TODO: tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem
+        // nodeJSTutorial/sample_servers/vigiles_node_server.js na amazonie)
+        //dziala !
+
         xmlhttp.setRequestHeader("Content-Type","application/json;charset=UTF-8");
 
         /*xmlhttp.onload = function(){ console.log("as as asas a");};*/ // to też może byc ale bez tego działa
