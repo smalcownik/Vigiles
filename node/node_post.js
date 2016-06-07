@@ -48,4 +48,4 @@ http.createServer(function(request, response) {
 }).listen(80);
 
 //TODO: do tego dorzucić opcję GET z tym samym plikiem, żeby vigiles brał go w app.js jako
-//TODO: url (skopiować z pliku vigile_node_server_test_with_json - jest w projekcie w folderze Vigiles/node)
+//TODO: url, plik jest w projekcie w folderze Vigiles/node)
