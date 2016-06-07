@@ -45,7 +45,7 @@ http.createServer(function(request, response) {
         response.end(); // response.end musi być bo inaczej nie wykona się request.on("end".....
 
     });
-}).listen(8001);
+}).listen(80);
 
 //TODO: do tego dorzucić opcję GET z tym samym plikiem, żeby vigiles brał go w app.js jako
 //TODO: url, plik jest w projekcie w folderze Vigiles/node)

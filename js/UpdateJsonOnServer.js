@@ -11,7 +11,7 @@ define([], function () {
         console.log(json);
 
         var http_request = new XMLHttpRequest();
-        http_request.open("POST", "http://52.30.81.203/"); // TODO: tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem
+        http_request.open("POST", "http://52.30.81.203"); // TODO: tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem
         // Vigiles/node/node_post.js)
         //dziala !
 
