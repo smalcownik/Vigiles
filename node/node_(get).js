@@ -36,3 +36,5 @@ server.listen(80, function(){
     console.log("Server listening on: http://localhost:%s", 80);
     console.log();
 });
+
+//TODO: tutaj teraz pracwoać - dostosować to żeby się odapało i potem połączyć z POST'em w pliku post_get_server

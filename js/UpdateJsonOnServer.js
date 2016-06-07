@@ -10,16 +10,16 @@ define([], function () {
 
         console.log(json);
 
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "http://52.30.81.203/"); // TODO: tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem
+        var http_request = new XMLHttpRequest();
+        http_request.open("POST", "http://52.30.81.203/"); // TODO: tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem
         // nodeJSTutorial/sample_servers/vigiles_node_server.js na amazonie)
         //dziala !
 
-        xmlhttp.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+        http_request.setRequestHeader("Content-Type","application/json;charset=UTF-8");
 
-        /*xmlhttp.onload = function(){ console.log("as as asas a");};*/ // to też może byc ale bez tego działa
+        /*http_request.onload = function(){ console.log("as as asas a");};*/ // to też może byc ale bez tego działa
 
-        xmlhttp.send(json);
+        http_request.send(json);
 
     };
 
