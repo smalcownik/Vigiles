@@ -70,3 +70,5 @@ http.createServer(function(request, response) {
 
 
 }).listen(port);
+
+//TODO: juz dziala tylko odpalic odczytywanie plikow img - przyklad w ajax_proby/node_server oraz server_with_several_file_types
