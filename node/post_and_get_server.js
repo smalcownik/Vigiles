@@ -59,7 +59,8 @@ http.createServer(function(request, response) {
 
         response.writeHead(200, {
             'Content-Type': 'text/json',
-            'Access-Control-Allow-Origin': '*'
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Content-Type'
 
         });
         response.write(stat);
