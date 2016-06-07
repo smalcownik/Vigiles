@@ -8,7 +8,7 @@ var server = http.createServer(function(request, response) {
 
 //   console.log(request.headers)
     
-    var filePath = '../data/test_arch/data1.json';
+    var filePath = './data/test_arch/data1.json';
 
 //    var stat = fileSystem.statSync(filePath);
 
