@@ -47,5 +47,6 @@ http.createServer(function(request, response) {
     });
 }).listen(80);
 
-//TODO: do tego dorzucić opcję GET z tym samym plikiem, żeby vigiles brał go w app.js jako
-//TODO: url, plik jest w projekcie w folderze Vigiles/node)
+
+//TODO: ten plik dziala dobrze, trzeba go polaczyc z plikiem node_get.js ale juz w nowym pliku
+// serwery dzialaja dobrze (sceizki do plikow sa prawidlowe jesli w konsoli serwer jest odpalanay z poziomu folderu /Vigiles$)
