@@ -12,7 +12,7 @@ define([], function () {
 
         var http_request = new XMLHttpRequest();
         http_request.open("POST", "http://52.30.81.203/"); // TODO: tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem
-        // nodeJSTutorial/sample_servers/vigiles_node_server.js na amazonie)
+        // Vigiles/node/node_post.js)
         //dziala !
 
         http_request.setRequestHeader("Content-Type","application/json;charset=UTF-8");

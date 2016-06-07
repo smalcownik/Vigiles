@@ -3,7 +3,7 @@
  */
 var http = require('http');
 var fs = require('fs');
-var path = "/home/ubuntu/Vigiles/data/test_arch/data.json";
+var path = "../data/test_arch/data.json";
 
 
 http.createServer(function(request, response) {
@@ -45,7 +45,7 @@ http.createServer(function(request, response) {
         response.end(); // response.end musi być bo inaczej nie wykona się request.on("end".....
 
     });
-}).listen(80);
+}).listen(8001);
 
 //TODO: do tego dorzucić opcję GET z tym samym plikiem, żeby vigiles brał go w app.js jako
 //TODO: url, plik jest w projekcie w folderze Vigiles/node)

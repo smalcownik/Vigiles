@@ -1,13 +1,14 @@
 var http = require('http'),
     fileSystem = require('fs');
 //    path = require('path');
+var port = 8000;
 
 var server = http.createServer(function(request, response) {
     //var filePath = path.join('someJSON.json');
 
 //   console.log(request.headers)
     
-    var filePath = 'someJSON.json';
+    var filePath = '../data/test_arch/data1.json';
 
 //    var stat = fileSystem.statSync(filePath);
 
@@ -31,9 +32,9 @@ response.end();
    
 });
 
-server.listen(80, function(){
+server.listen(port, function(){
     //Callback triggered when server is successfully listening. Hurray!
-    console.log("Server listening on: http://localhost:%s", 80);
+    console.log("Server listening on: http://localhost:%s", port);
     console.log();
 });
 
