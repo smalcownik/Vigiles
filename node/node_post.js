@@ -3,7 +3,7 @@
  */
 var http = require('http');
 var fs = require('fs');
-var path = "../data/test_arch/data.json";
+var path = "./data/test_arch/data.json";
 
 
 http.createServer(function(request, response) {
