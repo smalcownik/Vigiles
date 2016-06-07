@@ -12,30 +12,34 @@ http.createServer(function(request, response) {
 
     var body = []; // gdy to body chciałem dać poza createServer - jako zmienną globalną, to w request.on("data") wyskakiwał błąd że body "has no push method"
 
-    console.log("method 1: "+ request.method);
+    console.log("method 1: " + request.method);
     console.log("server running");
-    request.on('error', function(err) {
+
+    if (request.method == "POST") {
+
+
+    request.on('error', function (err) {
         console.error(err);
 
-    }).on('data', function(chunk) {
+    }).on('data', function (chunk) {
         body.push(chunk);
 
-    }).on('end', function() {
+    }).on('end', function () {
 
         body = Buffer.concat(body).toString(); // bez "to String wychodzi zakodowany Buffer, ale działa"
 
         console.log(body);
-        console.log("method 2: "+request.method);
+        console.log("method 2: " + request.method);
 
-        fs.writeFile(path, body, function(err) {
-            if(err) {
+        fs.writeFile(path, body, function (err) {
+            if (err) {
                 return console.log(err);
             }
 
             console.log("The file was saved!");
         });
 
-        response.on('error', function(err) {
+        response.on('error', function (err) {
             console.error(err);
         });
 
@@ -48,4 +52,20 @@ http.createServer(function(request, response) {
         response.end(); // response.end musi być bo inaczej nie wykona się request.on("end".....
 
     });
+}
+    else{
+
+        var stat = fs.readFileSync(path);
+
+        response.writeHead(200, {
+            'Content-Type': 'text/json',
+            'Access-Control-Allow-Origin': '*'
+
+        });
+        response.write(stat);
+
+        response.end();
+    }
+
+
 }).listen(port);
