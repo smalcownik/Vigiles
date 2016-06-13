@@ -17,7 +17,7 @@ function contentType(ext) {
             ct = 'text/javascript';
             break;
         case '.jpg':
-            ct = 'image/jpeg';
+            ct = "image/jpeg";
             break;
         default:
             ct = 'text/plain';
