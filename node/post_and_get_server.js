@@ -38,7 +38,7 @@ http.createServer(function(request, response) {
     console.log("method 1: " + request.method);
     console.log("server running");
 
-    var filepath = '.' + (req.url == '/' ? path_file : req.url);
+    var filepath = '.' + (request.url == '/' ? path_file : request.url);
         fileext = path.extname(filepath);
 
     if (request.method == "POST") {
