@@ -69,6 +69,12 @@ http.createServer(function(request, response) {
     }
 
 
-}).listen(port);
+}).listen(port, function(){
+    //Callback triggered when server is successfully listening. H$
+    console.log("Server listening on: http://localhost:%s", port);
+});
 
-//TODO: juz dziala tylko odpalic odczytywanie plikow img - przyklad w ajax_proby/node_server oraz server_with_several_file_types
+// TODO: juz dziala tylko odpalic odczytywanie plikow img -
+// przyklad w ajax_proby/node_server oraz server_with_several_file_types
+
+// pamietac zeby odpalac node na amazonie z poziomu folderu Vigiles a nie z poziomu Vigiles/node
