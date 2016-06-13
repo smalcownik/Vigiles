@@ -7,7 +7,7 @@ var fs = require('fs');
 var path = "./data/test_arch/data1.json";
 var port = 80;
 
-
+console.log("startuje");
 http.createServer(function(request, response) {
 
     var body = []; // gdy to body chciałem dać poza createServer - jako zmienną globalną, to w request.on("data") wyskakiwał błąd że body "has no push method"
