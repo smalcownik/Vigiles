@@ -39,7 +39,7 @@ http.createServer(function(request, response) {
     console.log("server running");
 
     var filepath = '.' + (request.url == '/' ? path_file : request.url);
-        fileext = path.extname(filepath);
+    var  fileext = path.extname(filepath);
 
     if (request.method == "POST") {
 
@@ -79,6 +79,8 @@ http.createServer(function(request, response) {
 
     });
 }
+
+
     else{
 
         var stat = fs.readFileSync(path_file);
@@ -87,12 +89,17 @@ http.createServer(function(request, response) {
         response.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // to też musi być bo wyrzuca błąd
 
 
-        response.writeHead(200, {
-            'Content-Type': 'text/json',
+        response.writeHead(200, contentType(fileext)
+
+         //   {
+          //  'Content-Type': 'text/json'
+        // ponizsze headery wklejone kilka linijek wyzej jso "response.setHeader"
             //'Access-Control-Allow-Origin': '*',
             //'Access-Control-Allow-Headers': 'Content-Type'
 
-        });
+        //}
+
+        );
         response.write(stat);
 
         response.end();
