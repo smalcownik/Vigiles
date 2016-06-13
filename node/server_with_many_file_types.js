@@ -23,11 +23,11 @@ function contentType(ext) {
 
     return {'Content-Type': ct};
 }
-
+//
 var http = require('http'),
     fs = require('fs'),
     path = require('path');
-
+//
 var HTTP_OK = 200,
     HTTP_ERR_UNKNOWN = 500,
     HTTP_ERR_NOT_FOUND = 404;

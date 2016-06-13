@@ -38,6 +38,9 @@ http.createServer(function(request, response) {
     console.log("method 1: " + request.method);
     console.log("server running");
 
+    var filepath = '.' + (req.url == '/' ? path_file : req.url);
+        fileext = path.extname(filepath);
+
     if (request.method == "POST") {
 
 
@@ -80,10 +83,14 @@ http.createServer(function(request, response) {
 
         var stat = fs.readFileSync(path_file);
 
+        response.setHeader('Access-Control-Allow-Origin', '*'); // to musi być bo wyrzuca błąd
+        response.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // to też musi być bo wyrzuca błąd
+
+
         response.writeHead(200, {
             'Content-Type': 'text/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Content-Type'
+            //'Access-Control-Allow-Origin': '*',
+            //'Access-Control-Allow-Headers': 'Content-Type'
 
         });
         response.write(stat);
