@@ -4,10 +4,33 @@
 
 var http = require('http');
 var fs = require('fs');
-var path = "./data/test_arch/data1.json";
+var path = require('path');
+var path_file = "./data/test_arch/data1.json";
 var port = 80;
 
-console.log("startuje");
+function contentType(ext) {
+    var ct;
+
+    switch (ext) {
+        case '.html':
+            ct = 'text/html';
+            break;
+        case '.css':
+            ct = 'text/css';
+            break;
+        case '.js':
+            ct = 'text/javascript';
+            break;
+        default:
+            ct = 'text/plain';
+            break;
+    }
+
+    return {'Content-Type': ct};
+}
+
+console.log("plik startuje");
+
 http.createServer(function(request, response) {
 
     var body = []; // gdy to body chciałem dać poza createServer - jako zmienną globalną, to w request.on("data") wyskakiwał błąd że body "has no push method"
@@ -31,7 +54,7 @@ http.createServer(function(request, response) {
         console.log(body);
         console.log("method 2: " + request.method);
 
-        fs.writeFile(path, body, function (err) {
+        fs.writeFile(path_file, body, function (err) {
             if (err) {
                 return console.log(err);
             }
@@ -55,7 +78,7 @@ http.createServer(function(request, response) {
 }
     else{
 
-        var stat = fs.readFileSync(path);
+        var stat = fs.readFileSync(path_file);
 
         response.writeHead(200, {
             'Content-Type': 'text/json',
