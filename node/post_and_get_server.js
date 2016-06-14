@@ -5,8 +5,8 @@
 var http = require('http');
 var fs = require('fs');
 var path = require('path');
-var path_file = "./data/test_arch/data1.json";
-//var path_image_folder = "./data/test_arch/data1.json";
+var path_file = "/data/test_arch/data1.json";
+//var path_image_folder = "/data/test_arch/data1.json";
 var port = 80;
 
 function contentType(ext) {
@@ -89,8 +89,8 @@ http.createServer(function(request, response) {
 
     else{
 
-        var stat = fs.readFileSync(path_file);
-        //var stat = fs.readFileSync(filepath);
+        //var stat = fs.readFileSync(path_file);
+        var stat = fs.readFileSync(filepath);
 
         response.setHeader('Access-Control-Allow-Origin', '*'); // to musi być bo wyrzuca błąd
         response.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // to też musi być bo wyrzuca błąd
