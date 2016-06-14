@@ -43,6 +43,7 @@ http.createServer(function(request, response) {
 
     var filepath = '.' + (request.url == '/' ? path_file : request.url);
     var  fileext = path.extname(filepath);
+    console.log("przed :"+filepath);
     console.log("przed :"+fileext);
 
     if (request.method == "POST") {
@@ -87,8 +88,8 @@ http.createServer(function(request, response) {
 
     else{
 
-        //var stat = fs.readFileSync(path_file);
-        var stat = fs.readFileSync(filepath);
+        var stat = fs.readFileSync(path_file);
+        //var stat = fs.readFileSync(filepath);
 
         response.setHeader('Access-Control-Allow-Origin', '*'); // to musi być bo wyrzuca błąd
         response.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // to też musi być bo wyrzuca błąd
