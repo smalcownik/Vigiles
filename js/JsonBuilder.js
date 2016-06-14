@@ -78,7 +78,7 @@ define(["./Camera","./UpdateJsonOnServer"], function (Camera, UpdateJsonOnServer
             if (element.DOM.tagName === "DIV") {
                 //console.log(element);
                 if (element.point.isNew === true) { // isNew występuje w ./PointEventFunctions i w ./Point
-                    console.log(element);
+                    //console.log(element); opcjonalnie wyświetla nowe elementy
 
                     element.image.points.push(element.point);
 
