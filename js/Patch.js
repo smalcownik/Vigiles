@@ -3,6 +3,7 @@ define([], function () { // tworzy objekty zdjec (łatek),
         var exported = function Patch(image,parent,data,i){
 
             var imgHTML= document.createElement('img');
+            console.log(data.url);
             imgHTML.src=data.url+'/imgs/imgs['+i+']/'+image.id+'.jpg'; //  tu jest odniesienie do plików jpg (jedyne!!)
             this.DOM = imgHTML;
             image.patch = this;
