@@ -43,6 +43,7 @@ http.createServer(function(request, response) {
 
     var filepath = '.' + (request.url == '/' ? path_file : request.url);
     var  fileext = path.extname(filepath);
+    console.log("przed :"+fileext);
 
     if (request.method == "POST") {
 
