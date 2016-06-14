@@ -63,7 +63,7 @@ http.createServer(function(request, response) {
         console.log(body);
         console.log("method 2: " + request.method);
 
-        fs.writeFile(path_file, body, function (err) {
+        fs.writeFile('.' +path_file, body, function (err) {
             if (err) {
                 return console.log(err);
             }
