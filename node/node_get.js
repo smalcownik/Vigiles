@@ -16,7 +16,7 @@ var stat = fileSystem.readFileSync(filePath);
 
     response.writeHead(200, {
        'Content-Type': 'text/json',
-'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*'
 
 	});
 response.write(stat);
