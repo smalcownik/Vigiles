@@ -87,7 +87,8 @@ http.createServer(function(request, response) {
 
     else{
 
-        var stat = fs.readFileSync(path_file);
+        //var stat = fs.readFileSync(path_file);
+        var stat = fs.readFileSync(filepath);
 
         response.setHeader('Access-Control-Allow-Origin', '*'); // to musi być bo wyrzuca błąd
         response.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // to też musi być bo wyrzuca błąd
