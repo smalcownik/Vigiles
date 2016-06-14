@@ -5,8 +5,8 @@ define([], function () { // tworzy objekty zdjec (łatek),
             var imgHTML= document.createElement('img');
             console.log(data.url);
             console.log(data.url);
-            imgHTML.src=data.url+'/imgs/imgs['+i+']/'+image.id+'.jpg'; //  tu jest odniesienie do plików jpg (jedyne!!)
-            //imgHTML.src=data.url+'data/test_arch/imgs/imgs['+i+']/'+image.id+'.jpg'; //  tu jest odniesienie do plików jpg (jedyne!!)
+            //imgHTML.src=data.url+'/imgs/imgs['+i+']/'+image.id+'.jpg'; //  tu jest odniesienie do plików jpg (jedyne!!)
+            imgHTML.src=data.url+'data/test_arch/imgs/imgs['+i+']/'+image.id+'.jpg'; //  tu jest odniesienie do plików jpg (jedyne!!)
             console.log(imgHTML.src);
             this.DOM = imgHTML;
             image.patch = this;

@@ -6,6 +6,7 @@ var http = require('http');
 var fs = require('fs');
 var path = require('path');
 var path_file = "./data/test_arch/data1.json";
+var path_image_folder = "./data/test_arch/data1.json";
 var port = 80;
 
 function contentType(ext) {
