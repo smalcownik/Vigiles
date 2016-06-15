@@ -118,7 +118,7 @@ http.createServer(function(request, response) {
     console.log("Server listening on: http://localhost:%s", port);
 });
 
-// TODO: juz dziala tylko odpalic odczytywanie plikow img -
+// TODO: działa w pełni: GET, POST, otwiera img
 // przyklad w ajax_proby/node_server oraz server_with_several_file_types
 
 // pamietac zeby odpalac node na amazonie z poziomu folderu Vigiles a nie z poziomu Vigiles/node
