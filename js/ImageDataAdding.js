@@ -4,7 +4,9 @@
 define([], function () {
 
     var exported = {};
+    
 
+    exported.newImageData = prompt("file_path, parentID_nr, pos{},)
 
     exported.xxxxx = function () { // f-kcja wywołana w JsonBuilder.updateJson
 
@@ -20,6 +22,8 @@ define([], function () {
 });
 
 //TODO: obmyślić i dokładnie zaplanować jak zbudować tę funkcjonalność - gdzie wprowadzić jakie czynnności
+
+
 /*
 
  tutaj bedą funkcje, odpowiedzialne za dodawanie nowych images'ów do danych
@@ -30,6 +34,7 @@ define([], function () {
 
     a.) kliknięcie powoduje wyskoczenie prompta z  : danymi i opcją wgrania pliku (adres zdjęcia,
         ID rodzica, pozycja, wymiary, punkty)
+                
     b.) zatwierdzneie spowoduje:
         I. zapisanie przez JsonBuilder json'a z nowym Patchem
         II. aktualizacja w przeglądarce
