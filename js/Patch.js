@@ -7,7 +7,7 @@ define([], function () { // tworzy objekty zdjec (łatek),
             console.log(data.url);
             //imgHTML.src=data.url+'/imgs/imgs['+i+']/'+image.id+'.jpg'; //  tu jest odniesienie do plików jpg (jedyne!!)
             imgHTML.src=data.url+'/data/test_arch/imgs/imgs['+i+']/'+image.id+'.jpg'; //  tu jest odniesienie do plików jpg (jedyne!!)
-            //TODO: powyżej dwie wersje - górna odnosi się do serwera na dysku - doln do serwera na amazonie
+            //powyżej dwie wersje - górna odnosi się do serwera na dysku - doln do serwera na amazonie
             console.log(imgHTML.src);
             this.DOM = imgHTML;
             image.patch = this;
@@ -19,7 +19,7 @@ define([], function () { // tworzy objekty zdjec (łatek),
 
             image.parent = parent;
 
-            this.originalParent = i; // to jest pozycja w tablicy images w data.json, żeby było wiadomo w którym zdjęciu ląduje dany Patch
+            this.originalParent = i; // to jest pozycja w tablicy images w data.json, żeby było wiadomo w którym zdjęciu-matce ląduje dany Patch
 
             this.defaultOpacity = 0.1;
 
@@ -56,7 +56,7 @@ define([], function () { // tworzy objekty zdjec (łatek),
 
                     image.absolutePos = {
                     y: window.innerWidth * 0.5 * image.size.h / image.size.w,  // srodek zdjęcia : y
-                    x: window.innerWidth * (0.5 + 1.10 *i), // srodek zdjęcia: x //TODO: tutaj jest odniesienie do "original parent"
+                    x: window.innerWidth * (0.5 + 1.10 *i), // srodek zdjęcia: x // tutaj jest jedyne odniesienie do "original parent"
                     // numeru parenta pierwotnego od tej liczby zależy w jakiej odległości będą parenty i tylko na jej podstawie można je identyfikować
                     w: window.innerWidth, //szerokość okna przegladarki www
                     h: window.innerWidth * image.size.h / image.size.w // wymiar zdjęcia y, w zasadzie 2*y

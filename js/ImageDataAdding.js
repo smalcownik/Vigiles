@@ -6,7 +6,7 @@ define([], function () {
     var exported = {};
     
 
-    exported.newImageData = prompt("file_path, parentID_nr, pos{},)
+    exported.newImageData = prompt("file_path, parentID_nr, pos{},");
 
     exported.xxxxx = function () { // f-kcja wywołana w JsonBuilder.updateJson
 
@@ -21,11 +21,9 @@ define([], function () {
 
 });
 
-//TODO: obmyślić i dokładnie zaplanować jak zbudować tę funkcjonalność - gdzie wprowadzić jakie czynnności
-
+//TODO: zaplanować tę funkcjonalność
 
 /*
-
  tutaj bedą funkcje, odpowiedzialne za dodawanie nowych images'ów do danych
  (budowanie JSONA i dodawanie zdjęcia do folderu na podtstawie pliku i kilku danych o lokalizacji zdjęcia):
 

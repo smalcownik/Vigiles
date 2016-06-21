@@ -48,8 +48,8 @@ define(['./MapData'], function (MapData) {
 //debugger;
             exported.loadData = function(url,cb){ // to cb jest z Viever.loadURL()
 //debugger;
-                //makeRequest(url+'/data1.json', //TODO : dać jako url server amazona i server noda odpowie plikiem
-                makeRequest(url, //TODO : dać jako url server amazona i server noda odpowie plikiem
+                //makeRequest(url+'/data1.json', // url pliku z dysku - dysk odpowiada plikiem
+                makeRequest(url, // w app.js jako url server amazona i server noda odpowie plikiem
                     function(response){ // response to (http_request.responseText)
                         cb(new MapData(response)); // czyli new MapData(response)
                                                    // wchodzi jako data do MDP.loadData w View.loadURL
