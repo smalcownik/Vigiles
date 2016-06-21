@@ -2,6 +2,10 @@
  * Created by marek on 07.06.16.
  */
 
+// pamietac zeby odpalac node na amazonie z poziomu folderu Vigiles a nie z poziomu Vigiles/node
+// działa w pełni: GET, POST, otwiera img
+
+
 var http = require('http');
 var fs = require('fs');
 var path = require('path');
@@ -118,7 +122,9 @@ http.createServer(function(request, response) {
     console.log("Server listening on: http://localhost:%s", port);
 });
 
-// TODO: działa w pełni: GET, POST, otwiera img
-// przyklad w ajax_proby/node_server oraz server_with_several_file_types
 
+
+// działa w pełni: GET, POST, otwiera img
 // pamietac zeby odpalac node na amazonie z poziomu folderu Vigiles a nie z poziomu Vigiles/node
+
+// przyklad w ajax_proby/node_server oraz server_with_several_file_types

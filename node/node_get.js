@@ -1,3 +1,5 @@
+// ten plik juz dziala prawidlowo, polaczenie z post w pliku node_post.js
+
 var http = require('http'),
     fileSystem = require('fs');
 
@@ -32,4 +34,4 @@ server.listen(port, function(){
     console.log();
 });
 
-//TODO: ten plik dziala prawidlowo, polaczenie w pliku node_post.js
+//ten plik dziala prawidlowo, polaczenie w pliku node_post.js
