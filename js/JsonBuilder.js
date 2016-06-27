@@ -142,17 +142,16 @@ define(["./Camera","./UpdateJsonOnServer"], function (Camera, UpdateJsonOnServer
 
         if (parentImage) {
 
-            //console.log(parentImage.jsonAddress);
-
+            //console.log(parentImage.jsonAddress); // ten objekt jest stworzony w "else" tej funkcji a tu w drugiej kolejnosci wystepuje
             parentImage.jsonAddress.children.push(img); // jsonAddress to sztucznie dolozony element do objektu,
             //ktory ma tylko te elementy, ktore sie nie zapetlaja
-            // zrobiono to dlatego, ze 
+            // zrobiono to dlatego, ze
             image.jsonAddress = parentImage.jsonAddress.children[parentImage.jsonAddress.children.length - 1]; // to ważna linijka, na niej zakończyłem tworzenie objektu (plus 5 linijek niżej)
 
         }
 
         else {
-
+            //console.log(parentImage.jsonAddress); // tutaj jeszcze NIE ISTNIEJE jsonAddress
             exported.objScheme.images.push(img);
             image.jsonAddress = exported.objScheme.images[exported.objScheme.images.length - 1]; // to ważna linijka, na niej zakończyłem tworzenie objektu (plus 5 linijek wyżej)
         }
