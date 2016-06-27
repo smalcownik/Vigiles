@@ -59,7 +59,7 @@ define([], function () { // tworzy objekty zdjec (łatek),
                     x: window.innerWidth * (0.5 + 1.10 *i), // srodek zdjęcia: x // tutaj jest jedyne odniesienie do "original parent"
                     // numeru parenta pierwotnego od tej liczby zależy w jakiej odległości będą parenty i tylko na jej podstawie można je identyfikować
                     w: window.innerWidth, //szerokość okna przegladarki www
-                    h: window.innerWidth * image.size.h / image.size.w // wymiar zdjęcia y, w zasadzie 2*y
+                    h: window.innerWidth * image.size.h / image.size.w // wymiar zdjęcia y, w zasadzie 2*y , bo samo y to srodek zdjecia
                 };
 
                /* }else{}
