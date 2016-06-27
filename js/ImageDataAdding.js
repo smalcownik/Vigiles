@@ -6,7 +6,7 @@ define([], function () {
     var exported = {};
     
 
-    exported.newImageData = prompt("file_path, parentID_nr, pos{},");
+    exported.newImageData = prompt("file_path , parentID_nr, pos{x,y,w}, size{w,h}"); //koncowka sciezki file_path jest jednoczesnie nr_ID
 
     exported.xxxxx = function () { // f-kcja wywołana w JsonBuilder.updateJson
 

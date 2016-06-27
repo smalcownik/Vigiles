@@ -142,7 +142,11 @@ define(["./Camera","./UpdateJsonOnServer"], function (Camera, UpdateJsonOnServer
 
         if (parentImage) {
 
-            parentImage.jsonAddress.children.push(img);
+            //console.log(parentImage.jsonAddress);
+
+            parentImage.jsonAddress.children.push(img); // jsonAddress to sztucznie dolozony element do objektu,
+            //ktory ma tylko te elementy, ktore sie nie zapetlaja
+            // zrobiono to dlatego, ze 
             image.jsonAddress = parentImage.jsonAddress.children[parentImage.jsonAddress.children.length - 1]; // to ważna linijka, na niej zakończyłem tworzenie objektu (plus 5 linijek niżej)
 
         }
