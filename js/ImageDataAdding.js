@@ -24,7 +24,6 @@ define([], function () {
 //TODO: zaplanować tę funkcjonalność
 
 /*
- tutaj bedą funkcje, odpowiedzialne za dodawanie nowych images'ów do danych
  (budowanie JSONA i dodawanie zdjęcia do folderu na podtstawie pliku i kilku danych o lokalizacji zdjęcia):
 
  1. przycisk, po kliknięciu którego włączy się request (z pliku, który będzie wysyłał request) POST,
