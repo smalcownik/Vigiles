@@ -87,7 +87,7 @@ define(["./Camera","./UpdateJsonOnServer"], function (Camera, UpdateJsonOnServer
         });
 
         exported.viewer.updateAllPositionables();
-        console.log(exported.viewer.positionable);
+        //console.log(exported.viewer.positionable);
 
     }; // f-kcja dodaje nowe/edytowane pointy do patchów (elementów viewer.positionable)
 

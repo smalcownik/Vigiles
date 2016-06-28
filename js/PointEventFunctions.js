@@ -332,14 +332,14 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                         }
                     );
 
-                    console.log(clickedPoint);
+                    //console.log(clickedPoint);
 
 
                     clickedElement.parentNode.childNodes[0].innerHTML = clickedPoint.point.textInit;
 
 
                     viewer.updateAllPositionables();
-                    console.log(viewer.positionable);
+                    //console.log(viewer.positionable);
                 }
 
             }
