@@ -191,7 +191,7 @@ define(["./Camera","./UpdateJsonOnServer"], function (Camera, UpdateJsonOnServer
 
         if (clickedElement.className === "saveJsonButton") {
 
-            //console.log(viewer.positionable);
+            console.log(viewer.positionable);
 
             exported.addNewPointsToPatches();
 
