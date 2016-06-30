@@ -22,12 +22,16 @@ define(['./AdditionalPatchBuilder'], function (AdditionalPatchBuilder) {
         document.body.addEventListener('click', this.newPatchDataReceiver);
     }
     
-    exported.newPatchDataReceiver = prompt("file_path , parentID_nr, pos{x,y,w}, size{w,h}"); //koncowka sciezki file_path jest jednoczesnie nr_ID
+    exported.newPatchDataReceiver = prompt("file_path , parentID_nr, pos{x,y,w}, size{w,h}");
+    //w tego prompta bym wklejał dane w postaci Jsona i zrobić z niego objekt i z niego już korzystać hehe :)
+    //koncowka sciezki file_path jest jednoczesnie nr_ID
     //i zatwierdzenie tego prompta musi wywołać funkcję i dać jej wszystkie potrzebne dane
     /* if (exported.newPatchDataReceiver != null) {
     następuje wywołanie AdditionalPatchBuilder
     exported.Additional...() -może tak?
     }
+
+
     */
 
 
