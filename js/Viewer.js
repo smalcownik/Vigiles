@@ -1,5 +1,5 @@
-define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./CameraEventListeners","./PointEventListeners",'./PointEventFunctions','./JsonBuilder'], function (
-        MapDataProvider,PatchBuilder,PointsBuilder,Camera,CameraEventListeners,PointEventListeners,PointEventFunctions,JsonBuilder
+define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./CameraEventListeners","./PointEventListeners",'./PointEventFunctions','./JsonBuilder','./ImageDataAdding'], function (
+        MapDataProvider,PatchBuilder,PointsBuilder,Camera,CameraEventListeners,PointEventListeners,PointEventFunctions,JsonBuilder,ImageDataAdding
     ) { //wyswietla strone i poczatkowe dane
 
         var exported = {
@@ -20,6 +20,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
             //PointEventListeners.viewer = this;
             PointEventFunctions.viewer = this;
             JsonBuilder.viewer = this;
+            AdditionalPatch.viewer = this;
 
             exported.registerEventListeners();  // reakcja na przyciski MUSIAŁEM NAJPIERW
 
@@ -74,7 +75,8 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
             CameraEventListeners.cameraEvents();
             PointEventListeners.addPoint();
             PointEventListeners.showPointContent();
-            JsonBuilder.buildJSON();
+            JsonBuilder.buildJSON(); // ponowne budowanie jsona z dodawanymi punktami i wysyłanie 
+            ImageDataAdding.addNewPatch(); //dodawanie zdjęć z zewnątrz
 
 
 
