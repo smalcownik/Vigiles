@@ -23,9 +23,7 @@ define(["./AdditionalPatch"], function (AdditionalPatch) {
 
                     viewer.positionable.push(new AdditionalPatch(data))
 
-           
         };
-
 
         return exported;
     }

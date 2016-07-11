@@ -15,7 +15,7 @@ define(['./AdditionalPatchBuilder'], function (AdditionalPatchBuilder) {
 
     };
     
-    exported.addNewPatchButton = function () {}; // dodaje przycisk i nadaje mu 
+    exported.addNewPatchButton = function () {}; // dodaje przycisk i nadaje mu klasę, że jak wciśniesz to wywołujesz exported.addNewPatchEventListener
 
     exported.addNewPatchEventListener = function () { // co po wciśnięciu przycisku (wyskakuje cały prompt)
 
@@ -28,7 +28,7 @@ define(['./AdditionalPatchBuilder'], function (AdditionalPatchBuilder) {
     //i zatwierdzenie tego prompta musi wywołać funkcję i dać jej wszystkie potrzebne dane
     /* if (exported.newPatchDataReceiver != null) {
     następuje wywołanie AdditionalPatchBuilder
-    exported.Additional...() -może tak?
+     AdditionalPatchBuilder.build
     }
 
 
