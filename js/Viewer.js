@@ -97,7 +97,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
                     // url powinine byc adresem katalogu w ktorym jest archiwum mapy
                 }
                 //debugger;
-            }
+            } // tu mają byc testy poprawności url ale jeszcze nie ma nic
 
             MapDataProvider.loadData(url,
                 function(data){ // cb w MDP.loadData
@@ -112,7 +112,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
 
         exported.showMapData = function(data){ // jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a
 
-            //debugger;
+            console.log(data);
 
             PatchBuilder.build(data); //// jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a;  PatchBuilder traversuje całego JSON'a
 

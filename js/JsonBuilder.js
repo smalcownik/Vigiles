@@ -183,12 +183,6 @@ define(["./Camera","./UpdateJsonOnServer"], function (Camera, UpdateJsonOnServer
     };
 
 
-    //TODO: tu rozkminić jak najprościej wpleść tu dodawany patch i na podstawie tej rozkminy dostosować plik AdditionalPatch
-
-    /*
-    * 1. może wrzucać nowe AddPatch do positionables, tylko przy przeszukiwaniu przez f-kcję
-    * */
-
     exported.updateJson = function (event) { // wywołana przez .updateJsonEventListener
 
         var viewer = exported.viewer; // tu nie mogłem dać "this.viewer" bo this tutaj to "body"
