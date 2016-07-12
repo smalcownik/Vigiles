@@ -4,6 +4,8 @@
 
 // tworzy objekty dodawanych patchow (zdjec/latek), rozkminić jak ma działać
 
+// TODO: ten plik chyba zniknie  zamiast nie go będzie sie normalmnie Patch budował tylko ze zmienionego JSON'a
+
 define([], function () { // tworzy objekty zdjec (łatek),
 
         var exported = function AdditionalPatch(image,parent,data,i){

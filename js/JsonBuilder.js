@@ -102,7 +102,7 @@ define(["./Camera","./UpdateJsonOnServer"], function (Camera, UpdateJsonOnServer
 
         if (image.children.length > 0) {
             image.children.forEach(
-                function (childrenImage) {
+                function (childrenImage) { //tu childrenImage to "each children"
 
                     exported.dig(childrenImage, visitFunction, image);
                 });
@@ -182,6 +182,12 @@ define(["./Camera","./UpdateJsonOnServer"], function (Camera, UpdateJsonOnServer
 
     };
 
+
+    //TODO: tu rozkminić jak najprościej wpleść tu dodawany patch i na podstawie tej rozkminy dostosować plik AdditionalPatch
+
+    /*
+    * 1. może wrzucać nowe AddPatch do positionables, tylko przy przeszukiwaniu przez f-kcję
+    * */
 
     exported.updateJson = function (event) { // wywołana przez .updateJsonEventListener
 

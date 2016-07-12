@@ -20,7 +20,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
             //PointEventListeners.viewer = this;
             PointEventFunctions.viewer = this;
             JsonBuilder.viewer = this;
-            AdditionalPatch.viewer = this;
+            //AdditionalPatch.viewer = this;
 
             exported.registerEventListeners();  // reakcja na przyciski MUSIAŁEM NAJPIERW
 
@@ -76,7 +76,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
             PointEventListeners.addPoint();
             PointEventListeners.showPointContent();
             JsonBuilder.buildJSON(); // ponowne budowanie jsona z dodawanymi punktami i wysyłanie 
-            ImageDataAdding.addNewPatch(); //dodawanie zdjęć z zewnątrz
+            //ImageDataAdding.addNewPatch(); //dodawanie zdjęć z zewnątrz
 
 
 

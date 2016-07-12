@@ -13,8 +13,6 @@ define([], function () { // tworzy objekty zdjec (łatek),
             image.patch = this;
             this.image = image;
 
-
-
             //console.log(image);
 
             image.parent = parent;
