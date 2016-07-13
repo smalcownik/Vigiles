@@ -21,7 +21,6 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
             PointEventFunctions.viewer = this;
             JsonBuilder.viewer = this;
             ImageDataAdding.viewer =this;
-            //AdditionalPatch.viewer = this;
 
             exported.registerEventListeners();  // reakcja na przyciski MUSIAŁEM NAJPIERW
 
@@ -102,8 +101,9 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
 
             MapDataProvider.loadData(url,
                 function(data){ // cb w MDP.loadData
-                    exported.currentData = data; // jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a - tego użyć do zonglowania
-                                                 // zawartoscia JSON'a
+
+                    exported.currentDataStringified = JSON.stringify(data); // zeby miec zachowana oryginalna tresc aktualnego JSONA
+                    exported.currentData = data; // jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a
                     exported.currentData.url = url;
                     exported.showMapData(exported.currentData); // w tej f-kcji będzie dopiero wołany PatchBuilder czyli cały widok, a currentData to obiekt new MapData(response)
                 }
@@ -114,7 +114,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
 
         exported.showMapData = function(data){ // jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a
 
-            console.log(data);
+            //console.log(data);
 
             PatchBuilder.build(data); //// jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a;  PatchBuilder traversuje całego JSON'a
 

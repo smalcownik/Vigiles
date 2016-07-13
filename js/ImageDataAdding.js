@@ -1,9 +1,8 @@
 /**
  * Created by marek on 16.06.16.
  */
-/*funkcja zbiera dane do nowego patcha przy pomocy prompta i uruchamia AdditionalPatchBuilder, 
-//który zajmuje się 1.wywołaniem nowego patcha (additionalPatch) oraz przesylaniem Patcha dalej (JsonBuilder)*/
-define(['./AdditionalPatchBuilder',"./Camera"], function (AdditionalPatchBuilder,Camera) {
+
+define(["./Camera"], function (Camera) {
 
     var exported = {};
 
@@ -69,7 +68,11 @@ define(['./AdditionalPatchBuilder',"./Camera"], function (AdditionalPatchBuilder
         if (clickedElement.className === "saveNewPatchButton"){
             console.log("odpalono newPatchDataReceiverbuilder");
 
-            console.log(exported.viewer.currentData); // currentData to obecny objekt MapData
+            console.log(exported.viewer.currentDataStringified); // currentData to obecny objekt MapData
+
+            exported.originalJSONparsed = JSON.parse(exported.viewer.currentDataStringified) ;
+
+            console.log(exported.originalJSONparsed);
         }
         
         

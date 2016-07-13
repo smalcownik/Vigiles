@@ -3,9 +3,7 @@ define(['./MapDataValidator'], function (MapDataValidator) {
         var exported = function MapData(jsonString) {
             var parsed = JSON.parse(jsonString); // u tu powstaje gotowy objekt
             
-            console.log(parsed);
 
-            //debugger;
             MapDataValidator.ValidateData(parsed);
             this.images = parsed.images;
             this.meta = parsed.meta;
