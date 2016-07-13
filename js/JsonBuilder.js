@@ -51,7 +51,7 @@ define(["./Camera","./UpdateJsonOnServer"], function (Camera, UpdateJsonOnServer
 
         // var saveButtonParagraph = document.createElement('p');
         // debugger;
-        var txt = "SAVE";
+        var txt = "SAVE POINTS";
         saveJsonButton.style.color = 'white';
         saveJsonButton.style.fontSize = '22px';
         saveJsonButton.style.textAlign = 'center';
@@ -207,6 +207,8 @@ define(["./Camera","./UpdateJsonOnServer"], function (Camera, UpdateJsonOnServer
 
 
         };
+        
+        
     };
 
 

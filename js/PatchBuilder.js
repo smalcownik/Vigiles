@@ -19,17 +19,18 @@ define(["./Patch"], function (Patch) {
 
 
                     function(image,i,parent){
-
-                        //console.log(data);
-
-
+                        
+                        
                         viewer.positionable.push(new Patch(image,parent,data,i))
 
                     }
+                    
                 );
+                
             };
 
 
             return exported;
         }
-    );
+
+);

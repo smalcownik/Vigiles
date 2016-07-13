@@ -20,6 +20,7 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
             //PointEventListeners.viewer = this;
             PointEventFunctions.viewer = this;
             JsonBuilder.viewer = this;
+            ImageDataAdding.viewer =this;
             //AdditionalPatch.viewer = this;
 
             exported.registerEventListeners();  // reakcja na przyciski MUSIAŁEM NAJPIERW
@@ -76,14 +77,14 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
             PointEventListeners.addPoint();
             PointEventListeners.showPointContent();
             JsonBuilder.buildJSON(); // ponowne budowanie jsona z dodawanymi punktami i wysyłanie 
-            //ImageDataAdding.addNewPatch(); //dodawanie zdjęć z zewnątrz
+            ImageDataAdding.addNewPatch(); //dodawanie zdjęć z zewnątrz
 
 
 
 
 
         };
-
+//
 
         exported.loadURL = function(url){ // ta fkcja jest odpalmana na początku z app.js z argumentem ('data/arch1')
 
@@ -101,7 +102,8 @@ define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./Cam
 
             MapDataProvider.loadData(url,
                 function(data){ // cb w MDP.loadData
-                    exported.currentData = data; // jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a
+                    exported.currentData = data; // jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a - tego użyć do zonglowania
+                                                 // zawartoscia JSON'a
                     exported.currentData.url = url;
                     exported.showMapData(exported.currentData); // w tej f-kcji będzie dopiero wołany PatchBuilder czyli cały widok, a currentData to obiekt new MapData(response)
                 }
