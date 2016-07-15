@@ -36,7 +36,7 @@ define(['./MapDataValidator'], function (MapDataValidator) {
         };
 
 
-        exported.prototype.getAllNodes = function () { // tu zbudow ać f-kcję, żeby
+        exported.prototype.getAllNodes = function () { // tu zbudować f-kcję, żeby
         };
 
         exported.prototype.getAllChildrenNodes = function (parentNode) {

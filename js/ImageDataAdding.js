@@ -6,7 +6,8 @@ define(["./Camera"], function (Camera) {
 
     var exported = {};
 
-    exported.addNewPatch = function () { // f-kcja wywoływana w Viewer.registerEventListeners
+    exported.addNewPatch = function () {
+        // f-kcja wywoływana w Viewer.registerEventListeners
         //var viewer = this.viewer;
         // console.log(viewer.positionable);
 
@@ -58,7 +59,55 @@ define(["./Camera"], function (Camera) {
     exported.addNewPatchEventListener = function () { // co po wciśnięciu przycisku (wyskakuje cały prompt)
 
         document.body.addEventListener('click', this.newPatchDataReceiverBuilder);
-    }
+    };
+
+    exported.dig = function(image,i, visitFunction, parent) {
+
+        visitFunction(image,i,parent);
+
+        image.children.forEach(
+            function (childrenImage) {
+
+                exported.dig(childrenImage,i, visitFunction, image);
+            });
+    };
+
+
+    exported.traverse = function(parentObject, visitFunction) {
+
+
+        for (var i = 0; i < parentObject.images.length; i++) {
+            exported.dig(parentObject.images[i],i, visitFunction, null);
+        }
+    };
+
+
+
+    exported.fillNodeList = function(){
+
+        exported.nodeList = [];
+        
+        function fill(image,i,parent){
+            
+            //TODO: tutaj dzialać zeby budowało nodeList
+            
+            
+        }
+        
+        
+
+
+
+    };
+
+    exported.nodeList = [];
+
+    exported.getNodeById = function (idNumber){ // ma znalexc noda w nodeList na podstawie ID
+
+
+
+        return node;
+    };
 
 
     exported.newPatchDataReceiverBuilder = function(){
@@ -72,7 +121,8 @@ define(["./Camera"], function (Camera) {
 
             exported.originalJSONparsed = JSON.parse(exported.viewer.currentDataStringified) ;
 
-            console.log(exported.originalJSONparsed);
+            console.log(exported.originalJSONparsed); // to dziala
+
         }
         
         
