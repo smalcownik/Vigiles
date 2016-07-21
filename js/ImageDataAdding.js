@@ -151,21 +151,28 @@ define(["./Camera"], function (Camera) {
 
            // exported.getNodeById(5); //TODO: tutaj zamiast 5 dać wartość rodzica dodawanego node'a, później:
 
-            // I. JSON data
-
-            // 1. znajdujemy rodzica po ID
-            // 2. dodajemy do jego children dodawany promptem objekt JSON
-            // 3. w międzyczasie ustalamy Id nowego img - żeby był unikatowy i nowy, proponuję przy okazji zrobić listę
-            // zarezerwowanych Id na bazie nodeList, i dodając img sprawdzić jaki jest największy i kolejna wolna liczba naturalna
-            // 4.żeby map data brał z nowego jsona
-            //
 
             // II. jpg/img data
 
+            //budujemy ściezke na  (f-kcja "buildPath")
             // 1. no i dodać obrazek - musi się wysłać node/POST i dopisać
             //imgHTML.src=data.url+'/data/test_arch/imgs/imgs['+i+']/'+image.id+'.jpg'; - tak jest wyświetlany więc tak go trzeba zapisywać
 
+            // I. JSON data
 
+            // 1. w międzyczasie ustalamy Id nowego img - żeby był unikatowy i nowy, proponuję
+            // przy okazji zrobić listę i f-kcje ktora bedzie wykonywala ta czynnosc
+
+            // 2. znajdujemy rodzica po ID itd
+
+            // 3. dodajemy do jego children dodawany promptem objekt JSON
+
+            // zarezerwowanych Id na bazie nodeList, i dodając img sprawdzić jaki jest największy i kolejna wolna liczba naturalna
+
+            // zeby wyslac jsona na serwer skorzystaj z f-kcji UpdateJsonOnServer.js tylko popatrz jak ten json ma wygladać
+            // (sprawdz czy maja podobna budowe)
+
+            // 4.odpalamy Viewer.loadURL
 
         }
         

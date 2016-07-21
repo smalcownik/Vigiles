@@ -201,7 +201,7 @@ define(["./Camera","./UpdateJsonOnServer"], function (Camera, UpdateJsonOnServer
 
             exported.updatedJSON = JSON.stringify(exported.objScheme);
 
-             //console.log(exported.updatedJSON);
+             console.log(exported.updatedJSON);
 
             UpdateJsonOnServer.makeRequest(exported.updatedJSON);
 
