@@ -131,28 +131,84 @@ define(["./Camera"], function (Camera) {
         return node;
     };
 
+    exported.prepareNextId = function(){
+
+    var occupiedIds = exported.nodeList.map(function(element){return element[0]}).sort(function(a, b) {
+        return a - b;
+    });
+    console.log(occupiedIds);
+
+    var nextId = occupiedIds[occupiedIds.length -1] +1;
+
+        //TODO: tutaj jestem linijke wyzej poprawic zeby liczbe zwracało i dalej wg planu (generalnie newPatchDataReceiverBuilder)
+
+        console.log(nextId);
+    //return nextId;
+    };
+
+
+    exported.prepareInitialData = function(){ // tutaj ma byc opcja znalezienia objektu po Id i pobranie aktualnego JSONA
+
+        //console.log(exported.viewer.currentDataStringified); // currentData to obecny objekt MapData (JSOn - string)
+
+        exported.originalJSONparsed = JSON.parse(exported.viewer.currentDataStringified) ;
+
+       //console.log(exported.originalJSONparsed); // to dziala - objekt!
+
+        exported.fillNodeList(exported.originalJSONparsed);
+
+        //console.log(exported.nodeList);
+
+        //TODO:ustalić na wstepie unikatowy nowy ID - bedzie potrzebny do danych
+
+        exported.prepareNextId();
+
+    };
+
+
+    exported.executeAddingNewImage = function(imgPath,data) { // tutaj maja byc czynnosci po prompcie
+
+    //buildPath
+
+
+
+    };
 
     exported.newPatchDataReceiverBuilder = function(){
-        
+
         var clickedElement = event.target;
 
         if (clickedElement.className === "saveNewPatchButton"){
-            console.log("odpalono newPatchDataReceiverbuilder");
 
-            //console.log(exported.viewer.currentDataStringified); // currentData to obecny objekt MapData (JSOn - string)
+            console.log("odpalono newPatchDataReceiverbuilder czyli... prompt");
 
-            exported.originalJSONparsed = JSON.parse(exported.viewer.currentDataStringified) ;
-
-            console.log(exported.originalJSONparsed); // to dziala - objekt!
-
-            exported.fillNodeList(exported.originalJSONparsed);
-
-            console.log(exported.nodeList);
-
-           // exported.getNodeById(5); //TODO: tutaj zamiast 5 dać wartość rodzica dodawanego node'a, później:
+            exported.prepareInitialData(); // tutaj przygotuje m.in. nowy ID oraz opcje znajdowania object po id
 
 
-            // II. jpg/img data
+
+            var newImgPath = prompt("Podaj ścieżkę zdjęcia"); // sciezka do pliku na dysku
+            var newImgData = prompt("Podaj dane do zdjęcia - w formie tablicy[JSONData, parentId]");
+
+
+            //TODO: ustalić formę JSON'a - jaki ma być dokładny schemat
+
+            var sampleDataJson = {
+                "size":{"w":512,"h":384},
+                //"id":"2",
+                "pos":{"x":0,"y":-0.5,"w":0.8},
+
+                "points":[{"x":0,"y":0},{"x":0.5,"y":0.5},{"x":0,"y":0.5}],
+
+                "children":[]
+
+            };
+
+            exported.executeAddingNewImage(newImgPath,newImgData); // musi dodac id ()
+
+
+            //TODO: OTO mój zajebisty plan:
+
+            // I. jpg/img data
 
             //budujemy ściezke na  (f-kcja "buildPath")
             // 1. no i dodać obrazek - musi się wysłać node/POST i dopisać
@@ -165,7 +221,7 @@ define(["./Camera"], function (Camera) {
 
             // 2. znajdujemy rodzica po ID itd
 
-            // 3. dodajemy do jego children dodawany promptem objekt JSON
+            // 3. dodajemy do jego children dodawany promptem objekt JSON ( podobna f-kcja budujaca objekt: JsonBuilder.cleanPatchBeforeAddingToObject)
 
             // zarezerwowanych Id na bazie nodeList, i dodając img sprawdzić jaki jest największy i kolejna wolna liczba naturalna
 
@@ -180,8 +236,6 @@ define(["./Camera"], function (Camera) {
     };
 
 
-
-    // ma dodawać od razu zdjęcie do folderu imgs tylko opcja save(savePatch) ma wykonać aktualizację
     
     
     return exported;
