@@ -73,7 +73,7 @@ define(["./Camera"], function (Camera) {
     };
 
 
-    exported.traverse = function(parentObject, visitFunction) {
+    exported.traverse = function(parentObject, visitFunction) { //to ma być cały objekt
 
 
         for (var i = 0; i < parentObject.images.length; i++) {
@@ -83,28 +83,50 @@ define(["./Camera"], function (Camera) {
 
 
 
-    exported.fillNodeList = function(){
+    exported.fillNodeList = function(wholeObject){ // to bedzie visitFunction w exported.dig (wywolanej z traverse)
 
-        exported.nodeList = [];
+        exported.nodeList = []; // ma być tablica, ktora umozliwi znalezienie referencji do objektu Patch po ID
         
         function fill(image,i,parent){
-            
-            //TODO: tutaj dzialać zeby budowało nodeList
-            
-            
-        }
-        
-        
 
+            if(parent){
 
+            exported.nodeList.push([image.id, image, parent.id ]);
+
+            }
+
+            else{
+
+                exported.nodeList.push([image.id, image ]);
+            }
+
+        };
+
+        this.traverse(wholeObject, fill);
 
     };
 
-    exported.nodeList = [];
+    //exported.nodeList = [];
 
     exported.getNodeById = function (idNumber){ // ma znalexc noda w nodeList na podstawie ID
 
+        var stringNumber = idNumber.toString();
 
+        console.log(stringNumber);
+        var node;
+
+        function findById(array){
+
+            if( array[0] === stringNumber){
+                node = array;
+            }
+
+        };
+       // debugger;
+
+        exported.nodeList.forEach(findById);
+
+        console.log(node);
 
         return node;
     };
@@ -117,21 +139,42 @@ define(["./Camera"], function (Camera) {
         if (clickedElement.className === "saveNewPatchButton"){
             console.log("odpalono newPatchDataReceiverbuilder");
 
-            console.log(exported.viewer.currentDataStringified); // currentData to obecny objekt MapData
+            //console.log(exported.viewer.currentDataStringified); // currentData to obecny objekt MapData (JSOn - string)
 
             exported.originalJSONparsed = JSON.parse(exported.viewer.currentDataStringified) ;
 
-            console.log(exported.originalJSONparsed); // to dziala
+            console.log(exported.originalJSONparsed); // to dziala - objekt!
+
+            exported.fillNodeList(exported.originalJSONparsed);
+
+            console.log(exported.nodeList);
+
+           // exported.getNodeById(5); //TODO: tutaj zamiast 5 dać wartość rodzica dodawanego node'a, później:
+
+            // I. JSON data
+
+            // 1. znajdujemy rodzica po ID
+            // 2. dodajemy do jego children dodawany promptem objekt JSON
+            // 3. w międzyczasie ustalamy Id nowego img - żeby był unikatowy i nowy, proponuję przy okazji zrobić listę
+            // zarezerwowanych Id na bazie nodeList, i dodając img sprawdzić jaki jest największy i kolejna wolna liczba naturalna
+            // 4.żeby map data brał z nowego jsona
+            //
+
+            // II. jpg/img data
+
+            // 1. no i dodać obrazek - musi się wysłać node/POST i dopisać
+            //imgHTML.src=data.url+'/data/test_arch/imgs/imgs['+i+']/'+image.id+'.jpg'; - tak jest wyświetlany więc tak go trzeba zapisywać
+
+
 
         }
         
         
     };
 
-    
-    //w tego prompta bym wklejał dane w postaci JSON'a i zrobić z niego objekt i z niego już korzystać hehe :)
-    //TODO: dodać nowe dane jednak do jsona budowanego z viewera żeby map data brał z nowego jsona
-    // ma dodawać od razu zdjęcie do folderu imgs tylko opcja save( nie save point tylko savePatch) ma wykonać aktualizację
+
+
+    // ma dodawać od razu zdjęcie do folderu imgs tylko opcja save(savePatch) ma wykonać aktualizację
     
     
     return exported;

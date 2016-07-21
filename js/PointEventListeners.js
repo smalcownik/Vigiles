@@ -15,7 +15,9 @@ define(['./Point','./PointEventFunctions'], function (Point,PointEventFunctions)
 
         //var viewer = this.viewer;
 
-        document.body.addEventListener('click',PointEventFunctions.toShowPointContent /*function (event) {    // event dla camery/obrazków
+        document.body.addEventListener('click',PointEventFunctions.toShowPointContent
+            
+            /*function (event) {    // event dla camery/obrazków
 
             var clickedElement = event.target; // to jest tylko element - zaraz znajdziemy dla niego Patch'a/Pointa
 
