@@ -68,7 +68,7 @@ http.createServer(function(request, response) {
 
         body = Buffer.concat(body).toString(); // bez "to String wychodzi zakodowany Buffer, ale działa"
 
-        console.log(body);
+        //console.log(body);
         console.log("method 2: " + request.method);
 
         fs.writeFile('.' +path_file, body, function (err) {
