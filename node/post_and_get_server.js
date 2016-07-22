@@ -54,6 +54,8 @@ http.createServer(function(request, response) {
     if (request.method == "POST") {
 
 
+    console.log(request.headers);
+
     request.on('error', function (err) {
         console.error(err);
 
@@ -61,6 +63,8 @@ http.createServer(function(request, response) {
         body.push(chunk);
 
     }).on('end', function () {
+        
+
 
         body = Buffer.concat(body).toString(); // bez "to String wychodzi zakodowany Buffer, ale działa"
 

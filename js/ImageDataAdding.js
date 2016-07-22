@@ -169,6 +169,11 @@ define(["./Camera"], function (Camera) {
             var originalParentIndex = exported.getNodeById(parentId)[2];
             console.log(originalParentIndex);
             
+            var path = '/data/test_arch/imgs/imgs['+originalParentIndex+']/'+newId+'.jpg';
+            
+            console.log(path);
+            
+            return path;
             
         }
         else {
@@ -205,8 +210,6 @@ define(["./Camera"], function (Camera) {
 
             var newImgPath = prompt("Podaj ścieżkę zdjęcia"); // sciezka do pliku na dysku
             var newImgData = prompt("Podaj dane do zdjęcia - JSONData");
-
-
             var newImgDataParentId = prompt("PARENT_ID - jak nie podasz to doda nowy originalParent");
 
             var promptedData = [newImgPath,newImgData,newImgDataParentId];
@@ -225,17 +228,16 @@ define(["./Camera"], function (Camera) {
 
             };
 
-            exported.executeAddingNewImage(promptedData); // musi dodac id ()
+            exported.executeAddingNewImage(promptedData);
 
 
             //TODO: OTO mój zajebisty plan:
 
             // I. jpg/img data
 
-            //budujemy ściezke na nowy plik img (f-kcja "buildPath")
+            //budujemy ściezke na nowy plik img (f-kcja "buildPath") //ok
 
             // 1. no i dodać obrazek - musi się wysłać node/POST i dopisać
-            //imgHTML.src=data.url+'/data/test_arch/imgs/imgs['+i+']/'+image.id+'.jpg'; - tak jest wyświetlany więc tak go trzeba zapisywać
 
             // I. JSON data
 
