@@ -87,17 +87,17 @@ define(["./Camera"], function (Camera) {
 
         exported.nodeList = []; // ma być tablica, ktora umozliwi znalezienie referencji do objektu Patch po ID
         
-        function fill(image,i,parent){
+        function fill(image,originalParent,parent){
 
             if(parent){
 
-            exported.nodeList.push([image.id, image, parent.id ]);
+            exported.nodeList.push([image.id, image, originalParent, parent.id]);
 
             }
 
             else{
 
-                exported.nodeList.push([image.id, image ]);
+                exported.nodeList.push([image.id, image, originalParent]);
             }
 
         };
@@ -131,19 +131,17 @@ define(["./Camera"], function (Camera) {
         return node;
     };
 
-    exported.prepareNextId = function(){
+    exported.prepareNextId = function () {
 
-    var occupiedIds = exported.nodeList.map(function(element){return element[0]}).sort(function(a, b) {
-        return a - b;
-    });
-    console.log(occupiedIds);
+        var occupiedIds = exported.nodeList.map(function (element) {
+            return element[0]
+        }).sort(function (a, b) {
+            return a - b;
+        });
+        //console.log(occupiedIds);
 
-    var nextId = occupiedIds[occupiedIds.length -1] +1;
+        return Number(occupiedIds[occupiedIds.length - 1]) + 1;
 
-        //TODO: tutaj jestem linijke wyzej poprawic zeby liczbe zwracało i dalej wg planu (generalnie newPatchDataReceiverBuilder)
-
-        console.log(nextId);
-    //return nextId;
     };
 
 
@@ -157,18 +155,37 @@ define(["./Camera"], function (Camera) {
 
         exported.fillNodeList(exported.originalJSONparsed);
 
-        //console.log(exported.nodeList);
+        console.log(exported.nodeList);
 
-        //TODO:ustalić na wstepie unikatowy nowy ID - bedzie potrzebny do danych
-
-        exported.prepareNextId();
+        nextId = exported.prepareNextId(); // jest kolejny wolny Id //TODO: pamietac że on musi być dodany do tabeli Id'sow (exp.nodeList) zeby mozna tworzyc kolejny Id
+        console.log(nextId);
 
     };
 
+    exported.buildPath = function(newId,parentId){ // parent id jest trzecim elementem wyniku f-kcji exported.getNodeById
 
-    exported.executeAddingNewImage = function(imgPath,data) { // tutaj maja byc czynnosci po prompcie
 
-    //buildPath
+        if (parentId) {
+            var originalParentIndex = exported.getNodeById(parentId)[2];
+            console.log(originalParentIndex);
+            
+            
+        }
+        else {
+            //trzeba sprawdzić, który originalParentIndex jest największy i zwiększyc tę wartość o 1
+            //TODO: jak nie ma to trzeba dodać nowy folder imgs[nowaWartoscIndex]
+
+            alert("skonczylem bez parenta wiec trzeba dodac nowy folder na imgsy")
+
+        }
+
+
+
+    };
+
+    exported.executeAddingNewImage = function(promptedData) { // tutaj maja byc czynnosci po prompcie
+
+        exported.buildPath(nextId,promptedData[2]);//1 - Id rodzica
 
 
 
@@ -182,15 +199,20 @@ define(["./Camera"], function (Camera) {
 
             console.log("odpalono newPatchDataReceiverbuilder czyli... prompt");
 
+            var nextId;
             exported.prepareInitialData(); // tutaj przygotuje m.in. nowy ID oraz opcje znajdowania object po id
 
 
-
             var newImgPath = prompt("Podaj ścieżkę zdjęcia"); // sciezka do pliku na dysku
-            var newImgData = prompt("Podaj dane do zdjęcia - w formie tablicy[JSONData, parentId]");
+            var newImgData = prompt("Podaj dane do zdjęcia - JSONData");
 
 
-            //TODO: ustalić formę JSON'a - jaki ma być dokładny schemat
+            var newImgDataParentId = prompt("PARENT_ID - jak nie podasz to doda nowy originalParent");
+
+            var promptedData = [newImgPath,newImgData,newImgDataParentId];
+
+
+            //TODO: ustalić formę JSON'a - jaki ma być dokładny schemat (musi być Id rodzica)
 
             var sampleDataJson = {
                 "size":{"w":512,"h":384},
@@ -203,21 +225,22 @@ define(["./Camera"], function (Camera) {
 
             };
 
-            exported.executeAddingNewImage(newImgPath,newImgData); // musi dodac id ()
+            exported.executeAddingNewImage(promptedData); // musi dodac id ()
 
 
             //TODO: OTO mój zajebisty plan:
 
             // I. jpg/img data
 
-            //budujemy ściezke na  (f-kcja "buildPath")
+            //budujemy ściezke na nowy plik img (f-kcja "buildPath")
+
             // 1. no i dodać obrazek - musi się wysłać node/POST i dopisać
             //imgHTML.src=data.url+'/data/test_arch/imgs/imgs['+i+']/'+image.id+'.jpg'; - tak jest wyświetlany więc tak go trzeba zapisywać
 
             // I. JSON data
 
-            // 1. w międzyczasie ustalamy Id nowego img - żeby był unikatowy i nowy, proponuję
-            // przy okazji zrobić listę i f-kcje ktora bedzie wykonywala ta czynnosc
+            // 1. w międzyczasie ustalamy Id nowego img - żeby był unikatowy i nowy, proponuję  -//ok
+            // przy okazji zrobić listę i f-kcje ktora bedzie wykonywala ta czynnosc            //ok
 
             // 2. znajdujemy rodzica po ID itd
 
