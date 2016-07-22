@@ -52,9 +52,10 @@ http.createServer(function(request, response) {
     console.log("przed :"+fileext);  // rozszerzenie/typ pliku
 
     if (request.method == "POST") {
-
-
-    console.log(request.headers);
+        
+        //TODO: tutuaj popracować, żeby rozróżniało że idzie json (dodoanie punkta) lub img (idzie nowe zdjęcie) i w drugm przypadku niech
+        // przesyła i zapisuje plik img na serverze
+        console.log(request.headers);
 
     request.on('error', function (err) {
         console.error(err);
