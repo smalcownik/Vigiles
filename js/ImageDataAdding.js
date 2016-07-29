@@ -2,7 +2,7 @@
  * Created by marek on 16.06.16.
  */
 
-define(["./Camera","./AddImageToServer.js"], function (Camera,AddImageToServer) {
+define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
 
     var exported = {};
 
@@ -197,7 +197,7 @@ define(["./Camera","./AddImageToServer.js"], function (Camera,AddImageToServer) 
 
         exported.buildPath(nextId,promptedData[2]);//1 - Id rodzica
 
-        exported.AddImageToServer.makeRequest(promptedData[0])
+        //exported.AddImageToServer.makeRequest(promptedData[0])
         
     };
 
