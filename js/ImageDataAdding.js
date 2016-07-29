@@ -195,7 +195,7 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
 
     exported.executeAddingNewImage = function(promptedData) { // tutaj maja byc czynnosci po prompcie
 
-        exported.buildPath(nextId,promptedData[2]);//1 - Id rodzica
+        var path = exported.buildPath(nextId,promptedData[2]);//1 - Id rodzica
 
         //exported.AddImageToServer.makeRequest(promptedData[0])
         
@@ -205,7 +205,8 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
 
         var clickedElement = event.target;
 
-        if (clickedElement.className === "saveNewPatchButton"){
+        if (clickedElement.className !== "saveNewPatchButton") {
+        } else {
 
             console.log("odpalono newPatchDataReceiverbuilder czyli... prompt");
 
@@ -217,19 +218,29 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
             var newImgData = prompt("Podaj dane do zdjęcia - JSONData");
             var newImgDataParentId = prompt("PARENT_ID - jak nie podasz to doda nowy originalParent");
 
-            var promptedData = [newImgPath,newImgData,newImgDataParentId];
+            var promptedData = [newImgPath, newImgData, newImgDataParentId];
+
+            promptedData.every(function(element)
+                {if (element === "") {
+                element = null;
+                }
+                }
+            );
+
+            console.log(promptedData[0]);
+            console.log(typeof promptedData[0]); // string jeśli nic nie wpisano
 
 
             //TODO: ustalić formę JSON'a - jaki ma być dokładny schemat (musi być Id rodzica)
 
             var sampleDataJson = {
-                "size":{"w":512,"h":384},
+                "size": {"w": 512, "h": 384},
                 //"id":"2",
-                "pos":{"x":0,"y":-0.5,"w":0.8},
+                "pos": {"x": 0, "y": -0.5, "w": 0.8},
 
-                "points":[{"x":0,"y":0},{"x":0.5,"y":0.5},{"x":0,"y":0.5}],
+                "points": [{"x": 0, "y": 0}, {"x": 0.5, "y": 0.5}, {"x": 0, "y": 0.5}],
 
-                "children":[]
+                "children": []
 
             };
 
@@ -261,8 +272,8 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
             // 4.odpalamy Viewer.loadURL
 
         }
-        
-        
+
+
     };
 
 
