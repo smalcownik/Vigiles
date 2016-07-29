@@ -55,7 +55,7 @@ http.createServer(function(request, response) {
         
         //TODO: tutuaj popracować, żeby rozróżniało że idzie json (dodoanie punkta) lub img (idzie nowe zdjęcie) i w drugm przypadku niech
         // przesyła i zapisuje plik img na serverze
-        console.log("tu jestem: " +request.headers);
+        console.log(JSON.stringify(request.headers));
 
     request.on('error', function (err) {
         console.error(err);
