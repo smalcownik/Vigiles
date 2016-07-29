@@ -239,7 +239,7 @@ define(["./Camera"], function (Camera) {
 
             //budujemy ściezke na nowy plik img (f-kcja "buildPath") //ok
 
-            // 1. no i dodać obrazek - musi się wysłać node/POST i dopisać
+            // 1. no i dodać obrazek - musi się wysłać node/POST i dopisać // TU JESTEM !
 
             // I. JSON data
 
