@@ -2,7 +2,7 @@
  * Created by marek on 16.06.16.
  */
 
-define(["./Camera"], function (Camera) {
+define(["./Camera","./AddImageToServer.js"], function (Camera,AddImageToServer) {
 
     var exported = {};
 
@@ -158,6 +158,8 @@ define(["./Camera"], function (Camera) {
         console.log(exported.nodeList);
 
         nextId = exported.prepareNextId(); // jest kolejny wolny Id //TODO: pamietac że on musi być dodany do tabeli Id'sow (exp.nodeList) zeby mozna tworzyc kolejny Id
+        // czy może ta tabela tworzy się za kazdym razem od nowa wiec automatycznie kolejne będą dodawane
+
         console.log(nextId);
 
     };
@@ -166,6 +168,7 @@ define(["./Camera"], function (Camera) {
 
 
         if (parentId) {
+            
             var originalParentIndex = exported.getNodeById(parentId)[2];
             console.log(originalParentIndex);
             
@@ -173,7 +176,7 @@ define(["./Camera"], function (Camera) {
             
             console.log(path);
 
-            //TODO: teraz zrobic przesylanie pliku na serwer node (addImageToServer.js i node/post_and_get_server.js)
+            //TODO: teraz zrobic przesylanie pliku na serwer node (AddImageToServer.js i node/post_and_get_server.js)
             
             return path;
             
@@ -194,8 +197,8 @@ define(["./Camera"], function (Camera) {
 
         exported.buildPath(nextId,promptedData[2]);//1 - Id rodzica
 
-
-
+        exported.AddImageToServer.makeRequest(promptedData[0])
+        
     };
 
     exported.newPatchDataReceiverBuilder = function(){
