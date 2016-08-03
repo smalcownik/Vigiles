@@ -57,14 +57,6 @@ http.createServer(function(request, response) {
     }
 
     if (request.method == "POST") {
-        
-        //TODO: tutuaj popracować, żeby rozróżniało że idzie json (dodoanie punkta) lub img (idzie nowe zdjęcie) i w drugm przypadku niech:
-        // może po fileext ??
-
-        // przesyła i zapisuje plik img na serverze
-
-        //console.log(JSON.stringify(request.headers));
-
 
 
     request.on('error', function (err) {
@@ -74,10 +66,20 @@ http.createServer(function(request, response) {
         body.push(chunk);
 
     }).on('end', function () {
-        
 
 
-        body = Buffer.concat(body).toString(); // bez "to String wychodzi zakodowany Buffer, ale działa"
+        //TODO: tutuaj popracować, żeby rozróżniało że idzie json (dodanie punkta) lub img (idzie nowe zdjęcie) i w drugim przypadku niech:
+        // może po fileext ??
+
+        // przesyła i zapisuje plik img na serverze
+
+        if(fileext == ".jpg"){
+
+            console.log("fileext to jotpeg");
+        }
+
+        //TODO: moze tutaj rozróżnić na img lub JSON
+        body = Buffer.concat(body).toString(); // bez "toString() wychodzi zakodowany Buffer, ale działa"
 
         //console.log(body);
         console.log("method 2: " + request.method);

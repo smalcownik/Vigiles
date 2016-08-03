@@ -198,6 +198,7 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
         var path = exported.buildPath(nextId,promptedData[2]);//1 - Id rodzica
 
         //exported.AddImageToServer.makeRequest(promptedData[0])
+        //TODO: zrobić plik a'la AddImageTOServer, który będzie wysyłał Jsona z danymi na temat zdjęcia (info na temat path - patrz 3 wersy wyzej)
         
     };
 
@@ -211,8 +212,9 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
             console.log("odpalono newPatchDataReceiverbuilder czyli... prompt");
 
             var nextId;
+            
             exported.prepareInitialData(); // tutaj przygotuje m.in. nowy ID oraz opcje znajdowania object po id
-
+            
 
             var newImgPath = prompt("Podaj ścieżkę zdjęcia"); // sciezka do pliku na dysku
             var newImgData = prompt("Podaj dane do zdjęcia - JSONData");
@@ -220,15 +222,20 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
 
             var promptedData = [newImgPath, newImgData, newImgDataParentId];
 
-            promptedData.every(function(element)
-                {if (element === "") {
-                element = null;
-                }
+            //console.log(promptedData);
+
+            promptedData.forEach(function (element,index) {
+                    if (element === "") {
+
+                        //element = 0; - to nie działa , na zewnątrz funkcji wartość element w proptedData pozostała niezmieniona
+                        promptedData[index] = null;
+                        //console.log(element);
+                    }
                 }
             );
 
-            console.log(promptedData[0]);
-            console.log(typeof promptedData[0]); // string jeśli nic nie wpisano
+            console.log(promptedData);
+            // console.log(typeof promptedData[0]);console.log(typeof null);
 
 
             //TODO: ustalić formę JSON'a - jaki ma być dokładny schemat (musi być Id rodzica)
