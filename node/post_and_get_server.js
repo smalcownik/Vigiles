@@ -51,6 +51,11 @@ http.createServer(function(request, response) {
     console.log("przed :"+filepath); // sciezka do miejsca przechowywania pliku
     console.log("przed :"+fileext);  // rozszerzenie/typ pliku
 
+    if(fileext == ".jpg"){
+
+        console.log("fileext to jotpeg");
+    }
+
     if (request.method == "POST") {
         
         //TODO: tutuaj popracować, żeby rozróżniało że idzie json (dodoanie punkta) lub img (idzie nowe zdjęcie) i w drugm przypadku niech:
@@ -60,10 +65,7 @@ http.createServer(function(request, response) {
 
         //console.log(JSON.stringify(request.headers));
 
-        if(fileext == ".jpg"){
 
-        console.log("fileext to jotpeg");
-        }
 
     request.on('error', function (err) {
         console.error(err);
