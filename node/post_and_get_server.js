@@ -55,18 +55,7 @@ http.createServer(function (request, response) {
 
     if (request.method == "POST") {
 
-
-        if (fileext == ".jpg") {
-
-            console.log("fileext to jotpeg");
-        }
-
-        if (fileext == ".json") {
-
-            console.log("fileext to JSON");
-        }
-
-
+        
         request.on('error', function (err) {
             console.error(err);
 
@@ -85,6 +74,11 @@ http.createServer(function (request, response) {
 
                 console.log("fileext to jotpeg");
             }
+
+            if (fileext == ".json") {
+
+                console.log("fileext to JSON");
+            }// to na próbe dla dotychczasowego kodu działało
 
             //TODO: moze tutaj rozróżnić na img lub JSON
             body = Buffer.concat(body).toString(); // bez "toString()" wychodzi zakodowany Buffer, ale działa"
