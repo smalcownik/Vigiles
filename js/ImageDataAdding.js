@@ -2,7 +2,7 @@
  * Created by marek on 16.06.16.
  */
 
-define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
+define(["./Camera","./AddImageToServer",".AddDataForImageToServer.js"], function (Camera,AddImageToServer,AddDataForImageToServer) {
 
     var exported = {};
 
@@ -188,14 +188,14 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
             
             console.log(path);
 
-            //TODO: teraz zrobic przesylanie pliku na serwer node (AddImageToServer.js i node/post_and_get_server.js)
+            //TODO: teraz zrobic przesylanie pliku ORAZ ŚCIEŻKI !!! na serwer node (AddImageToServer.js i node/post_and_get_server.js)
             
             return path;
             
         }
         else {
             //trzeba sprawdzić, który originalParentIndex jest największy i zwiększyc tę wartość o 1
-            //TODO: jak nie ma to trzeba dodać nowy folder imgs[nowaWartoscIndex]
+            //TODO: jak nie ma to trzeba dodać nowy folder imgs[nowaWartoscIndex] i na serwerze też w tej sytuacji utworzyć nowy folder
 
             alert("skonczylem bez parenta wiec trzeba dodac nowy folder na imgsy")
 
@@ -212,8 +212,10 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
 
         var path = exported.buildPath(nextId,promptedData[2]);// promptedData[2] to nr Id rodzica
 
-        //exported.AddImageToServer.makeRequest(promptedData[0])
-        //TODO: zrobić plik a'la AddImageTOServer, który będzie wysyłał Jsona z danymi na temat zdjęcia (info na temat path - patrz 3 wersy wyzej)
+        //exported.AddDataForImageToServer.makeRequest(path) - przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE
+        //exported.AddImageToServer.makeRequest(promptedData[0]) - przesyłanie pliku, po zapisaniu pliku usuń dane z servera - bo to będą już śmieci
+
+        //TODO: przygotować jakie dane mają pójść z funkcją powyżej (f-kcja w komentarzu, górna z dwóch), żeby potem były one informacją na temat zdjęcia
         
     };
 
@@ -269,30 +271,6 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
             exported.executeAddingNewImage(promptedData);
 
 
-            //TODO: OTO mój zajebisty plan:
-
-            // I. jpg/img data
-
-            //budujemy ściezke na nowy plik img (f-kcja "buildPath") //ok
-
-            // 1. no i dodać obrazek - musi się wysłać node/POST i dopisać // TU JESTEM !
-
-            // I. JSON data
-
-            // 1. w międzyczasie ustalamy Id nowego img - żeby był unikatowy i nowy, proponuję  -//ok
-            // przy okazji zrobić listę i f-kcje ktora bedzie wykonywala ta czynnosc            //ok
-
-            // 2. znajdujemy rodzica po ID itd
-
-            // 3. dodajemy do jego children dodawany promptem objekt JSON ( podobna f-kcja budujaca objekt: JsonBuilder.cleanPatchBeforeAddingToObject)
-
-            // zarezerwowanych Id na bazie nodeList, i dodając img sprawdzić jaki jest największy i kolejna wolna liczba naturalna
-
-            // zeby wyslac jsona na serwer skorzystaj z f-kcji UpdateJsonOnServer.js tylko popatrz jak ten json ma wygladać
-            // (sprawdz czy maja podobna budowe)
-
-            // 4.odpalamy Viewer.loadURL
-
         }
 
 
@@ -304,4 +282,32 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
     return exported;
 
 });
+//TODO: OTO mój zajebisty plan, wciąż aktualny!:
+
+// I. jpg/img data
+
+//budujemy ściezke na nowy plik img (f-kcja "buildPath") //ok
+
+// 1. no i dodać obrazek - musi się wysłać node/POST i dopisać // TU JESTEM !
+
+//TODO: teraz pracować nad zgraniem pliku servera z f-kcją "execute adding new image" tak żeby serwer przyjął zdjęcie oraz ścieżkę do zdjęcia,
+// i zapisał zdjęcie gdzie trzeba, jeśli zajdzie potrzeba - budując nowy folder, pozostałe dane do zdjęcia maja zostać
+
+
+
+// I. JSON data
+
+// 1. w międzyczasie ustalamy Id nowego img - żeby był unikatowy i nowy, proponuję  -//ok
+// przy okazji zrobić listę i f-kcje ktora bedzie wykonywala ta czynnosc            //ok
+
+// 2. znajdujemy rodzica po ID itd
+
+// 3. dodajemy do jego children dodawany promptem objekt JSON ( podobna f-kcja budujaca objekt: JsonBuilder.cleanPatchBeforeAddingToObject)
+
+// zarezerwowanych Id na bazie nodeList, i dodając img sprawdzić jaki jest największy i kolejna wolna liczba naturalna
+
+// zeby wyslac jsona na serwer skorzystaj z f-kcji UpdateJsonOnServer.js tylko popatrz jak ten json ma wygladać
+// (sprawdz czy maja podobna budowe)
+
+// 4.odpalamy Viewer.loadURL
 

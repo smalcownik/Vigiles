@@ -55,7 +55,7 @@ http.createServer(function (request, response) {
 
     if (request.method == "POST") {
 
-        
+
         request.on('error', function (err) {
             console.error(err);
 
@@ -64,11 +64,6 @@ http.createServer(function (request, response) {
 
         }).on('end', function () {
 
-
-            //TODO: tutuaj popracować, żeby rozróżniało że idzie json (dodanie punkta) lub img (idzie nowe zdjęcie) i w drugim przypadku niech:
-            // może po fileext ??
-
-            // przesyła i zapisuje plik img na serverze
 
             if (fileext == ".jpg") {
 
