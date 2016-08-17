@@ -51,12 +51,13 @@ http.createServer(function(request, response) {
     console.log("przed :"+filepath); // sciezka do miejsca przechowywania pliku
     console.log("przed :"+fileext);  // rozszerzenie/typ pliku
 
-    if(fileext == ".jpg"){
-
-        console.log("fileext to jotpeg");
-    }
 
     if (request.method == "POST") {
+
+        if(fileext == ".jpg"){
+
+            console.log("fileext to jotpeg");
+        }
 
 
     request.on('error', function (err) {
@@ -79,7 +80,7 @@ http.createServer(function(request, response) {
         }
 
         //TODO: moze tutaj rozróżnić na img lub JSON
-        body = Buffer.concat(body).toString(); // bez "toString() wychodzi zakodowany Buffer, ale działa"
+        body = Buffer.concat(body).toString(); // bez "toString()" wychodzi zakodowany Buffer, ale działa"
 
         //console.log(body);
         console.log("method 2: " + request.method);

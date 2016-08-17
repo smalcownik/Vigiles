@@ -17,6 +17,8 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
         this.addNewPatchEventListener();
 
     };
+
+
     
     exported.saveNewPatchButton = function () {
 
@@ -56,10 +58,14 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
 
     }; // dodaje przycisk i nadaje mu klasę, że jak wciśniesz to wywołujesz exported.addNewPatchEventListener
 
+
+
     exported.addNewPatchEventListener = function () { // co po wciśnięciu przycisku (wyskakuje cały prompt)
 
         document.body.addEventListener('click', this.newPatchDataReceiverBuilder);
     };
+
+
 
     exported.dig = function(image,i, visitFunction, parent) {
 
@@ -71,7 +77,6 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
                 exported.dig(childrenImage,i, visitFunction, image);
             });
     };
-
 
     exported.traverse = function(parentObject, visitFunction) { //to ma być cały objekt
 
@@ -108,6 +113,7 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
 
     //exported.nodeList = [];
 
+
     exported.getNodeById = function (idNumber){ // ma znalexc noda w nodeList na podstawie ID
 
         var stringNumber = idNumber.toString();
@@ -131,6 +137,8 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
         return node;
     };
 
+
+
     exported.prepareNextId = function () {
 
         var occupiedIds = exported.nodeList.map(function (element) {
@@ -143,6 +151,7 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
         return Number(occupiedIds[occupiedIds.length - 1]) + 1;
 
     };
+
 
 
     exported.prepareInitialData = function(){ // tutaj ma byc opcja znalezienia objektu po Id i pobranie aktualnego JSONA
@@ -163,6 +172,9 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
         console.log(nextId);
 
     };
+
+
+
 
     exported.buildPath = function(newId,parentId){ // parent id jest trzecim elementem wyniku f-kcji exported.getNodeById
 
@@ -193,9 +205,12 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
 
     };
 
+
+
+
     exported.executeAddingNewImage = function(promptedData) { // tutaj maja byc czynnosci po prompcie
 
-        var path = exported.buildPath(nextId,promptedData[2]);//1 - Id rodzica
+        var path = exported.buildPath(nextId,promptedData[2]);// promptedData[2] to nr Id rodzica
 
         //exported.AddImageToServer.makeRequest(promptedData[0])
         //TODO: zrobić plik a'la AddImageTOServer, który będzie wysyłał Jsona z danymi na temat zdjęcia (info na temat path - patrz 3 wersy wyzej)
@@ -209,14 +224,14 @@ define(["./Camera","./AddImageToServer"], function (Camera,AddImageToServer) {
         if (clickedElement.className !== "saveNewPatchButton") {
         } else {
 
-            console.log("odpalono newPatchDataReceiverbuilder czyli... prompt");
+            console.log("odpalono newPatchDataReceiverbuilder czyli..prompt");
 
             var nextId;
             
             exported.prepareInitialData(); // tutaj przygotuje m.in. nowy ID oraz opcje znajdowania object po id
             
 
-            var newImgPath = prompt("Podaj ścieżkę zdjęcia"); // sciezka do pliku na dysku
+            var newImgPath = prompt("Podaj ścieżkę zdjęcia"); // sciezka do pliku na dysku - uri zdjęcia ??
             var newImgData = prompt("Podaj dane do zdjęcia - JSONData");
             var newImgDataParentId = prompt("PARENT_ID - jak nie podasz to doda nowy originalParent");
 
