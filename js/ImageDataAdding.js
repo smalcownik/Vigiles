@@ -2,7 +2,7 @@
  * Created by marek on 16.06.16.
  */
 
-define(["./Camera","./AddImageToServer",".AddDataForImageToServer.js"], function (Camera,AddImageToServer,AddDataForImageToServer) {
+define(["./Camera","./AddImageToServer","./AddDataForImageToServer.js"], function (Camera,AddImageToServer,AddDataForImageToServer) {
 
     var exported = {};
 
