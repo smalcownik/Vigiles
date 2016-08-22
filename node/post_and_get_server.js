@@ -51,7 +51,7 @@ http.createServer(function (request, response) {
 
     console.log("path przed :" + filepath); // sciezka do miejsca przechowywania pliku
     console.log("ext przed :" + fileext);  // rozszerzenie/typ pliku
-    console.log("req url :" + request.url);  // rozszerzenie/typ pliku
+    console.log("req body dupa :" + request.body);  // rozszerzenie/typ pliku
 
 
     if (request.method == "POST") {
