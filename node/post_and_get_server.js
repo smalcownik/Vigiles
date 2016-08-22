@@ -49,8 +49,9 @@ http.createServer(function (request, response) {
     var filepath = '.' + (request.url == '/' ? path_file : request.url);
     var fileext = path.extname(filepath);
 
-    console.log("przed :" + filepath); // sciezka do miejsca przechowywania pliku
-    console.log("przed :" + fileext);  // rozszerzenie/typ pliku
+    console.log("path przed :" + filepath); // sciezka do miejsca przechowywania pliku
+    console.log("ext przed :" + fileext);  // rozszerzenie/typ pliku
+    console.log("req url :" + request.url);  // rozszerzenie/typ pliku
 
 
     if (request.method == "POST") {

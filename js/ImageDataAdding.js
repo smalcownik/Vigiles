@@ -187,8 +187,6 @@ define(["./Camera","./AddImageToServer","./AddDataForImageToServer"], function (
             var path = '/data/test_arch/imgs/imgs['+originalParentIndex+']/'+newId+'.jpg';
             
             console.log(path);
-
-            //TODO: teraz zrobic przesylanie pliku ORAZ ŚCIEŻKI !!! na serwer node (AddImageToServer.js i node/post_and_get_server.js)
             
             return path;
             
