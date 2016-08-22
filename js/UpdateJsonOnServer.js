@@ -1,12 +1,16 @@
+// f-kcja wywołana w JsonBuilder.updateJson
+
 /**
  * Created by marek on 11.05.16.
+ 
  */
+
 define([], function () {
 
     var exported = {};
 
 
-    exported.makeRequest = function (json) { // f-kcja wywołana w JsonBuilder.updateJson
+    exported.makeRequest = function (json) { 
 
         console.log(json);
 

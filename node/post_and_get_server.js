@@ -105,7 +105,7 @@ http.createServer(function (request, response) {
     }
 
 
-    else {
+    else { // if (request.method ==! "POST")
 
         //var stat = fs.readFileSync(path_file);
         var stat = fs.readFileSync(filepath);
