@@ -2,7 +2,7 @@
  * Created by marek on 16.06.16.
  */
 
-define(["./Camera","./AddImageToServer","./AddDataForImageToServer"], function (Camera,AddImageToServer,AddDataForImageToServer) {
+define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST"], function (Camera, AddImageToServer, AddDataForImageToServer) {
 
     var exported = {};
 
@@ -210,8 +210,8 @@ define(["./Camera","./AddImageToServer","./AddDataForImageToServer"], function (
 
         var path = exported.buildPath(nextId,promptedData[2]);// promptedData[2] to nr Id rodzica
 
-        //exported.AddDataForImageToServer.makeRequest(path) - przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE
-        //exported.AddImageToServer.makeRequest(promptedData[0]) - przesyłanie pliku, po zapisaniu pliku usuń dane z servera - bo to będą już śmieci
+        //exported.AddDataForImageToServerREQUEST.makeRequest(path) - przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE
+        //exported.AddImageToServerREQUEST.makeRequest(promptedData[0]) - przesyłanie pliku, po zapisaniu pliku usuń dane z servera - bo to będą już śmieci
 
         //TODO: przygotować jakie dane mają pójść z funkcją powyżej (f-kcja w komentarzu, górna z dwóch), żeby potem były one informacją na temat zdjęcia
         

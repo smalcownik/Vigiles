@@ -1,5 +1,5 @@
 define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera","./CameraEventListeners","./PointEventListeners",'./PointEventFunctions','./JsonBuilder','./ImageDataAdding'], function (
-        MapDataProvider,PatchBuilder,PointsBuilder,Camera,CameraEventListeners,PointEventListeners,PointEventFunctions,JsonBuilder,ImageDataAdding
+        MapDataProviderREQUEST,PatchBuilder,PointsBuilder,Camera,CameraEventListeners,PointEventListeners,PointEventFunctions,JsonBuilder,ImageDataAdding
     ) { //wyswietla strone i poczatkowe dane
 
         var exported = {
@@ -99,7 +99,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
                 //debugger;
             } // tu mają byc testy poprawności url ale jeszcze nie ma nic
 
-            MapDataProvider.loadData(url,
+            MapDataProviderREQUEST.loadData(url,
                 function(data){ // cb w MDP.loadData
 
                     exported.currentDataStringified = JSON.stringify(data); // zeby miec zachowana oryginalna tresc aktualnego JSONA
