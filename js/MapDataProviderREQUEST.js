@@ -1,3 +1,5 @@
+/*funckja wywołana w Viewer.js w jako MapDataProviderREQUEST.loadData*/
+
 define(['./MapData'], function (MapData) {
 
             var exported = {};

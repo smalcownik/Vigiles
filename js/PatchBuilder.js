@@ -1,4 +1,4 @@
-define(["./Patch"], function (Patch) {
+define(["./Patch"], function (Patch) { 
 
             var exported = {
 

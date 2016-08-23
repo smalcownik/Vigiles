@@ -71,8 +71,7 @@ http.createServer(function (request, response) {
 
                 console.log("fileext to JSON");
             }// to na próbe dla dotychczasowego kodu działało
-
-            //TODO: moze tutaj rozróżnić na img lub JSON
+            
             body = Buffer.concat(body).toString(); // bez "toString()" wychodzi zakodowany Buffer, ale działa"
 
             //console.log(body);
@@ -102,7 +101,7 @@ http.createServer(function (request, response) {
     }
 
 
-    else { // if (request.method ==! "POST")
+    else { // if (request.method ==! "POST") // to dotyczy przesyłania plików zdjęć z serwera
 
         //var stat = fs.readFileSync(path_file);
         var stat = fs.readFileSync(filepath);

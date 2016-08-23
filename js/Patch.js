@@ -1,4 +1,7 @@
-define([], function () { // tworzy objekty zdjec (łatek),
+/*wywołany z PatchBuilder tworzy objekty zdjec (łatek)
+ W TYM PLIKU ZNAJDUJE SIĘ JEDYNE ODNIESIENIE DO PLIKÓW JPG */
+define([], function () {
+
 
         var exported = function Patch(image,parent,data,i){
 
