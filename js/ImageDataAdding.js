@@ -18,7 +18,6 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
     };
 
-
     
     exported.saveNewPatchButton = function () {
 
@@ -59,12 +58,10 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
     }; // dodaje przycisk i nadaje mu klasę, że jak wciśniesz to wywołujesz exported.addNewPatchEventListener
 
 
-
     exported.addNewPatchEventListener = function () { // co po wciśnięciu przycisku (wyskakuje cały prompt)
 
         document.body.addEventListener('click', this.newPatchDataReceiverBuilder);
     };
-
 
 
     exported.dig = function(image,i, visitFunction, parent) {
@@ -85,7 +82,6 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
             exported.dig(parentObject.images[i],i, visitFunction, null);
         }
     };
-
 
 
     exported.fillNodeList = function(wholeObject){ // to bedzie visitFunction w exported.dig (wywolanej z traverse)
@@ -116,19 +112,18 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
     exported.getNodeById = function (idNumber){ // ma znalexc noda w nodeList na podstawie ID
 
-        var stringNumber = idNumber.toString();
+        var idNumber = idNumber.toString(); // przekształca idNumber do formy stringa
 
-        console.log(stringNumber);
+        console.log(idNumber);
         var node;
 
-        function findById(array){
+        function findById(nodeListElement){ //nodeListElement to array: [image.id, image, originalParent, parent.id ?(jesli istnieje)]
 
-            if( array[0] === stringNumber){
-                node = array;
+            if( nodeListElement[0] === idNumber){
+                node = nodeListElement;
             }
 
         };
-       // debugger;
 
         exported.nodeList.forEach(findById);
 
@@ -136,7 +131,6 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
         return node;
     };
-
 
 
     exported.prepareNextId = function () {
@@ -153,16 +147,13 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
     };
 
 
-
     exported.prepareInitialData = function(){ // tutaj ma byc opcja znalezienia objektu po Id i pobranie aktualnego JSONA
 
-        //console.log(exported.viewer.currentDataStringified); // currentData to obecny objekt MapData (JSOn - string)
+        exported.originalJSONparsed = JSON.parse(exported.viewer.currentDataStringified) ; // żeby zbudować całą listę NODE'ow używa pliku z Viewera:objekt MapData (JSOn - string)
 
-        exported.originalJSONparsed = JSON.parse(exported.viewer.currentDataStringified) ;
+       //to dziala - objekt!
 
-       //console.log(exported.originalJSONparsed); // to dziala - objekt!
-
-        exported.fillNodeList(exported.originalJSONparsed);
+        exported.fillNodeList(exported.originalJSONparsed); // z obec
 
         console.log(exported.nodeList);
 
@@ -172,7 +163,6 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         console.log(nextId);
 
     };
-
 
 
 
@@ -202,7 +192,6 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
 
     };
-
 
 
 
@@ -263,20 +252,13 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
                 "points": [{"x": 0, "y": 0}, {"x": 0.5, "y": 0.5}, {"x": 0, "y": 0.5}],
 
                 "children": []
-
             };
 
             exported.executeAddingNewImage(promptedData);
 
-
         }
-
-
     };
 
-
-    
-    
     return exported;
 
 });
