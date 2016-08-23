@@ -12,6 +12,7 @@ var path = require('path');
 var path_file = "/data/test_arch/data1.json";
 //var path_image_folder = "/data/test_arch/data1.json";
 var port = 80;
+var data_to_add_new_patch;
 
 function contentType(ext) {
     var ct;
@@ -51,7 +52,6 @@ http.createServer(function (request, response) {
 
     console.log("path przed :" + filepath); // sciezka do miejsca przechowywania pliku
     console.log("ext przed :" + fileext);  // rozszerzenie/typ pliku
-    console.log("req body dupa :" + request.body);  // rozszerzenie/typ pliku
 
 
     if (request.method == "POST") {

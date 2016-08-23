@@ -24,7 +24,6 @@ define([], function () {
 
         /*http_request.onload = function(){ console.log("as as asas a");};*/ // to też może byc ale bez tego działa
 
-        http_request.body.dupa = "request_body_to_dupa";
 
         http_request.send(json);
 
