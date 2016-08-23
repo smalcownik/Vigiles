@@ -1,7 +1,7 @@
 /**
  * Created by marek on 01.02.16.
  */
-define(["./Camera","./UpdateJsonOnServer"], function (Camera, UpdateJsonOnServer) {
+define(["./Camera","./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJsonOnServerREQUEST) {
 
     var exported = {};
 
@@ -203,7 +203,7 @@ define(["./Camera","./UpdateJsonOnServer"], function (Camera, UpdateJsonOnServer
 
              console.log(exported.updatedJSON);
 
-            UpdateJsonOnServer.makeRequest(exported.updatedJSON);
+            UpdateJsonOnServerREQUEST.makeRequest(exported.updatedJSON);
 
 
         };

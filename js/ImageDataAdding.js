@@ -304,7 +304,7 @@ define(["./Camera","./AddImageToServer","./AddDataForImageToServer"], function (
 
 // zarezerwowanych Id na bazie nodeList, i dodając img sprawdzić jaki jest największy i kolejna wolna liczba naturalna
 
-// zeby wyslac jsona na serwer skorzystaj z f-kcji UpdateJsonOnServer.js tylko popatrz jak ten json ma wygladać
+// zeby wyslac jsona na serwer skorzystaj z f-kcji UpdateJsonOnServerREQUEST.js tylko popatrz jak ten json ma wygladać
 // (sprawdz czy maja podobna budowe)
 
 // 4.odpalamy Viewer.loadURL

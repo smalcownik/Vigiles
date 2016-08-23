@@ -1,4 +1,4 @@
-define(["./MapDataProvider","./PatchBuilder","./PointsBuilder","./Camera","./CameraEventListeners","./PointEventListeners",'./PointEventFunctions','./JsonBuilder','./ImageDataAdding'], function (
+define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera","./CameraEventListeners","./PointEventListeners",'./PointEventFunctions','./JsonBuilder','./ImageDataAdding'], function (
         MapDataProvider,PatchBuilder,PointsBuilder,Camera,CameraEventListeners,PointEventListeners,PointEventFunctions,JsonBuilder,ImageDataAdding
     ) { //wyswietla strone i poczatkowe dane
 
