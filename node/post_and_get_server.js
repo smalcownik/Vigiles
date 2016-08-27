@@ -49,6 +49,16 @@ http.createServer(function (request, response) {
     console.log("path przed :" + filepath + "a request.url: " + request.url); // sciezka do miejsca przechowywania pliku
     console.log("ext przed :" + fileext);  // rozszerzenie/typ pliku
 
+    //TODO: zeby:
+    //1. rozróżniało jsona czy to url zdjęcia czy url data1.json
+    //2. jesli data1.json - to już dalsza cześć kodu jest gotowa tylko ją wyodrębnić
+    //3. jakoś wydobyć z niego ścieżkę do zapisania pliku jpg i
+    // a. jesli jest parent - zapisać plik
+    //    - zapisać url obrazka, żeby sprawdzić z następnym request/postem - aby móc dopasować przesłany obrazek do zapisanego urla
+    //    - wtedy  wysłać request/postem sam obrazek
+    // b. jesli nie ma parenta - utworzyć nowy folder (na podstawie danych z jsona)
+    //    -  wtedy  wysłać request/postem sam obrazek
+
 
     if (request.method == "POST") {
 
