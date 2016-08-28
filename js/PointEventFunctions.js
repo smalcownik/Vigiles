@@ -191,7 +191,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
             inDiv.appendChild(divPar1);
             divPar1.className = "pointContentTextValue";
 
-
+debugger;
 
             if (!ObjectElement.textInit) { // jesli nie ma początkowej wartości pole "textInit"
                 // to pisze żeby je wprowadzić, w innym razie wyswietla zawartość pola
