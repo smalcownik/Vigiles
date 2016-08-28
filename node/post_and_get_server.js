@@ -46,10 +46,10 @@ http.createServer(function (request, response) {
     var filepath = '.' + (request.url == '/' ? path_file : request.url);
     var fileext = path.extname(filepath);
 
-    console.log("path przed :" + filepath + "a request.url: " + request.url); // sciezka do miejsca przechowywania pliku
+    console.log("path przed :" + filepath+ '\n' +  "wartosc request.url: " + request.url); // sciezka do miejsca przechowywania pliku
     console.log("ext przed :" + fileext);  // rozszerzenie/typ pliku
 
-    //TODO: zeby:
+    //TODO: zeby: teraz to robić 27.08.2016
     //1. rozróżniało jsona czy to url zdjęcia czy url data1.json
     //2. jesli data1.json - to już dalsza cześć kodu jest gotowa tylko ją wyodrębnić
     //3. jakoś wydobyć z niego ścieżkę do zapisania pliku jpg i
