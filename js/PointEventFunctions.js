@@ -161,7 +161,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
             //console.log(ObjectElement);
 
-            //ObjectElement.isNew = true; //  tu jakoś zasrywało patch'e
+           // ObjectElement.isNew = true; // TODO: tu jakoś zasrywało patch'e
 
             var viewer = exported.viewer;
 
