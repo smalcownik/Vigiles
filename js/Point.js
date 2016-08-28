@@ -15,6 +15,7 @@ define([], function () {
             }
 
             this.image = image;
+            
 
             this.absolutePos = {
                 x: image.absolutePos.x + 0.5 * image.absolutePos.w * point.x,

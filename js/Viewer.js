@@ -77,10 +77,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
             PointEventListeners.showPointContent();
             JsonBuilder.buildJSON(); // ponowne budowanie jsona z dodawanymi punktami i wysyłanie 
             ImageDataAdding.addNewPatch(); //dodawanie zdjęć z zewnątrz
-
-
-
-
+            
 
         };
 //

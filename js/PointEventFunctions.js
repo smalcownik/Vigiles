@@ -37,7 +37,6 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
                             clickedImagePatch = element;
 
-                            //console.log(clickedImagePatch);
                         }
 
                     }
@@ -72,7 +71,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
                 parentsDigger(clickedImagePatch, clickedAndItsParents);
 
-                //console.log(clickedAndItsParents);
+                console.log(clickedAndItsParents);
 
 
                 function selectPointedImage(array, position) { // wywołana przez pointAllocate
@@ -142,7 +141,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                 var pointXY = countPointCoordinates(selectedImage, x, y);              // WERSJA Z POINTEM NA patchu, który jest odsłonięty
                 //var pointXY =countPointCoordinates(clickedImagePatch.image,x,y);  // WERSJA Z POINTEM NA POWIERZCHNI wszystkich patchów
 
-                console.log(selectedImage);
+                console.log(selectedImage);// to jest obraz, w którym są widoczne
 
 
                 viewer.positionable.push(new Point(selectedImage, pointXY));             // WERSJA Z POINTEM NA patchu, który jest odsłonięty
@@ -369,9 +368,24 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                                 a.parentNode.removeChild(a);
 
                                 console.log(a);
+                                console.log(element);
 
+
+
+//debugger;
                                 if (index > -1) {
-                                    viewer.positionable.splice(index, 1); // usunięto pointa z posositionable ale został jeszcze div.point w htmlu, może jego najpierw usunąć
+
+
+                                    for(var j=0;j<element.image.points.length;j++) { // ta cześć usuwa pointa z objektu img
+                                        // (bo potem przy zapisywaniu w JsonBuider na podstawie pointow w img jest tworzony positionable)
+
+                                        if(element.point == element.image.points[j]){
+
+                                        element.image.points.splice(j, 1);
+                                        }
+                                    }
+
+                                    viewer.positionable.splice(index, 1); // tutaj usuwa samego positionablesa z punktem
                                 }
 
                             }
@@ -379,6 +393,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                     );
                     //viewer.updateAllPositionables();
                     console.log(viewer.positionable);
+
                 }
 
             }
