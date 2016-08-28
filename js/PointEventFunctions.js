@@ -324,7 +324,9 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                                 clickedPoint = element;
 
                                 clickedPoint.point.textInit = editResult;
-                                clickedPoint.point.isNew = true;
+                                //clickedPoint.point.isNew = true;
+
+                                //TODO: tutaj może być słaby punkt, gdzie po edycji punktu, dodaje się on na nowo
 
 
 
@@ -351,14 +353,14 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
                 if (answer == true) {
 
-                    console.log("tutaj jestem1");
+                    //console.log("tutaj jestem1");
 
                     viewer.positionable.forEach(
                         function (element, index) {
 
                             if (element.DOM === clickedElement.parentNode.parentNode) {
 
-                                console.log("tutaj jestem2");
+                                //console.log("tutaj jestem2");
 
                                 var a = clickedElement.parentNode.parentNode;
 
