@@ -123,7 +123,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                 //console.log(selectedImage);
 
                 function countPointCoordinates(image, clickX, clickY) {
-                    var point = {x: null, y: null, textInit:null, isNew:true};
+                    var point = {x: null, y: null, textInit:null, isNew:true}; //TODO : tutaj jest true!
 
 
 
@@ -317,7 +317,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                 if(editResult != "" && editResult !== null){ // przypadke, gdy nic nie wpiszemy w prompta, albo damy "Cancel"
 
                     viewer.positionable.forEach(
-                        function (element, i) {
+                        function (element) {
 
                             if (element.DOM === clickedElement.parentNode.parentNode) {
 
@@ -370,7 +370,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
                                 console.log(a);
 
-                                if (i > -1) {
+                                if (index > -1) {
                                     viewer.positionable.splice(index, 1); // usunięto pointa z posositionable ale został jeszcze div.point w htmlu, może jego najpierw usunąć
                                 }
 
