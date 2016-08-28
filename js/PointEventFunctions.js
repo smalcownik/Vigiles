@@ -310,7 +310,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                 //console.log("kliknąłem w listęPodPunktem");
                 //alert("EDIT! EDIT!");
 
-                var editResult = prompt("Please write equipment note here","");
+                var editResult = prompt("Please write point text here","");
 
                 var clickedPoint;
 
@@ -350,12 +350,15 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                 var answer = confirm("Are you sure you wan't to delete point and it content?");
 
                 if (answer == true) {
+
+                    console.log("tutaj jestem1");
+
                     viewer.positionable.forEach(
                         function (element, i) {
 
                             if (element.DOM === clickedElement.parentNode.parentNode) {
 
-                                //console.log(i);
+                                console.log("tutaj jestem2");
 
                                 var a = clickedElement.parentNode.parentNode;
 
