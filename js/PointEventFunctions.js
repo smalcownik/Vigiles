@@ -71,7 +71,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
                 parentsDigger(clickedImagePatch, clickedAndItsParents);
 
-                console.log(clickedAndItsParents);
+                //console.log(clickedAndItsParents);
 
 
                 function selectPointedImage(array, position) { // wywołana przez pointAllocate
@@ -141,7 +141,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                 var pointXY = countPointCoordinates(selectedImage, x, y);              // WERSJA Z POINTEM NA patchu, który jest odsłonięty
                 //var pointXY =countPointCoordinates(clickedImagePatch.image,x,y);  // WERSJA Z POINTEM NA POWIERZCHNI wszystkich patchów
 
-                console.log(selectedImage);// to jest obraz, w którym są widoczne
+                //console.log(selectedImage);// to jest obraz, w którym są widoczne punkty
 
 
                 viewer.positionable.push(new Point(selectedImage, pointXY));             // WERSJA Z POINTEM NA patchu, który jest odsłonięty
