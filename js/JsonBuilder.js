@@ -82,7 +82,7 @@ define(["./Camera","./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJsonO
 
                     element.point.isNew = false;
 
-                    
+
 
                     element.image.points.push(element.point);
 
