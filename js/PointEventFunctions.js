@@ -191,16 +191,16 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
             inDiv.appendChild(divPar1);
             divPar1.className = "pointContentTextValue";
 
-debugger;
+//debugger;
 
-            if (!ObjectElement.textInit) { // jesli nie ma początkowej wartości pole "textInit"
+            if (!ObjectElement.point.textInit) { // jesli nie ma początkowej wartości pole "textInit"
                 // to pisze żeby je wprowadzić, w innym razie wyswietla zawartość pola
                 var initialTextValue = "To insert point value, click &quot;EditPoint&quot; just below";
 
                 divPar1.innerHTML = initialTextValue;
             }
             else {
-                divPar1.innerHTML = ObjectElement.textInit
+                divPar1.innerHTML = ObjectElement.point.textInit
             }
 
             divPar1.style.wordWrap = 'break-word';
