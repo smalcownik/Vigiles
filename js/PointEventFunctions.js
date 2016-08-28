@@ -354,7 +354,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                     console.log("tutaj jestem1");
 
                     viewer.positionable.forEach(
-                        function (element, i) {
+                        function (element, index) {
 
                             if (element.DOM === clickedElement.parentNode.parentNode) {
 
@@ -362,10 +362,14 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
                                 var a = clickedElement.parentNode.parentNode;
 
+                                console.log(a);
+
                                 a.parentNode.removeChild(a);
 
+                                console.log(a);
+
                                 if (i > -1) {
-                                    viewer.positionable.splice(i, 1); // usunięto pointa z posositionable ale został jeszcze div.point w htmlu, może jego najpierw usunąć
+                                    viewer.positionable.splice(index, 1); // usunięto pointa z posositionable ale został jeszcze div.point w htmlu, może jego najpierw usunąć
                                 }
 
                             }

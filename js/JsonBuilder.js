@@ -80,7 +80,12 @@ define(["./Camera","./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJsonO
                 if (element.point.isNew === true) { // isNew występuje w ./PointEventFunctions i w ./Point
                     //console.log(element); opcjonalnie wyświetla nowe elementy
 
+                    element.point.isNew = false;
+
+                    
+
                     element.image.points.push(element.point);
+
 
                 }
             }
