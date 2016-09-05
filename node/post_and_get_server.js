@@ -51,7 +51,13 @@ http.createServer(function (request, response) {
 
     //TODO: zeby: teraz to robić 27.08.2016
     //1. rozróżniało jsona czy to url zdjęcia czy url data1.json
+
     //2. jesli data1.json - to już dalsza cześć kodu jest gotowa tylko ją wyodrębnić
+
+    
+    // Jesli to url zdjęcia:
+
+    //3.0. zapisać dane z pliku json to jakiegoś pliku z danymi, żeby w tamtym pliku miał dane do zdjęcia i mógł użyc ich przy zapisaywaniu zdjęcia
     //3. jakoś wydobyć z niego ścieżkę do zapisania pliku jpg i
     // a. jesli jest parent - zapisać plik
     //    - zapisać url obrazka, żeby sprawdzić z następnym request/postem - aby móc dopasować przesłany obrazek do zapisanego urla
