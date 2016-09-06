@@ -201,7 +201,9 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
         var path = exported.buildPath(nextId,promptedData[2]);// promptedData[2] to nr Id rodzica
 
-        AddDataForImageToServerREQUEST.makeRequest(path); // przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE
+        var pathJSON = JSON.stringify(path);
+
+        AddDataForImageToServerREQUEST.makeRequest(pathJSON); // przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE
         //AddImageToServerREQUEST.makeRequest(promptedData[0]) // przesyłanie pliku, po zapisaniu pliku usuń dane z servera - bo to będą już śmieci
 
         //TODO: przygotować jakie dane mają pójść z funkcją powyżej (f-kcja w komentarzu, górna z dwóch), żeby potem były one informacją na temat zdjęcia
