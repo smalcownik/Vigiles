@@ -44,6 +44,7 @@ http.createServer(function (request, response) {
 
     console.log("method 1: " + request.method);
     console.log("server running");
+    console.log("request.url: "+ request.url);
 
     var filepath = '.' + (request.url == '/' ? json_data_file_path : request.url);
     var fileext = path.extname(filepath);
