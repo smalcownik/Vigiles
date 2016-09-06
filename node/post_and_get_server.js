@@ -97,13 +97,16 @@ http.createServer(function (request, response) {
                 console.log("fileext to JSON");
 
 
-
                 if (filepath == "."+json_data_file_path){ // request to post - json - data1.json
 
                     console.log("fileext to data1.json");
 
                 body = Buffer.concat(body).toString();
                 console.log("method 2: " + request.method);
+                console.log("method 2");
+
+                    //TODO: teraz 06-09-2016 zrobić żeby najpierw wczytało ścieżkę i na podstawie jej treści niech decydyje czy to data1.json
+                    // czy może jpg_data
 
                 fs.writeFile('.' + json_data_file_path, body, function (err) {
                     if (err) {
