@@ -96,6 +96,8 @@ http.createServer(function (request, response) {
 
                 console.log("fileext to JSON");
 
+
+
                 if (filepath == "."+json_data_file_path){ // request to post - json - data1.json
 
                     console.log("fileext to data1.json");
