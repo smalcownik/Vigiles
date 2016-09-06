@@ -2,10 +2,12 @@
 // pamietac zeby odpalac node na amazonie z poziomu folderu Vigiles a nie z poziomu Vigiles/node
 // działa w pełni: GET, POST, otwiera img
 
+// przyklad w ajax_proby/node_server oraz server_with_several_file_types
+
 var http = require('http');
 var fs = require('fs');
 var path = require('path');
-var path_file = "/data/test_arch/data1.json";
+var json_data_file_path = "/data/test_arch/data1.json";
 //var path_image_folder = "/data/test_arch/data1.json";
 var port = 80;
 var data_to_add_new_patch;
@@ -43,19 +45,19 @@ http.createServer(function (request, response) {
     console.log("method 1: " + request.method);
     console.log("server running");
 
-    var filepath = '.' + (request.url == '/' ? path_file : request.url);
+    var filepath = '.' + (request.url == '/' ? json_data_file_path : request.url);
     var fileext = path.extname(filepath);
 
     console.log("path przed :" + filepath+ '\n' +  "wartosc request.url: " + request.url); // sciezka do miejsca przechowywania pliku
     console.log("ext przed :" + fileext);  // rozszerzenie/typ pliku
 
     //TODO: zeby: teraz to robić 27.08.2016
-    //1. rozróżniało jsona czy to url zdjęcia czy url data1.json
+    //1. rozróżniało jsona czy to url danych zdjęcia czy url data1.json czy jpg
 
     //2. jesli data1.json - to już dalsza cześć kodu jest gotowa tylko ją wyodrębnić
 
     
-    // Jesli to url zdjęcia:
+    // Jesli to url danych do zdjęcia zdjęcia:
 
     //3.0. zapisać dane z pliku json to jakiegoś pliku z danymi, żeby w tamtym pliku miał dane do zdjęcia i mógł użyc ich przy zapisaywaniu zdjęcia
     //3. jakoś wydobyć z niego ścieżkę do zapisania pliku jpg i
@@ -78,40 +80,64 @@ http.createServer(function (request, response) {
         }).on('end', function () {
 
 
-            if (fileext == ".jpg") {
+            if (fileext == ".jpg") { // request to post - jpg
 
-                console.log("fileext to jotpeg");
+                console.log("fileext to jotpeg: "+ request.url);
+
+                // szukaj danych do jpg'a
+
+
+
+
             }
 
-            if (fileext == ".json") {
+            if (fileext == ".json") { // request to post - json
 
                 console.log("fileext to JSON");
-            }// to na próbe dla dotychczasowego kodu działało
-            
-            body = Buffer.concat(body).toString(); // bez "toString()" wychodzi zakodowany Buffer, ale działa"
 
-            //console.log(body);
-            console.log("method 2: " + request.method);
+                if (filepath == "."+json_data_file_path){ // request to post - json - data1.json
 
-            fs.writeFile('.' + path_file, body, function (err) {
-                if (err) {
-                    return console.log(err);
+                    console.log("fileext to data1.json");
+
+                body = Buffer.concat(body).toString();
+                console.log("method 2: " + request.method);
+
+                fs.writeFile('.' + json_data_file_path, body, function (err) {
+                    if (err) {
+                        return console.log(err);
+                    }
+                    console.log("The file was saved!");
+                });
+
+                response.on('error', function (err) {
+                    console.error(err);
+                });
+
+                response.statusCode = 200;
+                // response.setHeader('Content-Type', 'application/json'); // bez tego działa - o dziwo
+                response.setHeader('Access-Control-Allow-Origin', '*'); // to musi być bo wyrzuca błąd
+                response.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // to też musi być bo wyrzuca błąd
+                //response.write(JSON.stringify(responseBody));//żeby response.write działało musi mieć argument - jakiś string bo wyrzuci błąd
+                //response.end(body);
+                response.end(); // response.end musi być bo inaczej nie wykona się request.on("end".....
+
                 }
 
-                console.log("The file was saved!");
-            });
 
-            response.on('error', function (err) {
-                console.error(err);
-            });
+                else{// request to post - json - dane do jpg'a
 
-            response.statusCode = 200;
-            // response.setHeader('Content-Type', 'application/json'); // bez tego działa - o dziwo
-            response.setHeader('Access-Control-Allow-Origin', '*'); // to musi być bo wyrzuca błąd
-            response.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // to też musi być bo wyrzuca błąd
-            //response.write(JSON.stringify(responseBody));//żeby response.write działało musi mieć argument - jakiś string bo wyrzuci błąd
-            //response.end(body);
-            response.end(); // response.end musi być bo inaczej nie wykona się request.on("end".....
+                    console.log("fileext to json - jpg data");
+
+
+
+
+
+                }
+            }
+
+
+            
+
 
         });
     }
@@ -119,7 +145,7 @@ http.createServer(function (request, response) {
 
     else { // if (request.method ==! "POST") // to dotyczy przesyłania plików zdjęć z serwera
 
-        //var stat = fs.readFileSync(path_file);
+        //var stat = fs.readFileSync(json_data_file_path);
         var stat = fs.readFileSync(filepath);
 
         response.setHeader('Access-Control-Allow-Origin', '*'); // to musi być bo wyrzuca błąd
@@ -149,7 +175,4 @@ http.createServer(function (request, response) {
 });
 
 
-// działa w pełni: GET, POST, otwiera img
-// pamietac zeby odpalac node na amazonie z poziomu folderu Vigiles a nie z poziomu Vigiles/node
 
-// przyklad w ajax_proby/node_server oraz server_with_several_file_types
