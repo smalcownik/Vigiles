@@ -71,6 +71,8 @@ http.createServer(function (request, response) {
 
     if (request.method == "POST") {
 
+        console.log("method 2: " + request.method);
+
 
         request.on('error', function (err) {
             console.error(err);
@@ -83,9 +85,10 @@ http.createServer(function (request, response) {
 
             if (fileext == ".jpg") { // request to post - jpg
 
-                console.log("fileext to jotpeg: "+ request.url);
+                console.log("fileext to jotpeg, a jego url: "+ request.url);
 
                 // szukaj danych do jpg'a
+
 
 
 
@@ -93,17 +96,12 @@ http.createServer(function (request, response) {
             }
 
             if (fileext == ".json") { // request to post - json
-
                 console.log("fileext to JSON");
 
-
-                if (filepath == "."+json_data_file_path){ // request to post - json - data1.json
-
-                    console.log("fileext to data1.json");
-
                 body = Buffer.concat(body).toString();
-                console.log("method 2: " + request.method);
-                console.log("method 2");
+
+                console.log("body: " + body);
+
 
                     //TODO: teraz 06-09-2016 zrobić żeby najpierw wczytało ścieżkę i na podstawie jej treści niech decydyje czy to data1.json
                     // czy może jpg_data
@@ -127,7 +125,6 @@ http.createServer(function (request, response) {
                 //response.end(body);
                 response.end(); // response.end musi być bo inaczej nie wykona się request.on("end".....
 
-                }
 
 
                 else{// request to post - json - dane do jpg'a
