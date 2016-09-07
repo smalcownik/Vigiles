@@ -126,16 +126,6 @@ http.createServer(function (request, response) {
                 response.end(); // response.end musi być bo inaczej nie wykona się request.on("end".....
 
 
-
-                else{// request to post - json - dane do jpg'a
-
-                    console.log("fileext to json - jpg data");
-
-
-
-
-
-                }
             }
 
 
