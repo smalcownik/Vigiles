@@ -106,7 +106,7 @@ http.createServer(function (request, response) {
 
 
 
-                    //TODO: teraz 07-09-2016 przygotować dane do wysyłki AddDataForImage ... tak, żeby były już kompletne
+                    //TODO: teraz 07-09-2016 przygotować dane do wysyłki AddDataForImage ... tak, żeby były już kompletneq
                     //TODO: teraz 06-09-2016 zrobić żeby najpierw wczytało ścieżkę i na podstawie jej treści niech decydyje czy to data1.json
                     // czy może jpg_data
 

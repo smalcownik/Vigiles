@@ -183,12 +183,15 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         }
         else {
             //trzeba sprawdzić, który originalParentIndex jest największy i zwiększyc tę wartość o 1
+
+            // czyli z objektu zrobionego
+
+            console.log(exported.originalJSONparsed.images.length);
             //TODO: jak nie ma to trzeba dodać nowy folder imgs[nowaWartoscIndex] i na serwerze też w tej sytuacji utworzyć nowy folder
 
             alert("skonczylem bez parenta wiec trzeba dodac nowy folder na imgsy")
 
         }
-
 
 
     };
@@ -201,13 +204,15 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
         var path = exported.buildPath(nextId,promptedData[2]);// promptedData[2] to nr Id rodzica
 
+        //TODO: teraz 08-09-2016 przygotować dane: niech to będzie tablica obiektów
+
         var pathJSON = JSON.stringify(path);
 
-        AddDataForImageToServerREQUEST.makeRequest(pathJSON); // przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE
+        //AddDataForImageToServerREQUEST.makeRequest(pathJSON); // przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE
         //AddImageToServerREQUEST.makeRequest(promptedData[0]) // przesyłanie pliku, po zapisaniu pliku usuń dane z servera - bo to będą już śmieci
 
         //TODO: przygotować jakie dane mają pójść z funkcją powyżej (f-kcja w komentarzu, górna z dwóch), żeby potem były one informacją na temat zdjęcia
-        
+
     };
 
     exported.newPatchDataReceiverBuilder = function(){
@@ -225,10 +230,26 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
             
 
             var newImgPath = prompt("Podaj ścieżkę zdjęcia"); // sciezka do pliku na dysku - uri zdjęcia ??
-            var newImgData = prompt("Podaj dane do zdjęcia - JSONData");
+            // /home/marek/Downloads/jol.jpg
+
             var newImgDataParentId = prompt("PARENT_ID - jak nie podasz to doda nowy originalParent");
 
-            var promptedData = [newImgPath, newImgData, newImgDataParentId];
+            //var newImgJsonData = prompt("Podaj dane do zdjęcia - JSONData"); // size wh
+
+
+            function setSampleJsonData(parentId){
+                return ({
+                    "id" : parentId,
+                    "size": {"w": 500, "h": 900},
+                    "pos": {"x": 0, "y": -0.5, "w": 0.6},
+                    "points": [{"x": 0, "y": 0.5}],
+                    "children": []
+                })
+            }
+
+            var  newImgJsonData = setSampleJsonData(newImgDataParentId);
+
+            var promptedData = [newImgPath, newImgJsonData, newImgDataParentId];// ścieżka, dane jsona, parent.id
 
             //console.log(promptedData);
 
@@ -243,20 +264,6 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
             );
 
             console.log(promptedData);
-            // console.log(typeof promptedData[0]);console.log(typeof null);
-
-
-            //TODO: ustalić formę JSON'a - jaki ma być dokładny schemat (musi być Id rodzica)
-
-            var sampleDataJson = {
-                "size": {"w": 512, "h": 384},
-                //"id":"2",
-                "pos": {"x": 0, "y": -0.5, "w": 0.8},
-
-                "points": [{"x": 0, "y": 0}, {"x": 0.5, "y": 0.5}, {"x": 0, "y": 0.5}],
-
-                "children": []
-            };
 
             exported.executeAddingNewImage(promptedData);
 
