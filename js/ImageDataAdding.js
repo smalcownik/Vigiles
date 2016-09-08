@@ -155,7 +155,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
         exported.fillNodeList(exported.originalJSONparsed); // z obec
 
-        console.log(exported.nodeList);
+        console.log(exported.nodeList);//[image.id, image, originalParent, parent.id]
 
         var nextId = exported.prepareNextId(); // jest kolejny wolny Id //TODO: pamietac że on musi być dodany do tabeli Id'sow (exp.nodeList) zeby mozna tworzyc kolejny Id
         // czy może ta tabela tworzy się za kazdym razem od nowa wiec automatycznie kolejne będą dodawane
@@ -190,7 +190,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         else
 
         {
-            var originalParentIndex = exported.getNodeById(parentId)[2];
+            var originalParentIndex = exported.getNodeById(parentId)[2]; //[image.id, image, originalParent, parent.id]
             console.log(originalParentIndex);
 
             var path = '/data/test_arch/imgs/imgs['+originalParentIndex+']/'+newId+'.jpg';
@@ -260,13 +260,12 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
                 });
             }
 
-            var newImgJsonData = setSampleJsonData(newId);
+            var newImgJsonData = setSampleJsonData(newId.toString());
 
             console.log(newImgJsonData);
 
-            var promptedData = [newImgPath, newImgJsonData, newImgDataParentId];// pD: [ścieżka, dane jsona, parent.id]
-
-            //console.log(promptedData);
+            var promptedData = [newImgPath, newImgJsonData, newImgDataParentId];// pD: [ścieżka, dane jsona, parent.id lub "newParent"]
+            
 
             promptedData.forEach(function (element, index) {
                     if (element === "") {
