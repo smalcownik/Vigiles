@@ -157,42 +157,49 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
         console.log(exported.nodeList);
 
-        nextId = exported.prepareNextId(); // jest kolejny wolny Id //TODO: pamietac że on musi być dodany do tabeli Id'sow (exp.nodeList) zeby mozna tworzyc kolejny Id
+        var nextId = exported.prepareNextId(); // jest kolejny wolny Id //TODO: pamietac że on musi być dodany do tabeli Id'sow (exp.nodeList) zeby mozna tworzyc kolejny Id
         // czy może ta tabela tworzy się za kazdym razem od nowa wiec automatycznie kolejne będą dodawane
 
         console.log(nextId);
+        return nextId;
 
     };
 
 
 
     exported.buildPath = function(newId,parentId){ // parent id jest trzecim elementem wyniku f-kcji exported.getNodeById
+        
 
-
-        if (parentId) {
-            
-            var originalParentIndex = exported.getNodeById(parentId)[2];
-            console.log(originalParentIndex);
-            
-            var path = '/data/test_arch/imgs/imgs['+originalParentIndex+']/'+newId+'.jpg';
-            
-            console.log(path);
-            
-            return path;
-            
-        }
-        else {
+        if (parentId === "newParent") {
             //trzeba sprawdzić, który originalParentIndex jest największy i zwiększyc tę wartość o 1
 
             // czyli z objektu zrobionego
 
             console.log(exported.originalJSONparsed.images.length);
+
+            var path = '/data/test_arch/imgs/imgs['+exported.originalJSONparsed.images.length+']/'+newId+'.jpg';
+
+
+
             //TODO: jak nie ma to trzeba dodać nowy folder imgs[nowaWartoscIndex] i na serwerze też w tej sytuacji utworzyć nowy folder
 
             alert("skonczylem bez parenta wiec trzeba dodac nowy folder na imgsy")
 
         }
 
+        else
+
+        {
+            var originalParentIndex = exported.getNodeById(parentId)[2];
+            console.log(originalParentIndex);
+
+            var path = '/data/test_arch/imgs/imgs['+originalParentIndex+']/'+newId+'.jpg';
+
+            console.log(path);
+
+            return path;
+        }
+
 
     };
 
@@ -200,34 +207,37 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
 
 
-    exported.executeAddingNewImage = function(promptedData) { // tutaj maja byc czynnosci po prompcie
+    exported.executeAddingNewImage = function(newId,promptedData) { // tutaj maja byc czynnosci po prompcie
 
-        var path = exported.buildPath(nextId,promptedData[2]);// promptedData[2] to nr Id rodzica
 
-        //TODO: teraz 08-09-2016 przygotować dane: niech to będzie tablica obiektów
+
+        var path = exported.buildPath(newId,promptedData[2]);// promptedData[2] to nr Id rodzica
+                                                            //  pD: [ścieżka, dane jsona, parent.id]
+
+
+
+        //TODO: teraz 08-09-2016 przygotować dane do stringifiowania: niech to będzie tablica obiektów
+        //1.[path, promptedData]
 
         var pathJSON = JSON.stringify(path);
 
         //AddDataForImageToServerREQUEST.makeRequest(pathJSON); // przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE
         //AddImageToServerREQUEST.makeRequest(promptedData[0]) // przesyłanie pliku, po zapisaniu pliku usuń dane z servera - bo to będą już śmieci
 
-        //TODO: przygotować jakie dane mają pójść z funkcją powyżej (f-kcja w komentarzu, górna z dwóch), żeby potem były one informacją na temat zdjęcia
 
     };
 
-    exported.newPatchDataReceiverBuilder = function(){
+    exported.newPatchDataReceiverBuilder = function() {
 
         var clickedElement = event.target;
 
-        if (clickedElement.className !== "saveNewPatchButton") {
-        } else {
+        if (clickedElement.className === "saveNewPatchButton") {
 
             console.log("odpalono newPatchDataReceiverbuilder czyli..prompt");
 
-            var nextId;
-            
-            exported.prepareInitialData(); // tutaj przygotuje m.in. nowy ID oraz opcje znajdowania object po id
-            
+
+            var newId = exported.prepareInitialData(); // tutaj przygotuje m.in. nowy ID oraz opcje znajdowania object po id
+
 
             var newImgPath = prompt("Podaj ścieżkę zdjęcia"); // sciezka do pliku na dysku - uri zdjęcia ??
             // /home/marek/Downloads/jol.jpg
@@ -236,24 +246,29 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
             //var newImgJsonData = prompt("Podaj dane do zdjęcia - JSONData"); // size wh
 
+            if (newImgDataParentId === "") {
+                newImgDataParentId = "newParent"; // nr nowego parenta zawarty jest w path (buildPath)
+            }
 
-            function setSampleJsonData(parentId){
+            function setSampleJsonData(imageId) {
                 return ({
-                    "id" : parentId,
+                    "id": imageId,
                     "size": {"w": 500, "h": 900},
                     "pos": {"x": 0, "y": -0.5, "w": 0.6},
                     "points": [{"x": 0, "y": 0.5}],
                     "children": []
-                })
+                });
             }
 
-            var  newImgJsonData = setSampleJsonData(newImgDataParentId);
+            var newImgJsonData = setSampleJsonData(newId);
 
-            var promptedData = [newImgPath, newImgJsonData, newImgDataParentId];// ścieżka, dane jsona, parent.id
+            console.log(newImgJsonData);
+
+            var promptedData = [newImgPath, newImgJsonData, newImgDataParentId];// pD: [ścieżka, dane jsona, parent.id]
 
             //console.log(promptedData);
 
-            promptedData.forEach(function (element,index) {
+            promptedData.forEach(function (element, index) {
                     if (element === "") {
 
                         //element = 0; - to nie działa , na zewnątrz funkcji wartość element w proptedData pozostała niezmieniona
@@ -265,14 +280,17 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
             console.log(promptedData);
 
-            exported.executeAddingNewImage(promptedData);
+            exported.executeAddingNewImage(newId, promptedData);
+
 
         }
-    };
+
+    }
 
     return exported;
 
 });
+
 //TODO: OTO mój zajebisty plan, wciąż aktualny!:
 
 // I. jpg/img data
