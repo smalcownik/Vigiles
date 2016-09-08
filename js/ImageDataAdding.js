@@ -179,6 +179,10 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
             var path = '/data/test_arch/imgs/imgs['+exported.originalJSONparsed.images.length+']/'+newId+'.jpg';
 
+            console.log(path);
+
+            return path;
+
 
 
             //TODO: jak nie ma to trzeba dodać nowy folder imgs[nowaWartoscIndex] i na serwerze też w tej sytuacji utworzyć nowy folder
@@ -265,7 +269,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
             console.log(newImgJsonData);
 
             var promptedData = [newImgPath, newImgJsonData, newImgDataParentId];// pD: [ścieżka, dane jsona, parent.id lub "newParent"]
-            
+
 
             promptedData.forEach(function (element, index) {
                     if (element === "") {
