@@ -92,7 +92,7 @@ http.createServer(function (request, response) {
 
                 var bodyObject = JSON.parse(body);
 
-                //console.log(bodyObject);
+                console.log(bodyObject);
 
 
                 if (bodyObject.hasOwnProperty("meta")) {
