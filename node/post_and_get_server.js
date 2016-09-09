@@ -89,10 +89,14 @@ http.createServer(function (request, response) {
                 //console.log("body: " + body);
 
                 var bodyObject = JSON.parse(body);
+
+                console.log(bodyObject);
                 
                 if (bodyObject.hasOwnProperty(meta)){
 
                   console.log("to jest data1.json bo ma meta");
+
+
 
                     fs.writeFile('.' + json_data_file_path, body, function (err) {
                         if (err) {
@@ -101,9 +105,7 @@ http.createServer(function (request, response) {
                         console.log("The file was saved!");
                     });
 
-                    response.on('error', function (err) {
-                        console.error(err);
-                    });
+
 
 
                 }
@@ -116,6 +118,11 @@ http.createServer(function (request, response) {
 
                 };
 
+
+
+                response.on('error', function (err) {
+                    console.error(err);
+                });
                 response.statusCode = 200;
                 // response.setHeader('Content-Type', 'application/json'); // bez tego działa - o dziwo
                 response.setHeader('Access-Control-Allow-Origin', '*'); // to musi być bo wyrzuca błąd
