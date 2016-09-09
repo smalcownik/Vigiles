@@ -7,10 +7,11 @@
 var http = require('http');
 var fs = require('fs');
 var path = require('path');
+var mkdirp = require('mkdirp');
 var json_data_file_path = "/data/test_arch/data1.json";
 //var path_image_folder = "/data/test_arch/data1.json";
 var port = 80;
-var data_to_add_new_patch;
+var data_for_new_patches = [];
 
 function contentType(ext) {
     var ct;
@@ -95,7 +96,6 @@ http.createServer(function (request, response) {
                 if (bodyObject.hasOwnProperty("meta")){
 
                   console.log("to jest data1.json bo ma property 'meta' ");
-                    console.log("data to add to new patch: "+data_to_add_new_patch);
 
 
 
@@ -107,8 +107,6 @@ http.createServer(function (request, response) {
                     });
 
 
-
-
                 }
 
                 else if(typeof bodyObject[0] === "string"){
@@ -117,9 +115,16 @@ http.createServer(function (request, response) {
 
                     // przygotować sciezke dla kolejnego requesta
 
-                    data_to_add_new_patch = 5;
+                    data_for_new_patches.push(bodyObject);
 
-                    console.log("data to add to new patch: "+ data_to_add_new_patch);
+                    //TODO: 09-09-2016 tutaj teraz robic
+                    // a. jesli jest parent - zapisać plik
+                    //    - zapisać url obrazka, żeby sprawdzić z następnym request/postem - aby móc dopasować przesłany obrazek do zapisanego urla
+                    //    - wtedy  wysłać request/postem sam obrazek
+                    // b. jesli nie ma parenta - utworzyć nowy folder (na podstawie danych z jsona)
+                    //    -  wtedy  wysłać request/postem sam obrazek
+
+
                 };
 
 
@@ -135,14 +140,9 @@ http.createServer(function (request, response) {
                 //response.end(body);
                 response.end(); // response.end musi być bo inaczej nie wykona się request.on("end".....
 
-                    //TODO: teraz 07-09-2016 przygotować dane do wysyłki AddDataForImage ... tak, żeby były już kompletne
-                    //żeby najpierw wczytało ścieżkę i na podstawie jej treści niech decydyje czy to data1.json czy jpg
 
-                // a. jesli jest parent - zapisać plik
-                //    - zapisać url obrazka, żeby sprawdzić z następnym request/postem - aby móc dopasować przesłany obrazek do zapisanego urla 
-                //    - wtedy  wysłać request/postem sam obrazek
-                // b. jesli nie ma parenta - utworzyć nowy folder (na podstawie danych z jsona)
-                //    -  wtedy  wysłać request/postem sam obrazek
+
+
             }
 
 

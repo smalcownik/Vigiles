@@ -226,16 +226,14 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
 
 
-        //TODO: teraz 08-09-2016 przygotować dane do stringifiowania: niech to będzie tablica obiektów
-
-        var dataToServer = [path, promptedData, nextOriginalParent];
+        var dataToServer = [path, promptedData, nextOriginalParent]; // dane na serwer
 
         console.log(dataToServer);
 
         var pathJSON = JSON.stringify(dataToServer);
 
-        AddDataForImageToServerREQUEST.makeRequest(pathJSON); // przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE
-        //AddImageToServerREQUEST.makeRequest(promptedData[0]) // przesyłanie pliku, po zapisaniu pliku usuń dane z servera - bo to będą już śmieci
+        AddDataForImageToServerREQUEST.makeRequest(pathJSON); // przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE -->
+        AddImageToServerREQUEST.makeRequest(promptedData[0]) // przesyłanie pliku, po zapisaniu pliku usuń dane z servera - bo to będą już śmieci
 
 
     };
