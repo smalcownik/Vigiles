@@ -110,12 +110,13 @@ http.createServer(function (request, response) {
 
                 }
 
-                else if (typeof bodyObject[0] === "string") {
+                else if (typeof bodyObject[0][0] === "string") {
 
                     console.log("to sa dane do Patcha");
 
 
-                    data_for_new_patches = bodyObject; // bO:[path - docelowa, promptedData, nextOriginalParent],pD: [ścieżka_pierwotna_pliku, dane jsona, parent.id lub "newParent" ]
+                    data_for_new_patches = bodyObject; // bO:[path, promptedData, nextOriginalParent],pD: [ścieżka_pierwotna_pliku, dane jsona, parent.id lub "newParent" ],
+                                                        // path =[directory,file]
 
                     console.log("wyglad nowej sciezki: "+ bodyObject[0]);
 
