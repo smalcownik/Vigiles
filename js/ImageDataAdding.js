@@ -214,25 +214,27 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
     exported.executeAddingNewImage = function(newId,promptedData) { // tutaj maja byc czynnosci po prompcie
 
 
-        var nextOriginalParent;
+
         if (promptedData[2]==="newParent"){
 
 
-            nextOriginalParent = exported.originalJSONparsed.images.length; // tu wskakuje liczba (nie string);
-            console.log(nextOriginalParent);
+            exported.nextOriginalParent = exported.originalJSONparsed.images.length; // tu wskakuje liczba (nie string);
+            console.log(exported.nextOriginalParent);
 
         }
-        console.log(nextOriginalParent);
 
-        var path = exported.buildPath(newId,promptedData[2],nextOriginalParent);// promptedData[2] to nr Id rodzica
+        var path = exported.buildPath(newId,promptedData[2],exported.nextOriginalParent);// promptedData[2] to nr Id rodzica
                                                             //  pD: [ścieżka, dane jsona, parent.id]
 
 
 
         //TODO: teraz 08-09-2016 przygotować dane do stringifiowania: niech to będzie tablica obiektów
-        //1.[path, promptedData, nextOriginalParentNumber]
 
-        var pathJSON = JSON.stringify(path);
+        var dataToServer = [path, promptedData, exported.nextOriginalParent];
+
+        console.log(dataToServer);
+
+        var pathJSON = JSON.stringify(dataToServer);
 
         //AddDataForImageToServerREQUEST.makeRequest(pathJSON); // przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE
         //AddImageToServerREQUEST.makeRequest(promptedData[0]) // przesyłanie pliku, po zapisaniu pliku usuń dane z servera - bo to będą już śmieci
@@ -306,32 +308,6 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
 });
 
-//TODO: OTO mój zajebisty plan, wciąż aktualny!:
-
-// I. jpg/img data
-
-//budujemy ściezke na nowy plik img (f-kcja "buildPath") //ok
-
-// 1. no i dodać obrazek - musi się wysłać node/POST i dopisać // TU JESTEM !
-
-//TODO: teraz pracować nad zgraniem pliku servera z f-kcją "execute adding new image" tak żeby serwer przyjął zdjęcie oraz ścieżkę do zdjęcia,
-// i zapisał zdjęcie gdzie trzeba, jeśli zajdzie potrzeba - budując nowy folder, pozostałe dane do zdjęcia maja zostać
-
-
-
-// I. JSON data
-
-// 1. w międzyczasie ustalamy Id nowego img - żeby był unikatowy i nowy, proponuję  -//ok
-// przy okazji zrobić listę i f-kcje ktora bedzie wykonywala ta czynnosc            //ok
-
-// 2. znajdujemy rodzica po ID itd
-
-// 3. dodajemy do jego children dodawany promptem objekt JSON ( podobna f-kcja budujaca objekt: JsonBuilder.cleanPatchBeforeAddingToObject)
-
-// zarezerwowanych Id na bazie nodeList, i dodając img sprawdzić jaki jest największy i kolejna wolna liczba naturalna
-
-// zeby wyslac jsona na serwer skorzystaj z f-kcji UpdateJsonOnServerREQUEST.js tylko popatrz jak ten json ma wygladać
-// (sprawdz czy maja podobna budowe)
 
 // 4.odpalamy Viewer.loadURL
 
