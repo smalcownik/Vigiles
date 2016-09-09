@@ -91,10 +91,13 @@ http.createServer(function (request, response) {
                 var bodyObject = JSON.parse(body);
 
 
+                console.log(bodyObject);
+                console.log(body);
+
+
 
                     //TODO: teraz 07-09-2016 przygotować dane do wysyłki AddDataForImage ... tak, żeby były już kompletne
-
-                    //TODO: teraz 06-09-2016 zrobić żeby najpierw wczytało ścieżkę i na podstawie jej treści niech decydyje czy to data1.json czy jpg
+                    //żeby najpierw wczytało ścieżkę i na podstawie jej treści niech decydyje czy to data1.json czy jpg
 
                 // a. jesli jest parent - zapisać plik
                 //    - zapisać url obrazka, żeby sprawdzić z następnym request/postem - aby móc dopasować przesłany obrazek do zapisanego urla 

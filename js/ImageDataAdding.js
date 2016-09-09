@@ -181,7 +181,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
             console.log(path);
 
-            alert("skonczylem bez parenta wiec trzeba dodac nowy folder na imgsy");
+            console.log("skonczylem bez parenta wiec trzeba dodac nowy folder na imgsy");
 
             return path;
 
