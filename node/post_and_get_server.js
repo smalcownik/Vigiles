@@ -95,6 +95,7 @@ http.createServer(function (request, response) {
                 if (bodyObject.hasOwnProperty("meta")){
 
                   console.log("to jest data1.json bo ma property 'meta' ");
+                    console.log("data to add to new patch: "+data_to_add_new_patch);
 
 
 
@@ -116,6 +117,9 @@ http.createServer(function (request, response) {
 
                     // przygotować sciezke dla kolejnego requesta
 
+                    data_to_add_new_patch = 5;
+
+                    console.log("data to add to new patch: "+ data_to_add_new_patch);
                 };
 
 
@@ -139,15 +143,8 @@ http.createServer(function (request, response) {
                 //    - wtedy  wysłać request/postem sam obrazek
                 // b. jesli nie ma parenta - utworzyć nowy folder (na podstawie danych z jsona)
                 //    -  wtedy  wysłać request/postem sam obrazek
-                
-
-
-
-
             }
 
-
-            
 
 
         });
