@@ -236,7 +236,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
         console.log(promptedData[0]);
 
-        AddImageToServerREQUEST.makeRequest(promptedData[0]); // przesyłanie pliku, po zapisaniu pliku usuń dane z servera - bo to będą już śmieci
+        //AddImageToServerREQUEST.makeRequest(promptedData[0]); // przesyłanie pliku, po zapisaniu pliku usuń dane z servera - bo to będą już śmieci
 
 
     };
