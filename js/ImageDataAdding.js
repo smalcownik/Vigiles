@@ -167,7 +167,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
 
 
-    exported.buildPath = function(newId,parentId){ // parent id jest trzecim elementem wyniku f-kcji exported.getNodeById
+    exported.buildPath = function(newId,parentId,nextOriginalParent){ // parent id jest trzecim elementem wyniku f-kcji exported.getNodeById
         
 
         if (parentId === "newParent") {
@@ -175,9 +175,9 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
             // czyli z objektu zrobionego
 
-            console.log(exported.originalJSONparsed.images.length);
 
-            var path = '/data/test_arch/imgs/imgs['+exported.originalJSONparsed.images.length+']/'+newId+'.jpg';
+
+            var path = '/data/test_arch/imgs/imgs['+nextOriginalParent+']/'+newId+'.jpg';
 
             console.log(path);
 
@@ -214,9 +214,20 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
     exported.executeAddingNewImage = function(newId,promptedData) { // tutaj maja byc czynnosci po prompcie
 
 
+        var nextOriginalParent;
+        if (promptedData[2]==="newParent"){
 
-        var path = exported.buildPath(newId,promptedData[2]);// promptedData[2] to nr Id rodzica
+
+            nextOriginalParent = exported.originalJSONparsed.images.length);
+            console.log(nextOriginalParent);
+
+        }
+        console.log(nextOriginalParent);
+
+        var path = exported.buildPath(newId,promptedData[2],nextOriginalParent);// promptedData[2] to nr Id rodzica
                                                             //  pD: [ścieżka, dane jsona, parent.id]
+
+
 
 
 
@@ -251,7 +262,9 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
             //var newImgJsonData = prompt("Podaj dane do zdjęcia - JSONData"); // size wh
 
             if (newImgDataParentId === "") {
-                newImgDataParentId = "newParent"; // nr nowego parenta zawarty jest w path (buildPath)
+
+
+                newImgDataParentId = "newParent";
             }
 
             function setSampleJsonData(imageId) {
@@ -268,7 +281,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
             console.log(newImgJsonData);
 
-            var promptedData = [newImgPath, newImgJsonData, newImgDataParentId];// pD: [ścieżka, dane jsona, parent.id lub "newParent"]
+            var promptedData = [newImgPath, newImgJsonData, newImgDataParentId];// pD: [ścieżka, dane jsona, parent.id lub "newParent" ]
 
 
             promptedData.forEach(function (element, index) {
