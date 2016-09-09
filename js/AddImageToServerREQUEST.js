@@ -21,8 +21,8 @@ define([], function () {
 
         /*http_request.onload = function(){ console.log("as as asas a");};*/ // to też może byc ale bez tego działa
 
-        //http_request.send("nowe zdjecie");
-        http_request.send(imageUrl);
+        http_request.send("nowe zdjecie");
+       // http_request.send(imageUrl);
 
     };
 
