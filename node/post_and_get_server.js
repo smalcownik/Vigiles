@@ -117,9 +117,12 @@ http.createServer(function (request, response) {
 
                     data_for_new_patches = bodyObject; // bO:[path - docelowa, promptedData, nextOriginalParent],pD: [ścieżka_pierwotna_pliku, dane jsona, parent.id lub "newParent" ]
 
-                    console.log("wyglad nowej sciezki: "+ bodyObject[0].toString());
+                    console.log("wyglad nowej sciezki: "+ bodyObject[0]);
 
-                    mkdirp('+/tmp/some/path/foo', function (err) {
+
+                    mkdirp(bodyObject[0], function (err) {
+
+                        return console.log(err);
                         // path exists unless there was an error
 
                     });
