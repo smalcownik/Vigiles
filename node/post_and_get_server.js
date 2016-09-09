@@ -74,9 +74,6 @@ http.createServer(function (request, response) {
                 if (data_for_new_patches = !null) {
 
 
-
-
-
                 }
                 data_for_new_patches = null;
 
@@ -127,7 +124,9 @@ http.createServer(function (request, response) {
 
                         // path exists unless there was an error
 
-                    });
+                    }); // to dziala i folder się pojawił
+
+
 
                     //TODO: 09-09-2016 tutaj teraz robic
                     // a. jesli jest parent - zapisać plik
