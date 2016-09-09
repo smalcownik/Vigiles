@@ -120,7 +120,7 @@ http.createServer(function (request, response) {
                     console.log("wyglad nowej sciezki: "+ bodyObject[0]);
 
 
-                    mkdirp(bodyObject[0], function (err) {
+                    mkdirp(bodyObject[0][0], function (err) {
 
                         return console.log(err);
                         // path exists unless there was an error
