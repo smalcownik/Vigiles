@@ -90,11 +90,11 @@ http.createServer(function (request, response) {
 
                 var bodyObject = JSON.parse(body);
 
-                console.log(bodyObject);
+                //console.log(bodyObject);
                 
-                if (bodyObject.hasOwnProperty(meta)){
+                if (bodyObject.hasOwnProperty("meta")){
 
-                  console.log("to jest data1.json bo ma meta");
+                  console.log("to jest data1.json bo ma property 'meta' ");
 
 
 
