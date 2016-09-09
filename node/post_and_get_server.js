@@ -51,22 +51,8 @@ http.createServer(function (request, response) {
 
     console.log("path przed :" + filepath+ '\n' +  "wartosc request.url: " + request.url); // sciezka do miejsca przechowywania pliku
     console.log("ext przed :" + fileext);  // rozszerzenie/typ pliku
-
-    //TODO: zeby: teraz to robić 27.08.2016
-    //1. rozróżniało jsona czy to url danych zdjęcia czy url data1.json czy jpg
-
-    //2. jesli data1.json - to już dalsza cześć kodu jest gotowa tylko ją wyodrębnić
-
     
-    // Jesli to url danych do zdjęcia zdjęcia:
-
-    //3.0. zapisać dane z pliku json to jakiegoś pliku z danymi, żeby w tamtym pliku miał dane do zdjęcia i mógł użyc ich przy zapisaywaniu zdjęcia
-    //3. jakoś wydobyć z niego ścieżkę do zapisania pliku jpg i
-    // a. jesli jest parent - zapisać plik
-    //    - zapisać url obrazka, żeby sprawdzić z następnym request/postem - aby móc dopasować przesłany obrazek do zapisanego urla
-    //    - wtedy  wysłać request/postem sam obrazek
-    // b. jesli nie ma parenta - utworzyć nowy folder (na podstawie danych z jsona)
-    //    -  wtedy  wysłać request/postem sam obrazek
+   
 
 
     if (request.method == "POST") {
@@ -106,9 +92,16 @@ http.createServer(function (request, response) {
 
 
 
-                    //TODO: teraz 07-09-2016 przygotować dane do wysyłki AddDataForImage ... tak, żeby były już kompletneq
-                    //TODO: teraz 06-09-2016 zrobić żeby najpierw wczytało ścieżkę i na podstawie jej treści niech decydyje czy to data1.json
-                    // czy może jpg_data
+                    //TODO: teraz 07-09-2016 przygotować dane do wysyłki AddDataForImage ... tak, żeby były już kompletne
+
+                    //TODO: teraz 06-09-2016 zrobić żeby najpierw wczytało ścieżkę i na podstawie jej treści niech decydyje czy to data1.json czy jpg
+
+                // a. jesli jest parent - zapisać plik
+                //    - zapisać url obrazka, żeby sprawdzić z następnym request/postem - aby móc dopasować przesłany obrazek do zapisanego urla 
+                //    - wtedy  wysłać request/postem sam obrazek
+                // b. jesli nie ma parenta - utworzyć nowy folder (na podstawie danych z jsona)
+                //    -  wtedy  wysłać request/postem sam obrazek
+                
 
                 fs.writeFile('.' + json_data_file_path, body, function (err) {
                     if (err) {

@@ -157,7 +157,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
         console.log(exported.nodeList);//[image.id, image, originalParent, parent.id]
 
-        var nextId = exported.prepareNextId(); // jest kolejny wolny Id //TODO: pamietac że on musi być dodany do tabeli Id'sow (exp.nodeList) zeby mozna tworzyc kolejny Id
+        var nextId = exported.prepareNextId(); // jest kolejny wolny Id
         // czy może ta tabela tworzy się za kazdym razem od nowa wiec automatycznie kolejne będą dodawane
 
         console.log(nextId);
@@ -181,13 +181,9 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
             console.log(path);
 
+            alert("skonczylem bez parenta wiec trzeba dodac nowy folder na imgsy");
+
             return path;
-
-
-
-            //TODO: jak nie ma to trzeba dodać nowy folder imgs[nowaWartoscIndex] i na serwerze też w tej sytuacji utworzyć nowy folder
-
-            alert("skonczylem bez parenta wiec trzeba dodac nowy folder na imgsy")
 
         }
 
@@ -214,25 +210,25 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
     exported.executeAddingNewImage = function(newId,promptedData) { // tutaj maja byc czynnosci po prompcie
 
 
-
+        var nextOriginalParent;
         if (promptedData[2]==="newParent"){
 
 
-            exported.nextOriginalParent = exported.originalJSONparsed.images.length; // tu wskakuje liczba (nie string);
+            nextOriginalParent = exported.originalJSONparsed.images.length; // tu wskakuje liczba (nie string);
 
         }
         else{
-            exported.nextOriginalParent = null;
+            nextOriginalParent = null;
         }
 
-        var path = exported.buildPath(newId,promptedData[2],exported.nextOriginalParent);// promptedData[2] to nr Id rodzica
+        var path = exported.buildPath(newId,promptedData[2],nextOriginalParent);// promptedData[2] to nr Id rodzica
                                                             //  pD: [ścieżka, dane jsona, parent.id]
 
 
 
         //TODO: teraz 08-09-2016 przygotować dane do stringifiowania: niech to będzie tablica obiektów
 
-        var dataToServer = [path, promptedData, exported.nextOriginalParent];
+        var dataToServer = [path, promptedData, nextOriginalParent];
 
         console.log(dataToServer);
 
