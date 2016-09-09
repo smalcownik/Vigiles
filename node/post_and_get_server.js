@@ -117,12 +117,12 @@ http.createServer(function (request, response) {
 
                     data_for_new_patches = bodyObject; // bO:[path - docelowa, promptedData, nextOriginalParent],pD: [ścieżka_pierwotna_pliku, dane jsona, parent.id lub "newParent" ]
 
-                    console.log("wyglad nowej sciezki: "+bodyObject[0]);
+                    console.log("wyglad nowej sciezki: "+ bodyObject[0].toString());
 
-                    /*mkdirp('/tmp/some/path/foo', function (err) {
+                    mkdirp('+/tmp/some/path/foo', function (err) {
                         // path exists unless there was an error
 
-                    });*/
+                    });
 
                     //TODO: 09-09-2016 tutaj teraz robic
                     // a. jesli jest parent - zapisać plik
