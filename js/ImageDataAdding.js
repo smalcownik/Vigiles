@@ -175,8 +175,6 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
             //trzeba sprawdzić, który originalParentIndex jest największy i zwiększyc tę wartość o 1
 
 
-
-
             var path = ['/data/test_arch/imgs/imgs['+nextOriginalParent+']', newId +'.jpg'];
 
             console.log(path);
