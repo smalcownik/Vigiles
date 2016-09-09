@@ -86,15 +86,12 @@ http.createServer(function (request, response) {
 
                 body = Buffer.concat(body).toString();
 
-                console.log("body: " + body);
+                //console.log("body: " + body);
 
                 var bodyObject = JSON.parse(body);
 
-
-               // console.log(bodyObject);
-
-
-
+                console.log(typeof bodyObject);
+                console.log(typeof []);
 
                     //TODO: teraz 07-09-2016 przygotować dane do wysyłki AddDataForImage ... tak, żeby były już kompletne
                     //żeby najpierw wczytało ścieżkę i na podstawie jej treści niech decydyje czy to data1.json czy jpg
