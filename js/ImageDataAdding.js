@@ -219,8 +219,10 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
 
             exported.nextOriginalParent = exported.originalJSONparsed.images.length; // tu wskakuje liczba (nie string);
-            console.log(exported.nextOriginalParent);
 
+        }
+        else{
+            exported.nextOriginalParent = null;
         }
 
         var path = exported.buildPath(newId,promptedData[2],exported.nextOriginalParent);// promptedData[2] to nr Id rodzica
