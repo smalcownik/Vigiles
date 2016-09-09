@@ -121,8 +121,9 @@ http.createServer(function (request, response) {
                     console.log("wyglad nowej sciezki: "+ bodyObject[0]);
                     console.log("wyglad nowej sciezki po obcieciu: "+ bodyObject[0][0]);
 
+                    var currentPath = "."+bodyObject[0][0];
 
-                    mkdirp(bodyObject[0][0], function (err) {
+                    mkdirp(currentPath, function (err) {
 
                         // path exists unless there was an error
 
