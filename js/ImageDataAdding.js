@@ -177,7 +177,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
 
 
-            var path = '/data/test_arch/imgs/imgs['+nextOriginalParent+']/'+newId+'.jpg';
+            var path = ['/data/test_arch/imgs/imgs['+nextOriginalParent+']', "\""+newId +"\""+'.jpg'];
 
             console.log(path);
 
