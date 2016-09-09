@@ -2,7 +2,7 @@
  * Created by marek on 16.06.16.
  */
 
-define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST"], function (Camera, AddImageToServerREQUEST, AddDataForImageToServerREQUEST) {
+define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST","./JsonBuilder"], function (Camera, AddImageToServerREQUEST, AddDataForImageToServerREQUEST,JsonBuilder) {
 
     var exported = {};
 
@@ -163,7 +163,8 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         console.log(nextId);
         return nextId;
 
-    };
+    };//tutaj buduje listę już obecnych patchow zeby potem
+    // 1.uzupelnic nodeList 2.przygotowac nextId
 
 
 
@@ -173,7 +174,6 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         if (parentId === "newParent") {
             //trzeba sprawdzić, który originalParentIndex jest największy i zwiększyc tę wartość o 1
 
-            // czyli z objektu zrobionego
 
 
 
@@ -218,7 +218,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         if (promptedData[2]==="newParent"){
 
 
-            nextOriginalParent = exported.originalJSONparsed.images.length;
+            nextOriginalParent = exported.originalJSONparsed.images.length; // tu wskakuje liczba (nie string);
             console.log(nextOriginalParent);
 
         }
@@ -229,10 +229,8 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
 
 
-
-
         //TODO: teraz 08-09-2016 przygotować dane do stringifiowania: niech to będzie tablica obiektów
-        //1.[path, promptedData]
+        //1.[path, promptedData, nextOriginalParentNumber]
 
         var pathJSON = JSON.stringify(path);
 
@@ -259,7 +257,8 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
             var newImgDataParentId = prompt("PARENT_ID - jak nie podasz to doda nowy originalParent");
 
-            //var newImgJsonData = prompt("Podaj dane do zdjęcia - JSONData"); // size wh
+            //var newImgJsonData = prompt("Podaj dane do zdjęcia - JSONData");
+            // to na razie puszczam z automatu f-kcją "setSampleJsonData"
 
             if (newImgDataParentId === "") {
 
