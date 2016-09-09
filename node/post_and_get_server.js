@@ -47,7 +47,8 @@ http.createServer(function (request, response) {
     console.log("server running");
     console.log("request.url: " + request.url);
 
-    var filepath = '.' + (request.url == '/' ? json_data_file_path : request.url);
+    var filepath = '.' + (request.url == '/' ? json_data_file_path : request.url); // TODO:  09-09-216nad tym się zastanowić bo to mi zasrywa i obadać :
+                                                    //http://stackoverflow.com/questions/8445019/problems-with-sending-jpg-over-http-node-js
     var fileext = path.extname(filepath);
 
     console.log("wartosc request.url: " + request.url); // sciezka do miejsca przechowywania pliku
@@ -128,7 +129,7 @@ http.createServer(function (request, response) {
 
 
 
-                    //TODO: 09-09-2016 tutaj teraz robic
+                    //TODO: 09-09-2016 tutaj teraz robic (ale najpierw poprzednie TODO z tej daty)
                     // a. jesli jest parent - zapisać plik
                     //    - zapisać url obrazka, żeby sprawdzić z następnym request/postem - aby móc dopasować przesłany obrazek do zapisanego urla
                     //    - wtedy  wysłać request/postem sam obrazek
