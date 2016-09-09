@@ -218,7 +218,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         if (promptedData[2]==="newParent"){
 
 
-            nextOriginalParent = exported.originalJSONparsed.images.length);
+            nextOriginalParent = exported.originalJSONparsed.images.length;
             console.log(nextOriginalParent);
 
         }
