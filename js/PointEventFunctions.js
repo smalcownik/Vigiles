@@ -122,7 +122,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
                 //console.log(selectedImage);
 
                 function countPointCoordinates(image, clickX, clickY) {
-                    var point = {x: null, y: null, textInit:null, isNew:true}; //TODO : tutaj jest true!
+                    var point = {x: null, y: null, textInit:null, isNew:true}; //tutaj point sie robi  true!
 
 
 
@@ -160,7 +160,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
             //console.log(ObjectElement);
 
-           // ObjectElement.isNew = true; // TODO: tu jakoś zasrywało patch'e
+           // ObjectElement.isNew = true; // tu pozasrywało patch'e
 
             var viewer = exported.viewer;
 
@@ -324,8 +324,6 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
                                 clickedPoint.point.textInit = editResult;
                                 //clickedPoint.point.isNew = true;
-
-                                //TODO: tutaj może być słaby punkt, gdzie po edycji punktu, dodaje się on na nowo
 
 
 

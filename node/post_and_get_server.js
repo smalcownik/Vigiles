@@ -47,7 +47,7 @@ http.createServer(function (request, response) {
     console.log("server running");
     console.log("request.url: " + request.url);
 
-    var filepath = '.' + (request.url == '/' ? json_data_file_path : request.url); // TODO:  09-09-216nad tym się zastanowić bo to mi zasrywa i obadać :
+    var filepath = '.' + (request.url == '/' ? json_data_file_path : request.url); // TODO:  09-09-216 nad tym się zastanowić bo to mi zasrywa i obadać :
                                                     //http://stackoverflow.com/questions/8445019/problems-with-sending-jpg-over-http-node-js
     var fileext = path.extname(filepath);
 
@@ -76,6 +76,7 @@ http.createServer(function (request, response) {
 
 
                 }
+
                 data_for_new_patches = null;
 
             }

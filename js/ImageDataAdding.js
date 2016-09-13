@@ -254,7 +254,10 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
 
             var newImgPath = prompt("Podaj ścieżkę zdjęcia"); // sciezka do pliku na dysku - uri zdjęcia ??
-            // /home/marek/Downloads/jol.jpg
+            //home/marek/Downloads/jol.jpg
+
+
+            console.log(newImgPath);
 
             var newImgDataParentId = prompt("PARENT_ID - jak nie podasz to doda nowy originalParent");
 
