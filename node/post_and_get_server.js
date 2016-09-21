@@ -48,7 +48,10 @@ http.createServer(function (request, response) {
     console.log("request.url: " + request.url);
 
     var filepath = '.' + (request.url == '/' ? json_data_file_path : request.url); // TODO:  09-09-216 nad tym się zastanowić bo to mi zasrywa i obadać :
+                                                    // to wskakuje automatycznie a trzeba, żeby jak jpg idzie to file path i fileext było jpg
                                                     //http://stackoverflow.com/questions/8445019/problems-with-sending-jpg-over-http-node-js
+
+
     var fileext = path.extname(filepath);
 
     console.log("wartosc request.url: " + request.url); // sciezka do miejsca przechowywania pliku
