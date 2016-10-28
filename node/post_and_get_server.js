@@ -41,18 +41,17 @@ console.log("plik startuje");
 
 http.createServer(function (request, response) {
 
+    console.log("server running");
+
     var body = []; // gdy to body chciałem dać poza createServer - jako zmienną globalną, to w request.on("data") wyskakiwał błąd że body "has no push method"
 
     var headers = request.headers;
     var method = request.method;
     var url = request.url;
 
-    console.log("method 1: " + method);
-    console.log("headers: " + headers);
-
-    console.log("server running");
-    console.log("request.url: " + url);
-    console.log("req.headers content type: " + headers['content-type']);
+    console.log("1. method 1: " + method);
+    console.log("2. headers: " + JSON.stringify(headers));
+    console.log("3. request.url: " + url);
 
     //TODO: 03-10-2015 trzeba przy POST rozróżnić image od json i na tej podstawie budowac file path (w dwóch poniższych linijkach każdy post daje /')
 
@@ -63,8 +62,8 @@ http.createServer(function (request, response) {
 
     var fileext = path.extname(filepath);
 
-    console.log("wartosc request.url: " + url); // sciezka do miejsca przechowywania pliku
-    console.log("ext przed :" + fileext);  // rozszerzenie/typ pliku
+    console.log("5. wartosc request.url: " + url); // sciezka do miejsca przechowywania pliku
+    console.log("6. ext przed :" + fileext);  // rozszerzenie/typ pliku
 
 
     if (request.method == "POST") {
