@@ -46,6 +46,9 @@ http.createServer(function (request, response) {
     console.log("method 1: " + request.method);
     console.log("server running");
     console.log("request.url: " + request.url);
+    console.log("requestcosntent type: " +request.headers['content-type']);
+
+    //TODO: 03-10-2015 trzeba przy POST rozróżnić image od json i na tej podstwaie budowac file path (w dwóch poniższych linijkach każdy post daje /')
 
     var filepath = '.' + (request.url == '/' ? json_data_file_path : request.url); // TODO:  09-09-216 nad tym się zastanowić bo to mi zasrywa i obadać :
                                                     // to wskakuje automatycznie a trzeba, żeby jak jpg idzie to file path i fileext było jpg
