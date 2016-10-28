@@ -175,7 +175,8 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
             //trzeba sprawdzić, który originalParentIndex jest największy i zwiększyc tę wartość o 1
 
 
-            var path = ['/data/test_arch/imgs/imgs['+nextOriginalParent+']/'+ newId +'.jpg'];
+            var path = ['/data/test_arch/imgs/imgs['+nextOriginalParent+']/'+ newId +'.jpg' , '/data/test_arch/imgs/imgs['+nextOriginalParent+']/' ];
+
 
             console.log(path);
 
@@ -191,7 +192,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
             var originalParentIndex = exported.getNodeById(parentId)[2]; //[image.id, image, originalParent, parent.id]
             console.log(originalParentIndex);
 
-            var path = ['/data/test_arch/imgs/imgs['+originalParentIndex+']/'+ newId +'.jpg'];
+            var path = ['/data/test_arch/imgs/imgs['+originalParentIndex+']/'+ newId +'.jpg','/data/test_arch/imgs/imgs['+originalParentIndex+']/'+ newId +'.jpg'];
 
             console.log(path);
 

@@ -130,10 +130,10 @@ http.createServer(function (request, response) {
                     data_for_new_patches = bodyObject; // bO:[path, promptedData, nextOriginalParent],pD: [ścieżka_pierwotna_pliku, dane jsona, parent.id lub "newParent" ],
                                                         // path =[directory,file]
 
-                    console.log("wyglad nowej sciezki: "+ bodyObject[0]);
-                    console.log("wyglad nowej sciezki po obcieciu: "+ bodyObject[0][0]);
+                    console.log("wyglad nowej sciezki: "+ bodyObject[0][0]);
+                    console.log("wyglad nowej sciezki po obcieciu: "+ bodyObject[0][1]); // obicięciu czego
 
-                    var currentPath = "."+bodyObject[0][0];
+                    var currentPath = "."+bodyObject[0][1];
 
                     mkdirp(currentPath, function (err) {
 
