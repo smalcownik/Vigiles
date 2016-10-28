@@ -175,7 +175,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
             //trzeba sprawdzić, który originalParentIndex jest największy i zwiększyc tę wartość o 1
 
 
-            var path = ['/data/test_arch/imgs/imgs['+nextOriginalParent+']', newId +'.jpg'];
+            var path = ['/data/test_arch/imgs/imgs['+nextOriginalParent+']/'+ newId +'.jpg'];
 
             console.log(path);
 
@@ -191,7 +191,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
             var originalParentIndex = exported.getNodeById(parentId)[2]; //[image.id, image, originalParent, parent.id]
             console.log(originalParentIndex);
 
-            var path = ['/data/test_arch/imgs/imgs['+originalParentIndex+']', newId +'.jpg'];
+            var path = ['/data/test_arch/imgs/imgs['+originalParentIndex+']/'+ newId +'.jpg'];
 
             console.log(path);
 
@@ -253,13 +253,13 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
             var newId = exported.prepareInitialData(); // tutaj przygotuje m.in. nowy ID oraz opcje znajdowania object po id
 
 
-            var newImgPath = prompt("Podaj ścieżkę zdjęcia"); // sciezka do pliku na dysku - uri zdjęcia ??
+            var newImgPath = prompt("Podaj ścieżkę zdjęcia","/home/marek/WebstormProjects/Vigiles/data/add_new_patch_test_data/jol.jpg"); // sciezka do pliku na dysku - uri zdjęcia ??
             //home/marek/Downloads/jol.jpg
 
 
             console.log(newImgPath);
 
-            var newImgDataParentId = prompt("PARENT_ID - jak nie podasz to doda nowy originalParent");
+            var newImgDataParentId = prompt("PARENT_ID - jak nie podasz to doda nowy originalParent","0");
 
             //var newImgJsonData = prompt("Podaj dane do zdjęcia - JSONData");
             // to na razie puszczam z automatu f-kcją "setSampleJsonData"
