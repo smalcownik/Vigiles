@@ -51,15 +51,17 @@ http.createServer(function (request, response) {
 
     console.log("1. method 1: " + method);
     console.log("2. headers: " + JSON.stringify(headers));
-    console.log("3. request.url: " + url); // to jest inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, ale dla get JSon tez jest "/"
+    console.log("3. request.url: " + url); // to jest inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, ale dla get JSon tez jest "/" - i tu dla post-jpeg interpretuje jako json
 
     //TODO: 03-10-2015 trzeba przy POST rozróżnić image od json i na tej podstawie budowac file path (w dwóch poniższych linijkach każdy post daje /')
 
-    var filepath = '.' + (url == '/' ? json_data_file_path : url); // TODO:  09-09-216 nad tym się zastanowić bo to mi zasrywa i obadać :
+    var filepath = '.' + (url == '/' ? json_data_file_path : url);
+    // TODO:  09-09-216 nad tym się zastanowić bo to mi zasrywa i obadać :błąd jest na serwerze bo interpretuje url do jpg'ajako JSon pomimo, że jego headers content type jest image/jpeg
                                                     // to wskakuje automatycznie a trzeba, żeby jak jpg idzie to file path i fileext było jpg
                                                     //http://stackoverflow.com/questions/8445019/problems-with-sending-jpg-over-http-node-js
 
     // najpierw sprawdzić czy to jest POST - bo tam możemy sobie ustawiac header i wtedy nas interesuje różnica jaki to plik - przy get wszystko jest OK
+
 
 
     var fileext = path.extname(filepath);
@@ -135,11 +137,14 @@ http.createServer(function (request, response) {
 
                     var currentPath = "."+bodyObject[0][1];
 
+                    if(bodyObject[2]== null){ // czyli kiedy nie ma originalParent i trzeb utworzyć nowy folder na kolejnego patcha-matke
+
                     mkdirp(currentPath, function (err) {
 
                         // path exists unless there was an error
 
                     }); // to dziala i folder się pojawił
+                    }
 
 
 

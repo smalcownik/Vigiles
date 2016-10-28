@@ -237,7 +237,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         AddDataForImageToServerREQUEST.makeRequest(pathJSON); // przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE -->
 
 
-        var sentPictureUrl = promptedData[0].toString()
+        var sentPictureUrl = promptedData[0].toString();
         console.log(sentPictureUrl);
 
         AddImageToServerREQUEST.makeRequest(sentPictureUrl); // przesyłanie pliku, po zapisaniu pliku usuń dane z servera - bo to będą już śmieci
