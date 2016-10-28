@@ -43,27 +43,33 @@ http.createServer(function (request, response) {
 
     var body = []; // gdy to body chciałem dać poza createServer - jako zmienną globalną, to w request.on("data") wyskakiwał błąd że body "has no push method"
 
-    console.log("method 1: " + request.method);
+    var headers = request.headers;
+    var method = request.method;
+    var url = request.url;
+
+    console.log("method 1: " + method);
+    console.log("headers: " + headers);
+
     console.log("server running");
-    console.log("request.url: " + request.url);
-    console.log("requestcosntent type: " +request.headers['content-type']);
+    console.log("request.url: " + url);
+    console.log("req.headers content type: " + headers['content-type']);
 
-    //TODO: 03-10-2015 trzeba przy POST rozróżnić image od json i na tej podstwaie budowac file path (w dwóch poniższych linijkach każdy post daje /')
+    //TODO: 03-10-2015 trzeba przy POST rozróżnić image od json i na tej podstawie budowac file path (w dwóch poniższych linijkach każdy post daje /')
 
-    var filepath = '.' + (request.url == '/' ? json_data_file_path : request.url); // TODO:  09-09-216 nad tym się zastanowić bo to mi zasrywa i obadać :
+    var filepath = '.' + (url == '/' ? json_data_file_path : url); // TODO:  09-09-216 nad tym się zastanowić bo to mi zasrywa i obadać :
                                                     // to wskakuje automatycznie a trzeba, żeby jak jpg idzie to file path i fileext było jpg
                                                     //http://stackoverflow.com/questions/8445019/problems-with-sending-jpg-over-http-node-js
 
 
     var fileext = path.extname(filepath);
 
-    console.log("wartosc request.url: " + request.url); // sciezka do miejsca przechowywania pliku
+    console.log("wartosc request.url: " + url); // sciezka do miejsca przechowywania pliku
     console.log("ext przed :" + fileext);  // rozszerzenie/typ pliku
 
 
     if (request.method == "POST") {
 
-        console.log("method 2: " + request.method);
+        console.log("method 2: " + method);
 
 
         request.on('error', function (err) {
@@ -77,7 +83,7 @@ http.createServer(function (request, response) {
 
             if (fileext == ".jpg") { // request to post - jpg
 
-                console.log("fileext to jotpeg, a jego url: " + request.url);
+                console.log("fileext to jotpeg, a jego url: " + url);
                 if (data_for_new_patches = !null) {
 
 
