@@ -169,13 +169,14 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
 
     exported.buildPath = function(newId,parentId,nextOriginalParent){ // parent id jest trzecim elementem wyniku f-kcji exported.getNodeById
-        
+
 
         if (parentId === "newParent") {
             //trzeba sprawdzić, który originalParentIndex jest największy i zwiększyc tę wartość o 1
 
+            var folderPath =('/data/test_arch/imgs/imgs['+nextOriginalParent+']');
 
-            var path = ['/data/test_arch/imgs/imgs['+nextOriginalParent+']/'+ newId +'.jpg' , '/data/test_arch/imgs/imgs['+nextOriginalParent+']/' ];
+            var path = [folderPath +'/'+ newId +'.jpg' , folderPath ];
 
 
             console.log(path);
@@ -189,10 +190,12 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         else
 
         {
+
             var originalParentIndex = exported.getNodeById(parentId)[2]; //[image.id, image, originalParent, parent.id]
             console.log(originalParentIndex);
+            var folderPath = ('/data/test_arch/imgs/imgs['+originalParentIndex+']');
 
-            var path = ['/data/test_arch/imgs/imgs['+originalParentIndex+']/'+ newId +'.jpg','/data/test_arch/imgs/imgs['+originalParentIndex+']/'+ newId +'.jpg'];
+            var path = [folderPath+'/'+ newId +'.jpg',folderPath];
 
             console.log(path);
 
