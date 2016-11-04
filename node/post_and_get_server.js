@@ -50,12 +50,15 @@ http.createServer(function (request, response) {
     var url = request.url;
 
     console.log("1. method 1: " + method);
-    console.log("2. headers: " + JSON.stringify(headers));
+    console.log("2. headers: " + JSON.stringify(headers['content-type']));
     console.log("3. request.url: " + url); // to jest inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, ale dla get JSon tez jest "/" - i tu dla post-jpeg interpretuje jako json
+    console.log("4. headers:content-type: " + url); // to jest inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, ale dla get JSon tez jest "/" - i tu dla post-jpeg interpretuje jako json
 
     //TODO: 28-10-2015 trzeba przy POST rozróżnić image od json i na tej podstawie budowac file path (w dwóch poniższych linijkach każdy post daje /')
 
     var filepath = '.' + (url == '/' ? json_data_file_path : url);
+
+    //TODO: różnica polega na "headers/content type" - 04-11-2016"
     // TODO:  09-09-216 nad tym się zastanowić bo to mi zasrywa i obadać :błąd jest na serwerze bo interpretuje url do jpg'ajako JSon pomimo, że jego headers content type jest image/jpeg
                                                     // to wskakuje automatycznie a trzeba, żeby jak jpg idzie to file path i fileext było jpg
                                                     //http://stackoverflow.com/questions/8445019/problems-with-sending-jpg-over-http-node-js
@@ -72,7 +75,7 @@ http.createServer(function (request, response) {
 
     if (request.method == "POST") {
 
-        console.log("method 2: " + method);
+        console.log("7. method 2: " + method);
 
 
         request.on('error', function (err) {
