@@ -59,12 +59,12 @@ http.createServer(function (request, response) {
     var filepath; // = '.' + (headers['content-type'] == 'undefined' ?  json_data_file_path : url);
     if(headers['content-type'] == 'undefined'){
         console.log("confirmed undefined");
-        filepath = json_data_file_path;
+        filepath = "."+json_data_file_path;
     }
     else if(headers['content-type'] =="image/jpeg"){
         console.log("confirmed image/jpeg");
         console.log(data_for_curently_added_patch[0][0]);
-        filepath = data_for_curently_added_patch[0][0]
+        filepath = "."+data_for_curently_added_patch[0][0]
     }
     else {console.log("content-type jest poza kontrola")};
 
