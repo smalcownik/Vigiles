@@ -53,8 +53,7 @@ http.createServer(function (request, response) {
     console.log("2. headers: " + JSON.stringify(headers));
     console.log("3. request.url: " + url); // to jest inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, ale dla get JSon tez jest "/" - i tu dla post-jpeg interpretuje jako json
     console.log("4. headers:content-type: " + JSON.stringify(headers['content-type'])); // to jest inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, ale dla get JSon tez jest "/" - i tu dla post-jpeg interpretuje jako json
-
-    //TODO: 28-10-2015 trzeba przy POST rozróżnić image od json i na tej podstawie budowac file path (w dwóch poniższych linijkach każdy post daje /')
+    
 
     var filepath; // = '.' + (request.url == "/" ?  json_data_file_path : url);
     if(typeof headers['content-type'] == "undefined"){ // to jest GET - wgrywają sie pliki z serwera (jpg lub json - on tu nie widzi typu w headers),
@@ -78,13 +77,8 @@ http.createServer(function (request, response) {
         console.log("content-type jest poza kontrola: " + headers['content-type']);
     };
 
-    //TODO: różnica polega na "headers/content type" - 04-11-2016"
-    // TODO:  09-09-216 nad tym się zastanowić bo to mi zasrywa i obadać :błąd jest na serwerze bo interpretuje url do jpg'ajako JSon pomimo, że jego headers content type jest image/jpeg
-                                                    // to wskakuje automatycznie a trzeba, żeby jak jpg idzie to file path i fileext było jpg
-                                                    //http://stackoverflow.com/questions/8445019/problems-with-sending-jpg-over-http-node-js
 
-    // najpierw sprawdzić czy to jest POST - bo tam możemy sobie ustawiac header i wtedy nas interesuje różnica jaki to plik - przy get wszystko jest OK
-
+    // TODO: w razie problemu  http://stackoverflow.com/questions/8445019/problems-with-sending-jpg-over-http-node-js
 
 
     var fileext = path.extname(filepath);
@@ -108,8 +102,11 @@ http.createServer(function (request, response) {
 
             if (fileext == ".jpg") { // request to post - jpg
 
-                console.log("fileext to jotpeg, a jego url: " + url);
+                console.log("8. fileext to jotpeg, a jego url: " + url); //TODO: tutaj jestem - co dalej ?:
+                                                                         //
+
                 if (data_for_curently_added_patch = !null) {
+
 
 
                 }
@@ -170,7 +167,7 @@ http.createServer(function (request, response) {
 
 
 
-                    //TODO: 09-09-2016 tutaj teraz robic (ale najpierw poprzednie TODO z tej daty)
+                    //TODO: 04-11-2016 tutaj teraz robic (ale najpierw poprzednie TODO z tej daty)
                     // a. jesli jest parent - zapisać plik
                     //    - zapisać url obrazka, żeby sprawdzić z następnym request/postem - aby móc dopasować przesłany obrazek do zapisanego urla
                     //    - wtedy  wysłać request/postem sam obrazek
