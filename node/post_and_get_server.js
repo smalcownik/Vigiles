@@ -57,15 +57,22 @@ http.createServer(function (request, response) {
     //TODO: 28-10-2015 trzeba przy POST rozróżnić image od json i na tej podstawie budowac file path (w dwóch poniższych linijkach każdy post daje /')
 
     var filepath; // = '.' + (request.url == "/" ?  json_data_file_path : url);
-    if(typeof headers['content-type'] == "undefined"){
-        console.log("confirmed undefined");
+    if(typeof headers['content-type'] == "undefined"){ // to jest GET - wgrywają sie pliki z serwera (jpg lub json - on tu nie widzi typu w headers),
+        // ale rozrozni jes po url'u
+
         filepath = "." + (request.url == "/" ?  json_data_file_path : url);
         console.log("filepath: " + filepath);
     }
-    else if(headers['content-type'] =="image/jpeg"){
+    else if(headers['content-type'] =="image/jpeg"){  // to jest POST: przesyła się
         console.log("confirmed image/jpeg");
         console.log(data_for_curently_added_patch[0][0]);
-        //filepath = "."+ data_for_curently_added_patch[0][0]
+        //filepath = "."+ data_for_curently_added_patch[0][0];
+    }
+    else if(headers['content-type'] =="application/json;charset=UTF-8"){
+        console.log("aktualizacja jsona");
+        filepath = "." + (request.url == "/" ?  json_data_file_path : url);
+        console.log("filepath: " + filepath);
+
     }
     else {
         console.log("content-type jest poza kontrola: " + headers['content-type']);
@@ -82,7 +89,6 @@ http.createServer(function (request, response) {
 
     var fileext = path.extname(filepath);
 
-    console.log("5. wartosc request.url: " + url); // sciezka do miejsca przechowywania pliku
     console.log("6. ext przed :" + fileext);  // rozszerzenie/typ pliku
 
 
