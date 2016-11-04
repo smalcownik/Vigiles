@@ -64,9 +64,9 @@ http.createServer(function (request, response) {
         console.log("filepath: " + filepath);
     }
     else if(headers['content-type'] =="image/jpeg"){  // to jest POST: przesyła się
-        console.log("confirmed image/jpeg");
-        console.log(data_for_curently_added_patch[0][0]);
-        //filepath = "."+ data_for_curently_added_patch[0][0];
+        console.log("5. confirmed image/jpeg");
+        console.log("5.1 sciezka do pliku" + data_for_curently_added_patch[0][0]);
+        filepath = "."+ data_for_curently_added_patch[0][0];
     }
     else if(headers['content-type'] =="application/json;charset=UTF-8"){
         console.log("aktualizacja jsona");
