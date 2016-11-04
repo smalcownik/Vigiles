@@ -52,7 +52,7 @@ http.createServer(function (request, response) {
     console.log("1. method 1: " + method);
     console.log("2. headers: " + JSON.stringify(headers));
     console.log("3. request.url: " + url); // to jest inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, ale dla get JSon tez jest "/" - i tu dla post-jpeg interpretuje jako json
-    console.log("4. headers:content-type: " + JSON.stringify(headers['content-type']); // to jest inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, ale dla get JSon tez jest "/" - i tu dla post-jpeg interpretuje jako json
+    console.log("4. headers:content-type: " + JSON.stringify(headers['content-type'])); // to jest inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, ale dla get JSon tez jest "/" - i tu dla post-jpeg interpretuje jako json
 
     //TODO: 28-10-2015 trzeba przy POST rozróżnić image od json i na tej podstawie budowac file path (w dwóch poniższych linijkach każdy post daje /')
 
