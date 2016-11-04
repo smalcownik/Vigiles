@@ -53,7 +53,7 @@ http.createServer(function (request, response) {
     console.log("2. headers: " + JSON.stringify(headers));
     console.log("3. request.url: " + url); // to jest inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, ale dla get JSon tez jest "/" - i tu dla post-jpeg interpretuje jako json
 
-    //TODO: 03-10-2015 trzeba przy POST rozróżnić image od json i na tej podstawie budowac file path (w dwóch poniższych linijkach każdy post daje /')
+    //TODO: 28-10-2015 trzeba przy POST rozróżnić image od json i na tej podstawie budowac file path (w dwóch poniższych linijkach każdy post daje /')
 
     var filepath = '.' + (url == '/' ? json_data_file_path : url);
     // TODO:  09-09-216 nad tym się zastanowić bo to mi zasrywa i obadać :błąd jest na serwerze bo interpretuje url do jpg'ajako JSon pomimo, że jego headers content type jest image/jpeg
