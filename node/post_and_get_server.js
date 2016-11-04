@@ -56,11 +56,11 @@ http.createServer(function (request, response) {
 
     //TODO: 28-10-2015 trzeba przy POST rozróżnić image od json i na tej podstawie budowac file path (w dwóch poniższych linijkach każdy post daje /')
 
-    var filepath; // = '.' + (headers['content-type'] == 'undefined' ?  json_data_file_path : url);
+    var filepath; // = '.' + (request.url == "/" ?  json_data_file_path : url);
     if(typeof headers['content-type'] == "undefined"){
         console.log("confirmed undefined");
-        filepath = "." + json_data_file_path;
-        console.log("filepath");
+        filepath = "." + (request.url == "/" ?  json_data_file_path : url);
+        console.log("filepath: " + filepath);
     }
     else if(headers['content-type'] =="image/jpeg"){
         console.log("confirmed image/jpeg");
