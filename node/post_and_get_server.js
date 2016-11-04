@@ -9,9 +9,9 @@ var fs = require('fs');
 var path = require('path');
 var mkdirp = require('mkdirp'); // do tego musialem zainstalowa nmp i "npm install mkdirp" z nmp
 var json_data_file_path = "/data/test_arch/data1.json";
-//var path_image_folder = "/data/test_arch/data1.json";
+var path_image_folder;
 var port = 80;
-var data_for_new_patches;
+var data_for_curently_added_patch;
 
 function contentType(ext) {
     var ct;
@@ -50,13 +50,23 @@ http.createServer(function (request, response) {
     var url = request.url;
 
     console.log("1. method 1: " + method);
-    console.log("2. headers: " + JSON.stringify(headers['content-type']));
+    console.log("2. headers: " + JSON.stringify(headers));
     console.log("3. request.url: " + url); // to jest inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, ale dla get JSon tez jest "/" - i tu dla post-jpeg interpretuje jako json
-    console.log("4. headers:content-type: " + url); // to jest inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, ale dla get JSon tez jest "/" - i tu dla post-jpeg interpretuje jako json
+    console.log("4. headers:content-type: " + JSON.stringify(headers['content-type']); // to jest inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, ale dla get JSon tez jest "/" - i tu dla post-jpeg interpretuje jako json
 
     //TODO: 28-10-2015 trzeba przy POST rozróżnić image od json i na tej podstawie budowac file path (w dwóch poniższych linijkach każdy post daje /')
 
-    var filepath = '.' + (url == '/' ? json_data_file_path : url);
+    var filepath; // = '.' + (headers['content-type'] == 'undefined' ?  json_data_file_path : url);
+    if(headers['content-type'] == 'undefined'){
+        console.log("confirmed undefined");
+        filepath = json_data_file_path;
+    }
+    else if(headers['content-type'] =="image/jpeg"){
+        console.log("confirmed image/jpeg");
+        console.log(data_for_curently_added_patch[0][0]);
+        filepath = data_for_curently_added_patch[0][0]
+    }
+    else {console.log("content-type jest poza kontrola")};
 
     //TODO: różnica polega na "headers/content type" - 04-11-2016"
     // TODO:  09-09-216 nad tym się zastanowić bo to mi zasrywa i obadać :błąd jest na serwerze bo interpretuje url do jpg'ajako JSon pomimo, że jego headers content type jest image/jpeg
@@ -90,12 +100,12 @@ http.createServer(function (request, response) {
             if (fileext == ".jpg") { // request to post - jpg
 
                 console.log("fileext to jotpeg, a jego url: " + url);
-                if (data_for_new_patches = !null) {
+                if (data_for_curently_added_patch = !null) {
 
 
                 }
 
-                data_for_new_patches = null;
+                data_for_curently_added_patch = null;
 
             }
 
@@ -132,11 +142,11 @@ http.createServer(function (request, response) {
                     console.log("to sa dane do Patcha");
 
 
-                    data_for_new_patches = bodyObject; // bO:[path, promptedData, nextOriginalParent],pD: [ścieżka_pierwotna_pliku, dane jsona, parent.id lub "newParent" ],
+                    data_for_curently_added_patch = bodyObject; // bO:[path, promptedData, nextOriginalParent],pD: [ścieżka_pierwotna_pliku, dane jsona, parent.id lub "newParent" ],
                                                         // path =[directory,file]
 
-                    console.log("wyglad nowej sciezki: "+ bodyObject[0][0]);
-                    console.log("wyglad nowej sciezki po obcieciu: "+ bodyObject[0][1]); // obicięciu czego
+                    console.log("wyglad nowej sciezki do pliku: "+ bodyObject[0][0]);
+                    console.log("wyglad nowej sciezki po obcieciu folderu: "+ bodyObject[0][1]); // obicięciu czego
 
                     var currentPath = "."+bodyObject[0][1];
 
