@@ -76,7 +76,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
             PointEventListeners.addPoint();
             PointEventListeners.showPointContent();
             JsonBuilder.buildJSON(); // ponowne budowanie jsona z dodawanymi punktami i wysyłanie 
-            ImageDataAdding.addNewPatch(); //dodawanie zdjęć z zewnątrz
+            ImageDataAdding.addNewPatch(); //umozliwia dodawanie zdjęć z zewnątrz
             
 
         };
@@ -113,7 +113,8 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
 
             //console.log(data);
 
-            PatchBuilder.build(data); //// jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a;  PatchBuilder traversuje całego JSON'a
+            PatchBuilder.build(data); //// jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a;  PatchBuilder traversuje całego JSON'a;
+            // ma też poprzez data.url dostęp do plików serwera
 
             PointsBuilder.build(data);
 

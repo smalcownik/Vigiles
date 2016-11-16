@@ -34,7 +34,7 @@ define(['./MapData'], function (MapData) {
 
             http_request.onreadystatechange = function() {    if (http_request.readyState == 4) {
                 if (http_request.status == 200) {
-                    cb(http_request.responseText); // tu wchodzi cb - czyli "function(JSONstring)" w praktyce callback z loadPackage czyli "function(pack)"
+                    cb(http_request.responseText); // tu wchodzi cb - czyli "function(JSONstring)" w praktyce callback z loadData czyli "function(pack)"
                     // z wywolania loadPackage ,  za response text wchodzi obj (ktory w load package jest tworzony jsona w objekt)
                     // to jest miejsce gdzie wrzuca się w xmlhttprequest kod do obróbki - i dlatego u nas jest tu zmienna bo tym kodem są całe duże funkcje,
                     // które (m.in.) korzystaja z jsona itp.

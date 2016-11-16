@@ -1,4 +1,6 @@
-define(["./Patch"], function (Patch) { 
+/*wywolany w Viewer.showMapData*/
+
+define(["./Patch"], function (Patch) {
 
             var exported = {
 
