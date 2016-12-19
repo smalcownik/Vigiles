@@ -97,7 +97,7 @@ http.createServer(function (request, response) {
         }).on('data', function (chunk) {
             body.push(chunk);
 
-        }).on('end', function () {====--
+        }).on('end', function () {
 
 
             if (fileext == ".jpg") { // request to post - jpg
