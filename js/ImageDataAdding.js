@@ -119,7 +119,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
         function findById(nodeListElement){ //nodeListElement to array: [image.id, image, originalParent, parent.id ?(jesli istnieje)]
 
-            if( nodeListElement[0] === idNumber){
+            if( nodeListElement[0] === idNumber) // node list element odnosi sie do nodeList
                 node = nodeListElement;
             }
 
@@ -151,13 +151,15 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
         exported.originalJSONparsed = JSON.parse(exported.viewer.currentDataStringified) ; // żeby zbudować całą listę NODE'ow używa pliku z Viewera:objekt MapData (JSOn - string)
 
-       //to dziala - objekt!
-        console.log(exported.originalJSONparsed);
+        // console.log(exported.originalJSONparsed);
+        //to dziala - obiekt!
 
         exported.fillNodeList(exported.originalJSONparsed); // z obec
 
-        console.log(exported.nodeList);//[image.id, image, originalParent, parent.id] // parent.id nie wystepuje jezeli image ma jest OriginalParent
+        console.log(exported.nodeList);//[image.id, image, originalParent(numer folderu), parent.id] // parent.id nie wystepuje jezeli image jest na dnie stosu
                                         //originalParent nie odnosi się do numeru Patcha tylko do numeru folderu imgs
+        //TODO: 8-2-2017 : trzeba rozróżnić originalParent (folder) od zdjęcia, ktore jest na dnie stosu w danym folderze - trzeba to zrobic w ty pliku zeby
+        // nie bylo potem zadnych watpliwosci czy chdzi o folder czy o patch (np. patrz linie 278 i 303 i upewnij sie do czego sie odnosza: patch czy folder)
 
         var nextId = exported.prepareNextId(); // jest kolejny wolny Id
         // czy może ta tabela tworzy się za kazdym razem od nowa wiec automatycznie kolejne będą dodawane
@@ -170,7 +172,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
 
 
-    exported.buildPath = function(newId,parentId,nextOriginalParent){ // parent id jest trzecim elementem wyniku f-kcji exported.getNodeById
+    exported.buildPath = function(newId,parentId,nextOriginalParent){ // parent id jest trzecim elementem wyniku f-kcji exported.getNodeById, czyli numer folderu imgs
 
 
         if (parentId === "newParent") { //wartosc "newParent" jest domyslnie dodawana w prompcie (w funckji newPatchDataReceiverBuilder)
@@ -273,7 +275,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
             console.log(newImgPath);
 
-            var newImgDataParentId = prompt("PARENT_ID - jak nie podasz to doda nowy originalParent","0");
+            var newImgDataParentId = prompt("PARENT_ID - jak nie podasz to doda nowy originalParent","0"); // to jest numer nie patcha tylko folderu imgs -original parent ?
 
             //var newImgJsonData = prompt("Podaj dane do zdjęcia - JSONData");
             // to na razie puszczam z automatu f-kcją "setSampleJsonData"
