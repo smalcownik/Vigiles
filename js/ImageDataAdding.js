@@ -66,7 +66,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
     exported.dig = function(image,i, visitFunction, parent) {
 
-        visitFunction(image,i,parent);
+        visitFunction(image,i,parent); // i to numer folderu imgs - czyli folder imgs[0],imgs[1]... maja "i" w swojej nazwie
 
         image.children.forEach(
             function (childrenImage) {
@@ -88,7 +88,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
         exported.nodeList = []; // ma być tablica, ktora umozliwi znalezienie referencji do objektu Patch po ID
         
-        function fill(image,originalParent,parent){
+        function fill(image,originalParent,parent){ // originalParent odnosi sie do "i" a wiec do folderu imgs z numerem
 
             if(parent){
 
@@ -152,10 +152,12 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         exported.originalJSONparsed = JSON.parse(exported.viewer.currentDataStringified) ; // żeby zbudować całą listę NODE'ow używa pliku z Viewera:objekt MapData (JSOn - string)
 
        //to dziala - objekt!
+        console.log(exported.originalJSONparsed);
 
         exported.fillNodeList(exported.originalJSONparsed); // z obec
 
-        console.log(exported.nodeList);//[image.id, image, originalParent, parent.id]
+        console.log(exported.nodeList);//[image.id, image, originalParent, parent.id] // parent.id nie wystepuje jezeli image ma jest OriginalParent
+                                        //originalParent nie odnosi się do numeru Patcha tylko do numeru folderu imgs
 
         var nextId = exported.prepareNextId(); // jest kolejny wolny Id
         // czy może ta tabela tworzy się za kazdym razem od nowa wiec automatycznie kolejne będą dodawane
@@ -171,8 +173,13 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
     exported.buildPath = function(newId,parentId,nextOriginalParent){ // parent id jest trzecim elementem wyniku f-kcji exported.getNodeById
 
 
-        if (parentId === "newParent") {
-            //trzeba sprawdzić, który originalParentIndex jest największy i zwiększyc tę wartość o 1
+        if (parentId === "newParent") { //wartosc "newParent" jest domyslnie dodawana w prompcie (w funckji newPatchDataReceiverBuilder)
+                                        // jezeli nie określimy numeru parenta dla dodawanego patcha
+
+                                        //trzeba sprawdzić, który originalParentIndex jest największy i zwiększyc tę wartość o 1
+
+
+
 
             var folderPath =('/data/test_arch/imgs/imgs['+nextOriginalParent+']');
 
@@ -181,7 +188,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
             console.log(path);
 
-            console.log("skonczylem bez parenta wiec trzeba dodac nowy folder na imgsy");
+            console.log("dodaje nowego parenta wiec trzeba dodac nowy folder na imgsy i sciezke do niego");
 
             return path;
 
@@ -199,6 +206,8 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
             console.log(path);
 
+            console.log("dodaje sciezke path nowego patcha, dla ktorego istnieje parent");
+
             return path;
         }
 
@@ -213,7 +222,8 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
 
         var nextOriginalParent;
-        if (promptedData[2]==="newParent"){
+        if (promptedData[2]==="newParent"){ //wartosc "newParent" jest domyslnie dodawana w prompcie (w funckji newPatchDataReceiverBuilder)
+                                            // jezeli nie określimy numeru parenta dla dodawanego patcha
 
 
             nextOriginalParent = exported.originalJSONparsed.images.length; // tu wskakuje liczba (nie string);
