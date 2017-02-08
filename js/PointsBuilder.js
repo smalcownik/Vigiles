@@ -1,4 +1,5 @@
-define(["./Point"], function (Point) { //tworzy objekty dodawanych punktów razem z właściowściami DOM
+define(["./Point"], function (Point) { // wywolana w Viewer.js
+                                       //tworzy objekty dodawanych punktów razem z właściowściami DOM
 
 var exported = {};
 
