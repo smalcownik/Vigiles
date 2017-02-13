@@ -160,8 +160,8 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
         console.log(exported.nodeList);//[image.id, image, originalParent(numer folderu), parent.id] // parent.id nie wystepuje jezeli image jest na dnie mapy/stosu
                                         //originalParent nie odnosi się do numeru Patcha tylko do numeru folderu imgs
-        //TODO: 8-2-2017 : trzeba rozróżnić originalParent (folder) od zdjęcia, ktore jest na dnie stosu w danym folderze - trzeba to zrobic w ty pliku zeby
-        // nie bylo potem zadnych watpliwosci czy chdzi o folder czy o patch (np. patrz linie 280 i 303(5) i upewnij sie do czego sie odnosza: patch czy folder)
+        // trzeba rozróżnić originalParent (folder) od zdjęcia, ktore jest na dnie stosu w danym folderze
+        // nie bylo potem zadnych watpliwosci czy chdzi o folder czy o patch (np. patrz linie 280 i 303(5): wniosek: odnosi się do folderu!
 
         var nextId = exported.prepareNextId(); // jest kolejny wolny Id
         // czy może ta tabela tworzy się za kazdym razem od nowa wiec automatycznie kolejne będą dodawane

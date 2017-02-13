@@ -102,7 +102,7 @@ http.createServer(function (request, response) {
 
             if (fileext == ".jpg") { // request to post - jpg
 
-                console.log("8. fileext to jotpeg, a jego url: " + url); //TODO: 1. 19.12.2016:tutaj jestem - co dalej ?:
+                console.log("8. fileext to jotpeg, a jego url: " + url); //TODO: 1. 13.02.2017:tutaj jestem - co dalej ?:
                                                                          //wynik tego działania pojawia sie w serwerze node'a po kliknieciu addPatch
                                                                         // napisać program aby to działanie szło dalej - tj. żeby prawidłowo działał url
                 // do zdjęcia i pod tym urlem zdjęcie było dostępne (patrz "TO DO 2.")
@@ -170,7 +170,7 @@ http.createServer(function (request, response) {
 
 
 
-                    //TODO: 04-11-2016 tutaj teraz robic (ale najpierw poprzednie TODO z tej daty)
+                    //TODO: 04-11-2016 to teraz robic (ale najpierw poprzednie TODO z tej daty)
                     // a. jesli jest parent - zapisać plik
                     //    - zapisać url obrazka, żeby sprawdzić z następnym request/postem - aby móc dopasować przesłany obrazek do zapisanego urla
                     //    - wtedy  wysłać request/postem sam obrazek
