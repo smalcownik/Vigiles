@@ -122,7 +122,7 @@ define(["./Camera","./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJsonO
         }
     };
 
-    exported.cleanPatchBeforeAddingToObject = function (image) { //ogolocenie patcha przed dodanie do objektu
+    exported.cleanPatchBeforeAddingToObject = function (image) { //ogolocenie patcha przed dodaniem do objektu
 
         var result = {};
 

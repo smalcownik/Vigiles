@@ -57,7 +57,7 @@ http.createServer(function (request, response) {
 
     var filepath; // = '.' + (request.url == "/" ?  json_data_file_path : url);
     if(typeof headers['content-type'] == "undefined"){ // to jest GET - wgrywają sie pliki z serwera (jpg lub json - on tu nie widzi typu w headers),
-        // ale rozrozni jes po url'u
+        // ale rozrozni je po url'u
 
         filepath = "." + (request.url == "/" ?  json_data_file_path : url);
         console.log("filepath: " + filepath);
@@ -102,10 +102,10 @@ http.createServer(function (request, response) {
 
             if (fileext == ".jpg") { // request to post - jpg
 
-                console.log("8. fileext to jotpeg, a jego url: " + url); //TODO: 1. 13.02.2017:tutaj jestem - co dalej ?:
+                console.log("8. fileext to jotpeg, a jego url: " + url); //TODO: 1. 13.02.2017:tutaj jestem - dalszy plan:
                                                                          //wynik tego działania pojawia sie w serwerze node'a po kliknieciu addPatch
                                                                         // napisać program aby to działanie szło dalej - tj. żeby prawidłowo działał url
-                // do zdjęcia i pod tym urlem zdjęcie było dostępne (patrz "TO DO 2.")
+                                                                        // do zdjęcia i pod tym urlem zdjęcie było dostępne (patrz "TO DO 2.")
 
 
                 if (data_for_curently_added_patch = !null) {
