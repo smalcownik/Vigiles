@@ -79,7 +79,7 @@ http.createServer(function (request, response) {
     };
 
 
-    // TODO: 2. w razie problemu  http://stackoverflow.com/questions/8445019/problems-with-sending-jpg-over-http-node-js
+   
 
 
     var fileext = path.extname(filepath);
@@ -107,9 +107,10 @@ http.createServer(function (request, response) {
                 console.log("8. fileext to jotpeg, a jego url: " + url); //TODO: 1. 13.02.2017:tutaj jestem - dalszy plan:
                                                                          //wynik tego działania pojawia sie w serwerze node'a po kliknieciu addPatch
                                                                         // napisać program aby to działanie szło dalej - tj. żeby prawidłowo działał url
-                                                                        // do zdjęcia i pod tym urlem zdjęcie było dostępne (patrz "TO DO 2.")
-
-
+                                                                        // do zdjęcia i pod tym urlem zdjęcie było dostępne (szukaj rozwiązania na stackoverflowe)
+                
+                
+                
                 if (data_for_curently_added_patch = !null) {
 
 
