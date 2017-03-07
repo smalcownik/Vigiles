@@ -101,7 +101,8 @@ http.createServer(function (request, response) {
         }).on('end', function () {
 
 
-            if (fileext == ".jpg") { // request to post - jpg
+            if (fileext == ".jpg") { // request to post - jpg - informacje, ze to jpg bierze z danych do Patcha, natomiast brauje sceizki "url" od samego patcha
+                // trzeba tak zrobić, żeby tą ścieżkę wyłuskać
 
                 console.log("8. fileext to jotpeg, a jego url: " + url); //TODO: 1. 13.02.2017:tutaj jestem - dalszy plan:
                                                                          //wynik tego działania pojawia sie w serwerze node'a po kliknieciu addPatch
