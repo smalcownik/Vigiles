@@ -8,7 +8,8 @@ var http = require('http');
 var fs = require('fs');
 var path = require('path');
 var mkdirp = require('mkdirp'); // do tego musialem zainstalowa nmp i "npm install mkdirp" z nmp
-var json_data_file_path = "/data/test_arch/data1.json";
+var json_data_file_path = "/data/test_arch/data1.json"; // to trzeba będzie zrobić, żeby spośród kilku opcji wyboru wybierało - na razie nie rozbione
+                                                        //no i wystepuje w kilku miejscach wiec zwrocic uwage
 var path_image_folder;
 var port = 80;
 var data_for_curently_added_patch;
@@ -62,15 +63,15 @@ http.createServer(function (request, response) {
         filepath = "." + (request.url == "/" ?  json_data_file_path : url);
         console.log("filepath: " + filepath);
     }
-    else if(headers['content-type'] =="image/jpeg"){  // to jest POST: przesyła się
+    else if(headers['content-type'] =="image/jpeg"){  // to jest POST: przesyła się // ta sytuacja dotyczy tylko przesyłania nowego pliku image
         console.log("5. confirmed image/jpeg");
         console.log("5.1 sciezka do pliku" + data_for_curently_added_patch[0][0]);
         filepath = "."+ data_for_curently_added_patch[0][0];
     }
     else if(headers['content-type'] =="application/json;charset=UTF-8"){
-        console.log("aktualizacja jsona");
+        console.log("4.1. aktualizacja jsona");
         filepath = "." + (request.url == "/" ?  json_data_file_path : url);
-        console.log("filepath: " + filepath);
+        console.log("4.2. filepath: " + filepath);
 
     }
     else {
