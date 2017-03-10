@@ -9,7 +9,7 @@ define([], function () {
             //console.log(data.url); // == console.log(data); == "http://52.30.81.203/"
 
             //imgHTML.src=data.url+'/imgs/imgs['+i+']/'+image.id+'.jpg'; //  tu jest odniesienie do plików jpg (jedyne!!)
-            imgHTML.src=data.url+'/data/test_arch/imgs/imgs['+i+']/'+image.id+'.jpg'; //  tu jest odniesienie do plików jpg (jedyne!!) //TODO: 13.02.2017 do opcji wyboru paczki danych tutaj trzeba zmieniac fragment "test_arch" w zalezności od wyboru paczki
+            imgHTML.src=data.url+'/data/test_arch/imgs/imgs['+i+']/'+image.id+'.jpg'; // TODO: tu jest odniesienie do plików jpg (jedyne!!) //TODO: 13.02.2017 do opcji wyboru paczki danych tutaj trzeba zmieniac fragment "test_arch" w zalezności od wyboru paczki
             //powyżej dwie wersje - górna odnosi się do serwera na dysku - doln do serwera na amazonie
             console.log(imgHTML.src); // =="http://52.30.81.203//data/test_arch/imgs/imgs[0]/0.jpg" (koncowka oczywiscie sie zmienia)
             this.DOM = imgHTML;

@@ -47,7 +47,7 @@ define(['./MapData'], function (MapData) {
 
         }
 
-//debugger;
+debugger;
             exported.loadData = function(url,cb){ // to cb jest z Viever.loadURL()
 //debugger;
                 //makeRequest(url+'/data1.json', // url pliku z dysku - dysk odpowiada plikiem
