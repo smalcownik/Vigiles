@@ -61,7 +61,7 @@ http.createServer(function (request, response) {
         // ale rozrozni je po url'u
 
         filepath = "." + (request.url == "/" ?  json_data_file_path : url);
-        console.log("filepath: " + filepath);
+        console.log("4.0. filepath: " + filepath);
     }
     else if(headers['content-type'] =="image/jpeg"){  // to jest POST: przesyła się // ta sytuacja dotyczy tylko przesyłania nowego pliku image
         console.log("5. confirmed image/jpeg");
