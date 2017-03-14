@@ -96,6 +96,9 @@ http.createServer(function (request, response) {
             console.error(err);
 
         }).on('data', function (chunk) {
+
+            console.log("7.1. zabiera sie za przesylanie data"); // ten sposob przesyalnaia pliku prawdopodobnie nie dziala dla jpg wiec bedzie trzeba ten fragment
+                                                                    // przerzucic do "if (fileext == ".json")"
             body.push(chunk);
 
         }).on('end', function () {
