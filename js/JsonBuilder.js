@@ -118,9 +118,7 @@ define(["./Camera","./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJsonO
 
 
         for (var i = 0; i < this.patchesWithoutParent.length; i++) {
-            this.dig(this.patchesWithoutParent[i], visitFunction, null);
-        }
-    };
+            this.dig(this.patchesWithoutParent[i], visitFunction, null)
 
     exported.cleanPatchBeforeAddingToObject = function (image) { //ogolocenie patcha przed dodaniem do objektu
 
