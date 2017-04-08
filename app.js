@@ -22,5 +22,5 @@ requirejs([
 
         //Viewer.loadURL('data/test_arch'); // możnaby od razu dodać '/data1.json', ale jest w MapDataProvider to zrobione dla ogólności
         //Viewer.loadURL('data/test_arch'); // do servera z amazona (plik:   )
-        Viewer.loadURL('http://81.163.204.78/'); // do servera z amazona (plik JSON oddany przez node'a  )
+        Viewer.loadURL('http://81.163.204.78:4235'); // do servera z amazona (plik JSON oddany przez node'a  )
     });

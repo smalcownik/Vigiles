@@ -82,7 +82,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
         };
 //
 
-        exported.loadURL = function(url){ // ta fkcja jest odpalmana na początku z app.js z argumentem ('data/arch1')
+        exported.loadURL = function(url){ // ta f-kcja jest odpalana na początku z app.js z argumentem ('data/arch1')
 
             {
                 if (typeof(url) !== 'string') {
