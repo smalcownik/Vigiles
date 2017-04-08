@@ -11,7 +11,7 @@ var mkdirp = require('mkdirp'); // do tego musialem zainstalowa nmp i "npm insta
 var json_data_file_path = "/data/test_arch/data1.json"; // to trzeba będzie zrobić, żeby spośród kilku opcji wyboru wybierało - na razie nie rozbione
                                                         //no i wystepuje w kilku miejscach wiec zwrocic uwage
 var path_image_folder;
-var port = 80;
+var port = 80; //TODO: port 4000-5000
 var data_for_curently_added_patch;
 
 function contentType(ext) {
@@ -108,6 +108,8 @@ http.createServer(function (request, response) {
                 // trzeba tak zrobić, żeby tą ścieżkę wyłuskać
 
                 console.log("8. fileext to jotpeg, a jego url: " + url); //TODO: 1. 13.02.2017:tutaj jestem - dalszy plan:
+                                                                          // zakladki przegladarki "node server" 2 ostatnie, ew. 3-4 ostatnie tam jest klucz
+
                                                                          //wynik tego działania pojawia sie w serwerze node'a po kliknieciu addPatch
                                                                         // napisać program aby to działanie szło dalej - tj. żeby prawidłowo działał url
                                                                         // do zdjęcia i pod tym urlem zdjęcie było dostępne (szukaj rozwiązania na stackoverflowe)
