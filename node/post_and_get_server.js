@@ -11,7 +11,7 @@ var mkdirp = require('mkdirp'); // do tego musialem zainstalowa nmp i "npm insta
 var json_data_file_path = "/data/test_arch/data1.json"; // to trzeba będzie zrobić, żeby spośród kilku opcji wyboru wybierało - na razie nie rozbione
                                                         //no i wystepuje w kilku miejscach wiec zwrocic uwage
 var path_image_folder;
-var port = 80; //TODO: port 4000-5000
+var port = 4235; //TODO: port 4000-5000
 var data_for_curently_added_patch;
 
 function contentType(ext) {
