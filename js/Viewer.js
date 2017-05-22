@@ -7,7 +7,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
 
             ],
             camera:Camera,
-            serverURL:'http://81.163.204.78:4235'
+            serverURL:'http://81.163.204.78:4235' 
         };
 
 
