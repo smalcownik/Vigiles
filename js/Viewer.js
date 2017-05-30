@@ -8,7 +8,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
             ],
             camera:Camera,
             
-            serverURL:'http://192.168.55.102:4235'
+            serverURL:'http://192.168.55.102:4245'
 
             // TODO: ZAWSZE tutaj zmieniać na p00.pl:4235 jak się jest poza domem
             //serverURL:'http://p00.pl:4235'
