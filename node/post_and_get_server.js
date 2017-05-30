@@ -108,7 +108,7 @@ http.createServer(function (request, response) {
                 // trzeba tak zrobić, żeby tą ścieżkę wyłuskać
 
                 console.log("8. fileext to jotpeg, a jego url: " + url); //TODO: 1. 13.02.2017:tutaj jestem - dalszy plan:
-                                                                          //TODO:08.04.2017 zakladki przegladarki "node server" 2 ostatnie, ew. 3-4 ostatnie tam jest klucz
+                                                                          //TODO:30.05.2017 zakladki przegladarki "node server" 2 ostatnie, ew. 3-4 ostatnie tam jest klucz
 
                                                                          //wynik tego działania pojawia sie w serwerze node'a po kliknieciu addPatch
                                                                         // napisać program aby to działanie szło dalej - tj. żeby prawidłowo działał url
