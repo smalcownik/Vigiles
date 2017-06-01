@@ -9,11 +9,13 @@ define([], function () {
 
     var exported = {};
 
-    var viewer = this.viewer;
 
 
 
-    exported.makeRequest = function (json) { 
+
+    exported.makeRequest = function (json) {
+
+        var viewer = this.viewer;
 
         console.log(json);
 
