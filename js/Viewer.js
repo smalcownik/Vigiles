@@ -1,5 +1,5 @@
-define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera","./CameraEventListeners","./PointEventListeners",'./PointEventFunctions','./JsonBuilder','./ImageDataAdding','./UpdateJsonOnServerREQUEST'], function (
-        MapDataProviderREQUEST,PatchBuilder,PointsBuilder,Camera,CameraEventListeners,PointEventListeners,PointEventFunctions,JsonBuilder,ImageDataAdding,UpdateJsonOnServerREQUEST
+define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera","./CameraEventListeners","./PointEventListeners",'./PointEventFunctions','./JsonBuilder','./ImageDataAdding','./UpdateJsonOnServerREQUEST', './AddDataForImageToServerREQUEST'], function (
+        MapDataProviderREQUEST,PatchBuilder,PointsBuilder,Camera,CameraEventListeners,PointEventListeners,PointEventFunctions,JsonBuilder,ImageDataAdding,UpdateJsonOnServerREQUEST,AddDataForImageToServerREQUEST
     ) { //wyswietla strone i poczatkowe dane
 
         var exported = {
@@ -27,6 +27,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
             JsonBuilder.viewer = this;
             ImageDataAdding.viewer =this;
             UpdateJsonOnServerREQUEST.viewer =this;
+            AddDataForImageToServerREQUEST.viewer = this;
 
             exported.registerEventListeners();  // reakcja na przyciski MUSIAŁEM NAJPIERW
 
