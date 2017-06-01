@@ -15,6 +15,7 @@ define(["./Viewer"], function (Viewer) {
         console.log(json);
 
         var http_request = new XMLHttpRequest();
+        console.log(Viewer);
         http_request.open("POST", Viewer.serverURL); // tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem
         // Vigiles/node/node_post.js)
         //dziala !
