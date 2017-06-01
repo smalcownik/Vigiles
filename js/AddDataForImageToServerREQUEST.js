@@ -3,7 +3,7 @@
  */
 // f-kcja wywołana w ImageDataAdding.executeAddingNewImage
 
-define([], function () {
+define(["./Viewer"], function (Viewer) { // TODO: tu była zmianka i w linii 16
 
     var exported = {};
 
@@ -13,7 +13,7 @@ define([], function () {
         console.log(imageData);
 
         var http_request = new XMLHttpRequest();
-        http_request.open("POST", "http://52.30.81.203",false); // tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem
+        http_request.open("POST", Viewer.serverURL,false); // tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem
         // Vigiles/node/node_post.js)
         //dziala !
         //mozna dac dla testow url pliku z dysku, powinno tam sie zapisac ale nie testowalem

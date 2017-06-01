@@ -15,12 +15,12 @@ define([], function () {
 
     exported.makeRequest = function (json) {
 
-        var viewer = this.viewer;
+        var viewer = this.viewer; // musiałem wstrzyknąć viewera w ten sposób bo przez require/define/function nie widziało go - nie wiem dlaczego!
 
         console.log(json);
 
         var http_request = new XMLHttpRequest();
-        console.log(viewer);
+        //console.log(viewer);  // 
         http_request.open("POST", viewer.serverURL); // tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem
         // Vigiles/node/node_post.js)
         //dziala !
