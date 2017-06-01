@@ -5,9 +5,12 @@
  
  */
 
-define(["./Viewer"], function (Viewer) {
+define([], function () {
 
     var exported = {};
+
+    var viewer = this.viewer;
+
 
 
     exported.makeRequest = function (json) { 
@@ -15,8 +18,8 @@ define(["./Viewer"], function (Viewer) {
         console.log(json);
 
         var http_request = new XMLHttpRequest();
-        console.log(Viewer);
-        http_request.open("POST", Viewer.serverURL); // tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem
+        console.log(viewer);
+        http_request.open("POST", viewer.serverURL); // tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem
         // Vigiles/node/node_post.js)
         //dziala !
         //mozna dac dla testow ulr pliku z dysku, powinno tam sie zapisac ale nie testowalem
