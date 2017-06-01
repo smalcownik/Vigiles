@@ -7,12 +7,16 @@ define([], function () {
     var exported = {};
 
 
+
     exported.makeRequest = function (imageUrl) { // f-kcja wywołana w ImageDataAdding.executeAddingNewImage
 
         console.log(imageUrl);
 
+        var viewer = this.viewer; // musiałem wstrzyknąć viewera w ten sposób bo przez require/define/function nie widziało go - nie wiem dlaczego!
+
+
         var http_request = new XMLHttpRequest();
-        http_request.open("POST", "http://52.30.81.203");
+        http_request.open("POST", viewer.serverURL);
       
 
         http_request.setRequestHeader("Content-Type","image/jpeg");
