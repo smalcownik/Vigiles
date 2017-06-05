@@ -21,7 +21,7 @@ define([], function () {
 
         var http_request = new XMLHttpRequest();
         //console.log(viewer);  // 
-        http_request.open("POST", viewer.serverURL+"lala"); // tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem
+        http_request.open("POST", viewer.serverURL+"/lala"); // tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem
         // Vigiles/node/node_post.js)
         //dziala !
         //mozna dac dla testow ulr pliku z dysku, powinno tam sie zapisac ale nie testowalem
