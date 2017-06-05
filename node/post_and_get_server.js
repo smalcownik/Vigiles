@@ -60,7 +60,8 @@ http.createServer(function (request, response) {
     if(typeof headers['content-type'] == "undefined"){ // to jest GET - wgrywają sie pliki z serwera (jpg lub json - on tu nie widzi typu w headers),
         // ale rozrozni je po url'u
 
-        filepath = "." + (request.url == "/" ?  json_data_file_path : url);
+        filepath = "." + json_data_file_path ;//(request.url == "/" ?  json_data_file_path : url); //TODO: tutaj 5.06.2017 próby
+
         console.log("4.0. filepath: " + filepath);
     }
     else if(headers['content-type'] =="image/jpeg"){  // to jest POST: przesyła się // ta sytuacja dotyczy tylko przesyłania nowego pliku image
@@ -70,7 +71,7 @@ http.createServer(function (request, response) {
     }
     else if(headers['content-type'] =="application/json;charset=UTF-8"){
         console.log("4.1. aktualizacja jsona");
-        filepath = "." + json_data_file_path ;//(request.url == "/" ?  json_data_file_path : url); //TODO: tutaj 5.06.2017 próby
+        filepath = "." + (request.url == "/" ?  json_data_file_path : url);
 
         console.log("4.2. filepath: " + filepath);
 
