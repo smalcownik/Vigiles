@@ -218,6 +218,8 @@ http.createServer(function (request, response) {
 
     else { // if (request.method === "GET") // to dotyczy przesyłania plików zdjęć z serwera
 
+        console.log("10. method 2: " + method);
+
         var stat = fs.readFileSync(filepath);
 
         response.setHeader('Access-Control-Allow-Origin', '*'); // to musi być bo wyrzuca błąd
