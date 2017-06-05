@@ -70,7 +70,8 @@ http.createServer(function (request, response) {
     }
     else if(headers['content-type'] =="application/json;charset=UTF-8"){
         console.log("4.1. aktualizacja jsona");
-        filepath = "." + (request.url == "/" ?  json_data_file_path : url);
+        filepath = "." + json_data_file_path ;//(request.url == "/" ?  json_data_file_path : url); //TODO: tutaj 5.06.2017 próby
+
         console.log("4.2. filepath: " + filepath);
 
     }
@@ -109,6 +110,10 @@ http.createServer(function (request, response) {
 
                 console.log("8. fileext to jotpeg, a jego url: " + url); //TODO: 1. 13.02.2017:tutaj jestem - dalszy plan:
                                                                           //TODO:30.05.2017 zakladki przegladarki "node server" 3 ostatnie, ew. 4-5 ostatnie tam jest klucz
+
+                                                                         //TODO:póxniej zrobić logike url'ow (przyklad na update jsononserverREQUEST)
+
+
 
                                                                          //wynik tego działania pojawia sie w serwerze node'a po kliknieciu addPatch
                                                                         // napisać program aby to działanie szło dalej - tj. żeby prawidłowo działał url
