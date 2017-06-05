@@ -60,7 +60,7 @@ http.createServer(function (request, response) {
     if(typeof headers['content-type'] == "undefined"){ // to jest GET - wgrywają sie pliki z serwera (jpg lub json - on tu nie widzi typu w headers),
         // ale rozrozni je po url'u
 
-        filepath = "." + (request.url == "/" ?  json_data_file_path : url); //TODO: tutaj 5.06.2017 próby
+        filepath = "." + json_data_file_path ; // (request.url == "/" ?  json_data_file_path : url); //TODO: tutaj 5.06.2017 próby
 
         console.log("4.0. filepath: " + filepath);
     }
