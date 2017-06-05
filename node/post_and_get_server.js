@@ -87,6 +87,8 @@ http.createServer(function (request, response) {
 
     var fileext = path.extname(filepath);
 
+    console.log(" 4.0.1. typ rozszerzenia pliku :"+typeof fileext);
+
     console.log("6. ext przed :" + fileext);  // rozszerzenie/typ pliku
 
 
