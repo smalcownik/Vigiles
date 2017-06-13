@@ -64,17 +64,17 @@ http.createServer(function (request, response) {
     console.log("3. request.url: " + url); // to jest inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, ale dla get JSon tez jest "/" - i tu dla post-jpeg interpretuje jako json
     var contentTypeString = JSON.stringify(headers['content-type']);
 
-    console.log(headers['content-type']);
-    console.log(typeof headers['content-type']);
-    console.log("type of:" + typeof contentTypeString);
-    console.log(contentTypeString);
+    //console.log(headers['content-type']);
+    //console.log(typeof headers['content-type']);
+    //console.log("type of:" + typeof contentTypeString);
+    //console.log(contentTypeString);
 
     console.log("4. headers:content-type: " + contentTypeString); // dla json get,  pokazuje undefined - wyjasnic
 
 
     var filepath; // = '.' + (request.url == "/" ?  json_data_file_path : url);
 
-    if(contentTypeString == "undefined"){ // to jest GET - wgrywają sie pliki z serwera (jpg lub json - on tu nie widzi typu w headers),
+    if(typeof contentTypeString === "undefined"){ // to jest GET - wgrywają sie pliki z serwera (jpg lub json - on tu nie widzi typu w headers),
         // ale rozrozni je po url'u
 
         filepath = "." + (request.url == "/" ?  json_data_file_path : url); //TODO: tutaj 5.06.2017 próby
