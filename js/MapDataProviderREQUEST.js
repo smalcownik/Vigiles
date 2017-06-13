@@ -46,7 +46,7 @@ define(['./MapData'], function (MapData) {
             //http_request.setRequestHeader("Content-Type","application/json;charset=UTF-8");
             //http_request.setRequestHeader("Content-Type","image/jpeg");
 
-            console.log(url);
+            console.log("MDP.REQUEST_URL:" + url);
 
             http_request.send(null);
 
