@@ -54,8 +54,8 @@ http.createServer(function (request, response) {
 
     var body = []; // gdy to body chciałem dać poza createServer - jako zmienną globalną, to w request.on("data") wyskakiwał błąd że body "has no push method"
 
-    var headers = request.headers;
-    var method = request.method;
+    var headers = request.headers; 
+    var method = request.method; 
     var url = request.url;
 
     console.log("1. method 1: " + method);
@@ -253,6 +253,7 @@ http.createServer(function (request, response) {
         // bo na wypadek jsona znowu trzeba przekierować program w inne miejsce- tam gdzie powinien isc nomalnie JSON przed zmianą w pliku UpdateJsonREQUEST o koncowke URL'a lalala
 
         var stat = fs.readFileSync(filepath);
+        
 
         response.setHeader('Access-Control-Allow-Origin', '*'); // to musi być bo wyrzuca błąd
         response.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // to też musi być bo wyrzuca błąd
@@ -278,6 +279,3 @@ http.createServer(function (request, response) {
     //Callback triggered when server is successfully listening.
     console.log("Server listening on: http://localhost:%s", port);
 });
-
-
-

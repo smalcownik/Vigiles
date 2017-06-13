@@ -39,7 +39,7 @@ define(['./MapData'], function (MapData) {
                     // to jest miejsce gdzie wrzuca się w xmlhttprequest kod do obróbki - i dlatego u nas jest tu zmienna bo tym kodem są całe duże funkcje,
                     // które (m.in.) korzystaja z jsona itp.
                     
-                    console.log(http_request.responseText);
+                    console.log(http_request.responseText); // ten response text dostaje w pliku node_server, tam w chwili tego requesta jest udzielana odpowiedz
                 } else {
 
                 }

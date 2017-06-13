@@ -32,7 +32,7 @@ define([], function () {
         /*http_request.onload = function(){ console.log("as as asas a");};*/ // to też może byc ale bez tego działa
 
 
-        http_request.send(json);
+        http_request.send(json); // to ma forme JSON'A
 
     };
 
