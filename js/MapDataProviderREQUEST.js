@@ -38,6 +38,8 @@ define(['./MapData'], function (MapData) {
                     // z wywolania loadPackage ,  za response text wchodzi obj (ktory w load package jest tworzony jsona w objekt)
                     // to jest miejsce gdzie wrzuca się w xmlhttprequest kod do obróbki - i dlatego u nas jest tu zmienna bo tym kodem są całe duże funkcje,
                     // które (m.in.) korzystaja z jsona itp.
+                    
+                    console.log(http_request.responseText);
                 } else {
 
                 }
@@ -46,7 +48,7 @@ define(['./MapData'], function (MapData) {
             //http_request.setRequestHeader("Content-Type","application/json;charset=UTF-8");
             //http_request.setRequestHeader("Content-Type","image/jpeg");
 
-            console.log("MDP.REQUEST_URL:" + url);
+            console.log("MDP.REQUEST_URL:" + url); //
 
             http_request.send(null);
 
