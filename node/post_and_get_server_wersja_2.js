@@ -78,13 +78,16 @@ http.createServer(function (request, response) {
             console.log("4.1. method:"+ method + ", a powinno byc GET");
         //filepath = "." + (request.url == "/" ?  json_data_file_path : url); //TODO: tutaj 5.06.2017 próby
 
-        //console.log("4.0. filepath: " + filepath);}
+        //console.log("4.0. filepath: " + filepath);
+        }
+
 
         if (method == "POST"){//{ to jest POST: przesyła się // ta sytuacja dotyczy tylko przesyłania nowego pliku image
             console.log("4.2. method:"+ method + ", a powinno byc POST");
             console.log("5. confirmed image/jpeg");
         console.log("5.1 sciezka do pliku" + data_for_curently_added_patch[0][0]);
         filepath = "."+ data_for_curently_added_patch[0][0];}
+
     }
     else if(headers['content-type'] =="application/json;charset=UTF-8"){
         console.log("4.3. aktualizacja jsona");
