@@ -1,6 +1,7 @@
 /**
  * Created by marek on 22.07.16.
  */
+//f-kcja wywołana w ImageDataAdding
 
 define([], function () {
 

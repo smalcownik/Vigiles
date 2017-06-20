@@ -249,7 +249,7 @@ http.createServer(function (request, response) {
 
         console.log("10. method 2: " + method);
 
-        //TODO: 5.06.2017: tutaj zrobić jeszcze jedno rozróżneinie po URL, żeby wbrew komentarzpwi  po else (lin. 219) rozróżnić zdjęcia od przesylanego JSON'a
+        //TODO: 5.06.2017: tutaj zrobić jeszcze jedno rozróżneinie po URL, żeby wbrew komentarzowi  po else (lin. 219) rozróżnić zdjęcia od przesylanego JSON'a
         // bo na wypadek jsona znowu trzeba przekierować program w inne miejsce- tam gdzie powinien isc nomalnie JSON przed zmianą w pliku UpdateJsonREQUEST o koncowke URL'a lalala
 
         var stat = fs.readFileSync(filepath);
