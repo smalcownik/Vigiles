@@ -277,5 +277,5 @@ http.createServer(function (request, response) {
 
 }).listen(port, function () {
     //Callback triggered when server is successfully listening.
-    console.log("Server listening on: http://localhost:%s", port);
+    console.log("Server listening on: http://localhost:%s");
 });
