@@ -22,7 +22,7 @@ http.createServer(function(request, response) {
 
     }).on('end', function() {
 
-        body = Buffer.concat(body).toString(); // bez "to String wychodzi zakodowany Buffer, ale działa"
+        body = Buffer.concat(body).toString(); // bez "toString()" wychodzi zakodowany Buffer, ale działa
 
         console.log(body);
         console.log(request.method);
