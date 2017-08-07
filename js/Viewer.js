@@ -9,11 +9,11 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
             camera:Camera,
             
 
-            // TODO: ZAWSZE tutaj zmieniać na p00.pl:4245 jak się jest poza domem
+            // TODO: ZAWSZE tutaj zmieniać na p00.pl:4246 jak się jest poza domem
 
             serverURL:'http://192.168.55.102:4246'  // W DOMU (sieć wewnętrzna z serwerem)
 
-            //serverURL:'http://p00.pl:4245'  // POZA DOMEM
+            //serverURL:'http://p00.pl:4246'  // POZA DOMEM
         };
 
 

@@ -8,18 +8,14 @@
 // przyklad w ajax_proby/node_server oraz server_with_several_file_types
 
 //Plan obróbki:
-    //
 
-var http = require('http');
-var fs = require('fs');
-var path = require('path');
-var mkdirp = require('mkdirp'); // do tego musialem zainstalowa nmp i "npm install mkdirp" z nmp
-var json_data_file_path = "/data/test_arch/data1.json"; // to trzeba będzie zrobić, żeby spośród kilku opcji wyboru wybierało - na razie nie zrobione
-                                                        //no i wystepuje w kilku miejscach wiec zwrocic uwagenie
-                                                        // ustawić to tak: to jest pierwsza paczka domyślna, a z przycisku na stronie
-                                                        // można wybrać inną paczkę i wtedy się załaduje inne auto
+
+var http = require('http');var fs = require('fs');var path = require('path');var mkdirp = require('mkdirp'); // do tego musialem zainstalowa nmp i "npm install mkdirp" z nmp
+var json_data_file_path = "/data/test_arch/data1.json"; // to trzeba będzie zrobić, żeby spośród kilku opcji wyboru wybierało - na razie nie zrobione i wystepuje w kilku
+// miejscach wiec zwrocic uwagenie ustawić to tak: to jest pierwsza paczka domyślna, a z przycisku na stronie można wybrać inną paczkę i wtedy się załaduje inne auto
+
 var path_image_folder;
-var port = 4246; //TODO: port 4000-5000 zmieniono 01.08 po przeniesieniu konta na Beast
+var port = 4246; //TODO: port 4000-5000 zmieniono 07.08 z 4245 na 46 bo wyskakiwał błąd przy odpalaniu: Error: listen EADDRINUSE :::4245
 var data_for_curently_added_patch;
 
 function contentType(ext) { // MIME TYPE
@@ -59,16 +55,13 @@ http.createServer(function (request, response) {
     var url = request.url;
 
     console.log("1. method 1: " + method);
-    console.log("2. headers: " + JSON.stringify(headers));
-   // console.log("2.1. headers: " + headers);
+   //console.log("2. headers: " + JSON.stringify(headers));
+
     console.log("3. request.url: " + url); // to jest inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, ale dla get JSon tez jest "/" - i tu dla post-jpeg interpretuje jako json
    // var contentTypeString = JSON.stringify(headers['content-type']);
     var contentTypeString = headers['content-type'];
 
-    //console.log(headers['content-type']);
-    //console.log(typeof headers['content-type']);
-    //console.log("type of:" + typeof contentTypeString);
-    //console.log(contentTypeString);
+    //console.log(headers['content-type']);//console.log(typeof headers['content-type']);//console.log("type of:" + typeof contentTypeString);//console.log(contentTypeString);
 
     console.log("4. headers:content-type: " + contentTypeString); // dla json get,  pokazuje undefined - wyjasnic
 

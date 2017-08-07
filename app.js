@@ -24,5 +24,5 @@ requirejs([
         //Viewer.loadURL('data/test_arch'); // do servera z amazona (plik:   )
         
         Viewer.loadURL(Viewer.serverURL); // do servera z amazona (plik JSON oddany przez node'a  )
-        //Viewer.serverURL:'http://192.168.55.102:4245'
+        //Viewer.serverURL:'http://192.168.55.102:4246'
     });
