@@ -63,7 +63,7 @@ http.createServer(function (request, response) {
 
     //console.log(headers['content-type']);//console.log(typeof headers['content-type']);//console.log("type of:" + typeof contentTypeString);//console.log(contentTypeString);
 
-    console.log("4. headers:content-type: " + contentTypeString); // dla json get,  pokazuje undefined - wyjasnic
+    console.log("4. headers:content-type: " + contentTypeString); // dla metody get ,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc)
 
 
     var filepath; // = '.' + (request.url == "/" ?  json_data_file_path : url);
