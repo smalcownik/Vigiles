@@ -1,4 +1,4 @@
-/**
+/** Wywołane w Patch Builder (w Viewer) jako "data.traverse"
  * Created by marek on 01.02.16.
  */
 define(["./Camera","./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJsonOnServerREQUEST) {
