@@ -19,7 +19,7 @@ var json_data_file_path = "/data/test_arch/data1.json"; // to trzeba będzie zro
                                                         // ustawić to tak: to jest pierwsza paczka domyślna, a z przycisku na stronie
                                                         // można wybrać inną paczkę i wtedy się załaduje inne auto
 var path_image_folder;
-var port = 4245; //TODO: port 4000-5000 zmieniono 01.08 po przeniesieniu konta na Beast
+var port = 4246; //TODO: port 4000-5000 zmieniono 01.08 po przeniesieniu konta na Beast
 var data_for_curently_added_patch;
 
 function contentType(ext) { // MIME TYPE

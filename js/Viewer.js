@@ -11,7 +11,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
 
             // TODO: ZAWSZE tutaj zmieniać na p00.pl:4245 jak się jest poza domem
 
-            serverURL:'http://192.168.55.102:4245'  // W DOMU (sieć wewnętrzna z serwerem)
+            serverURL:'http://192.168.55.102:4246'  // W DOMU (sieć wewnętrzna z serwerem)
 
             //serverURL:'http://p00.pl:4245'  // POZA DOMEM
         };
