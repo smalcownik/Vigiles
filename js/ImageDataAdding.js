@@ -268,6 +268,8 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
             console.log("odpalono newPatchDataReceiverbuilder czyli..prompt");
 
+            debugger;
+
 
             var newId = exported.prepareInitialData(); // tutaj przygotuje m.in. nowy ID oraz opcje znajdowania object po id
 

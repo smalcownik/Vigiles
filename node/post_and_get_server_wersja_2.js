@@ -80,7 +80,7 @@ http.createServer(function (request, response) {
             console.log("4.1. method:"+ method + ", a powinno byc GET");
         filepath = "." + (request.url == "/" ?  json_data_file_path : url); //TODO: tutaj 5.06.2017 próby
 
-        console.log("4.0. filepath: " + filepath);
+        console.log("4.1.1. filepath: " + filepath);
         }
 
 
