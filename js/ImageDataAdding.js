@@ -268,7 +268,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
             console.log("odpalono newPatchDataReceiverbuilder czyli..prompt");
 
-            debugger;
+            //debugger; (bo z prepare initial data zniknął viewer.currentDataStringified, ale się odnalazl)
 
 
             var newId = exported.prepareInitialData(); // tutaj przygotuje m.in. nowy ID oraz opcje znajdowania object po id
