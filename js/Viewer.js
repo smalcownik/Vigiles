@@ -109,7 +109,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
             MapDataProviderREQUEST.loadData(url,
                 function(data){ // cb w MDP.loadData
 
-                    //exported.currentDataStringified = JSON.stringify(data); // zeby miec zachowana oryginalna tresc aktualnego JSONA
+                    exported.currentDataStringified = JSON.stringify(data); // UWAGA! użyte poźniej w klasie "ImageDataAdding.js" zeby miec zachowana oryginalna tresc aktualnego JSONA
                     exported.currentData = data; // jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a
                     exported.currentData.url = url;
                     //debugger;
