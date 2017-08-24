@@ -45,20 +45,20 @@ function contentType(ext) {
     return {'Content-Type': ct};
 } //MIME Type na podstawie rozszerzenia pliku (ext) // TODO: wrzucic to przez require do klasy pomocniczej
 
-process.stdout.write("\n" +"************************************************" +"\n" + "\n" + "Plik startuUujee..eaH! :)     "); // ta wersja nie powoduje wyswietlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
+process.stdout.write("\n" +"************************************************" +"\n" + "\n" + "Plik startuje..eaH! :)     "); // ta wersja nie powoduje wyswietlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
 
 
 http.createServer(function (request, response) {
 
     //console.log("server running");
-    process.stdout.write("server running:    ");
+    process.stdout.write("\n"+"server running:    ");
 
     var body = []; // gdy to body chciałem dać poza createServer - jako zmienną globalną, to w request.on("data") wyskakiwał błąd że body "has no push method"
 
     var headers = request.headers;      var method = request.method;        var url = request.url;
     var contentTypeString = headers['content-type'];// var contentTypeString = JSON.stringify(headers['content-type']); //przyklad proponowanej techniki ULR'ow na update jsononserverREQUEST)
 
-    console.log("\n  1. method 1: " + method +'     '+
+    console.log("1. method 1: " + method +'     '+
                 "3. request.url: " + url  +'     '+  // inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, dla get JSon tez jest "/" - tu dla post-jpeg interpretuje jako jso
                 "4. headers:content-type: " + contentTypeString); // dla metody get,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc)
 
