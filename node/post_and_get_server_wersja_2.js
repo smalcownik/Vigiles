@@ -69,7 +69,7 @@ http.createServer(function (request, response) {
 
         filepath = "." + (request.url == "/" ?  json_data_file_path : url); // TODO 2: tu zmienić, żeby brał url z klasy REQUEST
 
-        console.log("4.0. filepath: " + filepath);
+        process.stdout.write("4.0. filepath: " + filepath);
     }
     else if(contentTypeString == "image/jpeg"){
         if (method == "GET"){
