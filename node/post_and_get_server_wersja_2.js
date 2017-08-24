@@ -43,9 +43,9 @@ function contentType(ext) {
     return {'Content-Type': ct};
 } //MIME Type na podstawie rozszerzenia pliku (ext)
 
-//console.log("plik startuje\r");
-process.stdout.write("plik startuje");
-process.stdout.write("hello: ");
+
+process.stdout.write("plik startuje :)     "); // ta wersja nie powoduje wyświtlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
+
 
 http.createServer(function (request, response) {
 
@@ -56,8 +56,8 @@ http.createServer(function (request, response) {
     var headers = request.headers;      var method = request.method;        var url = request.url;
     var contentTypeString = headers['content-type'];// var contentTypeString = JSON.stringify(headers['content-type']); //przyklad proponowanej techniki ULR'ow na update jsononserverREQUEST)
 
-    console.log("1. method 1: " + method +'\n'+
-                "3. request.url: " + url  +'\n'+  // inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, dla get JSon tez jest "/" - tu dla post-jpeg interpretuje jako jso
+    console.log("'\n'+ 1. method 1: " + method +'     '+
+                "3. request.url: " + url  +'     '+  // inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, dla get JSon tez jest "/" - tu dla post-jpeg interpretuje jako jso
                 "4. headers:content-type: " + contentTypeString); // dla metody get,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc)
 
 
