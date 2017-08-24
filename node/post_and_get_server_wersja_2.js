@@ -73,26 +73,26 @@ http.createServer(function (request, response) {
     }
     else if(contentTypeString == "image/jpeg"){
         if (method == "GET"){
-            console.log("4.1. method:"+ method + ", a powinno byc GET");
+            console.log("     4.1. method:"+ method + ", a powinno byc GET");
         filepath = "." + (request.url == "/" ?  json_data_file_path : url); 
 
-        console.log("4.1.1. filepath: " + filepath);
+        console.log("     4.1.1. filepath: " + filepath);
         }
 
 
         if (method == "POST"){//{ to jest POST: przesyła się // ta sytuacja dotyczy tylko przesyłania nowego pliku image
-            process.stdout.write("4.2. method:"+ method + ", a powinno byc POST");
-            process.stdout.write("5. confirmed image/jpeg");
-            process.stdout.write("5.1 sciezka do pliku" + data_for_curently_added_patch[0][0]);
+            process.stdout.write("     4.2. method:"+ method + ", a powinno byc POST");
+            process.stdout.write("     5. confirmed image/jpeg");
+            process.stdout.write("     5.1 sciezka do pliku" + data_for_curently_added_patch[0][0]);
         filepath = "."+ data_for_curently_added_patch[0][0];}
 
     }
     else if(headers['content-type'] =="application/json;charset=UTF-8"){
-        process.stdout.write("4.3. aktualizacja jsona");
+        process.stdout.write("     4.3. aktualizacja jsona");
 
         filepath = "." + (request.url == "/" ?  json_data_file_path : url);
 
-        process.stdout.write("4.4. filepath: " + filepath);
+        process.stdout.write("     4.4. filepath: " + filepath);
 
     }
     else {
@@ -105,14 +105,14 @@ http.createServer(function (request, response) {
 
     var fileext = path.extname(filepath);
 
-    process.stdout.write("4.5. fileext:"+fileext);
+    process.stdout.write("     4.5. fileext:"+fileext);
 
-    process.stdout.write("6. ext przed :" + fileext);  // rozszerzenie/typ pliku
+    process.stdout.write("     6. ext przed :" + fileext);  // rozszerzenie/typ pliku
 
 
     if (request.method == "POST") {
 
-        console.log("7. method 2: " + method);
+        console.log("     7. method 2: " + method);
 
 
         request.on('error', function (err) {
@@ -120,7 +120,7 @@ http.createServer(function (request, response) {
 
         }).on('data', function (chunk) {
 
-            console.log("7.1. zabiera sie za przesylanie data"); // nie dziala dla jpg - wiadomo, trzeba to rozkminić
+            console.log("     7.1. zabiera sie za przesylanie data"); // nie dziala dla jpg - wiadomo, trzeba to rozkminić
             // przerzucic do "if (fileext == ".json")"
             body.push(chunk);
 
@@ -134,7 +134,7 @@ http.createServer(function (request, response) {
                 // napisać program aby to działanie szło dalej - tj. żeby prawidłowo działał url
                 // do zdjęcia i pod tym urlem zdjęcie było dostępne (szukaj rozwiązania na stackoverflowe)
 
-                console.log("8. fileext to jotpeg, a jego url: " + url);
+                console.log("     8. fileext to jotpeg, a jego url: " + url);
                 //TODO:30.05.2017 zakladki przegladarki "node server" 3 ostatnie, ew. 4-5 ostatnie tam jest klucz
 
                 //TODO:póxniej zrobić logike url'ow (przyklad na update jsononserverREQUEST)
@@ -232,7 +232,7 @@ http.createServer(function (request, response) {
 
     else { // if (request.method === "GET") // to dotyczy przesyłania plików zdjęć z serwera
 
-        console.log("10. method 2: " + method);
+        console.log("     10. method 2: " + method);
 
         //TODO: 5.06.2017: tutaj zrobić jeszcze jedno rozróżneinie po URL, żeby wbrew komentarzowi  po else (lin. 219) rozróżnić zdjęcia od przesylanego JSON'a
         // bo na wypadek jsona znowu trzeba przekierować program w inne miejsce- tam gdzie powinien isc nomalnie JSON przed zmianą w pliku UpdateJsonREQUEST o koncowke URL'a lalala
