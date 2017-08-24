@@ -43,9 +43,9 @@ function contentType(ext) {
     }
 
     return {'Content-Type': ct};
-} //MIME Type na podstawie rozszerzenia pliku (ext)
+} //MIME Type na podstawie rozszerzenia pliku (ext) // TODO: wrzucic to przez require do klasy pomocniczej
 
-process.stdout.write("************************************************ plik startuje :)     "); // ta wersja nie powoduje wyswietlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
+process.stdout.write("************************************************" +"\n" + "\n" + " plik startuje :)     "); // ta wersja nie powoduje wyswietlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
 
 
 http.createServer(function (request, response) {
@@ -262,7 +262,7 @@ http.createServer(function (request, response) {
 
 }).listen(port, function () {
     //Callback triggered when server is successfully listening.
-    console.log("Server listening on: http://localhost:%s"+"\n"+"********************************************************************************************************" +"\n"+"\n"+
+    console.log("Server listening on: http://localhost:%s"+"\n"+"\n"+"********************************************************************************************************" +"\n"+"\n"+
         "********************************************************************************************************" +"\n"+"\n"+
         "********************************************************************************************************", port);
 });
