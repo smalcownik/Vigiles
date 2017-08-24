@@ -44,7 +44,7 @@ function contentType(ext) {
 } //MIME Type na podstawie rozszerzenia pliku (ext)
 
 //console.log("plik startuje\r");
-process.stdout.write("plik startuje\r");
+process.stdout.write("plik startuje");
 process.stdout.write("hello: ");
 
 http.createServer(function (request, response) {
