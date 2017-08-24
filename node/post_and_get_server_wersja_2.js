@@ -45,7 +45,7 @@ function contentType(ext) {
     return {'Content-Type': ct};
 } //MIME Type na podstawie rozszerzenia pliku (ext) // TODO: wrzucic to przez require do klasy pomocniczej
 
-process.stdout.write("************************************************" +"\n" + "\n" + " plik startuje :)     "); // ta wersja nie powoduje wyswietlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
+process.stdout.write("\n" +"************************************************" +"\n" + "\n" + "PLIK STARTUUUUUJeee...eaH! :)     "); // ta wersja nie powoduje wyswietlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
 
 
 http.createServer(function (request, response) {
