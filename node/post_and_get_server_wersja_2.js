@@ -50,7 +50,7 @@ process.stdout.write("************************************************ plik star
 
 http.createServer(function (request, response) {
 
-    console.log("server running**************************************************** /n ****************************************************/n ********************************");
+    console.log("server running");
 
     var body = []; // gdy to body chciałem dać poza createServer - jako zmienną globalną, to w request.on("data") wyskakiwał błąd że body "has no push method"
 
@@ -262,5 +262,7 @@ http.createServer(function (request, response) {
 
 }).listen(port, function () {
     //Callback triggered when server is successfully listening.
-    console.log("Server listening on: http://localhost:%s", port);
+    console.log("Server listening on: http://localhost:%s"+"****************************************************" +"\n"+
+        "****************************************************" +"\n"+
+        "****************************************************" +"\n", port);
 });
