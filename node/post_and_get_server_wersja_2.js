@@ -43,17 +43,16 @@ function contentType(ext) {
     }
 
     return {'Content-Type': ct};
-} //MIME Type na podstawie rozszerzenia pliku (ext) // TODO: wrzucic to przez require do klasy pomocniczej
+} //MIME Type na podstawie rozszerzenia pliku (ext) // TODO 1: wrzucic to przez require do klasy pomocniczej
 
 process.stdout.write("\n" +"************************************************" +"\n" + "\n" + "Plik startuje..eaH! :)     "); // ta wersja nie powoduje wyswietlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
 
 
 http.createServer(function (request, response) {
 
-    //console.log("server running");
-    process.stdout.write("\n"+"server running:    ");
+    process.stdout.write("\n"+"server running:    ");//console.log("server running");
 
-    var body = []; // gdy to body chciałem dać poza createServer - jako zmienną globalną, to w request.on("data") wyskakiwał błąd że body "has no push method"
+    var body = []; //chcialem dac poza createServer, ale w request.on("data") wyskakiwal blad: body "has no push method"
 
     var headers = request.headers;      var method = request.method;        var url = request.url;
     var contentTypeString = headers['content-type'];// var contentTypeString = JSON.stringify(headers['content-type']); //przyklad proponowanej techniki ULR'ow na update jsononserverREQUEST)
@@ -65,10 +64,10 @@ http.createServer(function (request, response) {
 
     var filepath; // = '.' + (request.url == "/" ?  json_data_file_path : url);
 
-    if(typeof contentTypeString === "undefined"){ // to jest GET - wgrywają sie pliki z serwera (jpg lub json - nie widzi typu w headers),
+    if(typeof contentTypeString === "undefined"){ // dla GET jest undefined- wgrywają sie pliki z serwera (jpg lub json - nie widzi typu w headers),
         // ale rozrozni je po url'u
 
-        filepath = "." + (request.url == "/" ?  json_data_file_path : url);
+        filepath = "." + (request.url == "/" ?  json_data_file_path : url); // TODO 2: tu zmienić, żeby brał url z klasy REQUEST
 
         console.log("4.0. filepath: " + filepath);
     }
@@ -82,18 +81,18 @@ http.createServer(function (request, response) {
 
 
         if (method == "POST"){//{ to jest POST: przesyła się // ta sytuacja dotyczy tylko przesyłania nowego pliku image
-            console.log("4.2. method:"+ method + ", a powinno byc POST");
-            console.log("5. confirmed image/jpeg");
-        console.log("5.1 sciezka do pliku" + data_for_curently_added_patch[0][0]);
+            process.stdout.write("4.2. method:"+ method + ", a powinno byc POST");
+            process.stdout.write("5. confirmed image/jpeg");
+            process.stdout.write("5.1 sciezka do pliku" + data_for_curently_added_patch[0][0]);
         filepath = "."+ data_for_curently_added_patch[0][0];}
 
     }
     else if(headers['content-type'] =="application/json;charset=UTF-8"){
-        console.log("4.3. aktualizacja jsona");
+        process.stdout.write("4.3. aktualizacja jsona");
 
         filepath = "." + (request.url == "/" ?  json_data_file_path : url);
 
-        console.log("4.4. filepath: " + filepath);
+        process.stdout.write("4.4. filepath: " + filepath);
 
     }
     else {
@@ -106,9 +105,9 @@ http.createServer(function (request, response) {
 
     var fileext = path.extname(filepath);
 
-    console.log("4.5. fileext:"+fileext);
+    process.stdout.write("4.5. fileext:"+fileext);
 
-    console.log("6. ext przed :" + fileext);  // rozszerzenie/typ pliku
+    process.stdout.write("6. ext przed :" + fileext);  // rozszerzenie/typ pliku
 
 
     if (request.method == "POST") {
@@ -121,7 +120,7 @@ http.createServer(function (request, response) {
 
         }).on('data', function (chunk) {
 
-            console.log("7.1. zabiera sie za przesylanie data"); //TODO: nie dziala dla jpg
+            console.log("7.1. zabiera sie za przesylanie data"); // nie dziala dla jpg - wiadomo, trzeba to rozkminić
             // przerzucic do "if (fileext == ".json")"
             body.push(chunk);
 
@@ -186,7 +185,7 @@ http.createServer(function (request, response) {
                     data_for_curently_added_patch = bodyObject; // bodyObject:[path, promptedData, nextOriginalParent],promptedData: [ścieżka_pierwotna_pliku, dane jsona, parent.id lub "newParent" ],
                     // path =[directory,file]
 
-                    console.log("wyglad nowej sciezki do pliku: "+ bodyObject[0][0]);
+                    process.stdout.write("wyglad nowej sciezki do pliku: "+ bodyObject[0][0]);
                     console.log("wyglad nowej sciezki po obcieciu folderu: "+ bodyObject[0][1]); // obicięciu czego
 
                     var currentPath = "."+bodyObject[0][1];
