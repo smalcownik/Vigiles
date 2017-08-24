@@ -12,11 +12,13 @@
  //shift+ f4 - detach editor tabs
     
 var http = require('http');var fs = require('fs');var path = require('path');var mkdirp = require('mkdirp'); // do tego musialem zainstalowa nmp i "npm install mkdirp" z nmp
+
 var json_data_file_path = "/data/test_arch/data1.json"; // to trzeba będzie zrobić, żeby spośród kilku opcji wyboru wybierało - na razie nie zrobione i wystepuje w kilku
 // miejscach wiec zwrocic uwage ustawić to tak: to jest pierwsza paczka domyślna, a z przycisku na stronie można wybrać inną paczkę i wtedy się załaduje inne auto
 
 var path_image_folder;
 var port = 4246; //port 4000-5000 zmieniono 07.08 z 4245 na 46 bo wyskakiwał błąd przy odpalaniu: Error: listen EADDRINUSE :::4245
+
 var data_for_curently_added_patch;
 
 function contentType(ext) {
@@ -43,27 +45,26 @@ function contentType(ext) {
     return {'Content-Type': ct};
 } //MIME Type na podstawie rozszerzenia pliku (ext)
 
-
-process.stdout.write("plik startuje :)     "); // ta wersja nie powoduje wyświtlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
+process.stdout.write("************************************************ plik startuje :)     "); // ta wersja nie powoduje wyswietlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
 
 
 http.createServer(function (request, response) {
 
-    console.log("server running");
+    console.log("server running**************************************************** /n ****************************************************/n ********************************");
 
     var body = []; // gdy to body chciałem dać poza createServer - jako zmienną globalną, to w request.on("data") wyskakiwał błąd że body "has no push method"
 
     var headers = request.headers;      var method = request.method;        var url = request.url;
     var contentTypeString = headers['content-type'];// var contentTypeString = JSON.stringify(headers['content-type']); //przyklad proponowanej techniki ULR'ow na update jsononserverREQUEST)
 
-    console.log("'\n'+ 1. method 1: " + method +'     '+
+    console.log("'\n'  1. method 1: " + method +'     '+
                 "3. request.url: " + url  +'     '+  // inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, dla get JSon tez jest "/" - tu dla post-jpeg interpretuje jako jso
                 "4. headers:content-type: " + contentTypeString); // dla metody get,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc)
 
 
     var filepath; // = '.' + (request.url == "/" ?  json_data_file_path : url);
 
-    if(typeof contentTypeString === "undefined"){ // to jest GET - wgrywają sie pliki z serwera (jpg lub json - on tu nie widzi typu w headers),
+    if(typeof contentTypeString === "undefined"){ // to jest GET - wgrywają sie pliki z serwera (jpg lub json - nie widzi typu w headers),
         // ale rozrozni je po url'u
 
         filepath = "." + (request.url == "/" ?  json_data_file_path : url);
