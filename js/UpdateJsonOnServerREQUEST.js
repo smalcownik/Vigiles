@@ -23,14 +23,12 @@ define([], function () {
         //console.log(viewer);  // 
         //http_request.open("POST", viewer.serverURL +"/lala"); // tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem //TODO: tu jest trop z tym LALA
         http_request.open("POST", viewer.serverURL ); // tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem //TODO: tu jest trop z tym LALA
-        // tylko na serwerze robiz  tego scieżke do pliku (już tam) i to trzeba poprawić
-        // Vigiles/node/node_post.js)
-        //dziala !
-        //mozna dac dla testow ulr pliku z dysku, powinno tam sie zapisac ale nie testowalem
+        // tylko na serwerze robi z  tego scieżke do pliku (już tam) i to trzeba zmienić, tak żeby szło z gotową końcówką ścieżki
+       
 
         http_request.setRequestHeader("Content-Type","application/json;charset=UTF-8");
 
-        /*http_request.onload = function(){ console.log("as as asas a");};*/ // to też może byc ale bez tego działa
+        /*http_request.onload = function(){ console.log("as as asas a");};*/ // to może byc ale i bez tego działa
 
 
         http_request.send(json); // to ma forme JSON'A

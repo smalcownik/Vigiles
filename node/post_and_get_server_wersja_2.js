@@ -8,17 +8,18 @@
 // przyklad w ajax_proby/node_server oraz server_with_several_file_types
 
 //Plan obróbki:
-
-
+    
+ //shift+ f4 - detach editor tabs
+    
 var http = require('http');var fs = require('fs');var path = require('path');var mkdirp = require('mkdirp'); // do tego musialem zainstalowa nmp i "npm install mkdirp" z nmp
 var json_data_file_path = "/data/test_arch/data1.json"; // to trzeba będzie zrobić, żeby spośród kilku opcji wyboru wybierało - na razie nie zrobione i wystepuje w kilku
-// miejscach wiec zwrocic uwagenie ustawić to tak: to jest pierwsza paczka domyślna, a z przycisku na stronie można wybrać inną paczkę i wtedy się załaduje inne auto
+// miejscach wiec zwrocic uwage ustawić to tak: to jest pierwsza paczka domyślna, a z przycisku na stronie można wybrać inną paczkę i wtedy się załaduje inne auto
 
 var path_image_folder;
-var port = 4246; //TODO: port 4000-5000 zmieniono 07.08 z 4245 na 46 bo wyskakiwał błąd przy odpalaniu: Error: listen EADDRINUSE :::4245
+var port = 4246; //port 4000-5000 zmieniono 07.08 z 4245 na 46 bo wyskakiwał błąd przy odpalaniu: Error: listen EADDRINUSE :::4245
 var data_for_curently_added_patch;
 
-function contentType(ext) { // MIME TYPE
+function contentType(ext) {
     var ct;
 
     switch (ext) {
@@ -40,9 +41,10 @@ function contentType(ext) { // MIME TYPE
     }
 
     return {'Content-Type': ct};
-}
+} //MIME Type na podstawie rozszerzenia pliku (ext)
 
 console.log("plik startuje");
+process.stdout.write("hello: ");
 
 http.createServer(function (request, response) {
 
@@ -50,20 +52,12 @@ http.createServer(function (request, response) {
 
     var body = []; // gdy to body chciałem dać poza createServer - jako zmienną globalną, to w request.on("data") wyskakiwał błąd że body "has no push method"
 
-    var headers = request.headers; 
-    var method = request.method; 
-    var url = request.url;
+    var headers = request.headers;      var method = request.method;        var url = request.url;
+    var contentTypeString = headers['content-type'];// var contentTypeString = JSON.stringify(headers['content-type']); //przyklad proponowanej techniki ULR'ow na update jsononserverREQUEST)
 
-    console.log("1. method 1: " + method);
-   //console.log("2. headers: " + JSON.stringify(headers));
-
-    console.log("3. request.url: " + url); // to jest inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, ale dla get JSon tez jest "/" - i tu dla post-jpeg interpretuje jako json
-   // var contentTypeString = JSON.stringify(headers['content-type']);
-    var contentTypeString = headers['content-type'];
-
-    //console.log(headers['content-type']);//console.log(typeof headers['content-type']);//console.log("type of:" + typeof contentTypeString);//console.log(contentTypeString);
-
-    console.log("4. headers:content-type: " + contentTypeString); // dla metody get ,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc)
+    console.log("1. method 1: " + method +'\n'+
+                "3. request.url: " + url  +'\n'+  // inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, dla get JSon tez jest "/" - tu dla post-jpeg interpretuje jako jso
+                "4. headers:content-type: " + contentTypeString); // dla metody get,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc)
 
 
     var filepath; // = '.' + (request.url == "/" ?  json_data_file_path : url);
@@ -71,14 +65,14 @@ http.createServer(function (request, response) {
     if(typeof contentTypeString === "undefined"){ // to jest GET - wgrywają sie pliki z serwera (jpg lub json - on tu nie widzi typu w headers),
         // ale rozrozni je po url'u
 
-        filepath = "." + (request.url == "/" ?  json_data_file_path : url); //TODO: tutaj 5.06.2017 próby
+        filepath = "." + (request.url == "/" ?  json_data_file_path : url);
 
         console.log("4.0. filepath: " + filepath);
     }
     else if(contentTypeString == "image/jpeg"){
         if (method == "GET"){
             console.log("4.1. method:"+ method + ", a powinno byc GET");
-        filepath = "." + (request.url == "/" ?  json_data_file_path : url); //TODO: tutaj 5.06.2017 próby
+        filepath = "." + (request.url == "/" ?  json_data_file_path : url); 
 
         console.log("4.1.1. filepath: " + filepath);
         }
@@ -101,7 +95,7 @@ http.createServer(function (request, response) {
     }
     else {
         console.log("content-type jest poza kontrola: " + headers['content-type']);
-    };
+    }
 
 
 
@@ -124,32 +118,28 @@ http.createServer(function (request, response) {
 
         }).on('data', function (chunk) {
 
-            console.log("7.1. zabiera sie za przesylanie data"); //TODO: ten sposob przesyalnaia pliku prawdopodobnie nie dziala dla jpg wiec bedzie trzeba ten fragment
+            console.log("7.1. zabiera sie za przesylanie data"); //TODO: nie dziala dla jpg
             // przerzucic do "if (fileext == ".json")"
             body.push(chunk);
 
         }).on('end', function () {
 
 
-            if (fileext == ".jpg") { // request to post - jpg - informacje, ze to jpg bierze z danych do Patcha, natomiast brauje sciezki "url" od samego patcha
-                // trzeba tak zrobić, żeby tą ścieżkę wyłuskać
-
-                console.log("8. fileext to jotpeg, a jego url: " + url); //TODO: 1. 13.02.2017:tutaj jestem - dalszy plan:
-                //TODO:30.05.2017 zakladki przegladarki "node server" 3 ostatnie, ew. 4-5 ostatnie tam jest klucz
-
-                //TODO:póxniej zrobić logike url'ow (przyklad na update jsononserverREQUEST)
-
-
+            if (fileext == ".jpg") { // request to post - jpg - informacje, ze to jpg bierze z danych do Patcha, natomiast brakuje sciezki "url" od samego patcha
+                // trzeba znaleźć ścieżkę
 
                 //wynik tego działania pojawia sie w serwerze node'a po kliknieciu addPatch
                 // napisać program aby to działanie szło dalej - tj. żeby prawidłowo działał url
                 // do zdjęcia i pod tym urlem zdjęcie było dostępne (szukaj rozwiązania na stackoverflowe)
 
+                console.log("8. fileext to jotpeg, a jego url: " + url);
+                //TODO:30.05.2017 zakladki przegladarki "node server" 3 ostatnie, ew. 4-5 ostatnie tam jest klucz
+
+                //TODO:póxniej zrobić logike url'ow (przyklad na update jsononserverREQUEST)
 
 
                 if (data_for_curently_added_patch = !null) {
-
-
+                    
 
                 }
 
@@ -190,7 +180,7 @@ http.createServer(function (request, response) {
                     console.log("to sa dane do Patcha");
 
 
-                    data_for_curently_added_patch = bodyObject; // bO:[path, promptedData, nextOriginalParent],pD: [ścieżka_pierwotna_pliku, dane jsona, parent.id lub "newParent" ],
+                    data_for_curently_added_patch = bodyObject; // bodyObject:[path, promptedData, nextOriginalParent],promptedData: [ścieżka_pierwotna_pliku, dane jsona, parent.id lub "newParent" ],
                     // path =[directory,file]
 
                     console.log("wyglad nowej sciezki do pliku: "+ bodyObject[0][0]);
