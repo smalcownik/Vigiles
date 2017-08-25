@@ -112,7 +112,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
                     exported.currentDataStringified = JSON.stringify(data); // UWAGA! użyte poźniej w klasie "ImageDataAdding.js" zeby miec zachowana oryginalna tresc aktualnego JSONA
                     exported.currentData = data; // jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a
                     exported.currentData.url = url;
-                    console.log(url);
+                    //console.log(url); // wyswietla http://192.168.55.102:4246
                     exported.showMapData(exported.currentData); // w tej f-kcji będzie dopiero wołany PatchBuilder czyli cały widok, a currentData to obiekt new MapData(response)
                 }
             );
