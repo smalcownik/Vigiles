@@ -16,7 +16,12 @@ define(['./NodeFunctions'], function (NodeFunctions) {
     /*var http = require('http');
     var fs = require('fs');
     var path = require('path');
-    var mkdirp = require('mkdirp');*/ // do tego musialem zainstalowa npm i "npm install mkdirp" z npm
+    var mkdirp = require('mkdirp');*/ // do tego musialem zainstalowa npm i "npm install mkdirp" z npm // nie dzialalo w wersji z requirejs
+
+    /*exported.http = require('http');
+     exported.fs = require('fs');
+     exported.path = require('path');
+     exported.mkdirp = require('mkdirp');*/ // dziala w wersji z requirejs ale uproszczono w objekcie exported
 
     var exported = {
         http: require('http'),
@@ -25,10 +30,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
         mkdirp : require('mkdirp')
     };
 
-    /*exported.http = require('http');
-    exported.fs = require('fs');
-    exported.path = require('path');
-    exported.mkdirp = require('mkdirp');*/
+
 
     var json_data_file_path = "/data/test_arch/data1.json"; // to trzeba będzie zrobić, żeby spośród kilku opcji wyboru wybierało - na razie nie zrobione i wystepuje w kilku
 // miejscach wiec zwrocic uwage ustawić to tak: to jest pierwsza paczka domyślna, a z przycisku na stronie można wybrać inną paczkę i wtedy się załaduje inne auto
@@ -51,6 +53,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
         var contentTypeString = headers['content-type'];// var contentTypeString = JSON.stringify(headers['content-type']); //przyklad proponowanej techniki ULR'ow na update jsononserverREQUEST)
 
         console.log("1.method1: " + method + '     ' +
+            "2.headers: " + headers + '     ' +
             "3.req.url: " + url + '     ' +  // inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, dla get JSon tez jest "/" - tu dla post-jpeg interpretuje jako jso
             "4. headers:cont-type: " + contentTypeString); // dla metody get,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc)
 
