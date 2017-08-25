@@ -27,12 +27,13 @@ define([], function () {
         }
 
         return {'Content-Type': ct};
-    };
+    };//MIME Type na podstawie rozszerzenia pliku (ext)
+
     
-
-   
-
-
+    
+    
+    
+    
     return exported;
 
 });

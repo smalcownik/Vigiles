@@ -33,31 +33,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
     var data_for_curently_added_patch;
 
-   /* function contentTypeFromExt(ext) {
-        var ct;
-
-        switch (ext) {
-            case '.html':
-                ct = 'text/html';
-                break;
-            case '.css':
-                ct = 'text/css';
-                break;
-            case '.js':
-                ct = 'text/javascript';
-                break;
-            case '.jpg':
-                ct = "image/jpeg";
-                break;
-            default:
-                ct = 'text/plain';
-                break;
-        }
-
-        return {'Content-Type': ct};
-    }*/ //MIME Type na podstawie rozszerzenia pliku (ext) // TODO 1: wrzucic to przez require do klasy pomocniczej
-
-    process.stdout.write("\n" + "************************************************" + "\n" + "\n" + "Plik startuje..eaH! :)     "); // ta wersja nie powoduje wyswietlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
+    process.stdout.write("\n" + "************************************************" + "\n" + "\n" + "Plik startuje :)     "); // ta wersja nie powoduje wyswietlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
 
 
     exported.http.createServer(function (request, response) {
@@ -66,17 +42,16 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
         var body = []; //chcialem dac poza createServer, ale w request.on("data") wyskakiwal blad: body "has no push method"
 
-        var headers = request.headers;
-        var method = request.method;
-        var url = request.url;
+        var headers = request.headers, method = request.method, url = request.url; // URL
         var contentTypeString = headers['content-type'];// var contentTypeString = JSON.stringify(headers['content-type']); //przyklad proponowanej techniki ULR'ow na update jsononserverREQUEST)
 
-        console.log("1. method 1: " + method + '     ' +
-            "3. request.url: " + url + '     ' +  // inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, dla get JSon tez jest "/" - tu dla post-jpeg interpretuje jako jso
-            "4. headers:content-type: " + contentTypeString); // dla metody get,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc)
+        console.log("1.method1: " + method + '     ' +
+            "3.req.url: " + url + '     ' +  // inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, dla get JSon tez jest "/" - tu dla post-jpeg interpretuje jako jso
+            "4. headers:cont-type: " + contentTypeString); // dla metody get,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc)
 
 
         var filepath; // = '.' + (request.url == "/" ?  json_data_file_path : url);
+        // TODO 1: w drugiej wersji ma być zawsze tu treść, to ma być podstawa dalaszych dzialan
 
         if (typeof contentTypeString === "undefined") { // dla GET jest undefined- wgrywają sie pliki z serwera (jpg lub json - nie widzi typu w headers),
             // ale rozrozni je po url'u
