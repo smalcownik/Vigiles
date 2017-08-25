@@ -1,5 +1,8 @@
 /*wywołany z PatchBuilder tworzy objekty zdjec (łatek)
  W TYM PLIKU ZNAJDUJE SIĘ JEDYNE ODNIESIENIE DO PLIKÓW JPG */
+
+// w momencie jak patch dostaje swoje zrodlo pliku, automatycznie sie do niego odwoluje do serwera - bez funkcji request-get
+
 define([], function () {
 
 
@@ -14,6 +17,11 @@ define([], function () {
                                                     // TODO: 13.02.2017 do opcji wyboru paczki danych tutaj trzeba zmieniac fragment "test_arch" w zalezności od wyboru paczki
             
             //powyżej dwie wersje - górna odnosi się do serwera na dysku - doln do serwera na amazonie
+
+            //TODO: tu jest cud bo po wykonianiu linijki imgHTML.src=data.url+'/....  pojawia się get na serwerze node'a
+            // AHA ... czyli w momencie jak patch dostaje swoje zrodlo pliku, automatycznie sie do niego odwoluje do serwera - bez funkcji request-get!
+
+
             console.log(imgHTML.src); // =="http://52.30.81.203//data/test_arch/imgs/imgs[0]/0.jpg" (koncowka oczywiscie sie zmienia)
             this.DOM = imgHTML;
             image.patch = this;
