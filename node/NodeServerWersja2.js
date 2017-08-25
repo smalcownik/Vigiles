@@ -250,8 +250,8 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                 //}
 
             );
-            //response.write(stat); //TODO: PAMIĘTAJ ZE TU ZMIENILES
-            response.write("lalala");
+            response.write(stat); 
+            //response.write("lalala");
             response.end();
         }
 
