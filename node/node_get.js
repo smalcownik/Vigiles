@@ -3,7 +3,7 @@
 var http = require('http'),
     fileSystem = require('fs');
 
-var port = 8000;
+var port = 4246;
 
 var server = http.createServer(function(request, response) {
 
