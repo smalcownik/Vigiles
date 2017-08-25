@@ -146,7 +146,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                     // napisać program aby to działanie szło dalej - tj. żeby prawidłowo działał url
                     // do zdjęcia i pod tym urlem zdjęcie było dostępne (szukaj rozwiązania na stackoverflowe)
 
-                    console.log("     8. fileext to jotpeg, a jego url: " + url);
+                    console.log("    8. fileext to jotpeg, a jego url: " + url);
                     //TODO:30.05.2017 zakladki przegladarki "node server" 3 ostatnie, ew. 4-5 ostatnie tam jest klucz
 
                     //TODO:póxniej zrobić logike url'ow (przyklad na update jsononserverREQUEST)
@@ -165,7 +165,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                 if (fileext == ".json") { // request to post - json
 
 
-                    console.log("fileext to JSON");
+                    console.log("    9.  fileext to JSON");
 
                     body = Buffer.concat(body).toString();
 
@@ -176,14 +176,14 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                     if (bodyObject.hasOwnProperty("meta")) {
 
-                        console.log("to jest data1.json bo ma property 'meta' ");
+                        console.log("9.1.  to jest data1.json bo ma property 'meta' ");
 
 
                         exported.fs.writeFile('.' + json_data_file_path, body, function (err) {
                             if (err) {
                                 return console.log(err);
                             }
-                            console.log("The file was saved!");
+                            console.log(" 9.1.1. The file was saved!");
                         });
 
 
@@ -191,14 +191,14 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                     else if (typeof bodyObject[0][0] === "string") {
 
-                        console.log("to sa dane do Patcha");
+                        console.log("9.2.  to sa dane do Patcha");
 
 
                         data_for_curently_added_patch = bodyObject; // bodyObject:[path, promptedData, nextOriginalParent],promptedData: [ścieżka_pierwotna_pliku, dane jsona, parent.id lub "newParent" ],
                         // path =[directory,file]
 
-                        process.stdout.write("wyglad nowej sciezki do pliku: " + bodyObject[0][0]);
-                        console.log("wyglad nowej sciezki po obcieciu folderu: " + bodyObject[0][1]); // obicięciu czego
+                        process.stdout.write("9.2.1. wyglad nowej sciezki do pliku: " + bodyObject[0][0]);
+                        console.log("9.2.2. wyglad nowej sciezki po obcieciu folderu: " + bodyObject[0][1]); // obicięciu czego
 
                         var currentPath = "." + bodyObject[0][1];
 
