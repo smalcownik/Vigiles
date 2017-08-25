@@ -10,7 +10,7 @@
 //Plan obróbki:
     
  //shift+ f4 - detach editor tabs
-define(["./NodeFunctions"], function (NodeFunctions) {
+define(["../node/NodeFunctions"], function (NodeFunctions) {
 
     var exported = {};
 
