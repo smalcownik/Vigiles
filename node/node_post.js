@@ -1,7 +1,7 @@
 /**
  * Created by marek on 11.05.16.
  */
-// ten plik dziala dobrze, trzeba go polaczyc z plikiem node_get.js ale juz w nowym pliku (post_and_get_server.js)
+// ten plik dziala dobrze, trzeba go polaczyc z plikiem node_get.js ale juz w nowym pliku (NodeServer.js)
 // serwery dzialaja dobrze (sceizki do plikow sa prawidlowe jesli w konsoli serwer jest odpalanay z poziomu folderu /Vigiles$)
     
 var http = require('http');
@@ -51,5 +51,5 @@ http.createServer(function(request, response) {
 }).listen(80);
 
 
-//ten plik dziala dobrze, trzeba go polaczyc z plikiem node_get.js ale juz w nowym pliku (post_and_get_server.js)
+//ten plik dziala dobrze, trzeba go polaczyc z plikiem node_get.js ale juz w nowym pliku (NodeServer.js)
 // serwery dzialaja dobrze (sceizki do plikow sa prawidlowe jesli w konsoli serwer jest odpalanay z poziomu folderu /Vigiles$)

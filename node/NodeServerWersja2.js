@@ -10,14 +10,15 @@
 //Plan obróbki:
     
  //shift+ f4 - detach editor tabs
-define(["../node/NodeFunctions"], function (NodeFunctions) {
 
-    var exported = {};
+define([], function () {
 
     var http = require('http');
     var fs = require('fs');
     var path = require('path');
     var mkdirp = require('mkdirp'); // do tego musialem zainstalowa npm i "npm install mkdirp" z npm
+
+    var exported = {};
 
     var json_data_file_path = "/data/test_arch/data1.json"; // to trzeba będzie zrobić, żeby spośród kilku opcji wyboru wybierało - na razie nie zrobione i wystepuje w kilku
 // miejscach wiec zwrocic uwage ustawić to tak: to jest pierwsza paczka domyślna, a z przycisku na stronie można wybrać inną paczkę i wtedy się załaduje inne auto
@@ -54,7 +55,7 @@ define(["../node/NodeFunctions"], function (NodeFunctions) {
     process.stdout.write("\n" + "************************************************" + "\n" + "\n" + "Plik startuje..eaH! :)     "); // ta wersja nie powoduje wyswietlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
 
 
-    http.createServer(function (request, response) {
+    exported.http.createServer(function (request, response) {
 
         process.stdout.write("\n" + "server running:    ");//console.log("server running");
 
@@ -272,6 +273,7 @@ define(["../node/NodeFunctions"], function (NodeFunctions) {
             "********************************************************************************************************" + "\n" + "\n" +
             "********************************************************************************************************", port);
     });
+    
 
     return exported;
 });
