@@ -7,9 +7,7 @@ define(['./MapData'], function (MapData) {
 
         var http_request = false;
 
-        function makeRequest(url,cb) {
-
-            console.log(url);
+        function makeRequest(url,cb) { // url to http://192.168.55.102:4246
 
             http_request = false;
 
@@ -50,7 +48,7 @@ define(['./MapData'], function (MapData) {
             //http_request.setRequestHeader("Content-Type","application/json;charset=UTF-8");
             //http_request.setRequestHeader("Content-Type","image/jpeg");
 
-            console.log("MDP.REQUEST_URL:" + url); //
+            //console.log("MDP.REQUEST_URL:" + url); // url to http://192.168.55.102:4246
 
             http_request.send(null);
 
