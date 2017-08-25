@@ -131,7 +131,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
 
             this.updateAllPositionables();
 
-            cosnole.log(exported.positionable);
+            console.log(exported.positionable);
 
 
 
