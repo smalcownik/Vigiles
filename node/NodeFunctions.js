@@ -5,10 +5,30 @@ define([], function () {
 
     var exported = {};
 
-    exported.xxx = function () {
+    exported.contentTypeFromExt = function (ext){
+        var ct;
 
-       
+        switch (ext) {
+            case '.html':
+                ct = 'text/html';
+                break;
+            case '.css':
+                ct = 'text/css';
+                break;
+            case '.js':
+                ct = 'text/javascript';
+                break;
+            case '.jpg':
+                ct = "image/jpeg";
+                break;
+            default:
+                ct = 'text/plain';
+                break;
+        }
+
+        return {'Content-Type': ct};
     };
+    
 
    
 

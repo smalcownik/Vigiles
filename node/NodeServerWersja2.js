@@ -11,7 +11,7 @@
     
  //shift+ f4 - detach editor tabs
 
-define([], function () {
+define(['./NodeFunctions'], function (NodeFunctions) {
 
     /*var http = require('http');
     var fs = require('fs');
@@ -33,7 +33,7 @@ define([], function () {
 
     var data_for_curently_added_patch;
 
-    function contentTypeFromExt(ext) {
+   /* function contentTypeFromExt(ext) {
         var ct;
 
         switch (ext) {
@@ -55,7 +55,7 @@ define([], function () {
         }
 
         return {'Content-Type': ct};
-    } //MIME Type na podstawie rozszerzenia pliku (ext) // TODO 1: wrzucic to przez require do klasy pomocniczej
+    }*/ //MIME Type na podstawie rozszerzenia pliku (ext) // TODO 1: wrzucic to przez require do klasy pomocniczej
 
     process.stdout.write("\n" + "************************************************" + "\n" + "\n" + "Plik startuje..eaH! :)     "); // ta wersja nie powoduje wyswietlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
 
@@ -256,7 +256,7 @@ define([], function () {
             response.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // to też musi być bo wyrzuca błąd
 
 
-            response.writeHead(200, contentTypeFromExt(fileext)
+            response.writeHead(200, NodeFunctions.contentTypeFromExt(fileext)
 
                 //   {
                 //  'Content-Type': 'text/json'
