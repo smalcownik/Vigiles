@@ -44,7 +44,7 @@ define(['./MapData'], function (MapData) {
 
                 }
             }};
-            http_request.open('GET', url, true);
+            http_request.open('GET', url+"/lampa", true);
             //http_request.setRequestHeader("Content-Type","application/json;charset=UTF-8");
             //http_request.setRequestHeader("Content-Type","image/jpeg");
 
