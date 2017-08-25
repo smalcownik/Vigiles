@@ -14,7 +14,7 @@ define(["./Patch"], function (Patch) {
 
                 var viewer = this.viewer;
 
-                console.log(data);
+                console.log(data); // pokazuje caly MapData czyli objekt (juz gotowy po wykonaniu ponizszej funkcji data.traverse)
 
                 data.traverse(  // traverse z new MapData(response//jsonString),
                               // trawersowanie zawsze na początku ma argument jako image: MapData.images[0]
