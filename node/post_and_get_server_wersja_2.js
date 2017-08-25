@@ -17,7 +17,7 @@ define(["../node/NodeFunctions"], function (NodeFunctions) {
     var http = require('http');
     var fs = require('fs');
     var path = require('path');
-    var mkdirp = require('mkdirp'); // do tego musialem zainstalowa nmp i "npm install mkdirp" z nmp
+    var mkdirp = require('mkdirp'); // do tego musialem zainstalowa npm i "npm install mkdirp" z npm
 
     var json_data_file_path = "/data/test_arch/data1.json"; // to trzeba będzie zrobić, żeby spośród kilku opcji wyboru wybierało - na razie nie zrobione i wystepuje w kilku
 // miejscach wiec zwrocic uwage ustawić to tak: to jest pierwsza paczka domyślna, a z przycisku na stronie można wybrać inną paczkę i wtedy się załaduje inne auto
