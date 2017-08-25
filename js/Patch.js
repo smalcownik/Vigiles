@@ -4,6 +4,7 @@ define([], function () {
 
 
         var exported = function Patch(image,parent,data,i){
+            
 
             var imgHTML= document.createElement('img');
             //console.log(data.url); // == console.log(data); == "http://52.30.81.203/"

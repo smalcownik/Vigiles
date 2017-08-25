@@ -14,7 +14,7 @@ define(["./Patch"], function (Patch) {
 
                 var viewer = this.viewer;
 
-                //console.log(data);
+                console.log(data);
 
                 data.traverse(  // traverse z new MapData(response//jsonString),
                               // trawersowanie zawsze na początku ma argument jako image: MapData.images[0]
@@ -22,8 +22,8 @@ define(["./Patch"], function (Patch) {
 
                     function(image,i,parent){
 
-                        console.log(image);
-                        console.log(i);
+                        console.log(image); // object IMG, z np. "image.id" - (nr wlasny z pliku json)
+                        console.log(i); // nr odpowiadajacy ilosci patchow - matek, w tej wersji 0,1,2
                         
                         
                         viewer.positionable.push(new Patch(image,parent,data,i))
