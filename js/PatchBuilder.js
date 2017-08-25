@@ -25,7 +25,7 @@ define(["./Patch"], function (Patch) {
                         console.log(image); // object IMG, z np. "image.id" - (nr wlasny z pliku json)
                         console.log(i); // nr odpowiadajacy ilosci patchow - matek, w tej wersji 0,1,2
                         
-                        
+                        debugger;
                         viewer.positionable.push(new Patch(image,parent,data,i))
 
                     }
