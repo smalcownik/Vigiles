@@ -14,10 +14,10 @@ define(["./Patch"], function (Patch) {
 
                 var viewer = this.viewer;
 
-                //debugger;
+                console.log(data);
 
                 data.traverse(  // traverse z new MapData(response//jsonString),
-                                // trawersowanie zawsze na początku ma argument jako image: MapData.images[0]
+                              // trawersowanie zawsze na początku ma argument jako image: MapData.images[0]
 
 
                     function(image,i,parent){
