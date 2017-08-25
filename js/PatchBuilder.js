@@ -25,7 +25,9 @@ define(["./Patch"], function (Patch) {
                         console.log(image); // object IMG, z np. "image.id" - (nr wlasny z pliku json)
                         console.log(i); // nr odpowiadajacy ilosci patchow - matek, w tej wersji 0,1,2
                         
-                        debugger;
+                        //debugger; // wazny debuger - wylapuje jak poszczegolne patche dostaja url'a (w klasie Patch) i wtedy sa automatycznie
+                        // pobierane request-get z servera node
+                        
                         viewer.positionable.push(new Patch(image,parent,data,i))
 
                     }

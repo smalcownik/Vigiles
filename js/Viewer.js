@@ -128,10 +128,11 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
             // ma też poprzez data.url dostęp do plików serwera
 
             PointsBuilder.build(data);
+            
 
             this.updateAllPositionables();
 
-            console.log(exported.positionable);
+           // console.log(exported.positionable);
 
 
 
