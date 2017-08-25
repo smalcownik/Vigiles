@@ -48,7 +48,7 @@ http.createServer(function(request, response) {
         response.end(); // response.end musi być bo inaczej nie wykona się request.on("end".....
 
     });
-}).listen(80);
+}).listen(4246);
 
 
 //ten plik dziala dobrze, trzeba go polaczyc z plikiem node_get.js ale juz w nowym pliku (NodeServer.js)
