@@ -115,7 +115,7 @@ define([], function () {
         }
 
 
-        var fileext = path.extname(filepath);
+        var fileext = exported.path.extname(filepath);
 
         process.stdout.write("     4.5. fileext:" + fileext);
 
@@ -179,7 +179,7 @@ define([], function () {
                         console.log("to jest data1.json bo ma property 'meta' ");
 
 
-                        fs.writeFile('.' + json_data_file_path, body, function (err) {
+                        exported.fs.writeFile('.' + json_data_file_path, body, function (err) {
                             if (err) {
                                 return console.log(err);
                             }
@@ -204,7 +204,7 @@ define([], function () {
 
                         if (bodyObject[2] == null) { // czyli kiedy nie ma originalParent i trzeb utworzyć nowy folder na kolejnego patcha-matke
 
-                            mkdirp(currentPath, function (err) {
+                            exported.mkdirp(currentPath, function (err) {
 
                                 // path exists unless there was an error
 
@@ -249,7 +249,7 @@ define([], function () {
             //TODO: 5.06.2017: tutaj zrobić jeszcze jedno rozróżneinie po URL, żeby wbrew komentarzowi  po else (lin. 219) rozróżnić zdjęcia od przesylanego JSON'a
             // bo na wypadek jsona znowu trzeba przekierować program w inne miejsce- tam gdzie powinien isc nomalnie JSON przed zmianą w pliku UpdateJsonREQUEST o koncowke URL'a lalala
 
-            var stat = fs.readFileSync(filepath);
+            var stat = exported.fs.readFileSync(filepath);
 
 
             response.setHeader('Access-Control-Allow-Origin', '*'); // to musi być bo wyrzuca błąd
