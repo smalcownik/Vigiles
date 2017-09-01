@@ -14,7 +14,7 @@ define(["./Patch"], function (Patch) {
 
                 var viewer = this.viewer;
 
-                console.log(data); // pokazuje caly MapData czyli objekt (juz gotowy po wykonaniu ponizszej funkcji data.traverse)
+                //console.log(data); // pokazuje caly MapData czyli objekt (juz gotowy, jakby po wykonaniu ponizszej funkcji data.traverse)
 
                 data.traverse(  // traverse z new MapData(response//jsonString),
                               // trawersowanie zawsze na początku ma argument jako image: MapData.images[0]
@@ -22,8 +22,8 @@ define(["./Patch"], function (Patch) {
 
                     function(image,i,parent){
 
-                        console.log(image); // object IMG, z np. "image.id" - (nr wlasny z pliku json)
-                        console.log(i); // nr odpowiadajacy ilosci patchow - matek, w tej wersji 0,1,2
+                        //console.log(image); // object IMG, z np. "image.id" - (nr wlasny z pliku json)
+                        //console.log(i); // nr odpowiadajacy ilosci patchow - matek, w tej wersji 0,1,2
                         
                         //debugger; // wazny debuger - wylapuje jak poszczegolne patche dostaja url'a (w klasie Patch) i wtedy sa automatycznie
                         // pobierane request-get z servera node

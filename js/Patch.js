@@ -35,6 +35,8 @@ define([], function () {
 
             this.defaultOpacity = 0.1;
 
+            debugger;
+
             document.body.appendChild(imgHTML);
 
             if (parent) {
