@@ -7,7 +7,8 @@ define([], function () {
 
 
         var exported = function Patch(image,parent,data,i){
-            
+
+            debugger;
 
             var imgHTML= document.createElement('img');
             //console.log(data.url); // == console.log(data); == "http://52.30.81.203/"
@@ -35,7 +36,7 @@ define([], function () {
 
             this.defaultOpacity = 0.1;
 
-            debugger;
+
 
             document.body.appendChild(imgHTML);
 
