@@ -22,7 +22,7 @@ define([], function () {
         var http_request = new XMLHttpRequest();
         //console.log(viewer);  // 
         //http_request.open("POST", viewer.serverURL +"/lala"); // tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem //TODO: tu jest trop z tym LALA
-        http_request.open("POST", viewer.serverURL ); // tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem //TODO: tu jest trop z tym LALA
+        http_request.open("POST", viewer.serverURL+viewer.DataPath+viewer.JsonFile ); // tutaj zmienić url na odpalony serwer na amazonie (dziala z serwerem //TODO: tu jest trop z tym LALA
         // tylko na serwerze robi z  tego scieżke do pliku (już tam) i to trzeba zmienić, tak żeby szło z gotową końcówką ścieżki
        
 
