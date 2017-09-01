@@ -12,7 +12,8 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
             // TODO: ZAWSZE tutaj zmieniać na p00.pl:4246 jak się jest poza domem
 
             serverURL:'http://192.168.55.102:4246' , // W DOMU (sieć wewnętrzna z serwerem)
-            JsonFilePath:"/data/test_arch/data1.json"
+            DataPath:"/data/test_arch",
+            JsonFile:"/data1.json"
 
             //serverURL:'http://p00.pl:4246'  // POZA DOMEM
         };
@@ -93,7 +94,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
         };
 //
 
-        exported.loadURL = function(url){ // ta f-kcja jest odpalana na początku z app.js z argumentem ('Viewer.serverURL'+ Viewer.serverURL+Viewer.JsonFilePath)
+        exported.loadURL = function(url, fileName){ // ta f-kcja jest odpalana na początku z app.js z argumentem ('Viewer.serverURL'+ Viewer.serverURL+Viewer.DataPath)
 
             {
                 if (typeof(url) !== 'string') {
@@ -107,13 +108,14 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
                 //debugger;
             } // tu mają byc testy poprawności url ale jeszcze nie ma nic
 
-            MapDataProviderREQUEST.loadData(url,
+
+            MapDataProviderREQUEST.loadData(url+fileName,
                 function(data){ // cb w MDP.loadData
 
                     exported.currentDataStringified = JSON.stringify(data); // UWAGA! użyte poźniej w klasie "ImageDataAdding.js" zeby miec zachowana oryginalna tresc aktualnego JSONA
                     exported.currentData = data; // jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a
                     exported.currentData.url = url;
-                    console.log(url); // wyswietla http://192.168.55.102:4246
+                    console.log(url+fileName); // wyswietla http://192.168.55.102:4246 // po zmianie http://192.168.55.102:4246/data/test_arch/data1.json
                     exported.showMapData(exported.currentData); // w tej f-kcji będzie dopiero wołany PatchBuilder czyli cały widok, a currentData to obiekt new MapData(response)
                 }
             );

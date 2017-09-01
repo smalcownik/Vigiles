@@ -7,7 +7,7 @@ define(['./MapData'], function (MapData) {
 
         var http_request = false;
 
-        function makeRequest(url,cb) { // url to http://192.168.55.102:4246
+        function makeRequest(fullUrl,cb) { // url to http://192.168.55.102:4246
 
             http_request = false;
 
@@ -44,7 +44,7 @@ define(['./MapData'], function (MapData) {
 
                 }
             }};
-            http_request.open('GET', url/*+"/lampa"*/, true); //TODO: tutaj to lampa dobrze zadzialalo, trzeba na tej podstawie dzialac dalej
+            http_request.open('GET', fullUrl/*+"/lampa"*/, true); //TODO: tutaj to lampa dobrze zadzialalo, trzeba na tej podstawie dzialac dalej
             //http_request.setRequestHeader("Content-Type","application/json;charset=UTF-8");
             //http_request.setRequestHeader("Content-Type","image/jpeg");
 
@@ -55,10 +55,10 @@ define(['./MapData'], function (MapData) {
         }
 
 //debugger;
-            exported.loadData = function(url,cb){ // to cb jest z Viever.loadURL()
+            exported.loadData = function(fullUrl,cb){ // to cb jest z Viever.loadURL()
 //debugger;
                 //makeRequest(url+'/data1.json', // url pliku z dysku - dysk odpowiada plikiem
-                makeRequest(url, // w app.js jako url server amazona i server noda odpowie plikiem
+                makeRequest(fullUrl, // w app.js jako url server amazona i server noda odpowie plikiem
                     function(response){ // response to (http_request.responseText)
                         cb(new MapData(response)); // czyli new MapData(response)
                                                    // wchodzi jako data do MDP.loadData w View.loadURL
