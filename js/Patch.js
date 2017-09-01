@@ -12,7 +12,7 @@ define([], function () {
 
             var imgHTML= document.createElement('img');
 
-            //console.log(data.url); // == console.log(data); == "http://52.30.81.203/"
+            console.log(data.url); // == console.log(data); == "http://52.30.81.203/"
             //imgHTML.src=data.url+'/imgs/imgs['+i+']/'+image.id+'.jpg'; //  tu jest odniesienie do plików jpg (jedyne!!)
 
             imgHTML.src=data.url+'/data/test_arch/imgs/imgs['+i+']/'+image.id+'.jpg'; // TODO: tu jest odniesienie do plików jpg (jedyne!!) 
