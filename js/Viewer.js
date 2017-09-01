@@ -11,7 +11,8 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
 
             // TODO: ZAWSZE tutaj zmieniać na p00.pl:4246 jak się jest poza domem
 
-            serverURL:'http://192.168.55.102:4246'  // W DOMU (sieć wewnętrzna z serwerem)
+            serverURL:'http://192.168.55.102:4246' , // W DOMU (sieć wewnętrzna z serwerem)
+            JsonFilePath:"/data/test_arch/data1.json"
 
             //serverURL:'http://p00.pl:4246'  // POZA DOMEM
         };
@@ -92,7 +93,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
         };
 //
 
-        exported.loadURL = function(url){ // ta f-kcja jest odpalana na początku z app.js z argumentem ('data/arch1')
+        exported.loadURL = function(url){ // ta f-kcja jest odpalana na początku z app.js z argumentem ('Viewer.serverURL'+ Viewer.serverURL+Viewer.JsonFilePath)
 
             {
                 if (typeof(url) !== 'string') {
@@ -112,7 +113,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
                     exported.currentDataStringified = JSON.stringify(data); // UWAGA! użyte poźniej w klasie "ImageDataAdding.js" zeby miec zachowana oryginalna tresc aktualnego JSONA
                     exported.currentData = data; // jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a
                     exported.currentData.url = url;
-                    //console.log(url); // wyswietla http://192.168.55.102:4246
+                    console.log(url); // wyswietla http://192.168.55.102:4246
                     exported.showMapData(exported.currentData); // w tej f-kcji będzie dopiero wołany PatchBuilder czyli cały widok, a currentData to obiekt new MapData(response)
                 }
             );
