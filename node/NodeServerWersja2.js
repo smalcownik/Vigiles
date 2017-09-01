@@ -61,8 +61,9 @@ define(['./NodeFunctions'], function (NodeFunctions) {
         var filepath; // = '.' + (request.url == "/" ?  json_data_file_path : url);
         // TODO 1: w drugiej wersji ma być zawsze tu treść, to ma być podstawa dalaszych dzialan
 
-        if (typeof contentTypeString === "undefined") { // dla GET jest undefined- wgrywają sie pliki z serwera (jpg lub json - nie widzi typu w headers),
-            // ale rozrozni je po url'u
+        if (typeof contentTypeString === "undefined") { //niestety nie ma mozliwosci (stack overflow) ustawic headers z html.src skad jest wykonywany request i tym sposobem ustawienia image/jpg dla zdjec
+            // dla GET jest undefined- wgrywają sie pliki z serwera (jpg lub json - nie widzi typu w headers),
+            //  rozroznia je tylko po url'u
 
             filepath = "." + (request.url == "/" ? json_data_file_path : url); // TODO 2: tu zmienić, żeby brał url z klasy REQUEST
 
@@ -70,8 +71,9 @@ define(['./NodeFunctions'], function (NodeFunctions) {
         }
         else if (contentTypeString == "image/jpeg") {
             if (method == "GET") {
-                console.log("     4.1. method:" + method + ", a powinno byc GET");
-                filepath = "." + (request.url == "/" ? json_data_file_path : url);
+                console.log("     4.1. method:" + method + "(powinno byc GET, ale sprawdzam)");
+                //filepath = "." + (request.url == "/" ? json_data_file_path : url); // bez sensu - tu nie może być json
+                filepath = "." + url;
 
                 console.log("     4.1.1. filepath: " + filepath);
             }
@@ -80,8 +82,11 @@ define(['./NodeFunctions'], function (NodeFunctions) {
             if (method == "POST") {//{ to jest POST: przesyła się // ta sytuacja dotyczy tylko przesyłania nowego pliku image
                 process.stdout.write("     4.2. method:" + method + ", a powinno byc POST");
                 process.stdout.write("     5. confirmed image/jpeg");
-                process.stdout.write("     5.1 sciezka do pliku" + data_for_curently_added_patch[0][0]);
-                filepath = "." + data_for_curently_added_patch[0][0];
+
+                //TODO: tu trzeba uzyc formidable i przeslac pliki
+
+               // process.stdout.write("     5.1 sciezka do pliku" + data_for_curently_added_patch[0][0]); //artefakt
+               // filepath = "." + data_for_curently_added_patch[0][0];//artefakt
             }
 
         }
@@ -101,8 +106,6 @@ define(['./NodeFunctions'], function (NodeFunctions) {
         var fileext = exported.path.extname(filepath);
 
         process.stdout.write("     4.5. fileext:" + fileext);
-
-        process.stdout.write("     6. ext przed :" + fileext);  // rozszerzenie/typ pliku
 
 
         if (request.method == "POST") {

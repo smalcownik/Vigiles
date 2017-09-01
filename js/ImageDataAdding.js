@@ -2,6 +2,8 @@
  * Created by marek on 16.06.16.
  */
 
+//TODO: 01.09-2017 zobaczyc ile z tego pliku mozna teraz obciac i zgrac z node
+
 define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST","./JsonBuilder"], function (Camera, AddImageToServerREQUEST, AddDataForImageToServerREQUEST,JsonBuilder) {
 
     var exported = {};
@@ -58,7 +60,9 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
     }; // dodaje przycisk i nadaje mu klasę, że jak wciśniesz to wywołujesz exported.addNewPatchEventListener
 
 
-    exported.addNewPatchEventListener = function () { // co po wciśnięciu przycisku (wyskakuje cały prompt)
+    //TODO: odtad dalej analizuj
+    
+    exported.addNewPatchEventListener = function () { // wciśnięciu przycisku (wyskakuje cały prompt)
 
         document.body.addEventListener('click', this.newPatchDataReceiverBuilder);
     };
