@@ -100,10 +100,10 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
                     throw Error('invalid url');
                 }
 
-                if (url.match(/\.json/)) {
+                /*if (url.match(/\.json/)) {
                     throw Error('invalid url');
                     // url powinine byc adresem katalogu w ktorym jest archiwum mapy
-                }
+                }*/
                 //debugger;
             } // tu mają byc testy poprawności url ale jeszcze nie ma nic
 
