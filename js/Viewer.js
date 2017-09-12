@@ -12,7 +12,8 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
             // TODO: ZAWSZE tutaj zmieniać na p00.pl:4246 jak się jest poza domem
 
             serverURL:'http://192.168.55.102:4246' , // W DOMU (sieć wewnętrzna z serwerem)
-            DataPath:"/data/test_arch",
+            //DataPath:"/data/test_arch",
+            DataPath:"/data/chemik_1",
             JsonFile:"/data.json"
 
             //serverURL:'http://p00.pl:4246'  // POZA DOMEM

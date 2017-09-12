@@ -32,7 +32,9 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
 
 
-    var json_data_file_path = "/data/test_arch/data.json"; // to trzeba będzie zrobić, żeby spośród kilku opcji wyboru wybierało - na razie nie zrobione i wystepuje w kilku
+    var json_data_file_path = "/data/test_arch/data.json";
+    var json_data_file_path = "/data/chemik_1/data.json";
+    // to trzeba będzie zrobić, żeby spośród kilku opcji wyboru wybierało - na razie nie zrobione i wystepuje w kilku
 // miejscach wiec zwrocic uwage ustawić to tak: to jest pierwsza paczka domyślna, a z przycisku na stronie można wybrać inną paczkę i wtedy się załaduje inne auto
 
     var path_image_folder;
