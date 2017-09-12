@@ -41,14 +41,19 @@
           "id": "6",
           "pos": {
             "x": -0.30,
-            "y": -0.10,
-            "w": 0.61
+            "y": -0.03,
+            "w": 0.59
           },
           "size": {
             "w": 68,
             "h": 51
           },
-          "points": [],
+          "points": [{
+            "x": 0,
+            "y": 0,
+            "textInit": "punkt00",
+            "isNew": false
+          }],
           "children": [
           ]
         }
