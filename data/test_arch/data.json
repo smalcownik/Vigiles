@@ -1,1 +1,329 @@
-{"meta":{},"images":[]}
+{
+  "meta": {},
+  "images": [
+    {
+      "id": "0",
+      "size": {
+        "w": 512,
+        "h": 683
+      },
+      "points": [
+        {
+          "x": 0,
+          "y": 0,
+          "textInit": "punkt0",
+          "isNew": false
+        },
+        {
+          "x": 0.5,
+          "y": -0.5,
+          "textInit": "punkt0",
+          "isNew": false
+        },
+        {
+          "x": -0.5,
+          "y": -0.5,
+          "isNew": false
+        }
+      ],
+      "children": [
+        {
+          "id": "2",
+          "pos": {
+            "x": 0,
+            "y": -0.5,
+            "w": 0.8
+          },
+          "size": {
+            "w": 512,
+            "h": 384
+          },
+          "points": [],
+          "children": []
+        },
+        {
+          "id": "1",
+          "pos": {
+            "x": 0,
+            "y": 0.5,
+            "w": 0.8
+          },
+          "size": {
+            "w": 512,
+            "h": 384
+          },
+          "points": [
+            {
+              "x": 0,
+              "y": 0,
+              "textInit": "punkt3",
+              "isNew": false
+            }
+          ],
+          "children": [
+            {
+              "id": "4",
+              "pos": {
+                "x": -0.5,
+                "y": 0.5,
+                "w": 0.3
+              },
+              "size": {
+                "w": 512,
+                "h": 683
+              },
+              "points": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "textInit": "punkt0",
+                  "isNew": false
+                },
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "isNew": false
+                },
+                {
+                  "x": 0,
+                  "y": 0.5,
+                  "isNew": false
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "5",
+              "pos": {
+                "x": 0.5,
+                "y": 0.5,
+                "w": 0.3
+              },
+              "size": {
+                "w": 512,
+                "h": 683
+              },
+              "points": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "isNew": false
+                },
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "textInit": "punkt0",
+                  "isNew": false
+                },
+                {
+                  "x": 0,
+                  "y": 0.5,
+                  "isNew": false
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "size": {
+        "w": 512,
+        "h": 683
+      },
+      "points": [
+        {
+          "x": 0,
+          "y": 0,
+          "textInit": "punkt0",
+          "isNew": false
+        },
+        {
+          "x": 0.5,
+          "y": -0.5,
+          "isNew": false
+        },
+        {
+          "x": -0.5,
+          "y": -0.5,
+          "isNew": false
+        }
+      ],
+      "children": [
+        {
+          "id": "8",
+          "pos": {
+            "x": 0,
+            "y": -0.5,
+            "w": 0.8
+          },
+          "size": {
+            "w": 512,
+            "h": 384
+          },
+          "points": [],
+          "children": []
+        },
+        {
+          "id": "7",
+          "pos": {
+            "x": 0,
+            "y": 0.5,
+            "w": 0.8
+          },
+          "size": {
+            "w": 512,
+            "h": 384
+          },
+          "points": [
+            {
+              "x": 0,
+              "y": 0,
+              "isNew": false
+            }
+          ],
+          "children": [
+            {
+              "id": "9",
+              "pos": {
+                "x": -0.5,
+                "y": 0.5,
+                "w": 0.3
+              },
+              "size": {
+                "w": 512,
+                "h": 683
+              },
+              "points": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "isNew": false
+                },
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "isNew": false
+                },
+                {
+                  "x": 0,
+                  "y": 0.5,
+                  "isNew": false
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "10",
+              "pos": {
+                "x": 0.5,
+                "y": 0.5,
+                "w": 0.3
+              },
+              "size": {
+                "w": 512,
+                "h": 683
+              },
+              "points": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "isNew": false
+                },
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "isNew": false
+                },
+                {
+                  "x": 0,
+                  "y": 0.5,
+                  "isNew": false
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "size": {
+        "w": 512,
+        "h": 384
+      },
+      "points": [
+        {
+          "x": 0,
+          "y": 0,
+          "isNew": false
+        }
+      ],
+      "children": [
+        {
+          "id": "12",
+          "pos": {
+            "x": -0.5,
+            "y": 0.5,
+            "w": 0.3
+          },
+          "size": {
+            "w": 512,
+            "h": 683
+          },
+          "points": [
+            {
+              "x": 0,
+              "y": 0,
+              "isNew": false
+            },
+            {
+              "x": 0.5,
+              "y": 0.5,
+              "isNew": false
+            },
+            {
+              "x": 0,
+              "y": 0.5,
+              "isNew": false
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "13",
+          "pos": {
+            "x": 0.5,
+            "y": 0.5,
+            "w": 0.3
+          },
+          "size": {
+            "w": 512,
+            "h": 683
+          },
+          "points": [
+            {
+              "x": 0,
+              "y": 0,
+              "isNew": false
+            },
+            {
+              "x": 0.5,
+              "y": 0.5,
+              "isNew": false
+            },
+            {
+              "x": 0,
+              "y": 0.5,
+              "isNew": false
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ]
+}

@@ -13,7 +13,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
 
             serverURL:'http://192.168.55.102:4246' , // W DOMU (sieć wewnętrzna z serwerem)
             DataPath:"/data/test_arch",
-            JsonFile:"/data1.json"
+            JsonFile:"/data.json"
 
             //serverURL:'http://p00.pl:4246'  // POZA DOMEM
         };
