@@ -34,7 +34,9 @@ define([], function () {
             this.originalParent = i; // to jest pozycja w tablicy images w data.json, żeby było wiadomo w którym zdjęciu-matce ląduje dany Patch
 
             this.defaultOpacity = 0.25;
+            this.selectOpacity = 0.75;
 
+            console.log(image);
 
 
             document.body.appendChild(imgHTML);
@@ -109,6 +111,90 @@ define([], function () {
 
         };*/
 
+        exported.prototype.recalculateBack =function() {
+            var image = this.image;
+
+            return;
+            //TODO: przeliczyc
+
+            image.pos.x = 0;
+            image.pos.y = 0;
+            image.pos.w = 0;
+        };
+
+        exported.prototype.enableEditMode =function(pEditor){
+
+            this.pEditor = pEditor;
+
+
+            if(!this.image.parent){
+                return;
+            }
+
+
+            var imgHTML = this.DOM;
+
+            imgHTML.style.border = '2px solid rgba(255, 0, 0, 1)';
+
+            var that = this;
+
+            imgHTML.addEventListener('mousedown',function(e){
+                if(e.altKey){
+
+                    that.selectMe()
+                }
+
+            })
+        };
+
+        exported.prototype.deSelectMe =function(){
+
+            var pEditor = this.pEditor;
+
+            var imgHTML = this.DOM;
+
+            imgHTML.style.border = '5px solid rgba(255, 255, 255, .2)';
+            imgHTML.style.opacity = this.defaultOpacity;
+
+            this.recalculateBack();
+
+        };
+
+        exported.prototype.selectMe =function(){
+
+            var pEditor = this.pEditor;
+
+            if(pEditor.selected){
+                pEditor.selected.deSelectMe();
+                pEditor.selected = null;
+            }
+
+            pEditor.selected = this;
+
+            var imgHTML = this.DOM;
+
+            imgHTML.style.border = '5px solid rgba(255, 0, 0, 1)';
+            imgHTML.style.opacity = this.selectOpacity;
+
+        };
+
+        exported.prototype.move = function(dx,dy){
+            var image = this.image;
+
+            image.absolutePos.x +=dx;
+            image.absolutePos.y +=dy;
+
+        }
+
+        exported.prototype.zoom = function(zoom){
+            var image = this.image;
+
+            image.absolutePos.h *=Math.pow(1+0.01,zoom);
+            image.absolutePos.w *=Math.pow(1+0.01,zoom);
+
+
+        }
+
         exported.prototype.updateMyPosition =function(camera){
             var imgHTML = this.DOM;
 
@@ -135,23 +221,32 @@ define([], function () {
 
             // UPDATE OPACITY:
 
-            if(image.absolutePos.w*camera.scale/*imgHTML.style.width ale BEZ PIKSELI*/ > window.innerWidth ) {
+            if(this.pEditor /*&& this.pEditor.selected==this*/){
+                return
+            }else {
 
-               // console.log(image);
 
-                if (image.children.length > 0) {
+                if (image.absolutePos.w * camera.scale/*imgHTML.style.width ale BEZ PIKSELI*/ > window.innerWidth) {
 
-                    image.children.forEach(function(element){element.patch.DOM.style.opacity = 1});
+                    // console.log(image);
+
+                    if (image.children.length > 0) {
+
+                        image.children.forEach(function (element) {
+                            element.patch.DOM.style.opacity = 1
+                        });
+                    }
+
+                } else {
+                    if (image.children.length > 0) {
+
+                        image.children.forEach(function (element) {
+                            element.patch.DOM.style.opacity = defaultOpacity
+                        });
+                    }
+
                 }
-
-            }else{
-                if (image.children.length > 0) {
-
-                    image.children.forEach(function(element){element.patch.DOM.style.opacity = defaultOpacity});
-                }
-
             }
-
 
         };
 

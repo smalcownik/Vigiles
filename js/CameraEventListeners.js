@@ -21,8 +21,9 @@ define(['./Camera'], function (Camera) {
             187: 1
         };
 
+        exported.keyEvents = function (e) {  // event dla camery/obrazków
 
-        document.body.addEventListener('keydown', function (e) {  // event dla camery/obrazków
+
 
 
 
@@ -37,12 +38,15 @@ define(['./Camera'], function (Camera) {
             }
 
 
-           viewer.updateAllPositionables(); //
+            viewer.updateAllPositionables(); //
 
 
 
 
-        });
+        };
+
+
+        document.body.addEventListener('keydown', exported.keyEvents);
     }
 
     return exported;

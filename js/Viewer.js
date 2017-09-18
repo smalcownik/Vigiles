@@ -1,5 +1,5 @@
-define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera","./CameraEventListeners","./PointEventListeners",'./PointEventFunctions','./JsonBuilder','./ImageDataAdding','./UpdateJsonOnServerREQUEST', './AddDataForImageToServerREQUEST','./AddImageToServerREQUEST'], function (
-        MapDataProviderREQUEST,PatchBuilder,PointsBuilder,Camera,CameraEventListeners,PointEventListeners,PointEventFunctions,JsonBuilder,ImageDataAdding,UpdateJsonOnServerREQUEST,AddDataForImageToServerREQUEST,AddImageToServerREQUEST
+define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBuilder","./Camera","./CameraEventListeners","./PointEventListeners",'./PointEventFunctions','./JsonBuilder','./ImageDataAdding','./UpdateJsonOnServerREQUEST', './AddDataForImageToServerREQUEST','./AddImageToServerREQUEST'], function (
+        MapDataProviderREQUEST,PatchBuilder,PatchEditor,PointsBuilder,Camera,CameraEventListeners,PointEventListeners,PointEventFunctions,JsonBuilder,ImageDataAdding,UpdateJsonOnServerREQUEST,AddDataForImageToServerREQUEST,AddImageToServerREQUEST
     ) { //wyswietla strone i poczatkowe dane
 
         var exported = {
@@ -11,9 +11,10 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
 
             // TODO: ZAWSZE tutaj zmieniać na p00.pl:4246 jak się jest poza domem
 
-            serverURL:'http://192.168.55.102:4246' , // W DOMU (sieć wewnętrzna z serwerem)
-            //DataPath:"/data/test_arch",
-            DataPath:"/data/chemik_1",
+            //serverURL:'http://192.168.55.102:4246' , // W DOMU (sieć wewnętrzna z serwerem)
+            serverURL:'' , // W DOMU (sieć wewnętrzna z serwerem)
+            DataPath:"/data/test_arch",
+            //DataPath:"/data/chemik_1",
             JsonFile:"/data.json"
 
             //serverURL:'http://p00.pl:4246'  // POZA DOMEM
@@ -25,8 +26,12 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
             //exported.buildDOM();                // na razie nic tu nie ma - to ma być stworzenie interfejsu
 
             PatchBuilder.viewer = this;
+            PatchEditor.viewer = this;
             PointsBuilder.viewer = this;
             CameraEventListeners.viewer = this; // TRZEBA TO WSTRZYKNĄĆ PRZED F_KCJĄ registerEventListeners(), bo inaczej ona nie widzi viewera
+
+
+
             //PointEventListeners.viewer = this;
             PointEventFunctions.viewer = this;
             JsonBuilder.viewer = this;
@@ -129,10 +134,11 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PointsBuilder","./Camera"
             //console.log(data);
 
             PatchBuilder.build(data); //// jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a;  PatchBuilder traversuje całego JSON'a;
+            PatchEditor.build(data); //// jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a;  PatchBuilder traversuje całego JSON'a;
             // ma też poprzez data.url dostęp do plików serwera
 
             PointsBuilder.build(data);
-            
+
 
             this.updateAllPositionables();
 
