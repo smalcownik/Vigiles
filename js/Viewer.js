@@ -13,7 +13,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
 
             //serverURL:'http://192.168.55.102:4246' , // W DOMU (sieć wewnętrzna z serwerem)
             serverURL:'' , // W DOMU (sieć wewnętrzna z serwerem)
-            DataPath:"/data/test_arch",
+            DataPath:"/Vigiles/data/test_arch",
             //DataPath:"/data/chemik_1",
             JsonFile:"/data.json"
 

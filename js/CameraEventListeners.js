@@ -23,10 +23,6 @@ define(['./Camera'], function (Camera) {
 
         exported.keyEvents = function (e) {  // event dla camery/obrazków
 
-
-
-
-
             //debugger;
 
             if (e.keyCode in moveKeyActions) {
