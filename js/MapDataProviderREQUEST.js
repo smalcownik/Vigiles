@@ -44,7 +44,7 @@ define(['./MapData'], function (MapData) {
 
                 }
             }};
-            http_request.open('GET', fullUrl/*+"/lampa"*/, true); //TODO: tutaj to lampa dobrze zadzialalo, trzeba na tej podstawie dzialac dalej
+            http_request.open('GET', fullUrl/*+"/lampa"*/, true); //TODO: tutaj to lampa zadzialalo
             //http_request.setRequestHeader("Content-Type","application/json;charset=UTF-8");
             //http_request.setRequestHeader("Content-Type","image/jpeg");
 

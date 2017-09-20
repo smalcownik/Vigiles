@@ -25,4 +25,6 @@ requirejs([
         
         Viewer.loadURL(Viewer.serverURL+Viewer.DataPath, Viewer.JsonFile); // do servera z amazona (plik JSON oddany przez node'a  )
         //Viewer.serverURL:'http://192.168.55.102:4246'
+        
+        //TODO: tutaj dolozyc zmienna - url serwera node do pracy na plikach
     });

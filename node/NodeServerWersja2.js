@@ -4,11 +4,7 @@
 /*** Created by marek on 07.06.16.*/
 // pamietac zeby odpalac node na amazonie z poziomu folderu Vigiles a nie z poziomu Vigiles/node
 // działa w pełni: GET, POST, otwiera img
-
 // przyklad w ajax_proby/node_server oraz server_with_several_file_types
-
-//Plan obróbki:
-    
  //shift+ f4 - detach editor tabs
 
 define(['./NodeFunctions'], function (NodeFunctions) {
@@ -32,7 +28,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
 
 
-    var json_data_file_path = "/data/test_arch/data.json";
+    //var json_data_file_path = "/data/test_arch/data.json";
     var json_data_file_path = "/data/chemik_1/data.json";
     // to trzeba będzie zrobić, żeby spośród kilku opcji wyboru wybierało - na razie nie zrobione i wystepuje w kilku
 // miejscach wiec zwrocic uwage ustawić to tak: to jest pierwsza paczka domyślna, a z przycisku na stronie można wybrać inną paczkę i wtedy się załaduje inne auto
@@ -45,7 +41,9 @@ define(['./NodeFunctions'], function (NodeFunctions) {
     process.stdout.write("\n" + "************************************************" + "\n" + "\n" + "Plik startuje :)     "); // ta wersja nie powoduje wyswietlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
 
 
+
     exported.http.createServer(function (request, response) {
+        
 
         process.stdout.write("\n" + "server running:    ");//console.log("server running");
 
@@ -263,6 +261,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
     }).listen(port, function () {
         //Callback triggered when server is successfully listening.
+        
         console.log("Server listening on: http://localhost:%s" + "\n" + "\n" + "********************************************************************************************************" + "\n" + "\n" +
             "********************************************************************************************************" + "\n" + "\n" +
             "********************************************************************************************************", port);

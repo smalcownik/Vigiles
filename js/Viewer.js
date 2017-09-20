@@ -9,10 +9,11 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
             camera:Camera,
             
 
-            // TODO: ZAWSZE tutaj zmieniać na p00.pl:4246 jak się jest poza domem
-
+            //  ZAWSZE tutaj zmieniać na p00.pl:4246 jak się jest poza domem
             //serverURL:'http://192.168.55.102:4246' , // W DOMU (sieć wewnętrzna z serwerem)
             serverURL:'' , // W DOMU (sieć wewnętrzna z serwerem)
+            //TODO: pobiera dane z serverURL ale node moze robic requesta gdzie indziej, zrobic to wszystko z pliku node na tym kompie, i TEN NODE MA SIE ODNOSIC DO PLIKOW Z KOMPA
+            // który bedzie pracowal na plikach, dolozyc zmienna z nazwa url serwera do pliku app.js, nastepnie w funkcji load url rozroznic zmienne serwer node do obrobki
             DataPath:"/Vigiles/data/test_arch",
             //DataPath:"/data/chemik_1",
             JsonFile:"/data.json"
@@ -119,7 +120,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
                 function(data){ // cb w MDP.loadData
 
                     exported.currentDataStringified = JSON.stringify(data); // UWAGA! użyte poźniej w klasie "ImageDataAdding.js" zeby miec zachowana oryginalna tresc aktualnego JSONA
-                    exported.currentData = data; // jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a
+                    exported.currentData = data; // jako data wchodzi new MapData(response) czyli cały OBIEKT z jSON'a
                     exported.currentData.url = url; // znajduje się potem w Patch w sciezce do zdjec (przez Viewer.ShowMapData)
                     console.log(url+fileName); // wyswietla http://192.168.55.102:4246 // po zmianie http://192.168.55.102:4246/data/test_arch/data1.json
                     exported.showMapData(exported.currentData); // w tej f-kcji będzie dopiero wołany PatchBuilder czyli cały widok, a currentData to obiekt new MapData(response)
@@ -129,12 +130,15 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
 
         };
 
-        exported.showMapData = function(data){ // jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a
+        exported.showMapData = function(data){ // jako data wchodzi new MapData(response) czyli cały OBIEKT z jSON'a
 
             //console.log(data);
 
-            PatchBuilder.build(data); //// jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a;  PatchBuilder traversuje całego JSON'a;
-            PatchEditor.build(data); //// jako data wchodzi new MapData(response) czyli cały obiekt z jSON'a;  PatchBuilder traversuje całego JSON'a;
+            PatchBuilder.build(data); //// jako data wchodzi new MapData(response) czyli cały OBIEKT jSON'a;  PatchBuilder traversuje całego JSON'a;
+
+            //debugger;
+
+            PatchEditor.build(data); //// jako data wchodzi new MapData(response) czyli cały OBIEKT z jSON'a;  PatchBuilder traversuje całego JSON'a;
             // ma też poprzez data.url dostęp do plików serwera
 
             PointsBuilder.build(data);

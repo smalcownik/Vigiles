@@ -39,8 +39,11 @@ define(["./Patch","./CameraEventListeners"], function (Patch,CameraEventListener
                 document.body.addEventListener('keydown', function(e){
 
                     if(!e.altKey ){
+
                         CameraEventListeners.keyEvents(e);
                     }else{
+
+
                         e.preventDefault();
 
                         if(that.selected){

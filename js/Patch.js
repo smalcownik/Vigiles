@@ -222,7 +222,7 @@ define([], function () {
             // UPDATE OPACITY:
 
             if(this.pEditor /*&& this.pEditor.selected==this*/){
-                return
+                return;
             }else {
 
 
