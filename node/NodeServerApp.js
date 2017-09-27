@@ -10,8 +10,10 @@ requirejs.config({
     nodeRequire: require
 });
 
-requirejs(['NodeServerWersja2'],
-    function   (NodeServerWersja2) {
+//requirejs(['NodeServerWersja2'],
+requirejs(['NodeLocal'],
+    function   (NodeLocal) {
+   // function   (NodeServerWersja2) {
         //foo and bar are loaded according to requirejs
         //config, but if not found, then node's require
         //is used to load the module.

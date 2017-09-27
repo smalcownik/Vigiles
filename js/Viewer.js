@@ -7,15 +7,16 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
 
             ],
             camera:Camera,
-            
 
+
+            serverURL:'http://localhost:4246' , // W DOMU (sieć wewnętrzna z serwerem)
+            //TODO: pobiera dane z serverURL ale node moze robic requesta gdzie indziej, zrobic to wszystko z pliku node na tym kompie, i ten node ma sie odnosic do plikow z kompa
+            // który bedzie pracowal na plikach, dolozyc zmienna z nazwa url serwera do pliku app.js, nastepnie w funkcji load url rozroznic zmienne serwer node do obrobki
+            //DataPath:"/data/chemik_1",
             //  ZAWSZE tutaj zmieniać na p00.pl:4246 jak się jest poza domem
             //serverURL:'http://192.168.55.102:4246' , // W DOMU (sieć wewnętrzna z serwerem)
-            serverURL:'' , // W DOMU (sieć wewnętrzna z serwerem)
-            //TODO: pobiera dane z serverURL ale node moze robic requesta gdzie indziej, zrobic to wszystko z pliku node na tym kompie, i TEN NODE MA SIE ODNOSIC DO PLIKOW Z KOMPA
-            // który bedzie pracowal na plikach, dolozyc zmienna z nazwa url serwera do pliku app.js, nastepnie w funkcji load url rozroznic zmienne serwer node do obrobki
-            DataPath:"/Vigiles/data/test_arch",
-            //DataPath:"/data/chemik_1",
+            //DataPath:"/Vigiles/data/test_arch",
+            DataPath:"/data/test_arch",
             JsonFile:"/data.json"
 
             //serverURL:'http://p00.pl:4246'  // POZA DOMEM
@@ -101,7 +102,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
         };
 //
 
-        exported.loadURL = function(url, fileName){ // ta f-kcja jest odpalana na początku z app.js z argumentem ('Viewer.serverURL'+ Viewer.serverURL+Viewer.DataPath)
+        exported.loadURL = function(url/*, fileName*/){ // ta f-kcja jest odpalana na początku z app.js z argumentem ('Viewer.serverURL'+ Viewer.serverURL+Viewer.DataPath)
 
             {
                 if (typeof(url) !== 'string') {
@@ -116,13 +117,13 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
             } // tu mają byc testy poprawności url ale jeszcze nie ma nic
 
 
-            MapDataProviderREQUEST.loadData(url+fileName,
+            MapDataProviderREQUEST.loadData(url/*+fileName*/,
                 function(data){ // cb w MDP.loadData
 
                     exported.currentDataStringified = JSON.stringify(data); // UWAGA! użyte poźniej w klasie "ImageDataAdding.js" zeby miec zachowana oryginalna tresc aktualnego JSONA
                     exported.currentData = data; // jako data wchodzi new MapData(response) czyli cały OBIEKT z jSON'a
-                    exported.currentData.url = url; // znajduje się potem w Patch w sciezce do zdjec (przez Viewer.ShowMapData)
-                    console.log(url+fileName); // wyswietla http://192.168.55.102:4246 // po zmianie http://192.168.55.102:4246/data/test_arch/data1.json
+                    exported.currentData.url = url + exported.DataPath; //todo; sztucznie wstrzyniete(dla Patch) znajduje się potem w Patch w sciezce do zdjec (przez Viewer.ShowMapData)
+                    console.log(url/*+fileName*/); // wyswietla http://192.168.55.102:4246 // po zmianie http://192.168.55.102:4246/data/test_arch/data1.json
                     exported.showMapData(exported.currentData); // w tej f-kcji będzie dopiero wołany PatchBuilder czyli cały widok, a currentData to obiekt new MapData(response)
                 }
             );
