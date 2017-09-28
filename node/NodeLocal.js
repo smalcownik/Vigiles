@@ -35,58 +35,41 @@ define(['./NodeFunctions'], function (NodeFunctions) {
         process.stdout.write("     0.1. fileext:" + fileext);
         process.stdout.write("  1.method1: " + method + '     ' +
             //"2.headers: " + headers + '     ' +
-            "3.req.url: " + url + '     ' +  // inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, dla get JSon tez jest "/" - tu dla post-jpeg interpretuje jako jso
-            "4. send:cont-type: " + contentTypeString); // dla metody get,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc
-        var actualContType = NodeFunctions.contentTypeFromExt(fileext)["Content-Type"]; //ta funkcja potem użyta niżej w response.writeHead(200, NodeFunctions.contentTypeFromExt(fileext)
-        process.stdout.write("  4. actual:cont-type: " + actualContType ); // dla metody get,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc)
+            "3.req.url: " + url + '     ' );
+
+           //niestety nie ma mozliwosci (stack overflow) ustawic headers z html.src skad jest wykonywany request i rozroznia je tylko po url'u:
+        var actualContType;
+        if (typeof contentTypeString === "undefined"){
+                actualContType = NodeFunctions.contentTypeFromExt(fileext)["Content-Type"]; //ta funkcja potem użyta niżej w response.writeHead(200, NodeFunctions.contentTypeFromExt(fileext)
+                process.stdout.write("  4. send;;actual:cont-type: " +contentTypeString+";;"+ actualContType ); // dla metody get,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc)
+        }else{
+            process.stdout.write("  4. send;;actual:cont-type: " +contentTypeString+";;"+ actualContType);
+            actualContType = contentTypeString;}
 
 
-        if (typeof contentTypeString === "undefined") { //niestety nie ma mozliwosci (stack overflow) ustawic headers z html.src skad jest wykonywany request i tym sposobem ustawienia image/jpg dla zdjec
-            // dla GET jest undefined- wgrywają sie pliki z serwera (jpg lub json - nie widzi typu w headers),
-            //  rozroznia je tylko po url'u
-
-            //filepath = ".." + (request.url == "/" ? json_data_file_path : url); // TODO 2: tu zmienić, żeby brał url z klasy REQUEST
-
-            //process.stdout.write("4.0. filepath: " + filepath);
-        }
-        else if (contentTypeString == "image/jpeg") {
-            if (method == "GET") {
-                console.log("     4.1. method:" + method + "(powinno byc GET, ale sprawdzam)");
-                //filepath = "." + (request.url == "/" ? json_data_file_path : url); // bez sensu - tu nie może być json
-                //filepath = "." + url;
-
-                console.log("     4.1.1. filepath: " + filepath);
-            }
-
+        if (actualContType == "image/jpeg") {
+            //GET - przesyla zdjecia z bazy
 
             if (method == "POST") {//{ to jest POST: przesyła się // ta sytuacja dotyczy tylko przesyłania nowego pliku image
-                process.stdout.write("     4.2. method:" + method + ", a powinno byc POST");
+                process.stdout.write("     4.2. method:" + method);
                 process.stdout.write("     5. confirmed image/jpeg");
 
-                //TODO: tu trzeba uzyc formidable i przeslac pliki
-
-                // process.stdout.write("     5.1 sciezka do pliku" + data_for_curently_added_patch[0][0]); //artefakt
-                // filepath = "." + data_for_curently_added_patch[0][0];//artefakt
+                //TODO: tu uzyc formidable i przeslac pliki
             }
 
         }
-        else if (headers['content-type'] == "application/json;charset=UTF-8") {
-            process.stdout.write("     4.3. aktualizacja jsona");
 
-            //filepath = "." + (request.url == "/" ? json_data_file_path : url);
-
-            process.stdout.write("     4.4. filepath: " + filepath);
-
+        else if (actualContType == "application/json;charset=UTF-8" || "application/json") {
+            process.stdout.write("     4.3. aktualizacja jsona");;
         }
+
         else {
-            console.log("content-type jest poza kontrola: " + headers['content-type']);
+            process.stdout.write("UWAGA! content-type jest poza kontrola: actualContentType: " + actualContType);
         }
 
 
-       // process.stdout.write("     4.5. fileext:" + fileext);
 
-
-        if (request.method == "POST") {
+        if (method == "POST") {
 
             console.log("     7. method 2: " + method);
 
@@ -111,9 +94,9 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                     // do zdjęcia i pod tym urlem zdjęcie było dostępne (szukaj rozwiązania na stackoverflowe)
 
                     console.log("    8. fileext to jotpeg, a jego url: " + url);
-                    //TODO:30.05.2017 zakladki przegladarki "node server" 3 ostatnie, ew. 4-5 ostatnie tam jest klucz
 
-                    //TODO:póxniej zrobić logike url'ow (przyklad na update jsononserverREQUEST)
+
+                    //TODO: lub tu formidable - obmyslić logikę bo jest niejasna
 
 
                     if (data_for_curently_added_patch = !null) {
