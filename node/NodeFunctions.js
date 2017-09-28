@@ -21,6 +21,9 @@ define([], function () {
             case '.jpg':
                 ct = "image/jpeg";
                 break;
+            case '.json':
+                ct = "application/json";
+                break;
             default:
                 ct = 'text/plain';
                 break;

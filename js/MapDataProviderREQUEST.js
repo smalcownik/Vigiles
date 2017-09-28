@@ -8,6 +8,7 @@ define(['./MapData'], function (MapData) {
         var http_request = false;
 
         function makeRequest(fullUrl,cb) { // url to http://192.168.55.102:4246
+           // console.log(fullUrl);
 
             http_request = false;
 
@@ -15,6 +16,8 @@ define(['./MapData'], function (MapData) {
                 http_request = new XMLHttpRequest();
                 if (http_request.overrideMimeType) {
                     http_request.overrideMimeType('text/xml');
+
+
                     // Przeczytaj o tym wierszu poniżej
                 }
             } else if (window.ActiveXObject) { // IE

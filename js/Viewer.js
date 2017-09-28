@@ -102,8 +102,8 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
         };
 //
 
-        exported.loadURL = function(url/*, fileName*/){ // ta f-kcja jest odpalana na początku z app.js z argumentem ('Viewer.serverURL'+ Viewer.serverURL+Viewer.DataPath)
-
+        exported.loadURL = function(url, dataPath, fileName/*, fileName*/){ // ta f-kcja jest odpalana na początku z app.js z argumentem ('Viewer.serverURL'+ Viewer.serverURL+Viewer.DataPath)
+                                //(Viewer.serverURL,Viewer.DataPath, Viewer.JsonFile)
             {
                 if (typeof(url) !== 'string') {
                     throw Error('invalid url');
@@ -117,13 +117,13 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
             } // tu mają byc testy poprawności url ale jeszcze nie ma nic
 
 
-            MapDataProviderREQUEST.loadData(url/*+fileName*/,
+            MapDataProviderREQUEST.loadData(url+dataPath+fileName,
                 function(data){ // cb w MDP.loadData
 
                     exported.currentDataStringified = JSON.stringify(data); // UWAGA! użyte poźniej w klasie "ImageDataAdding.js" zeby miec zachowana oryginalna tresc aktualnego JSONA
                     exported.currentData = data; // jako data wchodzi new MapData(response) czyli cały OBIEKT z jSON'a
                     exported.currentData.url = url + exported.DataPath; //todo; sztucznie wstrzyniete(dla Patch) znajduje się potem w Patch w sciezce do zdjec (przez Viewer.ShowMapData)
-                    console.log(url/*+fileName*/); // wyswietla http://192.168.55.102:4246 // po zmianie http://192.168.55.102:4246/data/test_arch/data1.json
+                    //console.log(url/*+fileName*/); // wyswietla http://localhost:4246/data/test_arch/data.json
                     exported.showMapData(exported.currentData); // w tej f-kcji będzie dopiero wołany PatchBuilder czyli cały widok, a currentData to obiekt new MapData(response)
                 }
             );

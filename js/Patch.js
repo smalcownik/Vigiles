@@ -12,8 +12,7 @@ define([], function () {
 
             var imgHTML= document.createElement('img');
 
-            console.log(data.url); //http://192.168.55.102:4246/data/test_arch
-            //imgHTML.src=data.url+'/imgs/imgs['+i+']/'+image.id+'.jpg'; //  tu jest odniesienie do plików jpg (jedyne!!)
+            //console.log(data.url); //http://localhost...../data/test_arch
 
             imgHTML.src=data.url+'/imgs/imgs['+i+']/'+image.id+'.jpg'; // TODO: tu jest odniesienie do plików jpg (jedyne!!)
                                                     //  13.02.2017 do opcji wyboru paczki danych tutaj trzeba zmieniac fragment "test_arch" w zalezności od wyboru paczki
@@ -36,7 +35,7 @@ define([], function () {
             this.defaultOpacity = 0.25;
             this.selectOpacity = 0.75;
 
-            console.log(image);
+            //console.log(image);
 
 
             document.body.appendChild(imgHTML);

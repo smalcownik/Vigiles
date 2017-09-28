@@ -1,26 +1,12 @@
 /**
  * Created by marek on 27.09.17.
  */
-/**
- * Created by marek on 13.06.17.
- */
-/*** Created by marek on 07.06.16.*/
 // pamietac zeby odpalac node na amazonie z poziomu folderu Vigiles a nie z poziomu Vigiles/node
-// działa w pełni: GET, POST, otwiera img
-// przyklad w ajax_proby/node_server oraz server_with_several_file_types
 //shift+ f4 - detach editor tabs
 
+// zwrocic uwage - ustawić to tak: to jest pierwsza paczka domyślna, a z przycisku na stronie można wybrać inną paczkę i wtedy się załaduje inne auto
+
 define(['./NodeFunctions'], function (NodeFunctions) {
-
-    /*var http = require('http');
-     var fs = require('fs');
-     var path = require('path');
-     var mkdirp = require('mkdirp');*/ // do tego musialem zainstalowa npm i "npm install mkdirp" z npm // nie dzialalo w wersji z requirejs
-
-    /*exported.http = require('http');
-     exported.fs = require('fs');
-     exported.path = require('path');
-     exported.mkdirp = require('mkdirp');*/ // dziala w wersji z requirejs ale uproszczono w objekcie exported
 
     var exported = {
         http: require('http'),
@@ -29,21 +15,10 @@ define(['./NodeFunctions'], function (NodeFunctions) {
         mkdirp : require('mkdirp')
     };
 
-
-
-    var json_data_file_path = "/data/test_arch/data.json";
-    //var json_data_file_path = "/data/chemik_1/data.json";
-    // to trzeba będzie zrobić, żeby spośród kilku opcji wyboru wybierało - na razie nie zrobione i wystepuje w kilku
-// miejscach wiec zwrocic uwage ustawić to tak: to jest pierwsza paczka domyślna, a z przycisku na stronie można wybrać inną paczkę i wtedy się załaduje inne auto
-
-    var path_image_folder;
-    //var port = 4246; //port 4000-5000 zmieniono 07.08 z 4245 na 46 bo wyskakiwał błąd przy odpalaniu: Error: listen EADDRINUSE :::4245
-    var port = 4246; 
-
+    var port = 4246;
     var data_for_curently_added_patch;
 
     process.stdout.write("\n" + "************************************************" + "\n" + "\n" + "Plik startuje :)     "); // ta wersja nie powoduje wyswietlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
-
 
 
     exported.http.createServer(function (request, response) {
@@ -52,32 +27,33 @@ define(['./NodeFunctions'], function (NodeFunctions) {
         process.stdout.write("\n" + "server running:    ");//console.log("server running");
 
         var body = []; //chcialem dac poza createServer, ale w request.on("data") wyskakiwal blad: body "has no push method"
-
         var headers = request.headers, method = request.method, url =  request.url; // URL
         var contentTypeString = headers['content-type'];// var contentTypeString = JSON.stringify(headers['content-type']); //przyklad proponowanej techniki ULR'ow na update jsononserverREQUEST)
-
-        console.log("1.method1: " + method + '     ' +
+        var filepath = "." + url;
+        var fileext = exported.path.extname(filepath);
+        process.stdout.write("0.0. filepath: " + filepath);
+        process.stdout.write("     0.1. fileext:" + fileext);
+        process.stdout.write("  1.method1: " + method + '     ' +
             //"2.headers: " + headers + '     ' +
             "3.req.url: " + url + '     ' +  // inne niż "/" dla GET  - kiedy żąda konkretnego pliku zdjęcia, dla get JSon tez jest "/" - tu dla post-jpeg interpretuje jako jso
-            "4. headers:cont-type: " + contentTypeString); // dla metody get,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc)
+            "4. send:cont-type: " + contentTypeString); // dla metody get,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc
+        var actualContType = NodeFunctions.contentTypeFromExt(fileext)["Content-Type"]; //ta funkcja potem użyta niżej w response.writeHead(200, NodeFunctions.contentTypeFromExt(fileext)
+        process.stdout.write("  4. actual:cont-type: " + actualContType ); // dla metody get,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc)
 
-
-        var filepath; // = '.' + (request.url == "/" ?  json_data_file_path : url);
-        // TODO 1: w drugiej wersji ma być zawsze tu treść, to ma być podstawa dalaszych dzialan
 
         if (typeof contentTypeString === "undefined") { //niestety nie ma mozliwosci (stack overflow) ustawic headers z html.src skad jest wykonywany request i tym sposobem ustawienia image/jpg dla zdjec
             // dla GET jest undefined- wgrywają sie pliki z serwera (jpg lub json - nie widzi typu w headers),
             //  rozroznia je tylko po url'u
 
-            filepath = ".." + (request.url == "/" ? json_data_file_path : url); // TODO 2: tu zmienić, żeby brał url z klasy REQUEST
+            //filepath = ".." + (request.url == "/" ? json_data_file_path : url); // TODO 2: tu zmienić, żeby brał url z klasy REQUEST
 
-            process.stdout.write("4.0. filepath: " + filepath);
+            //process.stdout.write("4.0. filepath: " + filepath);
         }
         else if (contentTypeString == "image/jpeg") {
             if (method == "GET") {
                 console.log("     4.1. method:" + method + "(powinno byc GET, ale sprawdzam)");
                 //filepath = "." + (request.url == "/" ? json_data_file_path : url); // bez sensu - tu nie może być json
-                filepath = "." + url;
+                //filepath = "." + url;
 
                 console.log("     4.1.1. filepath: " + filepath);
             }
@@ -97,7 +73,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
         else if (headers['content-type'] == "application/json;charset=UTF-8") {
             process.stdout.write("     4.3. aktualizacja jsona");
 
-            filepath = "." + (request.url == "/" ? json_data_file_path : url);
+            //filepath = "." + (request.url == "/" ? json_data_file_path : url);
 
             process.stdout.write("     4.4. filepath: " + filepath);
 
@@ -107,9 +83,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
         }
 
 
-        var fileext = exported.path.extname(filepath);
-
-        process.stdout.write("     4.5. fileext:" + fileext);
+       // process.stdout.write("     4.5. fileext:" + fileext);
 
 
         if (request.method == "POST") {
@@ -169,7 +143,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                         console.log("9.1.  to jest data1.json bo ma property 'meta' ");
 
 
-                        exported.fs.writeFile('.' + json_data_file_path, body, function (err) {
+                        exported.fs.writeFile(filepath, body, function (err) { //tu poprawiono po zadzialaniu req.url na filepath
                             if (err) {
                                 return console.log(err);
                             }
