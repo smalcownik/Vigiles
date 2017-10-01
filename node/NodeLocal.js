@@ -189,7 +189,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
         }
 
 
-        else { // if (request.method === "GET") // to dotyczy przesyłania plików zdjęć z serwera
+        if (request.method === "GET"){ // if (request.method === "GET") // to dotyczy przesyłania plików zdjęć z serwera
 
             console.log("     10. method 2: " + method);
 
@@ -219,8 +219,13 @@ define(['./NodeFunctions'], function (NodeFunctions) {
             response.end();
         }
 
+        else{
 
-    }).listen(port, function () {
+            console.log("   ani get ani post??  ")
+        };
+
+
+            }).listen(port, function () {
         //Callback triggered when server is successfully listening.
 
         console.log("Server listening on: http://localhost:%s" + "\n" + "\n" + "********************************************************************************************************" + "\n" + "\n" +
