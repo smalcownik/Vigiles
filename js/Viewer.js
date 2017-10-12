@@ -31,9 +31,6 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
             PatchEditor.viewer = this;
             PointsBuilder.viewer = this;
             CameraEventListeners.viewer = this; // TRZEBA TO WSTRZYKNĄĆ PRZED F_KCJĄ registerEventListeners(), bo inaczej ona nie widzi viewera
-
-
-
             //PointEventListeners.viewer = this;
             PointEventFunctions.viewer = this;
             JsonBuilder.viewer = this;
@@ -43,55 +40,21 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
             AddImageToServerREQUEST.viewer = this;
 
             exported.registerEventListeners();  // reakcja na przyciski MUSIAŁEM NAJPIERW
-
-
+            
         };
 
-        exported.buildDOM = function(){
-            // TU MA BYC INTERFEJS
+        exported.buildDOM = function(){// TU MA BYC INTERFEJS
         };
 
         exported.updateAllPositionables = function(){ // ta funckja zachodzi przy: 1. Viewer.showMapData (czyli budowanie widoku przez PatchBuilder)
-
                                                       // 2. po kazdym Viewer.registerEventListeners
-
             this.positionable.forEach(function(p){
                 p.updateMyPosition(this.camera);
             },this);
         };
 
-
-
         exported.registerEventListeners = function(){
-
-           /* var moveKeyActions = {
-                37:[1,0],
-                38:[0,1],
-                39:[-1,0],
-                40:[0,-1]
-            };
-
-            var zoomKeyActions = {
-                189:-1,
-                187: 1
-            };
-
-            var viewer = this;
-
-            document.body.addEventListener('keydown',function(e) {  // event dla camery/obrazków
-
-                if(e.keyCode in moveKeyActions){
-                    viewer.camera.move.apply(viewer.camera,moveKeyActions[e.keyCode])
-                }
-
-                if(e.keyCode in zoomKeyActions){
-                    viewer.camera.zoom(zoomKeyActions[e.keyCode])
-                }
-
-                viewer.updateAllPositionables();
-
-            });*/
-
+            
             CameraEventListeners.cameraEvents();
             PointEventListeners.addPoint();
             PointEventListeners.showPointContent();
@@ -100,7 +63,6 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
             
 
         };
-//
 
         exported.loadURL = function(url, dataPath, fileName/*, fileName*/){ // ta f-kcja jest odpalana na początku z app.js z argumentem ('Viewer.serverURL'+ Viewer.serverURL+Viewer.DataPath)
                                 //(Viewer.serverURL,Viewer.DataPath, Viewer.JsonFile)
@@ -132,25 +94,17 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
         };
 
         exported.showMapData = function(data){ // jako data wchodzi new MapData(response) czyli cały OBIEKT z jSON'a
-
-            //console.log(data);
-
+            
             PatchBuilder.build(data); //// jako data wchodzi new MapData(response) czyli cały OBIEKT jSON'a;  PatchBuilder traversuje całego JSON'a;
-
-            //debugger;
-
+            
             PatchEditor.build(data); //// jako data wchodzi new MapData(response) czyli cały OBIEKT z jSON'a;  PatchBuilder traversuje całego JSON'a;
             // ma też poprzez data.url dostęp do plików serwera
 
             PointsBuilder.build(data);
-
-
+            
             this.updateAllPositionables();
 
            // console.log(exported.positionable);
-
-
-
         };
 
 

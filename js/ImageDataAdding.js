@@ -9,20 +9,15 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
     var exported = {};
 
     exported.addNewPatch = function () {
-        // f-kcja wywoływana w Viewer.registerEventListeners
-        //var viewer = this.viewer;
-        // console.log(viewer.positionable);
+        // f-kcja wywoływana w Viewer.registerEventListeners //var viewer = this.viewer; // console.log(viewer.positionable);
 
         this.saveNewPatchButton();
-
         //debugger;
         this.addNewPatchEventListener();
 
     };
 
-    
     exported.saveNewPatchButton = function () {
-
 
             var saveNewPatchButton = document.createElement('div');
             // document.body.appendChild(saveJsonButton);
@@ -187,8 +182,6 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
                                         //trzeba sprawdzić, który originalParentIndex jest największy i zwiększyc tę wartość o 1
 
 
-
-
             var folderPath =('/data/test_arch/imgs/imgs['+nextOriginalParent+']');
 
             var path = [folderPath +'/'+ newId +'.jpg' , folderPath ];
@@ -223,9 +216,6 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
     };
 
 
-
-
-
     exported.executeAddingNewImage = function(newId,promptedData) { // tutaj maja byc czynnosci po prompcie
 
 
@@ -244,8 +234,6 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
         var path = exported.buildPath(newId,promptedData[2],nextOriginalParent);// promptedData[2] to nr Id rodzica -!UWAGA nie Id tylko numer folderu imgs[nr]
                                                             //  promptedData: [ścieżka, dane jsona, parent.id] - parent.id !UWAGA - to numer folderu imgs[nr] a nie zdjecia
-
-
 
         var dataToServer = [path, promptedData, nextOriginalParent]; // dane na serwer
 

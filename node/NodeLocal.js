@@ -1,9 +1,8 @@
 /**
  * Created by marek on 27.09.17.
  */
-// pamietac zeby odpalac node na amazonie z poziomu folderu Vigiles a nie z poziomu Vigiles/node
+// odpalac node z poziomu folderu Vigiles a nie Vigiles/node
 //shift+ f4 - detach editor tabs
-
 // zwrocic uwage - ustawić to tak: to jest pierwsza paczka domyślna, a z przycisku na stronie można wybrać inną paczkę i wtedy się załaduje inne auto
 
 define(['./NodeFunctions'], function (NodeFunctions) {
@@ -27,7 +26,9 @@ define(['./NodeFunctions'], function (NodeFunctions) {
         process.stdout.write("\n" + "server running:    ");//console.log("server running");
 
         var body = []; //chcialem dac poza createServer, ale w request.on("data") wyskakiwal blad: body "has no push method"
-        var headers = request.headers, method = request.method, url =  request.url; // URL
+        var headers = request.headers, 
+            method = request.method, 
+            url =  request.url; // URL
         var contentTypeString = headers['content-type'];// var contentTypeString = JSON.stringify(headers['content-type']); //przyklad proponowanej techniki ULR'ow na update jsononserverREQUEST)
         var filepath = "." + url;
         var fileext = exported.path.extname(filepath);
@@ -39,13 +40,14 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
            //niestety nie ma mozliwosci (stack overflow) ustawic headers z html.src skad jest wykonywany request i rozroznia je tylko po url'u:
         var actualContType;
+
         if (typeof contentTypeString === "undefined"){
                 actualContType = NodeFunctions.contentTypeFromExt(fileext)["Content-Type"]; //ta funkcja potem użyta niżej w response.writeHead(200, NodeFunctions.contentTypeFromExt(fileext)
                 process.stdout.write("  4. send;;actual:cont-type: " +contentTypeString+";;"+ actualContType ); // dla metody get,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc)
         }else{
+            actualContType = contentTypeString;
             process.stdout.write("  4. send;;actual:cont-type: " +contentTypeString+";;"+ actualContType);
-            actualContType = contentTypeString;}
-
+            }
 
         if (actualContType == "image/jpeg") {
             //GET - przesyla zdjecia z bazy
