@@ -188,8 +188,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
             });
         }
 
-
-        if (request.method === "GET"){ // if (request.method === "GET") // to dotyczy przesyłania plików zdjęć z serwera
+        else if (request.method === "GET"){ // if (request.method === "GET") // to dotyczy przesyłania plików zdjęć z serwera
 
             console.log("     10. method 2: " + method);
 
@@ -221,7 +220,14 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
         else{
 
-            console.log("   ani get ani post??  ")
+
+
+            console.log("   ani get ani post??: " + method);
+
+            response.setHeader('Access-Control-Allow-Origin', '*');
+            response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+            response.end();
         };
 
 
