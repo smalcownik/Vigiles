@@ -65,23 +65,16 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                 }).on('data', function (chunk) {
 
-                    console.log("     7.1. zabiera sie za przesylanie data"); // nie dziala dla jpg - wiadomo, trzeba to rozkminić
+                    console.log("     7.1. zabiera sie za przesylanie data"); // nie dziala dla jpg - dalej jest formidable
                     // przerzucic do "if (fileext == ".json")"
                     exported.body.push(chunk);
 
                 }).on('end', function () {
 
 
-                    if (NodeFunctions.actualContType== "image/jpeg"
-
-                        /*exported.fileext == ".jpg"*/) { // request to post - jpg - informacje, ze to jpg bierze z danych do Patcha, natomiast brakuje sciezki "url" od samego patcha
-                        // trzeba znaleźć ścieżkę
-
-
-
+                    if (NodeFunctions.actualContType == "image/jpeg") {
+                        
                         //wynik tego działania pojawia sie w serwerze node'a po kliknieciu addPatch
-                        // napisać program aby to działanie szło dalej - tj. żeby prawidłowo działał url
-                        // do zdjęcia i pod tym urlem zdjęcie było dostępne (szukaj rozwiązania na stackoverflowe)
 
                         console.log("    8. fileext to jotpeg, a jego url: " + exported.url);
 
@@ -101,14 +94,15 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                     }
 
 
-                    if (exported.fileext == ".json") { // request to post - json
+                    if ( NodeFunctions.actualContType == ("application/json;charset=UTF-8" || "application/json") ) { // request to post - json
 
 
-                        console.log("    9.  fileext to JSON");
-
+                        console.log("   9.  fileext to JSON");
+                        
                         exported.body = Buffer.concat(exported.body).toString();
-
+                        
                         exported.bodyObject = JSON.parse(exported.body);
+                        
 
                         console.log(exported.bodyObject);
 
@@ -132,13 +126,11 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                             console.log("9.2.  to sa dane do Patcha");
 
-
                             data_for_curently_added_patch = exported.bodyObject; // bodyObject:[path, promptedData, nextOriginalParent],promptedData: [ścieżka_pierwotna_pliku, dane jsona, parent.id lub "newParent" ],
                             // path =[directory,file]
 
-                            process.stdout.write("9.2.1. wyglad nowej sciezki do pliku: " + exported.bodyObject[0][0]);
-                            console.log("9.2.2. wyglad nowej sciezki po obcieciu folderu: " + exported.bodyObject[0][1]); // obicięciu czego
-
+                            process.stdout.write("9.2.1. nowa sciezka do pliku: " + exported.bodyObject[0][0]);
+                            console.log("    9.2.2. sciezka do folderu: " + exported.bodyObject[0][1]);
                             var currentPath = "." + exported.bodyObject[0][1];
 
                             if (exported.bodyObject[2] == null) { // czyli kiedy nie ma originalParent i trzeb utworzyć nowy folder na kolejnego patcha-matke
@@ -158,10 +150,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                             // b. jesli nie ma parenta - utworzyć nowy folder (na podstawie danych z jsona)
                             //    -  wtedy  wysłać request/postem sam obrazek
 
-
-                        }
-                        ;
-
+                        };
 
                     }
 
