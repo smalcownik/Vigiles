@@ -3,15 +3,17 @@
  */
 // odpalac node z poziomu folderu Vigiles a nie Vigiles/node
 //shift+ f4 - detach editor tabs
-// zwrocic uwage - ustawić to tak: to jest pierwsza paczka domyślna, a z przycisku na stronie można wybrać inną paczkę i wtedy się załaduje inne auto
+// ustawić to tak: to jest pierwsza paczka domyślna, a z przycisku na stronie można wybrać inną paczkę i wtedy się załaduje inne auto
 
 define(['./NodeFunctions'], function (NodeFunctions) {
 
     var exported = {
         http: require('http'),
-        fs:  require('fs'),
+        fs:  require('fs-extra'),
         path : require('path'),
-        mkdirp : require('mkdirp')
+        mkdirp : require('mkdirp'),
+        util : require('util'), // do formidable - patrz formidable_sample/formidable.js
+        formidable : require('formidable')
     };
 
     var port = 4246;
@@ -21,6 +23,8 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
 
     exported.http.createServer(function (request, response) {
+
+        //var form = new exported.formidable.IncomingForm();
 
 
         process.stdout.write("\n" + "server running:    ");//console.log("server running");
@@ -41,13 +45,13 @@ define(['./NodeFunctions'], function (NodeFunctions) {
            //niestety nie ma mozliwosci (stack overflow) ustawic headers z html.src skad jest wykonywany request i rozroznia je tylko po url'u:
         var actualContType;
 
-        if (typeof contentTypeString === "undefined"){
+        if (typeof contentTypeString === "undefined"){ // ! OPTIONS, ale ta sama operacja jest wykonywana ponownie z POST więc mozna to zignorować(?) i będzie dzialało jak POST 
                 actualContType = NodeFunctions.contentTypeFromExt(fileext)["Content-Type"]; //ta funkcja potem użyta niżej w response.writeHead(200, NodeFunctions.contentTypeFromExt(fileext)
                 process.stdout.write("  4. send;;actual:cont-type: " +contentTypeString+";;"+ actualContType ); // dla metody get,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc)
         }else{
             actualContType = contentTypeString;
             process.stdout.write("  4. send;;actual:cont-type: " +contentTypeString+";;"+ actualContType);
-            }
+            } // tutaj serwer wykonuje dodatkowo opercaje z metoda options - zastanowic sie jak jej uniknac i czy jest konieczna
 
         if (actualContType == "image/jpeg") {
             //GET - przesyla zdjecia z bazy
@@ -62,7 +66,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
         }
 
         else if (actualContType == "application/json;charset=UTF-8" || "application/json") {
-            process.stdout.write("     4.3. aktualizacja jsona");;
+            process.stdout.write("     4.3. aktualizacja jsona");
         }
 
         else {
@@ -98,7 +102,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                     console.log("    8. fileext to jotpeg, a jego url: " + url);
 
 
-                    //TODO: lub tu formidable - obmyslić logikę bo jest niejasna
+                    //TODO: tutaj po "end" wykonać dodatkowe czynnosci na przeslanym pliku (przekopiować we właściwe miejsce i zmienić nazwę)
 
 
                     if (data_for_curently_added_patch = !null) {
@@ -194,8 +198,9 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
             console.log("     10. method 2: " + method);
 
-            //TODO: 5.06.2017: tutaj zrobić jeszcze jedno rozróżneinie po URL, żeby wbrew komentarzowi  po else (lin. 219) rozróżnić zdjęcia od przesylanego JSON'a
-            // bo na wypadek jsona znowu trzeba przekierować program w inne miejsce- tam gdzie powinien isc nomalnie JSON przed zmianą w pliku UpdateJsonREQUEST o koncowke URL'a lalala
+            //TODO: 5.06.2017: tutaj zrobić jeszcze jedno rozróżneinie po URL, żeby wbrew komentarzowi po else (lin. 219) rozróżnić zdjęcia od przesylanego JSON'a
+            // bo na wypadek jsona znowu trzeba przekierować program w inne miejsce- tam gdzie powinien isc nomalnie JSON przed zmianą w pliku UpdateJsonREQUEST
+            // o koncowke URL'a lalala
 
             var stat = exported.fs.readFileSync(filepath);
 
@@ -211,7 +216,6 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                 // ponizsze headery wklejone kilka linijek wyzej jso "response.setHeader"
                 //'Access-Control-Allow-Origin': '*',
                 //'Access-Control-Allow-Headers': 'Content-Type'
-
                 //}
 
             );
