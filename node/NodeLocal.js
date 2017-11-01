@@ -51,7 +51,9 @@ define(['./NodeFunctions'], function (NodeFunctions) {
             response.end();
         }
 
-        else { NodeFunctions.requestInfo(exported);
+        else { 
+            
+            NodeFunctions.requestInfo(exported); // informacja zwrotna z serwera na temat requestow
 
             if (exported.method == "POST") {
 
@@ -70,8 +72,12 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                 }).on('end', function () {
 
 
-                    if (exported.fileext == ".jpg") { // request to post - jpg - informacje, ze to jpg bierze z danych do Patcha, natomiast brakuje sciezki "url" od samego patcha
+                    if (NodeFunctions.actualContType== "image/jpeg"
+
+                        /*exported.fileext == ".jpg"*/) { // request to post - jpg - informacje, ze to jpg bierze z danych do Patcha, natomiast brakuje sciezki "url" od samego patcha
                         // trzeba znaleźć ścieżkę
+
+
 
                         //wynik tego działania pojawia sie w serwerze node'a po kliknieciu addPatch
                         // napisać program aby to działanie szło dalej - tj. żeby prawidłowo działał url

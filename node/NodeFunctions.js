@@ -43,36 +43,32 @@ define([], function () {
             "3.req.url: " + node.url + '     ' );
 
         //niestety nie ma mozliwosci (stack overflow) ustawic headers z html.src skad jest wykonywany request i rozroznia je tylko po url'u:
-        var actualContType;
+        exported.actualContType;
 
         if (typeof node.contentTypeString === "undefined"){ // ! OPTIONS, ale ta sama operacja jest wykonywana ponownie z POST więc mozna to zignorować(?) i będzie dzialało jak POST
-            actualContType = exported.contentTypeFromExt(node.fileext)["Content-Type"]; //ta funkcja potem użyta niżej w response.writeHead(200, NodeFunctions.contentTypeFromExt(fileext)
-            process.stdout.write("  4.0. send;;actual:cont-type: " +node.contentTypeString+";;"+ actualContType ); // dla metody get,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc)
+            exported.actualContType = exported.contentTypeFromExt(node.fileext)["Content-Type"]; //ta funkcja potem użyta niżej w response.writeHead(200, NodeFunctions.contentTypeFromExt(fileext)
+            process.stdout.write("  4.0. send;;actual:cont-type: " +node.contentTypeString+";;"+ exported.actualContType ); // dla metody get,  pokazuje undefined - wyjasnic (dla post pokazuje zawrtosc)
 
         }else{
-            actualContType = node.contentTypeString;
-            process.stdout.write("  4.1. send;;actual:cont-type: " +node.contentTypeString+";;"+ actualContType);
+            exported.actualContType = node.contentTypeString;
+            process.stdout.write("  4.1. send;;actual:cont-type: " +node.contentTypeString+";;"+ exported.actualContType);
         } // tutaj serwer wykonuje dodatkowo opercaje z metoda options - zastanowic sie jak jej uniknac i czy jest konieczna
 
 
 
 
-        if (actualContType == "image/jpeg") {
-            //GET - przesyla zdjecia z bazy
+        if (exported.actualContType == "image/jpeg") {
 
             if (node.method == "POST") {//{ to jest POST: przesyła się // ta sytuacja dotyczy tylko przesyłania nowego pliku image
-                process.stdout.write("     4.2. method:" + node.method);
                 process.stdout.write("     5. confirmed image/jpeg");
-                
             }
 
         }
-        else if (actualContType == "application/json;charset=UTF-8" || "application/json") {
+        else if (exported.actualContType == "application/json;charset=UTF-8" || "application/json") {
             process.stdout.write("     4.3. aktualizacja jsona");
-
         }
         else {
-            process.stdout.write("UWAGA! content-type jest poza kontrola: actualContentType: " + actualContType);
+            process.stdout.write("UWAGA! content-type jest poza kontrola: actualContentType: " + exported.actualContType);
         }
 
         return;
