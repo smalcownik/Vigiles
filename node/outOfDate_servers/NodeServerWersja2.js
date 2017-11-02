@@ -7,7 +7,7 @@
 // przyklad w ajax_proby/node_server oraz server_with_several_file_types
  //shift+ f4 - detach editor tabs
 
-define(['./NodeFunctions'], function (NodeFunctions) {
+define(['../NodeFunctions'], function (NodeFunctions) {
 
     /*var http = require('http');
     var fs = require('fs');

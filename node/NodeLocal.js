@@ -16,7 +16,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
         formidable : require('formidable')
     };
 
-    NodeFunctions.node = this;
+    //NodeFunctions.node = this;
 
     var port = 4246;
     var data_for_curently_added_patch;
@@ -72,16 +72,14 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                 }).on('end', function () {
 
 
-                    if (NodeFunctions.actualContType == "image/jpeg") {
-                        
-                        //wynik tego działania pojawia sie w serwerze node'a po kliknieciu addPatch
+                    if (NodeFunctions.actualContType == "image/jpeg") { //wynik tego działania pojawia sie w serwerze node'a po kliknieciu addPatch
 
                         console.log("    8. fileext to jotpeg, a jego url: " + exported.url);
 
                         //TODO: tu uzyc formidable i przeslac pliki
 
 
-                        //TODO: tutaj po "end" wykonać dodatkowe czynnosci na przeslanym pliku (przekopiować we właściwe miejsce i zmienić nazwę)
+                        //TODO: tutaj po "form.end" wykonać dodatkowe czynnosci na przeslanym pliku (przekopiować we właściwe miejsce i zmienić nazwę)
 
 
                         if (data_for_curently_added_patch = !null) {
@@ -126,7 +124,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                             console.log("9.2.  to sa dane do Patcha");
 
-                            data_for_curently_added_patch = exported.bodyObject; // bodyObject:[path, promptedData, nextOriginalParent],promptedData: [ścieżka_pierwotna_pliku, dane jsona, parent.id lub "newParent" ],
+                            data_for_curently_added_patch = exported.bodyObject; // exported.bodyObject:[path, promptedData, nextOriginalParent],promptedData: [ścieżka_pierwotna_pliku, dane jsona, parent.id lub "newParent" ],
                             // path =[directory,file]
 
                             process.stdout.write("9.2.1. nowa sciezka do pliku: " + exported.bodyObject[0][0]);

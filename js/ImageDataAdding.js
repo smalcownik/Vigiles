@@ -4,7 +4,7 @@
 
 //TODO: 01.09-2017 zobaczyc ile z tego pliku mozna teraz obciac i zgrac z node
 
-define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST","./JsonBuilder"], function (Camera, AddImageToServerREQUEST, AddDataForImageToServerREQUEST,JsonBuilder) {
+define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST","./JsonBuilder"], function (Camera, AddImageToServerREQUEST, AddDataForImageToServerREQUEST, JsonBuilder) {
 
     var exported = {};
 
@@ -54,18 +54,16 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
     }; // dodaje przycisk i nadaje mu klasę, że jak wciśniesz to wywołujesz exported.addNewPatchEventListener
 
-
-    //TODO: odtad dalej analizuj
     
     exported.addNewPatchEventListener = function () { // wciśnięciu przycisku (wyskakuje cały prompt)
 
         document.body.addEventListener('click', this.newPatchDataReceiverBuilder);
     };
+    
+    {
+     exported.dig = function(image,i, visitFunction, parent) {
 
-
-    exported.dig = function(image,i, visitFunction, parent) {
-
-        visitFunction(image,i,parent); // i to numer folderu imgs - czyli folder imgs[0],imgs[1]... maja "i" w swojej nazwie
+        visitFunction(image,i,parent); // "i" to numer folderu imgs - czyli folder imgs[0],imgs[1]... maja "i" w swojej nazwie
 
         image.children.forEach(
             function (childrenImage) {
@@ -82,6 +80,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         }
     };
 
+    } // f-kcje dig i trwverse do trawersowania mapy imgs'ów
 
     exported.fillNodeList = function(wholeObject){ // to bedzie visitFunction w exported.dig (wywolanej z traverse)
 
@@ -104,16 +103,15 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
         this.traverse(wholeObject, fill);
 
-    };
-
-    //exported.nodeList = [];
+    }; // funckja uzupełnia listę nodów:  exp.nodeList = [image.id, image, originalParent, parent.id]
+    // wykorzystuje cały obiekt mapy i używa funkcji traverse
 
 
     exported.getNodeById = function (idNumber){ // ma znalexc noda w nodeList na podstawie ID
 
         var idNumber = idNumber.toString(); // przekształca idNumber do formy stringa
 
-        console.log(idNumber);
+        console.log("searched node number: "+ idNumber);
 
         var node;
 
@@ -131,7 +129,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
         return node;
 
-    };
+    }; // funkcja zwraca (z listy nodeList) node'a o wybranym numerze id
 
 
     exported.prepareNextId = function () {
@@ -145,22 +143,20 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
         return Number(occupiedIds[occupiedIds.length - 1]) + 1;
 
-    };
+    }; // funkcja zwraca kolejny niezajęty numer Id
 
 
-    exported.prepareInitialData = function(){ // tutaj ma byc opcja znalezienia objektu po Id i pobranie aktualnego JSONA
+    exported.prepareInitialData = function(){ //  pobranie aktualnego JSONA
 
-        exported.originalJSONparsed = JSON.parse(exported.viewer.currentDataStringified) ; // żeby zbudować całą listę NODE'ow używa pliku z Viewera:objekt MapData (JSOn - string)
-
-        // console.log(exported.originalJSONparsed);
-        //to dziala - obiekt!
+        exported.originalJSONparsed = JSON.parse(exported.viewer.currentDataStringified) ; // używa pliku z Viewera:objekt MapData (JSOn - string)
+        // console.log(exported.originalJSONparsed);//to dziala - obiekt!
 
         exported.fillNodeList(exported.originalJSONparsed); // z obec
 
         console.log(exported.nodeList);//[image.id, image, originalParent(numer folderu), parent.id] // parent.id nie wystepuje jezeli image jest na dnie mapy/stosu
                                         //originalParent nie odnosi się do numeru Patcha tylko do numeru folderu imgs
         // trzeba rozróżnić originalParent (folder) od zdjęcia, ktore jest na dnie stosu w danym folderze
-        // nie bylo potem zadnych watpliwosci czy chdzi o folder czy o patch (np. patrz linie 280 i 303(5): wniosek: odnosi się do folderu!
+        //czy chdzi o folder czy o patch (np. patrz linie .......: wniosek: odnosi się do folderu!
 
         var nextId = exported.prepareNextId(); // jest kolejny wolny Id
         // czy może ta tabela tworzy się za kazdym razem od nowa wiec automatycznie kolejne będą dodawane
@@ -168,32 +164,27 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         console.log(nextId);
         return nextId;
 
-    };//tutaj buduje listę już obecnych patchow zeby potem
-    // 1.uzupelnic nodeList 2.przygotowac nextId
+    };// 1.uzupelnia exported.nodeList 2.zwraca nextId
 
-
-
+    
     exported.buildPath = function(newId,parentId,nextOriginalParent){ // parent id jest trzecim elementem wyniku f-kcji exported.getNodeById, czyli numer folderu imgs
 
 
         if (parentId === "newParent") { //wartosc "newParent" jest domyslnie dodawana w prompcie (w funckji newPatchDataReceiverBuilder)
                                         // jezeli nie określimy numeru parenta dla dodawanego patcha
+                                        //tedy trza sprawdzić, który originalParentIndex jest największy i zwiększyc tę wartość o 1
 
-                                        //trzeba sprawdzić, który originalParentIndex jest największy i zwiększyc tę wartość o 1
 
-
-            var folderPath =('/data/test_arch/imgs/imgs['+nextOriginalParent+']');
+            var folderPath =(exported.viewer.DataPath +"/imgs/imgs[" + nextOriginalParent + ']');
 
             var path = [folderPath +'/'+ newId +'.jpg' , folderPath ];
 
-
             console.log(path);
-
             console.log("dodaje nowego parenta wiec trzeba dodac nowy folder na imgsy i sciezke do niego");
 
             return path;
 
-        }
+        } // zwraca ścieżkę do nowego parenta (czyli nowy folder i ścieżka do pliku - jest to pierwszy plik w tym parencie
 
         else
 
@@ -201,7 +192,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
             var originalParentIndex = exported.getNodeById(parentId)[2]; //[image.id, image, originalParent, parent.id]
             console.log(originalParentIndex);
-            var folderPath = ('/data/test_arch/imgs/imgs['+originalParentIndex+']');
+            var folderPath = (exported.viewer.DataPath +"/imgs/imgs[" +originalParentIndex+']');
 
             var path = [folderPath+'/'+ newId +'.jpg',folderPath];
 
@@ -213,16 +204,14 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         }
 
 
-    };
+    }; // zwraca tablice [file path, folder path]
 
 
-    exported.executeAddingNewImage = function(newId,promptedData) { // tutaj maja byc czynnosci po prompcie
-
+    exported.executeAddingNewImage = function(newId,promptedData) { // tutaj maja byc czynnosci po prompcie 
 
         var nextOriginalParent; // to jest numer koljenego folderu imgs[nr] a nie pliku w nim
         if (promptedData[2]==="newParent") { //wartosc "newParent" jest domyslnie dodawana w prompcie (w funckji newPatchDataReceiverBuilder)
             // jezeli nie określimy numeru parenta dla dodawanego patcha
-
 
             nextOriginalParent = exported.originalJSONparsed.images.length;// tu wskakuje liczba (nie string);
             // tu widac ze originalParent to numer folderu ims[nr] a nie numer pliku w tych folderach
@@ -232,8 +221,8 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
             nextOriginalParent = null;
         }
 
-        var path = exported.buildPath(newId,promptedData[2],nextOriginalParent);// promptedData[2] to nr Id rodzica -!UWAGA nie Id tylko numer folderu imgs[nr]
-                                                            //  promptedData: [ścieżka, dane jsona, parent.id] - parent.id !UWAGA - to numer folderu imgs[nr] a nie zdjecia
+        var path = exported.buildPath(newId,promptedData[2],nextOriginalParent);// promptedData[2] to nr folderu ims["nr"] rodzica -!UWAGA nie Id tylko numer folderu imgs[nr]
+                                                            //  promptedData: [ścieżka, dane jsona, parentNumber] - parent.id !UWAGA - to numer folderu imgs[nr] a nie zdjecia
 
         var dataToServer = [path, promptedData, nextOriginalParent]; // dane na serwer
 
@@ -244,6 +233,9 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         AddDataForImageToServerREQUEST.makeRequest(pathJSON); // przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE -->
 
         // ... i teraz zdjecie
+        
+        //TODO: tu jakos trzeba tego requesta przerobic zeby byl kompatybilny z formidable 
+        
         var sentPictureUrl = promptedData[0].toString();
         console.log(sentPictureUrl);
 
@@ -259,30 +251,26 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         if (clickedElement.className === "saveNewPatchButton") {
 
             console.log("odpalono newPatchDataReceiverbuilder czyli..prompt");
-
-            //debugger; (bo z prepare initial data zniknął viewer.currentDataStringified, ale się odnalazl)
-
-
+            
             var newId = exported.prepareInitialData(); // tutaj przygotuje m.in. nowy ID oraz opcje znajdowania object po id
-
 
             var newImgPath = prompt("Podaj ścieżkę zdjęcia","/home/marek/WebstormProjects/Vigiles/data/add_new_patch_test_data/jol.jpg"); // sciezka do pliku na dysku - uri zdjęcia ??
             //home/marek/Downloads/jol.jpg
-
-
+            
+            //TODO: tutaj jest wybór zdjęcia - tak to przerobić, żeby wybierać z katalogu, zamiast prompta niech będzie okienko do wyboru
+            
             console.log(newImgPath);
 
-            var newImgDataParentId = prompt("PARENT_ID - jak nie podasz to doda nowy originalParent","0"); // ?? czy to jest numer nie patcha tylko folderu imgs -original parent ?
-
-            //var newImgJsonData = prompt("Podaj dane do zdjęcia - JSONData");
-            // to na razie puszczam z automatu f-kcją "setSampleJsonData" - te dane mają zostać podane z aplikacji
-
+            var newImgDataParentId = prompt("PARENT_NR - jak nie podasz to doda nowy originalParent","0"); // ?? czy to jest numer nie patcha tylko folderu imgs -original parent ?
+            
             if (newImgDataParentId === "") {
-
-
                 newImgDataParentId = "newParent";
             }
-
+            
+            //var newImgJsonData = prompt("Podaj dane do zdjęcia - JSONData");
+            // to na razie puszczam z automatu f-kcją "setSampleJsonData" - te dane mają zostać podane z aplikacji
+            // TODO: wsadzone w komenatrz dane lokalizacji zdjęcia - na razie domyślne
+            
             function setSampleJsonData(imageId) {
                 return ({
                     "id": imageId,
@@ -296,28 +284,27 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
             var newImgJsonData = setSampleJsonData(newId.toString());
 
             console.log(newImgJsonData);
+            
 
-            var promptedData = [newImgPath, newImgJsonData, newImgDataParentId];// pD: [ścieżka, dane jsona, parent.id lub "newParent" ]
+            var promptedData = [newImgPath, newImgJsonData, newImgDataParentId];// pD: [ścieżka pliku na dysku nadawcy, dane jsona, parent.id lub "newParent" ]
 
 
             promptedData.forEach(function (element, index) {
                     if (element === "") {
 
-                        //element = 0; - to nie działa , na zewnątrz funkcji wartość element w proptedData pozostała niezmieniona
-                        promptedData[index] = null;
+                        //element = 0; - tak nie działa , na zewnątrz funkcji wartość element w proptedData pozostała niezmieniona
+                        promptedData[index] = null; // w zwiazku z powyższym wprowadzono "index" i teraz działa
                         //console.log(element);
                     }
-                }
-            );
-
+             }); // f-kcja czyszcząca promptedData, nadaje pustym elementom wartość "null", logicznie bez znaczenia dla programu
+            
             console.log(promptedData);
+            
 
             exported.executeAddingNewImage(newId, promptedData);
-
-
+            
         }
-
-    }
+    };
 
     return exported;
 

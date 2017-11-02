@@ -15,7 +15,6 @@ define([], function () {
             //console.log(data.url); //http://localhost...../data/test_arch
 
             imgHTML.src=data.url+'/imgs/imgs['+i+']/'+image.id+'.jpg'; // TODO: tu jest odniesienie do plików jpg (jedyne!!)
-                                                    //  13.02.2017 do opcji wyboru paczki danych tutaj trzeba zmieniac fragment "test_arch" w zalezności od wyboru paczki
             
             //powyżej dwie wersje - górna odnosi się do serwera na dysku - doln do serwera na amazonie
             // AHA ! po wykonianiu linijki imgHTML.src=data.url+'/....  pojawia się get na serwerze node'a
