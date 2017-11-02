@@ -17,7 +17,7 @@ define([], function () {
 
 
         var http_request = new XMLHttpRequest();
-        http_request.open("POST", viewer.serverURL+ "/imageData.jpg");
+        http_request.open("POST", viewer.serverURL+ "/image.jpg");
       
 
         http_request.setRequestHeader("Content-Type","image/jpeg");

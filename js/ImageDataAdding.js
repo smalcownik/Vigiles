@@ -21,6 +21,8 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
             var saveNewPatchButton = document.createElement('div');
             // document.body.appendChild(saveJsonButton);
+        
+        //debugger;
 
             this.DOM = saveNewPatchButton;
             saveNewPatchButton.classList.add("saveNewPatchButton"); // użyte później w index2.html

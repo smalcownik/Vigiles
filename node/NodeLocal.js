@@ -78,6 +78,44 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                         //TODO: tu uzyc formidable i przeslac pliki
 
+                        // creates a new incoming form. 
+                        var form = new exported.formidable.IncomingForm();
+
+                        // parse a file upload
+                        form.parse(request, function(err, fields, files) {
+                            response.writeHead(200, {'content-type': 'text/plain'});
+                            response.write('Upload received :\n');
+                            response.end(exported.util.inspect({fields: fields, files: files}));
+                        });
+                        form.on('end', function(fields, files) {
+                            /* Temporary location of our uploaded file */
+                            var temp_path = this.openedFiles[0].path;
+
+                            console.log("path: "+temp_path);
+                            /* The file name of the uploaded file */
+                            var file_name = this.openedFiles[0].name;
+                            /* Location where we want to copy the uploaded file */
+                            var new_location = '/home/marek/WebstormProjects/nodeJSTutorial/formidable_sample/';
+                            fs.copy(temp_path, new_location + file_name, function(err) {
+                                if (err) {
+                                    console.error(err);
+                                } else {
+                                    console.log("success!")
+                                }
+                            });
+                        });
+                        response.writeHead(200, {'content-type': 'text/html'});
+
+                        //response.statusCode = 200;
+                        //response.setHeader('Access-Control-Allow-Origin', '*'); // to musi być bo wyrzuca błąd
+                        //response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+                        response.end(
+                            '<form action="/upload" method="post" enctype="multipart/form-data" >'+ // action = url,
+                            '<input type="file" name="upload" multiple="multiple"><br>'+
+                            '<input type="submit" value="Potwierdz">'+
+                            '</form>'
+                        );
 
                         //TODO: tutaj po "form.end" wykonać dodatkowe czynnosci na przeslanym pliku (przekopiować we właściwe miejsce i zmienić nazwę)
 
@@ -206,6 +244,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                 response.end();
             }
+            
         };
 
 
