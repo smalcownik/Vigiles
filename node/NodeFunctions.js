@@ -24,8 +24,10 @@ define([], function () {
             case '.json':
                 ct = "application/json";
                 break;
-            default:
+            case '.txt':
                 ct = 'text/plain';
+            default:
+                ct = null;
                 break;
         }
 
@@ -64,11 +66,11 @@ define([], function () {
             }
 
         }
-        else if (exported.actualContType == "application/json;charset=UTF-8" || "application/json") {
+        else if (exported.actualContType == ("application/json;charset=UTF-8" || "application/json")) {
             process.stdout.write("     4.3. aktualizacja jsona");
         }
         else {
-            process.stdout.write("UWAGA! content-type jest poza kontrola: actualContentType: " + exported.actualContType);
+            process.stdout.write("     UWAGA! content-type jest poza kontrola: actualContentType: " + exported.actualContType);
         }
 
         return;

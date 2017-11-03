@@ -12,6 +12,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         // f-kcja wywoływana w Viewer.registerEventListeners //var viewer = this.viewer; // console.log(viewer.positionable);
 
         this.saveNewPatchButton();
+        //this.formidableButton();
         //debugger;
         this.addNewPatchEventListener();
 
@@ -19,13 +20,13 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
     exported.saveNewPatchButton = function () {
 
-            var saveNewPatchButton = document.createElement('div');
-            // document.body.appendChild(saveJsonButton);
-        
+        var saveNewPatchButton = document.createElement('div');
+        // document.body.appendChild(saveJsonButton);
+
         //debugger;
 
-            this.DOM = saveNewPatchButton;
-            saveNewPatchButton.classList.add("saveNewPatchButton"); // użyte później w index2.html
+        this.DOM = saveNewPatchButton;
+        saveNewPatchButton.classList.add("saveNewPatchButton"); // użyte później w index2.html
 
 
         saveNewPatchButton.style.top = Camera.position.x + 20 + 'px';
@@ -38,25 +39,80 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         saveNewPatchButton.style.width = '140px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
         saveNewPatchButton.style.backgroundColor = '#000000';
         saveNewPatchButton.style.borderColor = '#ffffff';
-            //divPoint.style.borderRadius = '50%';
-            //divPoint.style.borderWidth = '3px';
+        //divPoint.style.borderRadius = '50%';
+        //divPoint.style.borderWidth = '3px';
         saveNewPatchButton.style.borderStyle = 'solid';
         saveNewPatchButton.style.textAlign = 'center';
 
-            // var saveButtonParagraph = document.createElement('p');
-            // debugger;
-            var txt = "ADD PATCH";
+        // var saveButtonParagraph = document.createElement('p');
+        // debugger;
+        var txt = "ADD PATCH";
         saveNewPatchButton.style.color = 'white';
         saveNewPatchButton.style.fontSize = '22px';
         saveNewPatchButton.style.textAlign = 'center';
         saveNewPatchButton.innerHTML = txt;
 
-            document.body.appendChild(saveNewPatchButton);
+        document.body.appendChild(saveNewPatchButton);
 
 
-    }; // dodaje przycisk i nadaje mu klasę, że jak wciśniesz to wywołujesz exported.addNewPatchEventListener
+    }; // dodaje przycisk i nadaje mu klasę, że jak wciśniesz to wywołujesz exported.addNewPatchEventListener (funkcja ponizej)
 
-    
+    exported.formidableButton = function () {
+
+        var formidableButton = document.createElement('form');
+        // document.body.appendChild(saveJsonButton);
+
+        //debugger;
+
+        this.DOM = formidableButton;
+        formidableButton.classList.add("formidableButton"); // użyte później w index2.html
+
+
+        formidableButton.style.top = Camera.position.x + 100 + 'px';
+        formidableButton.style.right = Camera.position.y + 20 + 'px';
+
+        formidableButton.style.position = 'absolute';
+
+        formidableButton.style.zIndex = '1000';
+        formidableButton.style.height = '70px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
+        formidableButton.style.width = '140px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
+        formidableButton.style.backgroundColor = '#000000';
+        formidableButton.style.borderColor = '#ffffff';
+        //divPoint.style.borderRadius = '50%';
+        //divPoint.style.borderWidth = '3px';
+        formidableButton.style.borderStyle = 'solid';
+        formidableButton.style.textAlign = 'center';
+        formidableButton.style.color = 'white';
+        formidableButton.style.fontSize = '22px';
+        formidableButton.style.textAlign = 'center';
+        var txt = "FORM";
+        formidableButton.innerHTML = txt;
+
+        formidableButton.action = exported.viewer.serverURL+ "/image.jpg";
+        //formidableButton.target = exported.viewer.serverURL+ "/image.jpg";
+        //formidableButton.action = "#";
+        formidableButton.method = "post";
+        formidableButton.enctype = "multipart/form-data";
+
+        var input = document.createElement('input');
+        this.DOM = input;
+        input.type = "file";
+        input.name = "upload";
+        input.multiple = "multiple";
+        var input2 = document.createElement('input');
+        this.DOM = input2;
+        input2.type = "submit";
+        input2.value = "Potwierdz";
+
+        formidableButton.appendChild(input);
+        formidableButton.appendChild(input2);
+        document.body.appendChild(formidableButton);
+
+
+
+
+    }; // dodaje przycisk i nadaje mu klasę, że jak wciśniesz to wywołujesz exported.addNewPatchEventListener (funkcja ponizej)
+
     exported.addNewPatchEventListener = function () { // wciśnięciu przycisku (wyskakuje cały prompt)
 
         document.body.addEventListener('click', this.newPatchDataReceiverBuilder);
@@ -236,12 +292,11 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
         // ... i teraz zdjecie
         
-        //TODO: tu jakos trzeba tego requesta przerobic zeby byl kompatybilny z formidable 
-        
-        var sentPictureUrl = promptedData[0].toString();
+        //TODO: tu jakos trzeba tego requesta przerobic zeby byl kompatybilny z formidable
+        //czyli... zamiast requesta uzyc formidable ?
+       /* var sentPictureUrl = promptedData[0].toString();
         console.log(sentPictureUrl);
-
-        AddImageToServerREQUEST.makeRequest(sentPictureUrl); // przesyłanie pliku, po zapisaniu pliku usuń dane z servera - bo to będą już śmieci
+        AddImageToServerREQUEST.makeRequest(sentPictureUrl); // przesyłanie pliku, po zapisaniu pliku usuń dane z servera - bo to będą już śmieci */
 
 
     };
@@ -253,14 +308,22 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         if (clickedElement.className === "saveNewPatchButton") {
 
             console.log("odpalono newPatchDataReceiverbuilder czyli..prompt");
+
+
             
             var newId = exported.prepareInitialData(); // tutaj przygotuje m.in. nowy ID oraz opcje znajdowania object po id
 
-            var newImgPath = prompt("Podaj ścieżkę zdjęcia","/home/marek/WebstormProjects/Vigiles/data/add_new_patch_test_data/jol.jpg"); // sciezka do pliku na dysku - uri zdjęcia ??
+            //TODO: to skomentuje i stworzę zamiast tego formularz
+
+            //debugger;
+            exported.formidableButton();
+
+            //var newImgPath = prompt("Podaj ścieżkę zdjęcia","/home/marek/WebstormProjects/Vigiles/data/add_new_patch_test_data/jol.jpg"); // sciezka do pliku na dysku - uri zdjęcia ??
             //home/marek/Downloads/jol.jpg
             
             //TODO: tutaj jest wybór zdjęcia - tak to przerobić, żeby wybierać z katalogu, zamiast prompta niech będzie okienko do wyboru
             
+            var newImgPath = null;
             console.log(newImgPath);
 
             var newImgDataParentId = prompt("PARENT_NR - jak nie podasz to doda nowy originalParent","0"); // ?? czy to jest numer nie patcha tylko folderu imgs -original parent ?
