@@ -194,6 +194,8 @@ define(["./Camera","./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJsonO
         var clickedElement = event.target; // to jest tylko element - zaraz znajdziemy dla niego Patch'a/Pointa
 
         if (clickedElement.className === "saveJsonButton") {
+            
+            //TODO: napisac funkcje na wzor tej, tylko ze zamiast punktow doda nowe dane do jsona (do patcha) i je zapisze
 
             console.log(viewer.positionable);
 
@@ -205,6 +207,7 @@ define(["./Camera","./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJsonO
 
             exported.updatedJSON = JSON.stringify(exported.objScheme);
 
+            //console.log(exported.updatedJSON);
             console.log(exported.updatedJSON);
 
             UpdateJsonOnServerREQUEST.makeRequest(exported.updatedJSON);

@@ -202,8 +202,6 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                         response.on('error', function (err) {
                             console.error(err);
                         });
-
-
                         response.statusCode = 200;
                         // response.setHeader('Content-Type', 'application/json'); // bez tego działa - o dziwo
                         response.setHeader('Access-Control-Allow-Origin', '*'); // to musi być bo wyrzuca błąd

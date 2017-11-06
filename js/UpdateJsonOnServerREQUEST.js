@@ -8,7 +8,7 @@ define([], function () {
 
         var viewer = this.viewer; // musiałem wstrzyknąć viewera w ten sposób bo przez require/define/function nie widziało go - nie wiem dlaczego!
 
-        console.log(json);
+        console.log("UpdateJsonREQUEST");
 
         var http_request = new XMLHttpRequest();
         //console.log(viewer);  //
