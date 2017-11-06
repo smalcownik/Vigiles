@@ -88,7 +88,9 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         var txt = "FORM";
         formidableButton.innerHTML = txt;
 
-        formidableButton.action = exported.viewer.serverURL+ "/image.jpg";
+        //formidableButton.target="_blank";
+        //formidableButton.target=null;
+        formidableButton.action = exported.viewer.serverURL+ "/image.jpg"; // to jest url requesta (a response z servera node jest HEad:204 wiec nie wyskakuje okno, ale robote robi)
         //formidableButton.target = exported.viewer.serverURL+ "/image.jpg";
         //formidableButton.action = "#";
         formidableButton.method = "post";

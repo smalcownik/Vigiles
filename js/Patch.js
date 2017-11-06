@@ -15,7 +15,8 @@ define([], function () {
             //console.log(data.url); //http://localhost...../data/test_arch
 
             imgHTML.src=data.url+'/imgs/imgs['+i+']/'+image.id+'.jpg'; // TODO: tu jest odniesienie do plików jpg (jedyne!!)
-            
+
+            //TODO: automatyczny request GET
             //powyżej dwie wersje - górna odnosi się do serwera na dysku - doln do serwera na amazonie
             // AHA ! po wykonianiu linijki imgHTML.src=data.url+'/....  pojawia się get na serwerze node'a
             // AHA ... czyli w momencie jak patch dostaje swoje zrodlo pliku, automatycznie sie do niego odwoluje do serwera - bez funkcji request-get!

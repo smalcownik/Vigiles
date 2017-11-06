@@ -91,10 +91,10 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                     var form = new exported.formidable.IncomingForm();
 
                     // parse a file upload
-                    form.parse(request, function (err, fields, files) {
-                        response.writeHead(200, {'content-type': 'text/plain'});
-                        response.write('Upload received :\n');
-                        response.end(exported.util.inspect({fields: fields, files: files}));
+                    form.parse(request, function (err/*, fields, files*/) {
+                        response.writeHead(204, {'content-type': 'text/plain'}); //TODO: to 204 powoduje, że nie wyskakuje okno - SUCCESS; tu zmieniłem z 200 i skomentowałem
+                        //response.write('Upload received :\n'); // tu skomentowałem
+                        response.end(/*exported.util.inspect({fields: fields, files: files})*/); //  tu skomentowałem
                     });
                     /*form.on('field', function (field, value) {
                         console.log(field, value);
@@ -105,13 +105,15 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                         console.log(field, file);
                         files.push([field, file]);
                     });*/ //to dodane ze stackoverflow
-                    form.on('end', function (fields, files) {
+                    form.on('end', function (/*fields, files*/) {
+
                         /* Temporary location of our uploaded file */
                         var temp_path = this.openedFiles[0].path;
-
                         console.log("path: " + temp_path);
+
                         /* The file name of the uploaded file */
                         var file_name = this.openedFiles[0].name;
+
                         /* Location where we want to copy the uploaded file */
                         var new_location = '/home/marek/WebstormProjects/nodeJSTutorial/formidable_sample/';
                         exported.fs.copy(temp_path, new_location + file_name, function (err) {
@@ -121,15 +123,15 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                                 console.log("success!")
                             }
                         });
-                        //return;
+                        //return;5
                     });
-                    response.writeHead(200, {'content-type': 'text/html'});
+                    //response.writeHead(200, {'content-type': 'text/html'});
 
                     //response.statusCode = 200;
                     //response.setHeader('Access-Control-Allow-Origin', '*'); // to musi być bo wyrzuca błąd
                     //response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-                    response.end();
+                    //response.end();
 
                     //TODO: tutaj po "form.end" wykonać dodatkowe czynnosci na przeslanym pliku (przekopiować we właściwe miejsce i zmienić nazwę)
 
