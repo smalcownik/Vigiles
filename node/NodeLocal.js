@@ -85,36 +85,36 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                     console.log("    8. fileext to jotpeg, a jego url: " + exported.url);
 
-                    //TODO: tu uzyc formidable i przeslac pliki
+                    //TODO: FORMIDABLE:
 
                     // creates a new incoming form. 
                     var form = new exported.formidable.IncomingForm();
 
                     // parse a file upload
                     form.parse(request, function (err/*, fields, files*/) {
-                        response.writeHead(204, {'content-type': 'text/plain'}); //TODO: to 204 powoduje, że nie wyskakuje okno - SUCCESS; tu zmieniłem z 200 i skomentowałem
+                        response.writeHead(204/* 200, {'content-type': 'text/plain'}*/); //TODO: SUCCESS 204 nie wyskakuje nowe okno response
                         //response.write('Upload received :\n'); // tu skomentowałem
                         response.end(/*exported.util.inspect({fields: fields, files: files})*/); //  tu skomentowałem
                     });
-                    /*form.on('field', function (field, value) {
-                        console.log(field, value);
-                        fields.push([field, value]);
-                    });
 
-                    form.on('file', function (field, file) {
-                        console.log(field, file);
-                        files.push([field, file]);
-                    });*/ //to dodane ze stackoverflow
                     form.on('end', function (/*fields, files*/) {
 
                         /* Temporary location of our uploaded file */
                         var temp_path = this.openedFiles[0].path;
-                        console.log("path: " + temp_path);
+                        //console.log("path: " + temp_path);
 
                         /* The file name of the uploaded file */
                         var file_name = this.openedFiles[0].name;
+                        console.log("name: " + file_name);
 
                         /* Location where we want to copy the uploaded file */
+                        //TODO: tu zrobic dodatkowe czynnosci na przeslanym pliku (przekopiować we właściwe miejsce i zmienić nazwę)
+
+                        process.stdout.write("8.1. nowa sciezka do pliku DZIALA?: " + exported.bodyObject[0][0]);
+                        console.log("    8.2. sciezka do folderu DZIALA?: " + exported.bodyObject[0][1]);
+
+                        //TODO: powyższe dziala wiec można skorzystac zeby przekopiować sciezke, teraz: nadbudowac jSON'a
+
                         var new_location = '/home/marek/WebstormProjects/nodeJSTutorial/formidable_sample/';
                         exported.fs.copy(temp_path, new_location + file_name, function (err) {
                             if (err) {
@@ -123,17 +123,8 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                                 console.log("success!")
                             }
                         });
-                        //return;5
+                        //return;
                     });
-                    //response.writeHead(200, {'content-type': 'text/html'});
-
-                    //response.statusCode = 200;
-                    //response.setHeader('Access-Control-Allow-Origin', '*'); // to musi być bo wyrzuca błąd
-                    //response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-                    //response.end();
-
-                    //TODO: tutaj po "form.end" wykonać dodatkowe czynnosci na przeslanym pliku (przekopiować we właściwe miejsce i zmienić nazwę)
 
 
                 }
