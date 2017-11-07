@@ -2,7 +2,6 @@
  * Created by marek on 16.06.16.
  */
 
-//TODO: 01.09-2017 zobaczyc ile z tego pliku mozna teraz obciac i zgrac z node
 
 define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST","./JsonBuilder"], function (Camera, AddImageToServerREQUEST, AddDataForImageToServerREQUEST, JsonBuilder) {
 
@@ -264,7 +263,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         }
 
 
-    }; // zwraca tablice [file path, folder path]
+    }; // zwraca tablice z ścieżką do zapisania [file path, folder path]
 
 
     exported.executeAddingNewImage = function(newId,promptedData) { // tutaj maja byc czynnosci po prompcie 
@@ -292,14 +291,8 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
         AddDataForImageToServerREQUEST.makeRequest(pathJSON); // przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE -->
 
-        // ... i teraz zdjecie
         
-        //TODO: tu jakos trzeba tego requesta przerobic zeby byl kompatybilny z formidable
-        //czyli... zamiast requesta uzyc formidable ?
-       /* var sentPictureUrl = promptedData[0].toString();
-        console.log(sentPictureUrl);
-        AddImageToServerREQUEST.makeRequest(sentPictureUrl); // przesyłanie pliku, po zapisaniu pliku usuń dane z servera - bo to będą już śmieci */
-
+        //TODO: tu już nie ma requesta - tym się zajmuje formidable
 
     };
 
@@ -315,15 +308,15 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
             
             var newId = exported.prepareInitialData(); // tutaj przygotuje m.in. nowy ID oraz opcje znajdowania object po id
 
-            //TODO: to skomentuje i stworzę zamiast tego formularz
+            
+            exported.formidableButton(); //TODO: tu pojawia się przycisk formidable
 
-            //debugger;
-            exported.formidableButton();
-
+            //wybór zdjęcia - teraz tym zajmie się formidable:
+            
             //var newImgPath = prompt("Podaj ścieżkę zdjęcia","/home/marek/WebstormProjects/Vigiles/data/add_new_patch_test_data/jol.jpg"); // sciezka do pliku na dysku - uri zdjęcia ??
             //home/marek/Downloads/jol.jpg
             
-            //TODO: tutaj jest wybór zdjęcia - tak to przerobić, żeby wybierać z katalogu, zamiast prompta niech będzie okienko do wyboru
+            
             
             var newImgPath = null;
             console.log(newImgPath);
@@ -334,9 +327,9 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
                 newImgDataParentId = "newParent";
             }
             
-            //var newImgJsonData = prompt("Podaj dane do zdjęcia - JSONData");
+            //var newImgJsonData = prompt("Podaj dane do zdjęcia - JSONData");  // dane lokalizacji zdjęcia - teraz tym zajmie się formidable
             // to na razie puszczam z automatu f-kcją "setSampleJsonData" - te dane mają zostać podane z aplikacji
-            // TODO: wsadzone w komenatrz dane lokalizacji zdjęcia - na razie domyślne
+            
             
             function setSampleJsonData(imageId) {
                 return ({

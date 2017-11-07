@@ -62,12 +62,14 @@ define(["./Camera","./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJsonO
         //saveButtonParagraph.style.zIndex = '1001';
         //saveJsonButton.appendChild(saveButtonParagraph);
 
-    };
+    }; // dodaje przycisk "save points" klasy "saveJsonButton"
 
     exported.updateJsonEventListener = function () {
 
         document.body.addEventListener('click', this.updateJson);
     }; // te f-kcje są wywołane wyżej (w buildJSON)
+
+   //TODO: na podstawie poniższej funkcji dodawać teraz Patche
 
     exported.addNewPointsToPatches = function () { // f-kcja działa poprawnie - po kliknięcu save patche mają dodane nowe(lub edytowne) punkty
 
@@ -96,32 +98,35 @@ define(["./Camera","./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJsonO
 
     }; // f-kcja dodaje nowe/edytowane pointy do patchów (elementów viewer.positionable)
 
-    exported.dig = function (image, visitFunction, parentImage) {
-        //debugger;
+    {
+        exported.dig = function (image, visitFunction, parentImage) {
+                //debugger;
 
-        visitFunction(image, parentImage);
+                visitFunction(image, parentImage);
 
-        //tutaj zrobić, zeby visit function dostawało jako parent Image już objekt parentsa z objScheme
-        // czyli : jak dojść żeby na podstawie kiedy mamy dany patch, określić, który image z objektu objScheme.images... jest jego parentem - to było trudne, rozwiązaniem
-        // jest funkcja addCleanedPatchesToObject i w niej dodanie do patchów swoich adresów w objekcie objScheme
+                //tutaj zrobić, zeby visit function dostawało jako parent Image już objekt parentsa z objScheme
+                // czyli : jak dojść żeby na podstawie kiedy mamy dany patch, określić, który image z objektu objScheme.images... jest jego parentem - to było trudne, rozwiązaniem
+                // jest funkcja addCleanedPatchesToObject i w niej dodanie do patchów swoich adresów w objekcie objScheme
 
-        if (image.children.length > 0) {
-            image.children.forEach(
-                function (childrenImage) { //tu childrenImage to "each children"
+                if (image.children.length > 0) {
+                    image.children.forEach(
+                        function (childrenImage) { //tu childrenImage to "each children"
 
-                    exported.dig(childrenImage, visitFunction, image);
-                });
-        }
-    };
+                            exported.dig(childrenImage, visitFunction, image);
+                        });
+                }
+            };
 
-    exported.traverse = function (visitFunction) {
+        exported.traverse = function (visitFunction) {
 
 
-        for (var i = 0; i < this.patchesWithoutParent.length; i++) {
-            this.dig(this.patchesWithoutParent[i], visitFunction, null);
-        }};
+                for (var i = 0; i < this.patchesWithoutParent.length; i++) {
+                    this.dig(this.patchesWithoutParent[i], visitFunction, null);
+                }
+            };
+    } // dig i traverse
 
-    exported.cleanPatchBeforeAddingToObject = function (image) { //ogolocenie patcha przed dodaniem do objektu
+    exported.cleanPatchBeforeAddingToObject = function (image) {
 
         var result = {};
 
@@ -136,8 +141,7 @@ define(["./Camera","./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJsonO
 
 
         return result;
-    };
-
+    }; //schemat ogoloceniapatcha do elementów niezapetlajacych przed dodaniem do objektu
 
     exported.addCleanedPatchesToObject = function (image, parentImage) {
 
@@ -162,7 +166,7 @@ define(["./Camera","./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJsonO
         //console.log(image);
 
 
-    };
+    }; // wsadzenie ogoloconego Patcha, użyte w buidPatchesToObject
 
     exported.buildPatchesTree = function () {
 
