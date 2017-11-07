@@ -289,8 +289,8 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
 
         var pathJSON = JSON.stringify(dataToServer);
 
-        AddDataForImageToServerREQUEST.makeRequest(pathJSON); // przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE -->
-
+        AddDataForImageToServerREQUEST.makeRequest(pathJSON); // przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE
+        //to sa wszystkie dane potrzebne do zapisania zdjęcia
         
         //TODO: tu już nie ma requesta - tym się zajmuje formidable
 

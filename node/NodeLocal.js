@@ -39,7 +39,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
             exported.contentTypeString = exported.headers['content-type'];// var contentTypeString = JSON.stringify(headers['content-type']); //przyklad proponowanej techniki ULR'ow na update jsononserverREQUEST)
             exported.filepath = "." + exported.url;
             exported.fileext = exported.path.extname(exported.filepath);
-        }
+        } //TODO: ?? pozmieniać te obiekty z powrotem na zmienne żeby szybciej działało??
 
 
         if (exported.method == "OPTIONS") {
@@ -59,25 +59,10 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                 console.log("     7. method 2: " + exported.method);
 
-
-                /*request.on('error', function (err) {
-                 console.error(err);
-
-                 }).on('data', function (chunk) {
-
-                 console.log("     7.1. zabiera sie za przesylanie data"); // nie dziala dla jpg - dalej jest formidable
-                 // przerzucic do "if (fileext == ".json")"
-                 exported.body.push(chunk);
-
-                 }).on('end', function () {*/
-
-                /////////////////////////////////////
-
                 request.on('error', function (err) {
                     console.error(err);
                 });
 
-                ////////////////////////////////////
 
                 console.log("   8.0 fileext  :" +exported.fileext);
 
@@ -186,7 +171,10 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                                     // path exists unless there was an error
 
                                 }); // to dziala i folder się pojawił
+
                             }
+
+                            else { } // czyli gdy jest parent
 
 
                             //TODO: 04-11-2016 to teraz robic (ale najpierw poprzednie TODO z tej daty)
@@ -243,7 +231,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                     //}
 
                 );
-                response.write(stat);
+                response.write(stat); // gdzie to idzie ?
                 //response.write("lalala");
                 response.end();
             }
