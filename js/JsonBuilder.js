@@ -214,8 +214,19 @@ define(["./Camera", "./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJson
 
                 UpdateJsonOnServerREQUEST.makeRequest(exported.updatedJSON);
 
+            }
+            else if (clickedElement.className === "potwierdz") { //czyli po kliknięciu "Potwierdź"
+
+                //TODO: napisac funkcje na wzor tej, tylko ze zamiast punktow doda nowe dane do jsona (do patcha) i je zapisze
+
+                console.log("jestem w JsonBuider czas dodać Patcha do jSona");
+
+                //UpdateJsonOnServerREQUEST.makeRequest(exported.updatedJSON);
 
             }
+
+
+
         };
 
 

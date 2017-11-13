@@ -79,15 +79,7 @@ define([], function () {
                     w: window.innerWidth, //szerokość okna przegladarki www
                     h: window.innerWidth * image.size.h / image.size.w // wymiar zdjęcia y, w zasadzie 2*y , bo samo y to srodek zdjecia
                 };
-
-               /* }else{}
-
-                image.absolutePos = {
-                    y: window.innerWidth * 0.5 * image.size.h / image.size.w,  // srodek zdjęcia : y
-                    x: window.innerWidth * (0.5 + 1.25 *i) , // srodek zdjęcia: x
-                    w: window.innerWidth, //szerokość okna przegladarki www
-                    h: window.innerWidth * image.size.h / image.size.w // wymiar zdjęcia y, w zasadzie 2*y
-                };*/
+                
 
                 imgHTML.style.opacity = 1; // jesli nie ma parenta to widac do mocno
 
@@ -97,29 +89,20 @@ define([], function () {
             imgHTML.style.border = '5px solid rgba(255, 255, 255, .2)';
             imgHTML.style.borderRadius = '5px';
             imgHTML.style.position = 'absolute';
-
-
-
-
+            
 
         };
-        /*exported.prototype.buildDOM =function(){ //to na razie nic nie robi
-
-        };
-        exported.prototype.attachEvents =function(){ // to na razie nic nie robi
-
-        };*/
 
         exported.prototype.recalculateBack =function() {
             var image = this.image;
 
             return;
-            //TODO: przeliczyc
+            //ODO: przeliczyc
 
             image.pos.x = 0;
             image.pos.y = 0;
             image.pos.w = 0;
-        };
+        }; //TODO: przeliczyc
 
         exported.prototype.enableEditMode =function(pEditor){
 

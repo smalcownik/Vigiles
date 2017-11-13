@@ -1,3 +1,5 @@
+{
+
 /**
  * Created by marek on 22.07.16.
  */
@@ -34,3 +36,4 @@ define([], function () {
 
 });
 
+} // Plik artefakt, zdjecie przesyla formidable zamiast tego requesta

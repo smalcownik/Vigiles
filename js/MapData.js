@@ -29,7 +29,7 @@ define(['./MapDataValidator'], function (MapDataValidator) {
             //debugger;
             //console.log(this.images);
             for (var i = 0; i < this.images.length; i++) {
-                this.dig(this.images[i],i, visitFunction, null); //argumenty f-kcji dig
+                this.dig(this.images[i],i, visitFunction, null); //ARGUMENTY FUNKCJI DIG !!
                 // jak trawersuje (gdziekowliek by nie było wywołane) to zawsze zaczyna od this.images[0]
                 // gdzie this to objekt z jSON'a
             }

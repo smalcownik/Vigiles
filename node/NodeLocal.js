@@ -3,7 +3,7 @@
  */
 // odpalac node z poziomu folderu Vigiles a nie Vigiles/node
 //shift+ f4 - detach editor tabs
-// ustawić to tak: to jest pierwsza paczka domyślna, a z przycisku na stronie można wybrać inną paczkę i wtedy się załaduje inne auto
+// ustawić tak: to jest pierwsza paczka domyślna, a z przycisku na stronie można wybrać inną paczkę i wtedy się załaduje inne auto
 
 define(['./NodeFunctions'], function (NodeFunctions) {
 
@@ -100,12 +100,16 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                         //TODO: powyższe dziala wiec można skorzystac zeby przekopiować sciezke, teraz: nadbudowac jSON'a
 
-                        var new_location = '/home/marek/WebstormProjects/nodeJSTutorial/formidable_sample/';
-                        exported.fs.copy(temp_path, new_location + file_name, function (err) {
+                        var new_location = '/home/marek/WebstormProjects/Vigiles' + exported.bodyObject[0][0] ;
+
+                        process.stdout.write("8.3. nowa sciezka do pliku DZIALA?: " + new_location);
+
+
+                        exported.fs.copy(temp_path, new_location, function (err) {
                             if (err) {
                                 console.error(err);
                             } else {
-                                console.log("success!")
+                                console.log("   success!")
                             }
                         });
                         //return;
@@ -210,7 +214,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                 console.log("     10. method 2: " + exported.method);
 
-                //TODO: 5.06.2017: tutaj zrobić jeszcze jedno rozróżneinie po URL, żeby wbrew komentarzowi po else (lin. 219) rozróżnić zdjęcia od przesylanego JSON'a
+                //TODO: 5.06.2017: tutaj zrobić jeszcze jedno rozróżneinie po URL, żeby rozróżnić zdjęcia od przesylanego JSON'a
                 // bo na wypadek jsona znowu trzeba przekierować program w inne miejsce- tam gdzie powinien isc nomalnie JSON przed zmianą w pliku UpdateJsonREQUEST
                 // o koncowke URL'a lalala
 

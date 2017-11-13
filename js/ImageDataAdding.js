@@ -3,7 +3,7 @@
  */
 
 
-define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST","./JsonBuilder"], function (Camera, AddImageToServerREQUEST, AddDataForImageToServerREQUEST, JsonBuilder) {
+define(["./Camera","./AddDataForImageToServerREQUEST","./JsonBuilder"], function (Camera, AddDataForImageToServerREQUEST, JsonBuilder) {
 
     var exported = {};
 
@@ -73,7 +73,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         formidableButton.style.position = 'absolute';
 
         formidableButton.style.zIndex = '1000';
-        formidableButton.style.height = '70px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
+        formidableButton.style.height = '30px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
         formidableButton.style.width = '140px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
         formidableButton.style.backgroundColor = '#000000';
         formidableButton.style.borderColor = '#ffffff';
@@ -99,9 +99,16 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         this.DOM = input;
         input.type = "file";
         input.name = "upload";
+        input.style.position = 'absolute';
+        input.style.top = Camera.position.x + 40 + 'px';
+        input.style.right = Camera.position.y - 110 + 'px';
         input.multiple = "multiple";
         var input2 = document.createElement('input');
         this.DOM = input2;
+        input2.classList.add("potwierdz");
+        input2.style.position = 'absolute';
+        input2.style.top = Camera.position.x + 70 + 'px';
+        input2.style.right = Camera.position.y + 65 + 'px'; // w poziomie
         input2.type = "submit";
         input2.value = "Potwierdz";
 
@@ -292,7 +299,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
         AddDataForImageToServerREQUEST.makeRequest(pathJSON); // przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE
         //to sa wszystkie dane potrzebne do zapisania zdjęcia
         
-        //TODO: tu już nie ma requesta - tym się zajmuje formidable
+        //tu już nie ma requesta - tym się zajmuje formidable
 
     };
 
@@ -309,7 +316,7 @@ define(["./Camera","./AddImageToServerREQUEST","./AddDataForImageToServerREQUEST
             var newId = exported.prepareInitialData(); // tutaj przygotuje m.in. nowy ID oraz opcje znajdowania object po id
 
             
-            exported.formidableButton(); //TODO: tu pojawia się przycisk formidable
+            exported.formidableButton(); //pojawia się przycisk formidable
 
             //wybór zdjęcia - teraz tym zajmie się formidable:
             
