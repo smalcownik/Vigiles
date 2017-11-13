@@ -4,8 +4,7 @@
 define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty dodawanych punktów razem z właściowściami DOM
 
         var exported = {};
-
-
+    
 
         exported.toAddPoint = function (event) {// event dla camery/obrazków // wywoływana w PointEventListeners.js
 

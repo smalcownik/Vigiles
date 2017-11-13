@@ -1,4 +1,7 @@
-/** Wywołane w Patch Builder (w Viewer) jako "data.traverse"
+/** //1. nanosi nowe punkty do jsona i wysyla go na serwer
+ * 
+ *  //2. wysyla na serwer nowego jSON'a przy dodawaniu zdjecia (nowego Patcha)// json stworzony w ImageDataAdding
+ *  
  * Created by marek on 01.02.16.
  */
 define(["./Camera", "./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJsonOnServerREQUEST) {
@@ -217,6 +220,10 @@ define(["./Camera", "./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJson
             else if (clickedElement.className === "potwierdz") { //czyli po kliknięciu "Potwierdź"
 
                 //TODO: napisac funkcje na wzor tej, tylko ze zamiast punktow doda nowe dane do jsona (do patcha) i je zapisze
+
+                // po tym odświeżyć ładnie
+                
+                // 1.
 
                 console.log("jestem w JsonBuider czas dodać Patcha do jSona");
 
