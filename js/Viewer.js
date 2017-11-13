@@ -82,10 +82,14 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
             MapDataProviderREQUEST.loadData(url+dataPath+fileName,
                 function(data){ // cb w MDP.loadData
 
-                    exported.currentDataStringified = JSON.stringify(data); // UWAGA! użyte poźniej w klasie "ImageDataAdding.js" zeby miec zachowana oryginalna tresc aktualnego JSONA
-                    exported.currentData = data; // jako data wchodzi new MapData(response) czyli cały OBIEKT z jSON'a
+                    exported.currentDataStringified = JSON.stringify(data); // UWAGA! użyte poźniej w klasie "ImageDataAdding.js" do fillNodeList, zeby miec zachowana oryginalna tresc aktualnego JSONA
+
+                    exported.currentData = data; // jako data wchodzi new MapData(response) czyli cały OBIEKT z jSON'a,
+                                        // wstosunku do  exported.currentDataStringified jest znaczaco rozbudowany, poniewaz jest to obiekt, który pozniej byl dobudowywany
+                    
                     exported.currentData.url = url + exported.DataPath; //sztucznie wstrzynieta droga do folderu zdjec(dla Patch) znajduje się potem w Patch w sciezce do zdjec (przez Viewer.ShowMapData)
                     //console.log(url/*+fileName*/); // wyswietla http://localhost:4246/data/test_arch/data.json
+                    
                     exported.showMapData(exported.currentData); // w tej f-kcji będzie dopiero wołany PatchBuilder czyli cały widok, a currentData to obiekt new MapData(response)
                 }
             );

@@ -207,9 +207,8 @@ define(["./Camera", "./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJson
 
                 console.log(exported.objScheme);
 
-                exported.updatedJSON = JSON.stringify(exported.objScheme);
+                exported.updatedJSON = JSON.stringify(exported.objScheme); // objScheme zbudowany w buildPatchesTree
 
-                //console.log(exported.updatedJSON);
                 console.log(exported.updatedJSON);
 
                 UpdateJsonOnServerREQUEST.makeRequest(exported.updatedJSON);

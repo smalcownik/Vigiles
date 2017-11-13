@@ -184,7 +184,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST","./JsonBuilder"], function
         function findById(nodeListElement){ //nodeListElement to array: [image.id, image, originalParent, parent.id ?(jesli istnieje)]
 
             if( nodeListElement[0] === idNumber) // node list element odnosi sie do nodeList
-                node = nodeListElement;
+                node = nodeListElement; // czyli node to cały element tablicy nodeList czyli jest on taka tabela: [image.id, image, originalParent, parent.id]
             //}
 
         };
@@ -193,7 +193,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST","./JsonBuilder"], function
 
         console.log(node);
 
-        return node;
+        return node; // node to cała tablica [image.id, image, originalParent, parent.id]
 
     }; // funkcja zwraca (z listy nodeList) node'a o wybranym numerze id
 
@@ -217,7 +217,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST","./JsonBuilder"], function
         exported.originalJSONparsed = JSON.parse(exported.viewer.currentDataStringified) ; // używa pliku z Viewera:objekt MapData (JSOn - string)
         // console.log(exported.originalJSONparsed);//to dziala - obiekt!
 
-        exported.fillNodeList(exported.originalJSONparsed); // z obec
+        exported.fillNodeList(exported.originalJSONparsed);
 
         console.log(exported.nodeList);//[image.id, image, originalParent(numer folderu), parent.id] // parent.id nie wystepuje jezeli image jest na dnie mapy/stosu
                                         //originalParent nie odnosi się do numeru Patcha tylko do numeru folderu imgs

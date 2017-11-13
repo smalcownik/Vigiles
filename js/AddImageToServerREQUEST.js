@@ -36,4 +36,4 @@ define([], function () {
 
 });
 
-} // Plik artefakt, zdjecie przesyla formidable zamiast tego requesta
+} // Plik artefakt, obecnie zdjecie przesyla formidable
