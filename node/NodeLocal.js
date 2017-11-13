@@ -77,7 +77,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                     // parse a file upload
                     form.parse(request, function (err/*, fields, files*/) {
-                        response.writeHead(204/* 200, {'content-type': 'text/plain'}*/); //TODO: SUCCESS 204 nie wyskakuje nowe okno response
+                        response.writeHead(204/* 200, {'content-type': 'text/plain'}*/); //SUCCESS 204 nie wyskakuje nowe okno response
                         //response.write('Upload received :\n'); // tu skomentowałem
                         response.end(/*exported.util.inspect({fields: fields, files: files})*/); //  tu skomentowałem
                     });
