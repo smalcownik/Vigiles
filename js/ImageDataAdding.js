@@ -3,7 +3,7 @@
  */
 
 
-define(["./Camera","./AddDataForImageToServerREQUEST","./JsonBuilder"], function (Camera, AddDataForImageToServerREQUEST, JsonBuilder) {
+define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQUEST"], function (Camera, AddDataForImageToServerREQUEST, UpdateJsonOnServerREQUEST) {
 
     var exported = {};
 
@@ -142,7 +142,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST","./JsonBuilder"], function
 
 
         for (var i = 0; i < parentObject.images.length; i++) {
-            exported.dig(parentObject.images[i],i, visitFunction, null);
+            exported.dig(parentObject.images[i],i, visitFunction, null); //na koncu jest null ale funkcja dig odwoluje sie sama do siebie i tam juz daje zmienną
         }
     };
 
@@ -152,17 +152,17 @@ define(["./Camera","./AddDataForImageToServerREQUEST","./JsonBuilder"], function
 
         exported.nodeList = []; // ma być tablica, ktora umozliwi znalezienie referencji do objektu Patch po ID
         
-        function fill(image,originalParent,parent){ // originalParent odnosi sie do "i" a wiec do folderu imgs z numerem
+        function fill(image,originalParentImgsNumber,parent){ // originalParentImgsNumber odnosi sie do "i" a wiec do folderu imgs z numerem
 
             if(parent){
 
-            exported.nodeList.push([image.id, image, originalParent, parent.id]);
+            exported.nodeList.push([image.id, image, originalParentImgsNumber, parent.id]);
 
             }
 
             else{
 
-                exported.nodeList.push([image.id, image, originalParent]);
+                exported.nodeList.push([image.id, image, originalParentImgsNumber]);
             }
 
         };
@@ -233,10 +233,10 @@ define(["./Camera","./AddDataForImageToServerREQUEST","./JsonBuilder"], function
     };// 1.uzupelnia exported.nodeList 2.zwraca nextId
 
     
-    exported.buildPath = function(newId,parentId,nextOriginalParent){ // parent id jest trzecim elementem wyniku f-kcji exported.getNodeById, czyli numer folderu imgs
+    exported.buildPath = function(newId,parentImgsNumber,nextOriginalParent){ // parent id jest trzecim elementem wyniku f-kcji exported.getNodeById, czyli numer folderu imgs
 
 
-        if (parentId === "newParent") { //wartosc "newParent" jest domyslnie dodawana w prompcie (w funckji newPatchDataReceiverBuilder)
+        if (parentImgsNumber === "newParent") { //wartosc "newParent" jest domyslnie dodawana w prompcie (w funckji newPatchDataReceiverBuilder)
                                         // jezeli nie określimy numeru parenta dla dodawanego patcha
                                         //tedy trza sprawdzić, który originalParentIndex jest największy i zwiększyc tę wartość o 1
 
@@ -256,7 +256,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST","./JsonBuilder"], function
 
         {
 
-            var originalParentIndex = exported.getNodeById(parentId)[2]; //[image.id, image, originalParent, parent.id]
+            var originalParentIndex = exported.getNodeById(parentImgsNumber)[2]; //[image.id, image, originalParent, parent.id]
             console.log(originalParentIndex);
             var folderPath = (exported.viewer.DataPath +"/imgs/imgs[" +originalParentIndex+']');
 
@@ -328,10 +328,10 @@ define(["./Camera","./AddDataForImageToServerREQUEST","./JsonBuilder"], function
             var newImgPath = null;
             console.log(newImgPath);
 
-            var newImgDataParentId = prompt("PARENT_NR - jak nie podasz to doda nowy originalParent","0"); // ?? czy to jest numer nie patcha tylko folderu imgs -original parent ?
+            var newImgDataParentImgsNumber = prompt("PARENT_NR - jak nie podasz to doda nowy originalParent","0"); // ?? czy to jest numer nie patcha tylko folderu imgs -original parent ?
             
-            if (newImgDataParentId === "") {
-                newImgDataParentId = "newParent";
+            if (newImgDataParentImgsNumber === "") {
+                newImgDataParentImgsNumber = "newParent";
             }
             
             //var newImgJsonData = prompt("Podaj dane do zdjęcia - JSONData");  // dane lokalizacji zdjęcia - teraz tym zajmie się formidable
@@ -353,7 +353,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST","./JsonBuilder"], function
             console.log(newImgJsonData);
             
 
-            var promptedData = [newImgPath, newImgJsonData, newImgDataParentId];// pD: [ścieżka pliku na dysku nadawcy, dane jsona, parent.id lub "newParent" ]
+            var promptedData = [newImgPath, newImgJsonData, newImgDataParentImgsNumber];// pD: [ścieżka pliku na dysku nadawcy, dane jsona, parentImgsNumber lub "newParent" ]
 
 
             promptedData.forEach(function (element, index) {
@@ -370,6 +370,37 @@ define(["./Camera","./AddDataForImageToServerREQUEST","./JsonBuilder"], function
 
             exported.executeAddingNewImage(newId, promptedData);
             
+        }
+        else if (clickedElement.className === "potwierdz") { //czyli po kliknięciu "Potwierdź"
+
+            //TODO: tutaj 14.11
+
+            // po tym odświeżyć ładnie
+
+            // 1. znaleźć obiekt
+
+            //exported.originalJSONparsed = JSON.parse(exported.viewer.currentDataStringified) ; // używa pliku z Viewera:objekt MapData (JSOn - string)
+            console.log(exported.originalJSONparsed);//to dziala?
+
+            //2. znaleźć w tym obiekcie parent na podstawie wyboru Id parenta (ImageDataAdding.fillNodeList - analogicznie tylko wyłapać parenta zamiasta budować coś)
+
+            //zamiast fill dać {if object.id == "id",
+            // return object}
+
+
+            //3. do tego parenta dodać nowy szkielet (setSampleJsonData)
+
+            //object.children.push(setSampleJsonData(imageId));
+
+
+            //4.zrobić z tego biektu  var exported.json = JSON.stringify(obiekt);
+
+            console.log("jestem w JsonBuider czas dodać Patcha do jSona");
+
+            //5. UpdateJsonOnServerREQUEST.makeRequest(exported.json); // tym zakończyć
+
+            //6. Viewer.loadURL
+
         }
     };
 
