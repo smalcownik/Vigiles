@@ -72,7 +72,7 @@ define(["./Camera", "./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJson
             document.body.addEventListener('click', this.updateJson);
         }; // te f-kcje są wywołane wyżej (w buildJSON)
 
-        //TODO: na podstawie poniższej funkcji dodawać teraz nowe Patche
+        //TODO: poniżej inna wersja budowania nowego jsona : na podstawie positionables, ale wybrano tę z ImagaDataAdding (przez zmiane jsona)
 
         exported.addNewPointsToPatches = function () { // f-kcja działa poprawnie - po kliknięcu save patche mają dodane nowe(lub edytowne) punkty
 
@@ -199,8 +199,6 @@ define(["./Camera", "./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJson
             var clickedElement = event.target; // to jest tylko element - zaraz znajdziemy dla niego Patch'a/Pointa
 
             if (clickedElement.className === "saveJsonButton") {
-
-                //TODO: napisac funkcje na wzor tej, tylko ze zamiast punktow doda nowe dane do jsona (do patcha) i je zapisze
 
                 console.log(viewer.positionable);
 

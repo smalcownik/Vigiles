@@ -312,10 +312,12 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             console.log("odpalono newPatchDataReceiverbuilder czyli..prompt");
 
 
-            
-            var newId = exported.prepareInitialData(); // tutaj przygotuje m.in. nowy ID oraz opcje znajdowania object po id
+            exported.newId = null;
 
-            
+            exported.newId = exported.prepareInitialData(); // tutaj przygotuje m.in. nowy ID oraz opcje znajdowania object po id
+
+            console.log("1. new id przy prompcie: "+exported.newId);
+
             exported.formidableButton(); //pojawia się przycisk formidable
 
             //wybór zdjęcia - teraz tym zajmie się formidable:
@@ -348,7 +350,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
                 });
             }
 
-            var newImgJsonData = setSampleJsonData(newId.toString());
+            var newImgJsonData = setSampleJsonData(exported.newId.toString());
 
             console.log(newImgJsonData);
             
@@ -368,7 +370,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             console.log(promptedData);
             
 
-            exported.executeAddingNewImage(newId, promptedData);
+            exported.executeAddingNewImage(exported.newId, promptedData);
             
         }
         else if (clickedElement.className === "potwierdz") { //czyli po kliknięciu "Potwierdź"
@@ -384,6 +386,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             //2. znaleźć w tym obiekcie parent na podstawie wyboru Id parenta (ImageDataAdding.fillNodeList - analogicznie tylko wyłapać parenta zamiasta budować coś)
 
+            console.log("2. new id przy potwierdzeniu: "+exported.newId);
             //zamiast fill dać {if object.id == "id",
             // return object}
 
