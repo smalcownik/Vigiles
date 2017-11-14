@@ -340,7 +340,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             // to na razie puszczam z automatu f-kcją "setSampleJsonData" - te dane mają zostać podane z aplikacji
             
             
-            function setSampleJsonData(imageId) {
+            exported.setSampleJsonData = function(imageId) {
                 return ({
                     "id": imageId,
                     "size": {"w": 500, "h": 900},
@@ -350,7 +350,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
                 });
             }
 
-            var newImgJsonData = setSampleJsonData(exported.newId.toString());
+            var newImgJsonData = exported.setSampleJsonData(exported.newId.toString());
 
             console.log(newImgJsonData);
             
@@ -377,18 +377,37 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             //TODO: tutaj 14.11
 
-            // po tym odświeżyć ładnie
+            // 1. znaleźć obiekt :)
+            console.log(exported.originalJSONparsed);// używa pliku z Viewera:objekt MapData (JSOn - string)
 
-            // 1. znaleźć obiekt
-
-            //exported.originalJSONparsed = JSON.parse(exported.viewer.currentDataStringified) ; // używa pliku z Viewera:objekt MapData (JSOn - string)
-            console.log(exported.originalJSONparsed);//to dziala?
 
             //2. znaleźć w tym obiekcie parent na podstawie wyboru Id parenta (ImageDataAdding.fillNodeList - analogicznie tylko wyłapać parenta zamiasta budować coś)
 
-            console.log("2. new id przy potwierdzeniu: "+exported.newId);
+            console.log("2. new id przy potwierdzeniu: "+ exported.newId);
             //zamiast fill dać {if object.id == "id",
             // return object}
+
+
+            //TODO: jeszcze dodać Id parenta (w prompcie), żeby wiadomo było czego szuka ()idNumber)
+
+            exported.findNodeById = function(wholeObject,idNumber){ // to bedzie visitFunction w exported.dig (wywolanej z traverse)
+
+                function find(image) {
+
+                    if (image.id == idNumber) {
+
+                        image.children.push(exported.setSampleJsonData(idNumber));
+
+                        return;
+
+                    }
+                }
+
+                this.traverse(wholeObject, find);
+
+            };
+
+
 
 
             //3. do tego parenta dodać nowy szkielet (setSampleJsonData)
@@ -402,6 +421,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             //5. UpdateJsonOnServerREQUEST.makeRequest(exported.json); // tym zakończyć
 
+            // po tym odświeżyć ładnie:
             //6. Viewer.loadURL
 
         }
