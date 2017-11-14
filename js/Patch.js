@@ -96,13 +96,16 @@ define([], function () {
         exported.prototype.recalculateBack =function() {
             var image = this.image;
 
-            return;
-            //ODO: przeliczyc
+
+            //ODO: przeliczyc (z exported.prototype.move i exported.prototype.zoom)
 
             image.pos.x = 0;
             image.pos.y = 0;
             image.pos.w = 0;
-        }; //TODO: przeliczyc
+
+            return;
+
+        }; //TODO: przeliczyc (z exported.prototype.move i exported.prototype.zoom lub exported.prototype.updateMyPosition ?)
 
         exported.prototype.enableEditMode =function(pEditor){
 

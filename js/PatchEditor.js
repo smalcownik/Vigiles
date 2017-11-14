@@ -13,7 +13,7 @@ define(["./Patch","./CameraEventListeners"], function (Patch,CameraEventListener
 
             exported.build = function(data){
 
-              if(window.location.hash.search('edit')==-1){
+              if(window.location.hash.search('edit')==-1){  // w oknie adresu "#edit" wtedy sie aktywuje
                   return
               }
 
