@@ -139,7 +139,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                         exported.bodyObject = JSON.parse(exported.body);
 
 
-                        console.log(exported.bodyObject);
+                        console.log("BODY:  "+exported.bodyObject);
 
 
                         if (exported.bodyObject.hasOwnProperty("meta")) {

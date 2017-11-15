@@ -331,7 +331,10 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             console.log(newImgPath);
 
             var newImgDataParentImgsNumber = prompt("PARENT_NR - jak nie podasz to doda nowy originalParent","0"); // ?? czy to jest numer nie patcha tylko folderu imgs -original parent ?
-            
+
+            exported.newDataParentIdNumber = null;
+            exported.newDataParentIdNumber = prompt("PARENT_Id - jak nie podasz to da 2","2"); // ?? czy to jest numer nie patcha tylko folderu imgs -original parent ?
+
             if (newImgDataParentImgsNumber === "") {
                 newImgDataParentImgsNumber = "newParent";
             }
@@ -375,7 +378,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
         }
         else if (clickedElement.className === "potwierdz") { //czyli po kliknięciu "Potwierdź"
 
-            //TODO: tutaj 14.11
+            console.log("jestem w JsonBuider czas dodać Patcha do jSona");
 
             // 1. znaleźć obiekt :)
             console.log(exported.originalJSONparsed);// używa pliku z Viewera:objekt MapData (JSOn - string)
@@ -387,16 +390,18 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             //zamiast fill dać {if object.id == "id",
             // return object}
 
+            console.log("3. Parent id przy potwierdzeniu: "+ exported.newDataParentIdNumber);
 
-            //TODO: jeszcze dodać Id parenta (w prompcie), żeby wiadomo było czego szuka ()idNumber)
 
-            exported.findNodeById = function(wholeObject,idNumber){ // to bedzie visitFunction w exported.dig (wywolanej z traverse)
+            //3. do tego parenta dodać nowy szkielet (setSampleJsonData)
+
+            exported.findNodeById = function(wholeObject,idNumber,parentNumber){ // to bedzie visitFunction w exported.dig (wywolanej z traverse)
 
                 function find(image) {
 
-                    if (image.id == idNumber) {
+                    if (image.id == parentNumber) { // znajduje rodzica naszego parenta - rodzic jest podany w prompcie w exported.newDataParentIdNumber
 
-                        image.children.push(exported.setSampleJsonData(idNumber));
+                        image.children.push(exported.setSampleJsonData(idNumber)); // temu rodzicowi dodaje childrena (szkielet z nowym Id)
 
                         return;
 
@@ -407,19 +412,26 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             };
 
+            exported.findNodeById(exported.originalJSONparsed,exported.newId,exported.newDataParentIdNumber);
 
+            //4. sprawdzic czy w obieckie po zmianie jest nowy children
 
-
-            //3. do tego parenta dodać nowy szkielet (setSampleJsonData)
-
-            //object.children.push(setSampleJsonData(imageId));
-
+            console.log(exported.originalJSONparsed); // to zadzialalo - pokazuje w oiekcie nowy ud :14
 
             //4.zrobić z tego biektu  var exported.json = JSON.stringify(obiekt);
 
-            console.log("jestem w JsonBuider czas dodać Patcha do jSona");
+            //TODO: jak zadziala to odkomentować poniższe polecenia:
 
             //5. UpdateJsonOnServerREQUEST.makeRequest(exported.json); // tym zakończyć
+
+            exported.JsonWithNewPatch = JSON.stringify(exported.originalJSONparsed); // objScheme zbudowany w buildPatchesTree
+
+            console.log(exported.JsonWithNewPatch);
+
+            UpdateJsonOnServerREQUEST.makeRequest(exported.JsonWithNewPatch);
+
+            //TODO: w nodzie blad bo z tym jsone nie idzie paczka danych - popatrzec jak szlo zapisywanie jsona przy punkcie i albo zrobić analogicznie
+            // wysyłaną z jsonem paczke danych albo przerobic w nodzie, zeby odroznil ta operacje i zapisal ten plik jak trzeba bo potem sciaga zdjecie i mu w node brakuje tych danych
 
             // po tym odświeżyć ładnie:
             //6. Viewer.loadURL
