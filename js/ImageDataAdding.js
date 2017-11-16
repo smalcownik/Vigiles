@@ -346,7 +346,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             exported.setSampleJsonData = function(imageId) {
                 return ({
                     "id": imageId,
-                    "size": {"w": 500, "h": 900},
+                    "size": {"w": 300, "h": 500},
                     "pos": {"x": 0, "y": -0.5, "w": 0.6},
                     "points": [{"x": 0, "y": 0.5}],
                     "children": []
@@ -373,8 +373,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             console.log(promptedData);
             
 
-            exported.executeAddingNewImage(exported.newId, promptedData);
-            
+            exported.executeAddingNewImage(exported.newId, promptedData); // TODO: przerobić na tą modłę zmiaję jsona
         }
         else if (clickedElement.className === "potwierdz") { //czyli po kliknięciu "Potwierdź"
 
@@ -419,8 +418,6 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             console.log(exported.originalJSONparsed); // to zadzialalo - pokazuje w oiekcie nowy ud :14
 
             //4.zrobić z tego biektu  var exported.json = JSON.stringify(obiekt);
-
-            //TODO: jak zadziala to odkomentować poniższe polecenia:
 
             //5. UpdateJsonOnServerREQUEST.makeRequest(exported.json); // tym zakończyć
 
