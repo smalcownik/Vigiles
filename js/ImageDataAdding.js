@@ -296,7 +296,9 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
         var pathJSON = JSON.stringify(dataToServer);
 
-        AddDataForImageToServerREQUEST.makeRequest(pathJSON); // przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE
+        AddDataForImageToServerREQUEST.makeRequest(pathJSON);
+        //TODO: tutaj dorzucić nowego jsona
+        // przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE
         //to sa wszystkie dane potrzebne do zapisania zdjęcia
         
         //tu już nie ma requesta - tym się zajmuje formidable
@@ -424,6 +426,8 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             exported.JsonWithNewPatch = JSON.stringify(exported.originalJSONparsed); // objScheme zbudowany w buildPatchesTree
 
             console.log(exported.JsonWithNewPatch);
+            
+            // TODO: ad. 1 i 2. tutaj przesłać JSONA
 
             UpdateJsonOnServerREQUEST.makeRequest(exported.JsonWithNewPatch);
 

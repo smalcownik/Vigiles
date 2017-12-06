@@ -98,6 +98,8 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                         process.stdout.write("8.1. nowa sciezka do pliku DZIALA?: " + exported.bodyObject[0][0]);
                         console.log("    8.2. sciezka do folderu DZIALA?: " + exported.bodyObject[0][1]);
 
+                        // TODO: powyższa linijka nie dziala, w chwili odpalania formidable nie ma request (taki jak ImageDataAdding lin 299)
+
                         //TODO: powyższe dziala wiec można skorzystac zeby przekopiować sciezke, teraz: nadbudowac jSON'a
 
                         var new_location = '/home/marek/WebstormProjects/Vigiles' + exported.bodyObject[0][0] ;
