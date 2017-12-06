@@ -1,4 +1,8 @@
-// f-kcja wywołana w JsonBuilder.updateJson
+// f-kcja wywołana w:
+// 1. JsonBuilder.updateJson - gdzie przesyla jsona z nowymi punktami
+// 2. ImageDataAdding  - gdzie przesyla jsona z nowym Patchami
+
+
 /*Created on 11.05.16.*/
 
 define([], function () {

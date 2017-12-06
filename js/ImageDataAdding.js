@@ -297,8 +297,10 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
         var pathJSON = JSON.stringify(dataToServer);
 
         AddDataForImageToServerREQUEST.makeRequest(pathJSON);
-        //TODO: tutaj dorzucić nowego jsona
-        // przesyłanie danych do pliku - NAJPIERW DANE, POTEM ZDJĘCIE
+
+        //TODO: nie pilne: opcjonalnie,tutaj dorzucić nowego jsona zamiast UpdateJsonOnServerREQUEST:
+
+
         //to sa wszystkie dane potrzebne do zapisania zdjęcia
         
         //tu już nie ma requesta - tym się zajmuje formidable
@@ -321,6 +323,8 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             console.log("1. new id przy prompcie: "+exported.newId);
 
             exported.formidableButton(); //pojawia się przycisk formidable
+
+            //TODO: wystarczy sciezka do pliku (miejsce zapisu na serwerze a nie sciezka pierwotna pliku pobieranego)
 
             //wybór zdjęcia - teraz tym zajmie się formidable:
             
@@ -373,10 +377,11 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
              }); // f-kcja czyszcząca promptedData, nadaje pustym elementom wartość "null", logicznie bez znaczenia dla programu
             
             console.log(promptedData);
-            
 
-            exported.executeAddingNewImage(exported.newId, promptedData); // TODO: przerobić na tą modłę zmiaję jsona
+
+            exported.executeAddingNewImage(exported.newId, promptedData); // TODO: dane do jsona tą modłę
         }
+
         else if (clickedElement.className === "potwierdz") { //czyli po kliknięciu "Potwierdź"
 
             console.log("jestem w JsonBuider czas dodać Patcha do jSona");
@@ -411,7 +416,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
                 this.traverse(wholeObject, find);
 
-            };
+            }; // f-kcja dodaje nowy setSampleJsonData do objektu
 
             exported.findNodeById(exported.originalJSONparsed,exported.newId,exported.newDataParentIdNumber);
 
@@ -421,17 +426,20 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             //4.zrobić z tego biektu  var exported.json = JSON.stringify(obiekt);
 
-            //5. UpdateJsonOnServerREQUEST.makeRequest(exported.json); // tym zakończyć
-
             exported.JsonWithNewPatch = JSON.stringify(exported.originalJSONparsed); // objScheme zbudowany w buildPatchesTree
 
             console.log(exported.JsonWithNewPatch);
             
-            // TODO: ad. 1 i 2. tutaj przesłać JSONA
+
+            //5. UpdateJsonOnServerREQUEST.makeRequest(exported.json); // tym zakończyć, teraz trzeba przygotować paczkę danych do zdjęcia zeby przy jego wysłaniu
+            // serwer miał dane
 
             UpdateJsonOnServerREQUEST.makeRequest(exported.JsonWithNewPatch);
 
-            //TODO: w nodzie blad bo z tym jsone nie idzie paczka danych - popatrzec jak szlo zapisywanie jsona przy punkcie i albo zrobić analogicznie
+
+            //TODO: tutaj d
+
+            //
             // wysyłaną z jsonem paczke danych albo przerobic w nodzie, zeby odroznil ta operacje i zapisal ten plik jak trzeba bo potem sciaga zdjecie i mu w node brakuje tych danych
 
             // po tym odświeżyć ładnie:

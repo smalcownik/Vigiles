@@ -1,6 +1,8 @@
-/** //1. nanosi nowe punkty do jsona i wysyla go na serwer
+/** //1. użyte tylko przy dodawaniu nowych punktów //!! wersja budowania nowego jsona na podstawie positionables,
  * 
- *  //2. wysyla na serwer nowego jSON'a przy dodawaniu zdjecia (nowego Patcha)// json stworzony w ImageDataAdding
+ *  //2. nanosi nowe punkty do jsona i wysyla go na serwer - ale 3.
+ * 
+ *  //3. !!! przy dodawaniu zdjecia (nowego Patcha), json stworzony jest w inny sposob w ImageDataAdding
  *  
  * Created by marek on 01.02.16.
  */
@@ -71,8 +73,7 @@ define(["./Camera", "./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJson
 
             document.body.addEventListener('click', this.updateJson);
         }; // te f-kcje są wywołane wyżej (w buildJSON)
-
-        //TODO: poniżej inna wersja budowania nowego jsona : na podstawie positionables, ale wybrano tę z ImagaDataAdding (przez zmiane jsona)
+    
 
         exported.addNewPointsToPatches = function () { // f-kcja działa poprawnie - po kliknięcu save patche mają dodane nowe(lub edytowne) punkty
 
@@ -189,7 +190,7 @@ define(["./Camera", "./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJson
             this.traverse(this.addCleanedPatchesToObject);
 
 
-        };
+        }; // budowanie exported.objScheme - czyli obiektu, z którego jest robiony json (w funkcji updateJson)
 
 
         exported.updateJson = function (event) { // wywołana przez .updateJsonEventListener
