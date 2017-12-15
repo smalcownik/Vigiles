@@ -256,8 +256,9 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
         {
 
-            var originalParentIndex = exported.getNodeById(parentImgsNumber)[2]; //[image.id, image, originalParent, parent.id]
+            var originalParentIndex = exported.getNodeById(parentImgsNumber)[2]; // originalParent bo getNodeyId zwraca cały node:[image.id, image, originalParent, parent.id]
             console.log(originalParentIndex);
+
             var folderPath = (exported.viewer.DataPath +"/imgs/imgs[" +originalParentIndex+']');
 
             var path = [folderPath+'/'+ newId +'.jpg',folderPath];
@@ -273,7 +274,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
     }; // zwraca tablice z ścieżką do zapisania [file path, folder path]
 
 
-    exported.executeAddingNewImage = function(newId,promptedData) { // tutaj maja byc czynnosci po prompcie 
+    exported.executeAddingNewImage = function(newId,promptedData) { // tutaj maja byc czynnosci po prompcie // wywołane na końcu exp.newPatchDataReceiverBuilder
 
         var nextOriginalParent; // to jest numer koljenego folderu imgs[nr] a nie pliku w nim
         if (promptedData[2]==="newParent") { //wartosc "newParent" jest domyslnie dodawana w prompcie (w funckji newPatchDataReceiverBuilder)
@@ -294,9 +295,11 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
         console.log(dataToServer);
 
-        var pathJSON = JSON.stringify(dataToServer);
+        var dataToServerJSON = JSON.stringify(dataToServer);
 
-        AddDataForImageToServerREQUEST.makeRequest(pathJSON);
+        console.log("wysylam dane do zdjecia na serwer!");
+
+        AddDataForImageToServerREQUEST.makeRequest(dataToServerJSON);
 
         //TODO: nie pilne: opcjonalnie,tutaj dorzucić nowego jsona zamiast UpdateJsonOnServerREQUEST:
 
@@ -325,26 +328,26 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             exported.formidableButton(); //pojawia się przycisk formidable
             //wybór zdjęcia - teraz tym zajmie się formidable:
             
-            //var newImgPath = prompt("Podaj ścieżkę zdjęcia","/home/marek/WebstormProjects/Vigiles/data/add_new_patch_test_data/jol.jpg"); // sciezka do pliku na dysku - uri zdjęcia ??
+            //var oldImgPath = prompt("Podaj ścieżkę zdjęcia","/home/marek/WebstormProjects/Vigiles/data/add_new_patch_test_data/jol.jpg"); // sciezka do pliku na dysku - uri zdjęcia ??
             //home/marek/Downloads/jol.jpg
-            //TODO: wystarczy sciezka do pliku (miejsce zapisu na serwerze, a nie sciezka pierwotna pliku pobieranego)
-            
-            
-            var newImgPath = null;
-            console.log(newImgPath);
+            //TODO: info: artefakt: wystarczy sciezka docelowa do zapisu na serwer, a nie pierwotna lokalizacja pliku pobieranego
+            //zatem:
+            var oldImgPath = null;
 
-            var newImgDataParentImgsNumber = prompt("PARENT_NR - jak nie podasz to doda nowy originalParent","0"); // ?? czy to jest numer nie patcha tylko folderu imgs -original parent ?
+
+            var newImgParentImgsNumber = prompt("PARENT_NR - jak nie podasz to doda nowy originalParent","0"); // ?? czy to jest numer nie patcha tylko folderu imgs -original parent ?
+
+            if (newImgParentImgsNumber === "") {
+                newImgParentImgsNumber = "newParent";
+            }
+
 
             exported.newDataParentIdNumber = null;
             exported.newDataParentIdNumber = prompt("PARENT_Id - jak nie podasz to da 2","2"); // ?? czy to jest numer nie patcha tylko folderu imgs -original parent ?
 
-            if (newImgDataParentImgsNumber === "") {
-                newImgDataParentImgsNumber = "newParent";
-            }
-            
             //var newImgJsonData = prompt("Podaj dane do zdjęcia - JSONData");  // dane lokalizacji zdjęcia - teraz tym zajmie się formidable
-            // to na razie puszczam z automatu f-kcją "setSampleJsonData" - te dane mają zostać podane z aplikacji
-            
+            // to na razie puszczam z automatu f-kcją "setSampleJsonData" - te dane mają zostać podane z aplikacji lub zdjęcie może być osadzane ręcznie przez tryb #edit
+
             
             exported.setSampleJsonData = function(imageId) {
                 return ({
@@ -354,14 +357,15 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
                     "points": [{"x": 0, "y": 0.5}],
                     "children": []
                 });
-            }
+            };
 
-            var newImgJsonData = exported.setSampleJsonData(exported.newId.toString());
+            var newImgJsonData = exported.setSampleJsonData(exported.newId.toString()); // tutaj mozna dodać cudzysłowy ("\"" + exported.newId.toString()+ "\"") - tak ?
+                                                                                        // w razie potrzeby, zeby w json był z cudzysłowiem
 
             console.log(newImgJsonData);
             
 
-            var promptedData = [newImgPath, newImgJsonData, newImgDataParentImgsNumber];// pD: [ścieżka pliku na dysku nadawcy, dane jsona, parentImgsNumber lub "newParent" ]
+            var promptedData = [oldImgPath, newImgJsonData, newImgParentImgsNumber];// pD: [ścieżka pliku na dysku nadawcy, dane jsona, parentImgsNumber lub "newParent" ]
 
 
             promptedData.forEach(function (element, index) {
@@ -398,7 +402,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             //3. do tego parenta dodać nowy szkielet (setSampleJsonData)
 
-            exported.findNodeById = function(wholeObject,idNumber,parentNumber){ // to bedzie visitFunction w exported.dig (wywolanej z traverse)
+            exported.pushNewChildrenJsonDataToObject = function(wholeObject, idNumber, parentNumber){ // to bedzie visitFunction w exported.dig (wywolanej z traverse)
 
                 function find(image) {
 
@@ -415,13 +419,13 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             }; // f-kcja dodaje nowy setSampleJsonData do objektu
 
-            exported.findNodeById(exported.originalJSONparsed,exported.newId,exported.newDataParentIdNumber);
+            exported.pushNewChildrenJsonDataToObject(exported.originalJSONparsed,exported.newId,exported.newDataParentIdNumber);
 
             //4. sprawdzic czy w obieckie po zmianie jest nowy children
 
-            console.log(exported.originalJSONparsed); // to zadzialalo - pokazuje w oiekcie nowy ud :14
+            console.log(exported.originalJSONparsed); // to zadzialalo - pokazuje w oiekcie nowy id :14
 
-            //4.zrobić z tego biektu  var exported.json = JSON.stringify(obiekt);
+            //4.zrobić z tego obiektu  var exported.json = JSON.stringify(obiekt);
 
             exported.JsonWithNewPatch = JSON.stringify(exported.originalJSONparsed); // objScheme zbudowany w buildPatchesTree
 

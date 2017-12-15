@@ -33,6 +33,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
         {
             exported.body = []; //chcialem dac poza createServer, ale w request.on("data") wyskakiwal blad: body "has no push method"
+            exported.bodyObject;
             exported.headers = request.headers;
             exported.method = request.method;
             exported.url = request.url; // URL
@@ -141,7 +142,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                         exported.bodyObject = JSON.parse(exported.body);
 
 
-                        console.log("BODY:  "+exported.bodyObject);
+                        console.log("objectBODY:  "+ exported.bodyObject);
 
 
                         if (exported.bodyObject.hasOwnProperty("meta")) {
