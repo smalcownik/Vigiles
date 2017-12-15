@@ -10,7 +10,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
 
 
             serverURL:'http://localhost:4246' , // W DOMU (sieć wewnętrzna z serwerem)
-            //TODO: pobiera dane z serverURL (moze robic requesta gdzie indziej) z pliku node na tym kompie, node ma sie odnosic do plikow z kompa
+            //TODO: tylko info: pobiera dane z serverURL (moze robic requesta gdzie indziej) z pliku node na tym kompie, node ma sie odnosic do plikow z kompa
             // który bedzie pracowal na plikach, dolozyc zmienna z nazwa url serwera do pliku app.js, nastepnie w funkcji load url rozroznic zmienne serwer node do obrobki
             //DataPath:"/data/chemik_1",
             //  ZAWSZE tutaj zmieniać na p00.pl:4246 jak się jest poza domem

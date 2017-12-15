@@ -323,14 +323,11 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             console.log("1. new id przy prompcie: "+exported.newId);
 
             exported.formidableButton(); //pojawia się przycisk formidable
-
-            //TODO: wystarczy sciezka do pliku (miejsce zapisu na serwerze a nie sciezka pierwotna pliku pobieranego)
-
             //wybór zdjęcia - teraz tym zajmie się formidable:
             
             //var newImgPath = prompt("Podaj ścieżkę zdjęcia","/home/marek/WebstormProjects/Vigiles/data/add_new_patch_test_data/jol.jpg"); // sciezka do pliku na dysku - uri zdjęcia ??
             //home/marek/Downloads/jol.jpg
-            
+            //TODO: wystarczy sciezka do pliku (miejsce zapisu na serwerze, a nie sciezka pierwotna pliku pobieranego)
             
             
             var newImgPath = null;
@@ -437,7 +434,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             UpdateJsonOnServerREQUEST.makeRequest(exported.JsonWithNewPatch);
 
 
-            //TODO: tutaj d
+            //TODO: tutaj dodać drugi request z danymi do tego patcha na wzór linijki ~ 299
 
             //
             // wysyłaną z jsonem paczke danych albo przerobic w nodzie, zeby odroznil ta operacje i zapisal ten plik jak trzeba bo potem sciaga zdjecie i mu w node brakuje tych danych
