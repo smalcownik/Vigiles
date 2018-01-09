@@ -23,6 +23,8 @@ define(['./NodeFunctions'], function (NodeFunctions) {
     var test1 = "dupa";
     exported.test2 = "lampa";
 
+    exported.bodyObject;
+
     console.log("TEST1: "+test1+ "  "+exported.test2);
 
     process.stdout.write("\n" + "************************************************" + "\n" + "\n" + "Plik startuje :)     "); // ta wersja nie powoduje wyswietlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
@@ -30,7 +32,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
     exported.http.createServer(function (request, response) {
 
-        console.log("TEST2: "+test1+ "  "+exported.test2);
+        console.log("TEST2: "+test1+ "  "+exported.test2 + "  "+exported.bodyObject[0][0]);
         //var form = new exported.formidable.IncomingForm();
 
         process.stdout.write("\n" + "server running:    ");//console.log("server running");
@@ -38,7 +40,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
         {
             exported.body = []; //chcialem dac poza createServer, ale w request.on("data") wyskakiwal blad: body "has no push method"
-            exported.bodyObject;
+            //exported.bodyObject; // to dałem wyżej zeby było bardziej globalne
             exported.headers = request.headers;
             exported.method = request.method;
             exported.url = request.url; // URL
@@ -105,7 +107,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                         /* Location where we want to copy the uploaded file */
                         
-                        console.log("TEST4: "+test1+ "  "+exported.test2);
+                        console.log("TEST4: "+test1+ "  "+exported.test2 + "  "+exported.bodyObject);
 
                         process.stdout.write("8.1. nowa sciezka do pliku DZIALA?: " + exported.bodyObject[0][0]);
                         console.log("    8.2. sciezka do folderu DZIALA?: " + exported.bodyObject[0][1]);
@@ -159,7 +161,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                         if (exported.bodyObject.hasOwnProperty("meta")) {
 
-                            console.log("9.1.  to jest data1.json bo ma property 'meta' ");
+                            console.log("9.1.  to jest data.json lub data1.json bo ma property 'meta' ");
 
 
                             exported.fs.writeFile(exported.filepath, exported.body, function (err) { //tu poprawiono po zadzialaniu req.url na filepath
@@ -250,7 +252,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                     //}
 
                 );
-                response.write(stat); // gdzie to idzie ?
+                response.write(stat); // gdzie to idzie ? czy to jest zwrocone zdjecie w pliku Patch w linijce mgHTML.src=(...) ?
                 //response.write("lalala");
                 response.end();
             }
