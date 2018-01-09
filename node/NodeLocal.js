@@ -20,12 +20,17 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
     var port = 4246;
     var data_for_curently_added_patch;
+    var test1 = "dupa";
+    exported.test2 = "lampa";
+
+    console.log("TEST1: "+test1+ "  "+exported.test2);
 
     process.stdout.write("\n" + "************************************************" + "\n" + "\n" + "Plik startuje :)     "); // ta wersja nie powoduje wyswietlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
 
 
     exported.http.createServer(function (request, response) {
 
+        console.log("TEST2: "+test1+ "  "+exported.test2);
         //var form = new exported.formidable.IncomingForm();
 
         process.stdout.write("\n" + "server running:    ");//console.log("server running");
@@ -40,7 +45,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
             exported.contentTypeString = exported.headers['content-type'];// var contentTypeString = JSON.stringify(headers['content-type']); //przyklad proponowanej techniki ULR'ow na update jsononserverREQUEST)
             exported.filepath = "." + exported.url;
             exported.fileext = exported.path.extname(exported.filepath);
-        } //TODO: ?? pozmieniać te obiekty z powrotem na zmienne żeby szybciej działało??
+        } //TODO: pozniej?? pozmieniać te obiekty z powrotem na zmienne żeby szybciej działało??
 
 
         if (exported.method == "OPTIONS") {
@@ -71,9 +76,14 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                     console.log("    8. fileext to jotpeg, a jego url: " + exported.url);
 
+                    console.log("TEST3: "+test1+ "  "+exported.test2);
+
                     //TODO: FORMIDABLE:
 
-                    // creates a new incoming form. 
+                    // creates a new incoming form.
+
+                   // debugger;
+
                     var form = new exported.formidable.IncomingForm();
 
                     // parse a file upload
@@ -94,7 +104,8 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                         console.log("name: " + file_name);
 
                         /* Location where we want to copy the uploaded file */
-                        //TODO: tu zrobic dodatkowe czynnosci na przeslanym pliku (przekopiować we właściwe miejsce i zmienić nazwę)
+                        
+                        console.log("TEST4: "+test1+ "  "+exported.test2);
 
                         process.stdout.write("8.1. nowa sciezka do pliku DZIALA?: " + exported.bodyObject[0][0]);
                         console.log("    8.2. sciezka do folderu DZIALA?: " + exported.bodyObject[0][1]);
@@ -103,10 +114,11 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                         //TODO: powyższe dziala wiec można skorzystac zeby przekopiować sciezke, teraz: nadbudowac jSON'a
 
-                        var new_location = '/home/marek/WebstormProjects/Vigiles' + exported.bodyObject[0][0] ;
+                        var new_location = '/home/marek/WebstormProjects/Vigiles' + exported.bodyObject[0][0]; //ImageDataAdding;path[0] - sciezka do pliku
 
                         process.stdout.write("8.3. nowa sciezka do pliku DZIALA?: " + new_location);
 
+                        // tu zrobic dodatkowe czynnosci na przeslanym pliku (przekopiować we właściwe miejsce i zmienić nazwę)
 
                         exported.fs.copy(temp_path, new_location, function (err) {
                             if (err) {
@@ -184,7 +196,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                             else { } // czyli gdy jest parent
 
 
-                            //TODO: 04-11-2016 to teraz robic (ale najpierw poprzednie TODO z tej daty)
+                            //TODO:pozniej: 04-11-2016 to teraz robic (ale najpierw poprzednie TODO z tej daty)
                             // a. jesli jest parent - zapisać plik
                             //    - zapisać url obrazka, żeby sprawdzić z następnym request/postem - aby móc dopasować przesłany obrazek do zapisanego urla
                             //    - wtedy  wysłać request/postem sam obrazek
@@ -217,7 +229,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                 console.log("     10. method 2: " + exported.method);
 
-                //TODO: 5.06.2017: tutaj zrobić jeszcze jedno rozróżneinie po URL, żeby rozróżnić zdjęcia od przesylanego JSON'a
+                //TODO: pozniej: 5.06.2017: tutaj zrobić jeszcze jedno rozróżneinie po URL, żeby rozróżnić zdjęcia od przesylanego JSON'a
                 // bo na wypadek jsona znowu trzeba przekierować program w inne miejsce- tam gdzie powinien isc nomalnie JSON przed zmianą w pliku UpdateJsonREQUEST
                 // o koncowke URL'a lalala
 

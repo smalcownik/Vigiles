@@ -306,9 +306,9 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
         //to sa wszystkie dane potrzebne do zapisania zdjęcia
         
-        //tu już nie ma requesta - tym się zajmuje formidable
+        //tu już nie ma requesta - tym się zajmuje formidable z osobnego requesta (z przegladarki wgranie zdjecia - patrz niżej )
 
-    };
+    }; // dane z prompta - wysyla dane do zdjecia na serwer (samo zdjecie wysyla pozniej: w exported.newPatchDataReceiverBuilder)
 
     exported.newPatchDataReceiverBuilder = function() {
 
@@ -330,12 +330,12 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             
             //var oldImgPath = prompt("Podaj ścieżkę zdjęcia","/home/marek/WebstormProjects/Vigiles/data/add_new_patch_test_data/jol.jpg"); // sciezka do pliku na dysku - uri zdjęcia ??
             //home/marek/Downloads/jol.jpg
-            //TODO: info: artefakt: wystarczy sciezka docelowa do zapisu na serwer, a nie pierwotna lokalizacja pliku pobieranego
+            //artefakt: wystarczy sciezka docelowa do zapisu na serwer, a nie pierwotna lokalizacja pliku pobieranego
             //zatem:
             var oldImgPath = null;
 
 
-            var newImgParentImgsNumber = prompt("PARENT_NR - jak nie podasz to doda nowy originalParent","0"); // ?? czy to jest numer nie patcha tylko folderu imgs -original parent ?
+            var newImgParentImgsNumber = prompt("PARENT_NR - jak nie podasz to doda nowy originalParent, wpisujac puste pole doda nowego parenta","0"); // ?? czy to jest numer nie patcha tylko folderu imgs -original parent ?
 
             if (newImgParentImgsNumber === "") {
                 newImgParentImgsNumber = "newParent";
@@ -343,12 +343,11 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
 
             exported.newDataParentIdNumber = null;
-            exported.newDataParentIdNumber = prompt("PARENT_Id - jak nie podasz to da 2","2"); // ?? czy to jest numer nie patcha tylko folderu imgs -original parent ?
+            exported.newDataParentIdNumber = prompt("PARENT_Id - jak nie podasz to da 2","2"); // ?? to nie numer folderu tylko "ID" a wiec konkretnego zdjecia w folderze
 
             //var newImgJsonData = prompt("Podaj dane do zdjęcia - JSONData");  // dane lokalizacji zdjęcia - teraz tym zajmie się formidable
-            // to na razie puszczam z automatu f-kcją "setSampleJsonData" - te dane mają zostać podane z aplikacji lub zdjęcie może być osadzane ręcznie przez tryb #edit
-
             
+            // to na razie puszczam z automatu f-kcją "setSampleJsonData" - te dane mają zostać podane z aplikacji lub zdjęcie może być osadzane ręcznie przez tryb #edit
             exported.setSampleJsonData = function(imageId) {
                 return ({
                     "id": imageId,
@@ -364,7 +363,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             console.log(newImgJsonData);
             
-
+            //TODO: pozniej kosmetyka : w linijce ponizej oldImgPath jest artefaktem - usunac go wraz z odwolaniami (uwaga to zmieni tez w pliku node)
             var promptedData = [oldImgPath, newImgJsonData, newImgParentImgsNumber];// pD: [ścieżka pliku na dysku nadawcy, dane jsona, parentImgsNumber lub "newParent" ]
 
 
@@ -380,7 +379,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             console.log(promptedData);
 
 
-            exported.executeAddingNewImage(exported.newId, promptedData); // TODO: dane do jsona tą modłę
+            exported.executeAddingNewImage(exported.newId, promptedData); // TODO: dane do jsona pod tą modłę
         }
 
         else if (clickedElement.className === "potwierdz") { //czyli po kliknięciu "Potwierdź"
