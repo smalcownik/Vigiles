@@ -32,7 +32,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
     exported.http.createServer(function (request, response) {
 
-        console.log("TEST2: "+test1+ "  "+exported.test2 + "  "+exported.bodyObject[0][0]);
+        console.log("TEST2: "+test1+ "  "+exported.test2 + "  "+exported.bodyObject);
         //var form = new exported.formidable.IncomingForm();
 
         process.stdout.write("\n" + "server running:    ");//console.log("server running");
@@ -107,14 +107,13 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                         /* Location where we want to copy the uploaded file */
                         
-                        console.log("TEST4: "+test1+ "  "+exported.test2 + "  "+exported.bodyObject);
+                        console.log("TEST4: "+test1+ "  "+exported.test2 + "  "+JSON.stringify(exported.bodyObject));
+
+                        console.log(exported.bodyObject.toString());
 
                         process.stdout.write("8.1. nowa sciezka do pliku DZIALA?: " + exported.bodyObject[0][0]);
                         console.log("    8.2. sciezka do folderu DZIALA?: " + exported.bodyObject[0][1]);
 
-                        // TODO: powyższa linijka nie dziala, w chwili odpalania formidable nie ma request z danymi do patcha (taki jak ImageDataAdding lin 299)
-
-                        //TODO: powyższe dziala wiec można skorzystac zeby przekopiować sciezke, teraz: nadbudowac jSON'a
 
                         var new_location = '/home/marek/WebstormProjects/Vigiles' + exported.bodyObject[0][0]; //ImageDataAdding;path[0] - sciezka do pliku
 
@@ -148,18 +147,20 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                     request.on('end', function () {
 
+                        // ponizej zrobiono rozroznienie zeby nie wskakiwał json w boduObject
+
 
                         console.log("   9.  fileext to JSON");
 
                         exported.body = Buffer.concat(exported.body).toString();
 
-                        exported.bodyObject = JSON.parse(exported.body);
+                        var bodyObject = JSON.parse(exported.body); // to jeszcze nie jest obiekt tylko zmienna i dopiero jak to są dane do patcha to wrzuca się to w obiekt ~ 30 linijek niżej
 
 
-                        console.log("objectBODY:  "+ exported.bodyObject);
+                        console.log("objectBODY:  "+ bodyObject);
 
 
-                        if (exported.bodyObject.hasOwnProperty("meta")) {
+                        if (bodyObject.hasOwnProperty("meta")) {
 
                             console.log("9.1.  to jest data.json lub data1.json bo ma property 'meta' ");
 
@@ -174,12 +175,16 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                         }
 
-                        else if (typeof exported.bodyObject[0][0] === "string") {
+                        else if (typeof bodyObject[0][0] === "string") {
+
+                            //data_for_curently_added_patch = bodyObject; // exported.bodyObject:[path, promptedData, nextOriginalParent],gdzie:
+                            // path =[filePath,folderPath]
+                            // promptedData: [ścieżka_pierwotna_pliku(w obecnej wersji null), fragmentJsona, parent.id lub "newParent" ],
+
 
                             console.log("9.2.  to sa dane do Patcha");
 
-                            data_for_curently_added_patch = exported.bodyObject; // exported.bodyObject:[path, promptedData, nextOriginalParent],promptedData: [ścieżka_pierwotna_pliku, dane jsona, parent.id lub "newParent" ],
-                            // path =[directory,file]
+                            exported.bodyObject = bodyObject;
 
                             process.stdout.write("9.2.1. nowa sciezka do pliku: " + exported.bodyObject[0][0]);
                             console.log("    9.2.2. sciezka do folderu: " + exported.bodyObject[0][1]);
@@ -198,7 +203,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                             else { } // czyli gdy jest parent
 
 
-                            //TODO:pozniej: 04-11-2016 to teraz robic (ale najpierw poprzednie TODO z tej daty)
+                            //TODO:pozniej: dotyczy zapisywania plikow na serwer w zaleznosci od nowego parenta (a może to zrobić w miejscu: (form.on('end',.....) )
                             // a. jesli jest parent - zapisać plik
                             //    - zapisać url obrazka, żeby sprawdzić z następnym request/postem - aby móc dopasować przesłany obrazek do zapisanego urla
                             //    - wtedy  wysłać request/postem sam obrazek

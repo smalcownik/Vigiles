@@ -72,9 +72,9 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
         formidableButton.style.position = 'absolute';
 
-        formidableButton.style.zIndex = '1000';
-        formidableButton.style.height = '30px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
-        formidableButton.style.width = '140px';// to ręcznie dodałem do PointEventListener.countPointCoordinate żeby póxniej przy dodawaniu ładnie wyglądało
+        formidableButton.style.zIndex = '1001';
+        formidableButton.style.height = '30px';
+        formidableButton.style.width = '140px';
         formidableButton.style.backgroundColor = '#000000';
         formidableButton.style.borderColor = '#ffffff';
         //divPoint.style.borderRadius = '50%';
@@ -100,6 +100,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
         input.type = "file";
         input.name = "upload";
         input.style.position = 'absolute';
+        input.style.zIndex = '1002';
         input.style.top = Camera.position.x + 40 + 'px';
         input.style.right = Camera.position.y - 110 + 'px';
         input.multiple = "multiple";
@@ -107,6 +108,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
         this.DOM = input2;
         input2.classList.add("potwierdz");
         input2.style.position = 'absolute';
+        input2.style.zIndex = '1003';
         input2.style.top = Camera.position.x + 70 + 'px';
         input2.style.right = Camera.position.y + 65 + 'px'; // w poziomie
         input2.type = "submit";
@@ -233,7 +235,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
     };// 1.uzupelnia exported.nodeList 2.zwraca nextId
 
     
-    exported.buildPath = function(newId,parentImgsNumber,nextOriginalParent){ // parent id jest trzecim elementem wyniku f-kcji exported.getNodeById, czyli numer folderu imgs
+    exported.buildPath = function(newId,parentImgsNumber,nextOriginalParent,parentId){ // parent id jest trzecim elementem wyniku f-kcji exported.getNodeById, czyli numer folderu imgs
 
 
         if (parentImgsNumber === "newParent") { //wartosc "newParent" jest domyslnie dodawana w prompcie (w funckji newPatchDataReceiverBuilder)
@@ -256,7 +258,8 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
         {
 
-            var originalParentIndex = exported.getNodeById(parentImgsNumber)[2]; // originalParent bo getNodeyId zwraca cały node:[image.id, image, originalParent, parent.id]
+            var originalParentIndex = exported.getNodeById(parentId)[2]; // originalParent bo getNodeyId zwraca cały node:[image.id, image, originalParent, parent.id]
+
             console.log(originalParentIndex);
 
             var folderPath = (exported.viewer.DataPath +"/imgs/imgs[" +originalParentIndex+']');
@@ -288,8 +291,10 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             nextOriginalParent = null;
         }
 
-        var path = exported.buildPath(newId,promptedData[2],nextOriginalParent);// promptedData[2] to nr folderu ims["nr"] rodzica -!UWAGA nie Id tylko numer folderu imgs[nr]
-                                                            //  promptedData: [ścieżka, dane jsona, parentNumber] - parent.id !UWAGA - to numer folderu imgs[nr] a nie zdjecia
+        console.log("test przy budowaniu path, promptedData[2]: "+ promptedData[2]);
+
+        var path = exported.buildPath(newId,promptedData[2],nextOriginalParent,promptedData[3]);// promptedData[2] to nr folderu ims["nr"] rodzica -!UWAGA nie Id tylko numer folderu imgs[nr]
+                                                            //  promptedData: [ścieżka, dane jsona, parentImgsNumber,parentId] UWAGA - parent imgs number to numer folderu imgs[nr] a nie zdjecia
 
         var dataToServer = [path, promptedData, nextOriginalParent]; // dane na serwer
 
@@ -299,7 +304,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
         console.log("wysylam dane do zdjecia na serwer!");
 
-        AddDataForImageToServerREQUEST.makeRequest(dataToServerJSON);
+        AddDataForImageToServerREQUEST.makeRequest(dataToServerJSON); // tu wysyla dane do patcha na serwer
 
         //TODO: nie pilne: opcjonalnie,tutaj dorzucić nowego jsona zamiast UpdateJsonOnServerREQUEST:
 
@@ -325,7 +330,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             console.log("1. new id przy prompcie: "+exported.newId);
 
-            exported.formidableButton(); //pojawia się przycisk formidable
+            exported.formidableButton(); //pojawia się przycisk formidable //TODO: formidable button tutaj
             //wybór zdjęcia - teraz tym zajmie się formidable:
             
             //var oldImgPath = prompt("Podaj ścieżkę zdjęcia","/home/marek/WebstormProjects/Vigiles/data/add_new_patch_test_data/jol.jpg"); // sciezka do pliku na dysku - uri zdjęcia ??
@@ -364,7 +369,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             console.log(newImgJsonData);
             
             //TODO: pozniej kosmetyka : w linijce ponizej oldImgPath jest artefaktem - usunac go wraz z odwolaniami (uwaga to zmieni tez w pliku node)
-            var promptedData = [oldImgPath, newImgJsonData, newImgParentImgsNumber];// pD: [ścieżka pliku na dysku nadawcy, dane jsona, parentImgsNumber lub "newParent" ]
+            var promptedData = [oldImgPath, newImgJsonData, newImgParentImgsNumber,exported.newDataParentIdNumber];// pD: [ścieżka pliku na dysku nadawcy, dane jsona, parentImgsNumber lub "newParent", parentId]
 
 
             promptedData.forEach(function (element, index) {
@@ -379,10 +384,10 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             console.log(promptedData);
 
 
-            exported.executeAddingNewImage(exported.newId, promptedData); // TODO: dane do jsona pod tą modłę
+            exported.executeAddingNewImage(exported.newId, promptedData);
         }
 
-        else if (clickedElement.className === "potwierdz") { //czyli po kliknięciu "Potwierdź"
+        else if (clickedElement.className === "potwierdz") { //czyli po kliknięciu "Potwierdź" - to jest drugi etap wysylania nowego zdjecia w saveNewPatchButton daje dane a tutaj wysyla jsona
 
             console.log("jestem w JsonBuider czas dodać Patcha do jSona");
 
@@ -437,13 +442,11 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             UpdateJsonOnServerREQUEST.makeRequest(exported.JsonWithNewPatch);
 
 
-            //TODO: tutaj dodać drugi request z danymi do tego patcha na wzór linijki ~ 299
-
             //
             // wysyłaną z jsonem paczke danych albo przerobic w nodzie, zeby odroznil ta operacje i zapisal ten plik jak trzeba bo potem sciaga zdjecie i mu w node brakuje tych danych
 
             // po tym odświeżyć ładnie:
-            //6. Viewer.loadURL
+            exported.viewer.loadURL(exported.viewer.serverURL,exported.viewer.DataPath, exported.viewer.JsonFile);
 
         }
     };
