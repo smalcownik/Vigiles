@@ -20,27 +20,22 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
     var port = 4246;
     var data_for_curently_added_patch;
-    var test1 = "dupa";
-    exported.test2 = "lampa";
+    //exported.bodyObject;
 
-    exported.bodyObject;
 
-    console.log("TEST1: "+test1+ "  "+exported.test2);
 
     process.stdout.write("\n" + "************************************************" + "\n" + "\n" + "Plik startuje :)     "); // ta wersja nie powoduje wyswietlania dodatkowych linijek w konsoli ( miast console.log("plik startuje"); )
 
 
     exported.http.createServer(function (request, response) {
 
-        console.log("TEST2: "+test1+ "  "+exported.test2 + "  "+exported.bodyObject);
-        //var form = new exported.formidable.IncomingForm();
 
         process.stdout.write("\n" + "server running:    ");//console.log("server running");
         //NodeFunctions.node = this;
 
         {
             exported.body = []; //chcialem dac poza createServer, ale w request.on("data") wyskakiwal blad: body "has no push method"
-            //exported.bodyObject; // to dałem wyżej zeby było bardziej globalne
+            exported.bodyObject; // to dałem wyżej zeby było bardziej globalne
             exported.headers = request.headers;
             exported.method = request.method;
             exported.url = request.url; // URL
@@ -78,8 +73,6 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                     console.log("    8. fileext to jotpeg, a jego url: " + exported.url);
 
-                    console.log("TEST3: "+test1+ "  "+exported.test2);
-
                     //TODO: FORMIDABLE:
 
                     // creates a new incoming form.
@@ -107,7 +100,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                         /* Location where we want to copy the uploaded file */
                         
-                        console.log("TEST4: "+test1+ "  "+exported.test2 + "  "+JSON.stringify(exported.bodyObject));
+                        //console.log("TEST4: "+test1+ "  "+exported.test2 + "  "+JSON.stringify(exported.bodyObject));
 
                         console.log(exported.bodyObject.toString());
 

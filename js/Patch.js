@@ -1,4 +1,4 @@
-/*wywołany z PatchBuilder tworzy objekty zdjec (łatek)
+/*wywołany z PatchBuilder tworzy objekty zdjęć (łatek)
  W TYM PLIKU ZNAJDUJE SIĘ JEDYNE ODNIESIENIE DO PLIKÓW JPG */
 
 // w momencie jak patch dostaje swoje zrodlo pliku, automatycznie sie do niego odwoluje do serwera - bez funkcji request-get
@@ -12,33 +12,25 @@ define([], function () {
 
             var imgHTML= document.createElement('img');
 
-            //console.log(data.url); //http://localhost...../data/test_arch
+            //poniżej dwie wersje - górna odnosi się do serwera na dysku - doln do serwera na amazonie
+            //http://localhost...../data/test_arch
+            //console.log(data.url);
 
             imgHTML.src=data.url+'/imgs/imgs['+i+']/'+image.id+'.jpg'; // !!! tu jest odniesienie do plików jpg (jedyne!!)
 
-            // !!! .src  - oznacza automatyczny request GET
-            
-            //powyżej dwie wersje - górna odnosi się do serwera na dysku - doln do serwera na amazonie
-            // AHA ! po wykonianiu linijki imgHTML.src=data.url+'/....  pojawia się get na serwerze node'a
+            // !!! .src  - oznacza automatyczny request GET,po wykonianiu linijki imgHTML.src=data.url+'/....  pojawia się get na serwerze node'a
             // AHA ... czyli w momencie jak patch dostaje swoje zrodlo pliku, automatycznie sie do niego odwoluje do serwera - bez funkcji request-get!
             //console.log(imgHTML.src); // =="http://52.30.81.203//data/test_arch/imgs/imgs[0]/0.jpg" (koncowka sie zmienia)
 
-            this.DOM = imgHTML;
-            image.patch = this;
-            this.image = image;
 
+            this.DOM = imgHTML;   image.patch = this;   this.image = image;   image.parent = parent;
             //console.log(image);
-
-            image.parent = parent;
 
             this.originalParent = i; // to jest pozycja w tablicy images w data.json, żeby było wiadomo w którym zdjęciu-matce ląduje dany Patch
 
-            this.defaultOpacity = 0.25;
-            this.selectOpacity = 0.75;
-
+            this.defaultOpacity = 0.25;   this.selectOpacity = 0.75;
             //console.log(image);
-
-
+            
             document.body.appendChild(imgHTML);
 
             if (parent) {
@@ -64,11 +56,8 @@ define([], function () {
                 imgHTML.style.opacity = this.defaultOpacity; // jesli ma parenta to widac go słabiej (a f-kcja updateMyPosition zrobi tak):
                                                             // jeśli parent wykracza poza obraz windowWidth/heigth to wtedy jego children będzie mocniej widoczny
 
-                //debugger;
-
             } else {
 
-                //debugger;
 
                     image.absolutePos = {
                     y: window.innerWidth * 0.5 * image.size.h / image.size.w,  // srodek zdjęcia : y
@@ -96,8 +85,7 @@ define([], function () {
 
         exported.prototype.recalculateBack =function() {
             var image = this.image;
-
-
+            
             //ODO: przeliczyc (z exported.prototype.move i exported.prototype.zoom)
 
             image.pos.x = 0;
@@ -182,8 +170,9 @@ define([], function () {
         }
 
         exported.prototype.updateMyPosition =function(camera){
+            
             var imgHTML = this.DOM;
-
+            
             var image = this.image;
 
             var defaultOpacity = this.defaultOpacity;
@@ -192,10 +181,8 @@ define([], function () {
 
                 var parentDOM = image.parent.patch.DOM;
             }
-
-
+            
            // UPDATE POSITION:
-
             imgHTML.style.top = String(window.innerHeight/2+(image.absolutePos.y - image.absolutePos.h * 0.5 + camera.position.y - window.innerHeight/2)*camera.scale) + 'px';
 
             imgHTML.style.left = String(window.innerWidth/2+(image.absolutePos.x - image.absolutePos.w * 0.5 + camera.position.x - window.innerWidth/2)*camera.scale) + 'px';/*image.absolutePos.x - image.absolutePos.w * 0.5 +*/

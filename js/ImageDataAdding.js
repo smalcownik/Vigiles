@@ -306,7 +306,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
         AddDataForImageToServerREQUEST.makeRequest(dataToServerJSON); // tu wysyla dane do patcha na serwer
 
-        //TODO: nie pilne: opcjonalnie,tutaj dorzucić nowego jsona zamiast UpdateJsonOnServerREQUEST:
+        //opcjonalnie,tutaj dorzucić nowego jsona zamiast UpdateJsonOnServerREQUEST:
 
 
         //to sa wszystkie dane potrzebne do zapisania zdjęcia
@@ -368,7 +368,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             console.log(newImgJsonData);
             
-            //TODO: pozniej kosmetyka : w linijce ponizej oldImgPath jest artefaktem - usunac go wraz z odwolaniami (uwaga to zmieni tez w pliku node)
+            // ponizej oldImgPath jest artefaktem - kiedys usunac go wraz z odwolaniami (uwaga to zmieni tez w pliku node)
             var promptedData = [oldImgPath, newImgJsonData, newImgParentImgsNumber,exported.newDataParentIdNumber];// pD: [ścieżka pliku na dysku nadawcy, dane jsona, parentImgsNumber lub "newParent", parentId]
 
 
