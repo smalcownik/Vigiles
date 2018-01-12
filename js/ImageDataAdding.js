@@ -193,7 +193,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
         exported.nodeList.forEach(findById);
 
-        console.log(node);
+        console.log("Node by Id data [image.id, image, originalParent, parent.id]:"+ node);
 
         return node; // node to cała tablica [image.id, image, originalParent, parent.id]
 
@@ -260,7 +260,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             var originalParentIndex = exported.getNodeById(parentId)[2]; // originalParent bo getNodeyId zwraca cały node:[image.id, image, originalParent, parent.id]
 
-            console.log(originalParentIndex);
+            console.log("Original parent imgs number: "+ originalParentIndex);
 
             var folderPath = (exported.viewer.DataPath +"/imgs/imgs[" +originalParentIndex+']');
 
@@ -315,7 +315,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
     }; // dane z prompta - wysyla dane do zdjecia na serwer (samo zdjecie wysyla pozniej: w exported.newPatchDataReceiverBuilder)
 
-    exported.newPatchDataReceiverBuilder = function() {
+    exported.newPatchDataReceiverBuilder = function() { // wywolane w exported.addNewPatchEventListener
 
         var clickedElement = event.target;
         
@@ -340,11 +340,11 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             //zatem:
             var oldImgPath = null;
 
+            exported.newImgParentImgsNumber = null;
+            exported.newImgParentImgsNumber = prompt("PARENT_NR - jak nie podasz to doda nowy originalParent, wpisujac puste pole doda nowego parenta","0"); // ?? czy to jest numer nie patcha tylko folderu imgs -original parent ?
 
-            var newImgParentImgsNumber = prompt("PARENT_NR - jak nie podasz to doda nowy originalParent, wpisujac puste pole doda nowego parenta","0"); // ?? czy to jest numer nie patcha tylko folderu imgs -original parent ?
-
-            if (newImgParentImgsNumber === "") {
-                newImgParentImgsNumber = "newParent";
+            if ( exported.newImgParentImgsNumber === "") {
+                exported.newImgParentImgsNumber = "newParent";
             }
 
 
@@ -364,13 +364,14 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
                 });
             };
 
-            var newImgJsonData = exported.setSampleJsonData(exported.newId.toString()); // tutaj mozna dodać cudzysłowy ("\"" + exported.newId.toString()+ "\"") - tak ?
+            exported.newImgJsonData = null;
+            exported.newImgJsonData = exported.setSampleJsonData(exported.newId.toString()); // tutaj mozna dodać cudzysłowy ("\"" + exported.newId.toString()+ "\"") - tak ?
                                                                                         // w razie potrzeby, zeby w json był z cudzysłowiem
 
-            console.log(newImgJsonData); // zwraca obiekt
+            console.log(exported.newImgJsonData); // zwraca obiekt
             
             // ponizej oldImgPath jest artefaktem - kiedys usunac go wraz z odwolaniami (uwaga to zmieni tez w pliku node)
-            var promptedData = [oldImgPath, newImgJsonData, newImgParentImgsNumber,exported.newDataParentIdNumber];// pD: [ścieżka pliku na dysku nadawcy, dane jsona, parentImgsNumber lub "newParent", parentId]
+            var promptedData = [oldImgPath, exported.newImgJsonData, exported.newImgParentImgsNumber,exported.newDataParentIdNumber];// pD: [ścieżka pliku na dysku nadawcy, dane jsona, parentImgsNumber lub "newParent", parentId]
 
 
             promptedData.forEach(function (element, index) {
@@ -448,22 +449,33 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             
             console.log("teraz ładnie odświeża");
             
-            //TODO: wstrzyknąć zmienne Patcha:
+            //wstrzyknąć zmienne Patcha:
 
-            //image -
-            
-            
-            
-            viewer.positionable.push(new Patch(image,parent,data,i));
+            //image - newImgJsonData;
+            //i -
+            //exported.getNodeById(id) - return node // node to cała tablica [image.id, image, originalParent, parent.id]
+
+            //PIERWOTNIE: viewer.positionable.push(new Patch(image,parent,data,i));
+            //szczególnie:
+            console.log(exported.newImgJsonData,exported.getNodeById(exported.newDataParentIdNumber)[1] , exported.viewer.currentData,exported.newImgParentImgsNumber );
+
+            console.log(exported.viewer.positionable);
+
+            //exported.viewer.positionable.push(new Patch(exported.newImgJsonData , exported.getNodeById(exported.newDataParentIdNumber)[1] , exported.viewer.currentData,exported.newImgParentImgsNumber));
 
             //7. Update positionables
-            
+
+            //TODO: TERAZ: w linijce niżej tkwi błąd:
             //exported.viewer.loadURL(exported.viewer.serverURL,exported.viewer.DataPath, exported.viewer.JsonFile);
+
+            //console.log(exported.viewer.positionable);
 
             exported.viewer.updateAllPositionables();
 
+            console.log(exported.viewer.positionable);
+
         }
-    };
+    }; // wywolane w exported.addNewPatchEventListener
 
     return exported;
 
