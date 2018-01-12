@@ -86,6 +86,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
 
                     exported.currentData = data; // jako data wchodzi new MapData(response) czyli cały OBIEKT z jSON'a,
                                         // wstosunku do  exported.currentDataStringified jest znaczaco rozbudowany, poniewaz jest to obiekt, który pozniej byl dobudowywany
+                   // console.log(exported.currentData); pełny obiekt MapData - z Patchami itp
                     
                     exported.currentData.url = url + exported.DataPath; //sztucznie wstrzynieta droga do folderu zdjec(dla Patch) znajduje się potem w Patch w sciezce do zdjec (przez Viewer.ShowMapData)
                     //console.log(url/*+fileName*/); // wyswietla http://localhost:4246/data/test_arch/data.json
@@ -99,12 +100,20 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
 
         exported.showMapData = function(data){ // jako data wchodzi new MapData(response) czyli cały OBIEKT z jSON'a
             
+            //TODO: tutaj zczyszczam positionable przed odświeżeniem
+            //for (var member in exported.positionable) delete exported.positionable[member]; to powoduje powielenie
+            //TODO ; a może lepiej tylko odświeżyć positionable ??
+            //TODO: patrz  PatchBuilder linijka 31 viewer.positionable.push(new Patch(image,parent,data,i)) i ją wkleić
+
+            
             PatchBuilder.build(data); //// jako data wchodzi new MapData(response) czyli cały OBIEKT jSON'a;  PatchBuilder traversuje całego JSON'a;
             
             PatchEditor.build(data); //// jako data wchodzi new MapData(response) czyli cały OBIEKT z jSON'a;  PatchBuilder traversuje całego JSON'a;
             // ma też poprzez data.url dostęp do plików serwera
 
             PointsBuilder.build(data);
+
+            console.log(exported.positionable);
             
             this.updateAllPositionables();
 

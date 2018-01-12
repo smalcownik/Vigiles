@@ -17,6 +17,7 @@ define([], function () {
             //console.log(data.url);
 
             imgHTML.src=data.url+'/imgs/imgs['+i+']/'+image.id+'.jpg'; // !!! tu jest odniesienie do plików jpg (jedyne!!)
+            //data to jest viewer exported.currentData.url
 
             // !!! .src  - oznacza automatyczny request GET,po wykonianiu linijki imgHTML.src=data.url+'/....  pojawia się get na serwerze node'a
             // AHA ... czyli w momencie jak patch dostaje swoje zrodlo pliku, automatycznie sie do niego odwoluje do serwera - bez funkcji request-get!
@@ -46,8 +47,8 @@ define([], function () {
                 var imSizeW = parentW * image.pos.w;
                 var imSizeH = parentW * image.pos.w * image.size.h / image.size.w;
 
-                image.absolutePos = {
-                    y: parentT + parentH * (image.pos.y) * 0.5, // odleglosc od gory storny do strodka zdjecia
+                image.absolutePos = { //  tu sie tworzy image.absotlutePos dla obiektu, który ma parenta
+                    y: parentT + parentH * (image.pos.y) * 0.5, // odleglosc od gory strony do strodka zdjecia
                     x: parentL + parentW * (image.pos.x) * 0.5,// odleglosc od lewej krawedzi strony do srodka zdjecia
                     w: imSizeW,
                     h: imSizeH
@@ -58,14 +59,11 @@ define([], function () {
 
             } else {
 
-
-                    image.absolutePos = {
+                image.absolutePos = {//  tu sie tworzy image.absotlutePos dla obiektu, który jest parentem
                     y: window.innerWidth * 0.5 * image.size.h / image.size.w,  // srodek zdjęcia : y
                     x: window.innerWidth * (0.5 + 1.10 *i), // srodek zdjęcia: x // tutaj jest jedyne odniesienie do "original parent"
                         //UWAGA! dla ujemnych "i" też działa, wyrzuca zdjęcia bardziej w lewą stronę
-                        
-                   
-                    // numeru parenta pierwotnego od tej liczby zależy w jakiej odległości będą parenty i tylko na jej podstawie można je identyfikować
+                        // numeru parenta pierwotnego od tej liczby zależy w jakiej odległości będą parenty i tylko na jej podstawie można je identyfikować
                     w: window.innerWidth, //szerokość okna przegladarki www
                     h: window.innerWidth * image.size.h / image.size.w // wymiar zdjęcia y, w zasadzie 2*y , bo samo y to srodek zdjecia
                 };

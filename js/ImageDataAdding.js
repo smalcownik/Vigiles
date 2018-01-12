@@ -3,7 +3,7 @@
  */
 
 
-define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQUEST"], function (Camera, AddDataForImageToServerREQUEST, UpdateJsonOnServerREQUEST) {
+define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQUEST","./Patch"], function (Camera, AddDataForImageToServerREQUEST, UpdateJsonOnServerREQUEST, Patch) {
 
     var exported = {};
 
@@ -318,6 +318,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
     exported.newPatchDataReceiverBuilder = function() {
 
         var clickedElement = event.target;
+        
 
         if (clickedElement.className === "saveNewPatchButton") {
 
@@ -353,10 +354,10 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             //var newImgJsonData = prompt("Podaj dane do zdjęcia - JSONData");  // dane lokalizacji zdjęcia - teraz tym zajmie się formidable
             
             // to na razie puszczam z automatu f-kcją "setSampleJsonData" - te dane mają zostać podane z aplikacji lub zdjęcie może być osadzane ręcznie przez tryb #edit
-            exported.setSampleJsonData = function(imageId) {
+            exported.setSampleJsonData = function(imageId) { // ta funkcja zwraca obiekt
                 return ({
                     "id": imageId,
-                    "size": {"w": 300, "h": 500},
+                    "size": {"w": 300, "h": 400},
                     "pos": {"x": 0, "y": -0.5, "w": 0.6},
                     "points": [{"x": 0, "y": 0.5}],
                     "children": []
@@ -366,7 +367,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             var newImgJsonData = exported.setSampleJsonData(exported.newId.toString()); // tutaj mozna dodać cudzysłowy ("\"" + exported.newId.toString()+ "\"") - tak ?
                                                                                         // w razie potrzeby, zeby w json był z cudzysłowiem
 
-            console.log(newImgJsonData);
+            console.log(newImgJsonData); // zwraca obiekt
             
             // ponizej oldImgPath jest artefaktem - kiedys usunac go wraz z odwolaniami (uwaga to zmieni tez w pliku node)
             var promptedData = [oldImgPath, newImgJsonData, newImgParentImgsNumber,exported.newDataParentIdNumber];// pD: [ścieżka pliku na dysku nadawcy, dane jsona, parentImgsNumber lub "newParent", parentId]
@@ -441,12 +442,25 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             UpdateJsonOnServerREQUEST.makeRequest(exported.JsonWithNewPatch);
 
-
-            //
-            // wysyłaną z jsonem paczke danych albo przerobic w nodzie, zeby odroznil ta operacje i zapisal ten plik jak trzeba bo potem sciaga zdjecie i mu w node brakuje tych danych
+            //6. Teraz wprowadzić nowego Patcha do positionables
 
             // po tym odświeżyć ładnie:
-            exported.viewer.loadURL(exported.viewer.serverURL,exported.viewer.DataPath, exported.viewer.JsonFile);
+            
+            console.log("teraz ładnie odświeża");
+            
+            //TODO: wstrzyknąć zmienne Patcha:
+
+            //image -
+            
+            
+            
+            viewer.positionable.push(new Patch(image,parent,data,i));
+
+            //7. Update positionables
+            
+            //exported.viewer.loadURL(exported.viewer.serverURL,exported.viewer.DataPath, exported.viewer.JsonFile);
+
+            exported.viewer.updateAllPositionables();
 
         }
     };
