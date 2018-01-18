@@ -152,7 +152,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
     exported.fillNodeList = function(wholeObject){ // to bedzie visitFunction w exported.dig (wywolanej z traverse)
 
-        exported.nodeList = []; // ma być tablica, ktora umozliwi znalezienie referencji do objektu Patch po ID
+        exported.nodeList = []; // ma być tablica, ktora umozliwi znalezienie referencji do objektu Patch po ID .. no właśnie nie do Patch tylko do oiektu z jsona - brak mu Patcha
         
         function fill(image,originalParentImgsNumber,parent){ // originalParentImgsNumber odnosi sie do "i" a wiec do folderu imgs z numerem
 
@@ -221,7 +221,9 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
         exported.fillNodeList(exported.originalJSONparsed);
 
-        console.log(exported.nodeList);//[image.id, image, originalParent(numer folderu), parent.id] // parent.id nie wystepuje jezeli image jest na dnie mapy/stosu
+        console.log("Node list: " );
+        console.log(exported.nodeList);
+        //[image.id, image, originalParent(numer folderu), parent.id] // parent.id nie wystepuje jezeli image jest na dnie mapy/stosu
                                         //originalParent nie odnosi się do numeru Patcha tylko do numeru folderu imgs
         // trzeba rozróżnić originalParent (folder) od zdjęcia, ktore jest na dnie stosu w danym folderze
         //czy chdzi o folder czy o patch (np. patrz linie .......: wniosek: odnosi się do folderu!
@@ -445,30 +447,60 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             //6. Teraz wprowadzić nowego Patcha do positionables
 
-            // po tym odświeżyć ładnie:
-            
-            console.log("teraz ładnie odświeża");
-            
-            //wstrzyknąć zmienne Patcha:
+                // 6.1.zebrać zmienne do Patcha:
 
-            //image - newImgJsonData;
-            //i -
+            //TODO: teraz zamiast "get node by id" dać positionable na druga zmienna tutaj (i w new Patch)
+
+            this.viewer.positionable.forEach(function (element) {
+                if (element.DOM.tagName === "IMG" && element.image.parent === null) {
+                    exported.patchesWithoutParent.push(element.image);
+                }
+            });
+-
             //exported.getNodeById(id) - return node // node to cała tablica [image.id, image, originalParent, parent.id]
 
             //PIERWOTNIE: viewer.positionable.push(new Patch(image,parent,data,i));
             //szczególnie:
             console.log(exported.newImgJsonData,exported.getNodeById(exported.newDataParentIdNumber)[1] , exported.viewer.currentData,exported.newImgParentImgsNumber );
 
+
+                //6.2. stworzyć Patcha
+
+            //positionable przed dodaniem Patcha:
+            console.log("przed dodaniem patcha: ");
             console.log(exported.viewer.positionable);
+
+
+            
+
+            function wait(ms){
+                var start = new Date().getTime();
+                var end = start;
+                while(end < start + ms) {
+                    end = new Date().getTime();
+                }
+            }
+            console.log('before');
+            wait(3000);  //7 seconds in milliseconds
+            console.log('after');
+
+            //TODO: TERAZ (ale najpierw zdefiniuj funkcje w viewer (tamtejsze TODO)): w linijce niżej tkwi błąd, na razie ja komentuje: błąd następuje przy budowaniu Patcha, gdzie brakuje mu parent.Patch przy budowaniu
 
             //exported.viewer.positionable.push(new Patch(exported.newImgJsonData , exported.getNodeById(exported.newDataParentIdNumber)[1] , exported.viewer.currentData,exported.newImgParentImgsNumber));
 
+            //positionable po dodaniu Patcha:
+            console.log("po dodaniu patcha: ");
+            console.log(exported.viewer.positionable);
+
+
             //7. Update positionables
 
-            //TODO: TERAZ: w linijce niżej tkwi błąd:
-            //exported.viewer.loadURL(exported.viewer.serverURL,exported.viewer.DataPath, exported.viewer.JsonFile);
 
-            //console.log(exported.viewer.positionable);
+            //artefakt: exported.viewer.loadURL(exported.viewer.serverURL,exported.viewer.DataPath, exported.viewer.JsonFile);
+
+            console.log("teraz ładnie odświeża positionables");
+
+
 
             exported.viewer.updateAllPositionables();
 

@@ -53,6 +53,16 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
             },this);
         };
 
+        exported.findPatchById = function(IdNumber){ // ta funckja zachodzi przy:
+            this.positionable.forEach(function(p){
+
+                //TODO: teraz tutaj zdefiniowac funkcje, która znajdzie Patcha po id : patrz też lin 123-129
+
+
+            },this);
+        };
+
+
         exported.registerEventListeners = function(){
             
             CameraEventListeners.cameraEvents();
@@ -110,7 +120,13 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
             
             this.updateAllPositionables();
 
-           // console.log(exported.positionable);
+            //console.log(exported.positionable);
+            //console.log(exported.positionable[0]);
+            //console.log(exported.positionable[0].__proto__); // constructor
+            //console.log(exported.positionable[0].__proto__.constructor.name); //"Patch"
+            //console.log(exported.positionable[0].constructor.name); // "Patch"
+            //console.log(exported.positionable[0].constructor); // to wyświetla całą treść funkcji Patch
+            //if (exported.positionable[0].__proto__.constructor.name ===exported.positionable[0].constructor.name){console.log("to samo")}; // działa
         };
 
 

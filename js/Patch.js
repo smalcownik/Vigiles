@@ -36,6 +36,8 @@ define([], function () {
 
             if (parent) {
 
+                //TODO: tutaj wyskakuje bład: parentowi brakuje patcha!
+
                 var parentDOM = parent.patch.DOM;
 
                 var parentW = parent.absolutePos.w; // szerokosc (wraz z padding i border), analogicznie Height
@@ -220,6 +222,7 @@ define([], function () {
             }
 
         };
+    
 
 
             return exported;
