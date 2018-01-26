@@ -158,7 +158,7 @@ define([], function () {
             image.absolutePos.x +=dx;
             image.absolutePos.y +=dy;
 
-        }
+        };
 
         exported.prototype.zoom = function(zoom){
             var image = this.image;
@@ -167,7 +167,7 @@ define([], function () {
             image.absolutePos.w *=Math.pow(1+0.01,zoom);
 
 
-        }
+        };
 
         exported.prototype.updateMyPosition =function(camera){
             
@@ -222,6 +222,27 @@ define([], function () {
             }
 
         };
+
+        exported.prototype.findMeById = function(IdNumber){
+
+           if(this.constructor.name == "Patch"){
+              var patch = this;
+
+               if (patch.image.id == IdNumber.toString()){
+                   console.log("jestem w patchu o id" + IdNumber+", oto on:" + patch);
+                   return patch;
+               }
+               else return;
+           };
+
+        };
+        //console.log(exported.positionable);
+        //console.log(exported.positionable[0]);
+        //console.log(exported.positionable[0].__proto__); // constructor
+        //console.log(exported.positionable[0].__proto__.constructor.name); //"Patch"
+        //console.log(exported.positionable[0].constructor.name); // "Patch"
+        //console.log(exported.positionable[0].constructor); // to wyświetla całą treść funkcji Patch
+        //if (exported.positionable[0].__proto__.constructor.name ===exported.positionable[0].constructor.name){console.log("to samo")}; // działa
     
 
 

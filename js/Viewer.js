@@ -54,12 +54,27 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
         };
 
         exported.findPatchById = function(IdNumber){ // ta funckja zachodzi przy:
-            this.positionable.forEach(function(p){
 
+            console.log("this:"+this);
+            
+            var patch;
+
+            this.positionable.forEach(function(p){
+                if(p.constructor.name == "Patch"){
+                
+                    if(p.findMeById(IdNumber)){
+                    patch = p;
+                    }
+                }
                 //TODO: teraz tutaj zdefiniowac funkcje, która znajdzie Patcha po id : patrz też lin 123-129
+                // todo: posprzątać tą brzydką funkcję i te consol.logi i to co w patchi i wtedy kontynuuj to
+                // w image data adding(gdzie wcześniej brakowalo patcha ale wlasnie w tej funkcji sie znalazl)
 
 
             },this);
+
+            console.log(patch);
+            return patch;
         };
 
 

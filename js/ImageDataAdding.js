@@ -449,15 +449,18 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
                 // 6.1.zebrać zmienne do Patcha:
 
-            //TODO: teraz zamiast "get node by id" dać positionable na druga zmienna tutaj (i w new Patch)
-
-            this.viewer.positionable.forEach(function (element) {
-                if (element.DOM.tagName === "IMG" && element.image.parent === null) {
-                    exported.patchesWithoutParent.push(element.image);
-                }
-            });
--
+            //TODO: teraz (po funkcji z viewer) zamiast "get node by id" dać positionable na druga zmienna tutaj (i w new Patch);
             //exported.getNodeById(id) - return node // node to cała tablica [image.id, image, originalParent, parent.id]
+
+    //debugger;
+
+            console.log("cyt uwaga! a numer:");
+            console.log(exported.newDataParentIdNumber);
+
+    console.log("proba z findPatchById:");
+    console.log(exported.viewer.findPatchById(exported.newDataParentIdNumber));
+
+
 
             //PIERWOTNIE: viewer.positionable.push(new Patch(image,parent,data,i));
             //szczególnie:
@@ -467,7 +470,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
                 //6.2. stworzyć Patcha
 
             //positionable przed dodaniem Patcha:
-            console.log("przed dodaniem patcha: ");
+            console.log(" positionable przed dodaniem patcha: ");
             console.log(exported.viewer.positionable);
 
 
@@ -485,6 +488,8 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             console.log('after');
 
             //TODO: TERAZ (ale najpierw zdefiniuj funkcje w viewer (tamtejsze TODO)): w linijce niżej tkwi błąd, na razie ja komentuje: błąd następuje przy budowaniu Patcha, gdzie brakuje mu parent.Patch przy budowaniu
+
+
 
             //exported.viewer.positionable.push(new Patch(exported.newImgJsonData , exported.getNodeById(exported.newDataParentIdNumber)[1] , exported.viewer.currentData,exported.newImgParentImgsNumber));
 
