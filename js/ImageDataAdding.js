@@ -449,7 +449,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
                 // 6.1.zebrać zmienne do Patcha:
 
-            //TODO: teraz (po funkcji z viewer) zamiast "get node by id" dać positionable na druga zmienna tutaj (i w new Patch);
+            //TODO: 1# teraz 26.02 (po funkcji z viewer) zamiast "get node by id" dać positionable na druga zmienna tutaj (i w new Patch);
             //exported.getNodeById(id) - return node // node to cała tablica [image.id, image, originalParent, parent.id]
 
     //debugger;
@@ -457,8 +457,8 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             console.log("cyt uwaga! a numer:");
             console.log(exported.newDataParentIdNumber);
 
-    console.log("proba z findPatchById:");
-    console.log(exported.viewer.findPatchById(exported.newDataParentIdNumber));
+            console.log("proba z findPatchById:");
+            console.log(exported.viewer.findPatchById(exported.newDataParentIdNumber));
 
 
 
@@ -476,7 +476,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             
 
-            function wait(ms){
+            /*function wait(ms){
                 var start = new Date().getTime();
                 var end = start;
                 while(end < start + ms) {
@@ -485,9 +485,9 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             }
             console.log('before');
             wait(3000);  //7 seconds in milliseconds
-            console.log('after');
+            console.log('after');*/
 
-            //TODO: TERAZ (ale najpierw zdefiniuj funkcje w viewer (tamtejsze TODO)): w linijce niżej tkwi błąd, na razie ja komentuje: błąd następuje przy budowaniu Patcha, gdzie brakuje mu parent.Patch przy budowaniu
+            //TODO: 2# (po 1#): (ale najpierw zdefiniuj funkcje w viewer (tamtejsze TODO)): w linijce niżej tkwi błąd, na razie ja komentuje: błąd następuje przy budowaniu Patcha, gdzie brakuje mu parent.Patch przy budowaniu
 
 
 

@@ -224,16 +224,16 @@ define([], function () {
         };
 
         exported.prototype.findMeById = function(IdNumber){
+            
+            console.log("jestem w find me by id a this, czyli nasz patch to: "+this);
+            
+              var localPatch = this;
 
-           if(this.constructor.name == "Patch"){
-              var patch = this;
-
-               if (patch.image.id == IdNumber.toString()){
-                   console.log("jestem w patchu o id" + IdNumber+", oto on:" + patch);
-                   return patch;
+               if (localPatch.image.id == IdNumber.toString()){
+                   console.log("jestem w patchu o id" + IdNumber+", oto on:" + localPatch);
+                   return localPatch;
                }
                else return;
-           };
 
         };
         //console.log(exported.positionable);
