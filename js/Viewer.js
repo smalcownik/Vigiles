@@ -55,20 +55,42 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
 
         exported.findPatchById = function(IdNumber){ // ta funckja zachodzi przy:
 
-            console.log("this:"+this);
+
+            debugger;
+            //console.log("this:"+this); tutaj this to viewer
             
-            var patch;
+
+
+            /*function isBigEnough(value) {
+                return value >= 10;
+            }
+
+            var filtered = [12, 5, 8, 130, 44].filter(isBigEnough); // tu zwraca wszystkie elementy
+// filtered is [12, 130, 44]
+lub
+
+             function isBigEnough(element) {
+             return element >= 15;
+             }
+
+             [12, 5, 8, 130, 44].find(isBigEnough); // tu zwraca pierwszy elelment
+*/
+            //TODO: uprościć szukanie wg powyższych schematów
+            //1* filtered
+            //2* sprawdzić czy tablica ma dlugosc 1, jesli nie to jest blad
+            //3* zwrocić wynik
 
             this.positionable.forEach(function(p){
                 if(p.constructor.name == "Patch"){
                 
-                   patch = p.findMeById(IdNumber);
+                   //patch = p.findMeById(IdNumber);
+
+                    // coś takiego:
+                    if (this.image.id == IdNumber.toString()){
+                        console.log("jestem w patchu o id" + IdNumber+", oto on:" + this);
+                        return this;
                     
                 }
-                //TODO: teraz tutaj zdefiniowac funkcje, która znajdzie Patcha po id : patrz też lin 123-129
-                // todo: posprzątać tą brzydką funkcję i te consol.logi i to co w patchi i wtedy kontynuuj to
-                //
-                // +w image data adding(gdzie wcześniej brakowalo patcha ale wlasnie w tej funkcji sie znalazl)
 
 
             },this);

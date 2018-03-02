@@ -225,17 +225,17 @@ define([], function () {
 
         exported.prototype.findMeById = function(IdNumber){
             
-            console.log("jestem w find me by id a this, czyli nasz patch to: "+this);
+            console.log("jestem w find me by id a this, czyli nasz patch to: "+this); // this to patch
             
-              var localPatch = this;
+              //var localPatch = this; // tu bylo undefined: chyba nei mozna wsadzic w zmienna obiektu
 
-               if (localPatch.image.id == IdNumber.toString()){
-                   console.log("jestem w patchu o id" + IdNumber+", oto on:" + localPatch);
-                   return localPatch;
+               if (this.image.id == IdNumber.toString()){
+                   console.log("jestem w patchu o id" + IdNumber+", oto on:" + this);
+                   return this;
                }
                else return;
 
-        };
+        }; //TODO: 2.03.2018 ta cala funkcja do poprawy, info w todo w Viewer
         //console.log(exported.positionable);
         //console.log(exported.positionable[0]);
         //console.log(exported.positionable[0].__proto__); // constructor

@@ -465,7 +465,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             //PIERWOTNIE: viewer.positionable.push(new Patch(image,parent,data,i));
             //szczególnie:
             console.log(exported.newImgJsonData,exported.getNodeById(exported.newDataParentIdNumber)[1] , exported.viewer.currentData,exported.newImgParentImgsNumber );
-
+//TODO: w linijce wyzej zmienic druga zmienną na parent.patch
 
                 //6.2. stworzyć Patcha
 
