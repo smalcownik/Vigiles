@@ -53,53 +53,28 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
             },this);
         };
 
-        exported.findPatchById = function(IdNumber){ // ta funckja zachodzi przy:
-
-
-            debugger;
-            //console.log("this:"+this); tutaj this to viewer
-            
-
-
-            /*function isBigEnough(value) {
-                return value >= 10;
-            }
-
-            var filtered = [12, 5, 8, 130, 44].filter(isBigEnough); // tu zwraca wszystkie elementy
-// filtered is [12, 130, 44]
-lub
-
-             function isBigEnough(element) {
-             return element >= 15;
-             }
-
-             [12, 5, 8, 130, 44].find(isBigEnough); // tu zwraca pierwszy elelment
-*/
-            //TODO: uprościć szukanie wg powyższych schematów
+        exported.findPatchById = function(IdNumber){
+            // uprościć szukanie wg powyższych schematów
             //1* filtered
             //2* sprawdzić czy tablica ma dlugosc 1, jesli nie to jest blad
             //3* zwrocić wynik
 
-            this.positionable.forEach(function(p){
-                if(p.constructor.name == "Patch"){
-                
-                   //patch = p.findMeById(IdNumber);
+            function imageIdPass(element){
+            return (element.image.id == IdNumber.toString() && element.constructor.name == "Patch" )
+            };
 
-                    // coś takiego:
-                    if (this.image.id == IdNumber.toString()){
-                        console.log("jestem w patchu o id" + IdNumber+", oto on:" + this);
-                        return this;
-                    
-                }
+            var filteredPatch = this.positionable.filter(imageIdPass);
 
+            if (filteredPatch.length == 1) {
+                console.log(filteredPatch[0]);
+                return filteredPatch[0];
+            }else{
+                console.log("dwa Patche z tym samym id: " + filteredPatch );
+                return;
+            }
 
-            },this);
-
-            console.log(" w Viewer findPatchById: "+ patch);
-            return patch;
-        };
-
-
+        }; // zwraca patcha po nr id - analogicznie mozna znajdowac pointy lekko przerabiajac ta funkcje
+    
         exported.registerEventListeners = function(){
             
             CameraEventListeners.cameraEvents();

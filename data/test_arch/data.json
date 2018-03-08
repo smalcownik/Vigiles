@@ -1,1 +1,362 @@
-{"images":[{"id":"0","size":{"w":512,"h":683},"points":[{"x":0,"y":0,"textInit":"punkt0","isNew":false},{"x":0.5,"y":-0.5,"textInit":"punkt0","isNew":false},{"x":-0.5,"y":-0.5,"isNew":false},{"x":-0.5940438871473355,"y":-0.7685299503848502,"textInit":null,"isNew":false},{"x":-0.051698670605613,"y":-0.6213075081478662,"textInit":null,"isNew":false},{"x":-0.3825701624815362,"y":-0.8671254414553916,"textInit":null,"isNew":false},{"x":-0.3293943870014771,"y":-0.8604817135281613,"textInit":null,"isNew":false}],"children":[{"id":"2","size":{"w":512,"h":384},"points":[{"x":-0.9269456681350954,"y":-0.950126479900881,"textInit":null,"isNew":false}],"children":[{"id":14,"size":{"w":300,"h":400},"pos":{"x":0,"y":-0.5,"w":0.6},"points":[{"x":0,"y":0.5}],"children":[]}],"pos":{"x":0,"y":-0.5,"w":0.8}},{"id":"1","size":{"w":512,"h":384},"points":[{"x":0,"y":0,"textInit":"punkt3","isNew":false}],"children":[{"id":"4","size":{"w":512,"h":683},"points":[{"x":0,"y":0,"textInit":"punkt0","isNew":false},{"x":0.5,"y":0.5,"isNew":false},{"x":0,"y":0.5,"isNew":false}],"children":[],"pos":{"x":-0.5,"y":0.5,"w":0.3}},{"id":"5","size":{"w":512,"h":683},"points":[{"x":0,"y":0,"isNew":false},{"x":0.5,"y":0.5,"textInit":"punkt0","isNew":false},{"x":0,"y":0.5,"isNew":false}],"children":[],"pos":{"x":0.5,"y":0.5,"w":0.3}}],"pos":{"x":0,"y":0.5,"w":0.8}}]},{"id":"6","size":{"w":512,"h":683},"points":[{"x":0,"y":0,"textInit":"punkt0","isNew":false},{"x":0.5,"y":-0.5,"isNew":false},{"x":-0.5,"y":-0.5,"isNew":false}],"children":[{"id":"8","size":{"w":512,"h":384},"points":[],"children":[],"pos":{"x":0,"y":-0.5,"w":0.8}},{"id":"7","size":{"w":512,"h":384},"points":[{"x":0,"y":0,"isNew":false}],"children":[{"id":"9","size":{"w":512,"h":683},"points":[{"x":0,"y":0,"isNew":false},{"x":0.5,"y":0.5,"isNew":false},{"x":0,"y":0.5,"isNew":false}],"children":[],"pos":{"x":-0.5,"y":0.5,"w":0.3}},{"id":"10","size":{"w":512,"h":683},"points":[{"x":0,"y":0,"isNew":false},{"x":0.5,"y":0.5,"isNew":false},{"x":0,"y":0.5,"isNew":false}],"children":[],"pos":{"x":0.5,"y":0.5,"w":0.3}}],"pos":{"x":0,"y":0.5,"w":0.8}}]},{"id":"11","size":{"w":512,"h":384},"points":[{"x":0,"y":0,"isNew":false}],"children":[{"id":"12","size":{"w":512,"h":683},"points":[{"x":0,"y":0,"isNew":false},{"x":0.5,"y":0.5,"isNew":false},{"x":0,"y":0.5,"isNew":false}],"children":[],"pos":{"x":-0.5,"y":0.5,"w":0.3}},{"id":"13","size":{"w":512,"h":683},"points":[{"x":0,"y":0,"isNew":false},{"x":0.5,"y":0.5,"isNew":false},{"x":0,"y":0.5,"isNew":false}],"children":[],"pos":{"x":0.5,"y":0.5,"w":0.3}}]}],"meta":{}}
+{
+  "images": [
+    {
+      "id": "0",
+      "size": {
+        "w": 512,
+        "h": 683
+      },
+      "points": [
+        {
+          "x": 0,
+          "y": 0,
+          "textInit": "punkt0",
+          "isNew": false
+        },
+        {
+          "x": 0.5,
+          "y": -0.5,
+          "textInit": "punkt0",
+          "isNew": false
+        },
+        {
+          "x": -0.5,
+          "y": -0.5,
+          "isNew": false
+        },
+        {
+          "x": -0.5940438871473355,
+          "y": -0.7685299503848502,
+          "textInit": null,
+          "isNew": false
+        },
+        {
+          "x": -0.051698670605613,
+          "y": -0.6213075081478662,
+          "textInit": null,
+          "isNew": false
+        },
+        {
+          "x": -0.3825701624815362,
+          "y": -0.8671254414553916,
+          "textInit": null,
+          "isNew": false
+        },
+        {
+          "x": -0.3293943870014771,
+          "y": -0.8604817135281613,
+          "textInit": null,
+          "isNew": false
+        }
+      ],
+      "children": [
+        {
+          "id": "2",
+          "size": {
+            "w": 512,
+            "h": 384
+          },
+          "points": [
+            {
+              "x": -0.9269456681350954,
+              "y": -0.950126479900881,
+              "textInit": null,
+              "isNew": false
+            }
+          ],
+          "children": [
+
+          ],
+          "pos": {
+            "x": 0,
+            "y": -0.5,
+            "w": 0.8
+          }
+        },
+        {
+          "id": "1",
+          "size": {
+            "w": 512,
+            "h": 384
+          },
+          "points": [
+            {
+              "x": 0,
+              "y": 0,
+              "textInit": "punkt3",
+              "isNew": false
+            }
+          ],
+          "children": [
+            {
+              "id": "4",
+              "size": {
+                "w": 512,
+                "h": 683
+              },
+              "points": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "textInit": "punkt0",
+                  "isNew": false
+                },
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "isNew": false
+                },
+                {
+                  "x": 0,
+                  "y": 0.5,
+                  "isNew": false
+                }
+              ],
+              "children": [],
+              "pos": {
+                "x": -0.5,
+                "y": 0.5,
+                "w": 0.3
+              }
+            },
+            {
+              "id": "5",
+              "size": {
+                "w": 512,
+                "h": 683
+              },
+              "points": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "isNew": false
+                },
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "textInit": "punkt0",
+                  "isNew": false
+                },
+                {
+                  "x": 0,
+                  "y": 0.5,
+                  "isNew": false
+                }
+              ],
+              "children": [],
+              "pos": {
+                "x": 0.5,
+                "y": 0.5,
+                "w": 0.3
+              }
+            }
+          ],
+          "pos": {
+            "x": 0,
+            "y": 0.5,
+            "w": 0.8
+          }
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "size": {
+        "w": 512,
+        "h": 683
+      },
+      "points": [
+        {
+          "x": 0,
+          "y": 0,
+          "textInit": "punkt0",
+          "isNew": false
+        },
+        {
+          "x": 0.5,
+          "y": -0.5,
+          "isNew": false
+        },
+        {
+          "x": -0.5,
+          "y": -0.5,
+          "isNew": false
+        }
+      ],
+      "children": [
+        {
+          "id": "8",
+          "size": {
+            "w": 512,
+            "h": 384
+          },
+          "points": [],
+          "children": [],
+          "pos": {
+            "x": 0,
+            "y": -0.5,
+            "w": 0.8
+          }
+        },
+        {
+          "id": "7",
+          "size": {
+            "w": 512,
+            "h": 384
+          },
+          "points": [
+            {
+              "x": 0,
+              "y": 0,
+              "isNew": false
+            }
+          ],
+          "children": [
+            {
+              "id": "9",
+              "size": {
+                "w": 512,
+                "h": 683
+              },
+              "points": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "isNew": false
+                },
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "isNew": false
+                },
+                {
+                  "x": 0,
+                  "y": 0.5,
+                  "isNew": false
+                }
+              ],
+              "children": [],
+              "pos": {
+                "x": -0.5,
+                "y": 0.5,
+                "w": 0.3
+              }
+            },
+            {
+              "id": "10",
+              "size": {
+                "w": 512,
+                "h": 683
+              },
+              "points": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "isNew": false
+                },
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "isNew": false
+                },
+                {
+                  "x": 0,
+                  "y": 0.5,
+                  "isNew": false
+                }
+              ],
+              "children": [],
+              "pos": {
+                "x": 0.5,
+                "y": 0.5,
+                "w": 0.3
+              }
+            }
+          ],
+          "pos": {
+            "x": 0,
+            "y": 0.5,
+            "w": 0.8
+          }
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "size": {
+        "w": 512,
+        "h": 384
+      },
+      "points": [
+        {
+          "x": 0,
+          "y": 0,
+          "isNew": false
+        }
+      ],
+      "children": [
+        {
+          "id": "12",
+          "size": {
+            "w": 512,
+            "h": 683
+          },
+          "points": [
+            {
+              "x": 0,
+              "y": 0,
+              "isNew": false
+            },
+            {
+              "x": 0.5,
+              "y": 0.5,
+              "isNew": false
+            },
+            {
+              "x": 0,
+              "y": 0.5,
+              "isNew": false
+            }
+          ],
+          "children": [],
+          "pos": {
+            "x": -0.5,
+            "y": 0.5,
+            "w": 0.3
+          }
+        },
+        {
+          "id": "13",
+          "size": {
+            "w": 512,
+            "h": 683
+          },
+          "points": [
+            {
+              "x": 0,
+              "y": 0,
+              "isNew": false
+            },
+            {
+              "x": 0.5,
+              "y": 0.5,
+              "isNew": false
+            },
+            {
+              "x": 0,
+              "y": 0.5,
+              "isNew": false
+            }
+          ],
+          "children": [],
+          "pos": {
+            "x": 0.5,
+            "y": 0.5,
+            "w": 0.3
+          }
+        }
+      ]
+    }
+  ],
+  "meta": {}
+}

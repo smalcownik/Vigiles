@@ -313,7 +313,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
         //to sa wszystkie dane potrzebne do zapisania zdjęcia
         
-        //tu już nie ma requesta - tym się zajmuje formidable z osobnego requesta (z przegladarki wgranie zdjecia - patrz niżej )
+        //tu już nie ma image requesta - tym się zajmuje formidable z osobnego requesta (z przegladarki wgranie zdjecia - patrz niżej )
 
     }; // dane z prompta - wysyla dane do zdjecia na serwer (samo zdjecie wysyla pozniej: w exported.newPatchDataReceiverBuilder)
 
@@ -322,7 +322,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
         var clickedElement = event.target;
         
 
-        if (clickedElement.className === "saveNewPatchButton") {
+        if (clickedElement.className === "saveNewPatchButton")  {
 
             console.log("odpalono newPatchDataReceiverbuilder czyli..prompt");
 
@@ -333,7 +333,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             console.log("1. new id przy prompcie: "+exported.newId);
 
-            exported.formidableButton(); //pojawia się przycisk formidable //TODO: formidable button tutaj
+            exported.formidableButton(); //pojawia się przycisk formidable //TODO: formidable button jest tutaj
             //wybór zdjęcia - teraz tym zajmie się formidable:
             
             //var oldImgPath = prompt("Podaj ścieżkę zdjęcia","/home/marek/WebstormProjects/Vigiles/data/add_new_patch_test_data/jol.jpg"); // sciezka do pliku na dysku - uri zdjęcia ??
@@ -449,23 +449,20 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
                 // 6.1.zebrać zmienne do Patcha:
 
-            //TODO: 1# teraz 26.02 (po funkcji z viewer) zamiast "get node by id" dać positionable na druga zmienna tutaj (i w new Patch);
-            //exported.getNodeById(id) - return node // node to cała tablica [image.id, image, originalParent, parent.id]
 
-    //debugger;
-
-            console.log("cyt uwaga! a numer:");
+            console.log("numer Id parenta:");
             console.log(exported.newDataParentIdNumber);
 
             console.log("proba z findPatchById:");
-            console.log(exported.viewer.findPatchById(exported.newDataParentIdNumber));
+            var parentPatch = exported.viewer.findPatchById(exported.newDataParentIdNumber);
+            console.log(parentPatch);
 
 
 
             //PIERWOTNIE: viewer.positionable.push(new Patch(image,parent,data,i));
             //szczególnie:
-            console.log(exported.newImgJsonData,exported.getNodeById(exported.newDataParentIdNumber)[1] , exported.viewer.currentData,exported.newImgParentImgsNumber );
-//TODO: w linijce wyzej zmienic druga zmienną na parent.patch
+            console.log(exported.newImgJsonData,parentPatch, exported.viewer.currentData,exported.newImgParentImgsNumber );
+
 
                 //6.2. stworzyć Patcha
 
@@ -474,24 +471,12 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             console.log(exported.viewer.positionable);
 
 
+ // tu zwrocic uwage na mala zmiane: jest w drugiej zmiennej parentPatch.image - dodalem image bo dokladnie to jest potrzebne do zbudowania Patcha, inaczej wyskakiwal blad w budowaniu patcha
+
             
-
-            /*function wait(ms){
-                var start = new Date().getTime();
-                var end = start;
-                while(end < start + ms) {
-                    end = new Date().getTime();
-                }
-            }
-            console.log('before');
-            wait(3000);  //7 seconds in milliseconds
-            console.log('after');*/
-
-            //TODO: 2# (po 1#): (ale najpierw zdefiniuj funkcje w viewer (tamtejsze TODO)): w linijce niżej tkwi błąd, na razie ja komentuje: błąd następuje przy budowaniu Patcha, gdzie brakuje mu parent.Patch przy budowaniu
+            exported.viewer.positionable.push(new Patch(exported.newImgJsonData , parentPatch.image , exported.viewer.currentData,exported.newImgParentImgsNumber));
 
 
-
-            //exported.viewer.positionable.push(new Patch(exported.newImgJsonData , exported.getNodeById(exported.newDataParentIdNumber)[1] , exported.viewer.currentData,exported.newImgParentImgsNumber));
 
             //positionable po dodaniu Patcha:
             console.log("po dodaniu patcha: ");
@@ -505,14 +490,22 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             console.log("teraz ładnie odświeża positionables");
 
+// todo: tutaj teraz szukac bledu - serwer pokazuje ze zdjecia nie ma wgranego
+
 
 
             exported.viewer.updateAllPositionables();
 
             console.log(exported.viewer.positionable);
 
+           // debugger;
+
         }
+        
+        console.log("lala");
     }; // wywolane w exported.addNewPatchEventListener
+
+    console.log("lala_2");
 
     return exported;
 

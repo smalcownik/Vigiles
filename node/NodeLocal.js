@@ -66,8 +66,10 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                     console.error(err);
                 });
 
-
                 console.log("   8.0 fileext  :" +exported.fileext);
+
+                // todo: tu poniżej nie wchodzi program:
+
 
                 if (exported.fileext == ".jpg") { //wynik tego działania pojawia sie w serwerze node'a po kliknieciu addPatch
 
@@ -75,11 +77,9 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                     //TODO: FORMIDABLE:
 
-                    // creates a new incoming form.
-
-                   // debugger;
-
+                    console.log("TERA FORMIDABLE:");
                     var form = new exported.formidable.IncomingForm();
+                    console.log("I PO FORMIDABLE ...");
 
                     // parse a file upload
                     form.parse(request, function (err/*, fields, files*/) {
@@ -99,7 +99,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                         console.log("name: " + file_name);
 
                         /* Location where we want to copy the uploaded file */
-                        
+
                         //console.log("TEST4: "+test1+ "  "+exported.test2 + "  "+JSON.stringify(exported.bodyObject));
 
                         console.log(exported.bodyObject.toString());
