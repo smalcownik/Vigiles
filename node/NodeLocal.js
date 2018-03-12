@@ -58,7 +58,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
             NodeFunctions.requestInfo(exported); // informacja zwrotna z serwera na temat requestow
 
-            if (exported.method == "POST") {
+            if (exported.method == "POST" || exported.method == "post") {
 
                 console.log("     7. method 2: " + exported.method);
 
@@ -128,7 +128,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                 }
 
 
-                if (NodeFunctions.actualContType == ("application/json;charset=UTF-8" || "application/json")) { // request to post - json
+                else if (NodeFunctions.actualContType == ("application/json;charset=UTF-8" || "application/json")) { // request to post - json
 
                     request.on('data', function (chunk) {
 
@@ -156,6 +156,8 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                         if (bodyObject.hasOwnProperty("meta")) {
 
                             console.log("9.1.  to jest data.json lub data1.json bo ma property 'meta' ");
+
+                            console.log(JSON.stringify(exported.body));
 
 
                             exported.fs.writeFile(exported.filepath, exported.body, function (err) { //tu poprawiono po zadzialaniu req.url na filepath
@@ -193,7 +195,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                             }
 
-                            else { } // czyli gdy jest parent
+                            else { console.log(" tu jestem"); } // czyli gdy jest parent
 
 
                             //TODO:pozniej: dotyczy zapisywania plikow na serwer w zaleznosci od nowego parenta (a może to zrobić w miejscu: (form.on('end',.....) )

@@ -468,29 +468,35 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             //positionable przed dodaniem Patcha:
             console.log(" positionable przed dodaniem patcha: ");
-            console.log(exported.viewer.positionable);
+            console.log(exported.viewer.positionable.length);
+            alert("xxxxxx"); // TODO: dzieki temu alertowi moze być budowany 5 linijek nizej Patch ma juz wgrany obraz na dysk,
+            // bez tej pauzy wyskakiwal blad ze nie ma pliku jescze (wrzuconego firmaidablem)
+            console.log("HA !");
 
 
  // tu zwrocic uwage na mala zmiane: jest w drugiej zmiennej parentPatch.image - dodalem image bo dokladnie to jest potrzebne do zbudowania Patcha, inaczej wyskakiwal blad w budowaniu patcha
 
-            
-            exported.viewer.positionable.push(new Patch(exported.newImgJsonData , parentPatch.image , exported.viewer.currentData,exported.newImgParentImgsNumber));
+            var newPatch = new Patch(exported.newImgJsonData , parentPatch.image , exported.viewer.currentData,exported.newImgParentImgsNumber);
+            exported.viewer.positionable.push(newPatch);
+            //TODO:problem w linijce wyżej jest bo przy budowaniu patcha w linijce 19 Patch.js jest " imgHTML.src=",
+            // co powduje odwołanie do pliku, który jeszcze nie jest wgrany - trzeba zaczekać aż się wgra i wtedy zbudować Patcha: zrobiono kilka linijek wyzej alert, ktory uspokoil sprawe
 
+            //TODO: do patcha 2 dodać nowego patch.image jako childrena, inaczej dodane zdjęcie nie bedzie zmieniało opacity przy ruszaniu cameraS:
+            parentPatch.children.push(newPatch.image);
 
 
             //positionable po dodaniu Patcha:
             console.log("po dodaniu patcha: ");
-            console.log(exported.viewer.positionable);
+            console.log(exported.viewer.positionable.length);
 
 
             //7. Update positionables
 
 
             //artefakt: exported.viewer.loadURL(exported.viewer.serverURL,exported.viewer.DataPath, exported.viewer.JsonFile);
-
+            alert("xxxxxx");
             console.log("teraz ładnie odświeża positionables");
 
-// todo: tutaj teraz szukac bledu - serwer pokazuje ze zdjecia nie ma wgranego
 
 
 
@@ -498,7 +504,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             console.log(exported.viewer.positionable);
 
-           // debugger;
+           //debugger;
 
         }
         

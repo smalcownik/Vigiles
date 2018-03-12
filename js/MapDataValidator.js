@@ -40,7 +40,7 @@ define([/*'./MapData'*/], function (/*MapData*/) {
 
 
                 if (Object.keys(data).length==2){
-                    if(Object.keys(data)[0]=='meta' &&  Object.keys(data)[1]=='images'){/*console.log("ok:jest meta i images")*/}
+                    if((Object.keys(data)[0]=='meta' &&  Object.keys(data)[1]=='images')||(Object.keys(data)[1]=='meta' &&  Object.keys(data)[0]=='images')){/*console.log("ok:jest meta i images")*/}
                     else (console.log("NOT_OK:cos nie tak z meta i images"));
                 }
                 else (console.log("NOT_OK:ilosc plikow na wierzchu objektu sie nie zgadza (powinny byc dwa: main i images)"));
