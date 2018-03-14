@@ -300,11 +300,16 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
         var dataToServer = [path, promptedData, nextOriginalParent]; // dane na serwer
 
+        //TODO: to trzecie wchodzi NULL
+
         console.log(dataToServer);
 
         var dataToServerJSON = JSON.stringify(dataToServer);
 
         console.log("wysylam dane do zdjecia na serwer!");
+
+
+
 
         AddDataForImageToServerREQUEST.makeRequest(dataToServerJSON); // tu wysyla dane do patcha na serwer
 
@@ -443,8 +448,12 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             //5. UpdateJsonOnServerREQUEST.makeRequest(exported.json); // tym zakończyć, teraz trzeba przygotować paczkę danych do zdjęcia zeby przy jego wysłaniu
             // serwer miał dane
 
-            UpdateJsonOnServerREQUEST.makeRequest(exported.JsonWithNewPatch);
+            debugger;
 
+
+
+            //UpdateJsonOnServerREQUEST.makeRequest(exported.JsonWithNewPatch); //TODO: 1
+            alert("wysyla nowy json z mapa na serwer:");
             //6. Teraz wprowadzić nowego Patcha do positionables
 
                 // 6.1.zebrać zmienne do Patcha:
@@ -461,7 +470,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             //PIERWOTNIE: viewer.positionable.push(new Patch(image,parent,data,i));
             //szczególnie:
-            console.log(exported.newImgJsonData,parentPatch, exported.viewer.currentData,exported.newImgParentImgsNumber );
+            //console.log(exported.newImgJsonData,parentPatch, exported.viewer.currentData,exported.newImgParentImgsNumber );
 
 
                 //6.2. stworzyć Patcha
@@ -474,15 +483,22 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             console.log("HA !");
 
 
+
+
  // tu zwrocic uwage na mala zmiane: jest w drugiej zmiennej parentPatch.image - dodalem image bo dokladnie to jest potrzebne do zbudowania Patcha, inaczej wyskakiwal blad w budowaniu patcha
 
-            var newPatch = new Patch(exported.newImgJsonData , parentPatch.image , exported.viewer.currentData,exported.newImgParentImgsNumber);
-            exported.viewer.positionable.push(newPatch);
+            //var newPatch = new Patch(exported.newImgJsonData , parentPatch.image , exported.viewer.currentData,exported.newImgParentImgsNumber);
+           // exported.viewer.positionable.push(new Patch(exported.newImgJsonData , parentPatch.image , exported.viewer.currentData,exported.newImgParentImgsNumber)); //TODO: 2
+
+
             //TODO:problem w linijce wyżej jest bo przy budowaniu patcha w linijce 19 Patch.js jest " imgHTML.src=",
             // co powduje odwołanie do pliku, który jeszcze nie jest wgrany - trzeba zaczekać aż się wgra i wtedy zbudować Patcha: zrobiono kilka linijek wyzej alert, ktory uspokoil sprawe
 
             //TODO: do patcha 2 dodać nowego patch.image jako childrena, inaczej dodane zdjęcie nie bedzie zmieniało opacity przy ruszaniu cameraS:
-            parentPatch.children.push(newPatch.image);
+           // debugger;
+
+            /*console.log(parentPatch.image.children);
+            console.log(newPatch);*/
 
 
             //positionable po dodaniu Patcha:
@@ -494,7 +510,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
 
             //artefakt: exported.viewer.loadURL(exported.viewer.serverURL,exported.viewer.DataPath, exported.viewer.JsonFile);
-            alert("xxxxxx");
+
             console.log("teraz ładnie odświeża positionables");
 
 
@@ -504,7 +520,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             console.log(exported.viewer.positionable);
 
-           //debugger;
+           debugger;
 
         }
         

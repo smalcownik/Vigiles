@@ -16,7 +16,7 @@ define([], function () {
 
         var http_request = new XMLHttpRequest();
         //console.log(viewer);  //
-        http_request.open("POST", viewer.serverURL+viewer.DataPath+viewer.JsonFile ); // request url gotowy!
+        http_request.open("POST", viewer.serverURL + viewer.DataPath + viewer.JsonFile ); // request url gotowy!
 
         http_request.setRequestHeader("Content-Type","application/json;charset=UTF-8");
 

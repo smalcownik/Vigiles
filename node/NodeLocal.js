@@ -51,6 +51,8 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
             response.setHeader('Access-Control-Allow-Origin', '*');
             response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+            console.log("przy koncu options");
             response.end();
         }
 
@@ -58,7 +60,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
             NodeFunctions.requestInfo(exported); // informacja zwrotna z serwera na temat requestow
 
-            if (exported.method == "POST" || exported.method == "post") {
+            if (exported.method == "POST" /*|| exported.method == "post"*/) {
 
                 console.log("     7. method 2: " + exported.method);
 
@@ -157,7 +159,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                             console.log("9.1.  to jest data.json lub data1.json bo ma property 'meta' ");
 
-                            console.log(JSON.stringify(exported.body));
+                            //console.log(JSON.stringify(exported.body));
 
 
                             exported.fs.writeFile(exported.filepath, exported.body, function (err) { //tu poprawiono po zadzialaniu req.url na filepath
@@ -185,8 +187,8 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                             console.log("    9.2.2. sciezka do folderu: " + exported.bodyObject[0][1]);
                             var currentPath = "." + exported.bodyObject[0][1];
 
-                            if (exported.bodyObject[2] == null) { // czyli kiedy nie ma originalParent i trzeb utworzyć nowy folder na kolejnego patcha-matke
-
+                            if (exported.bodyObject[2] ==! null) { // czyli kiedy nie ma originalParent i trzeb utworzyć nowy folder na kolejnego patcha-matke
+                                console.log(" tu jestem1");
                                 exported.mkdirp(currentPath, function (err) {
 
                                     // path exists unless there was an error
@@ -195,7 +197,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                             }
 
-                            else { console.log(" tu jestem"); } // czyli gdy jest parent
+                            else { console.log(" tu jestem2"); } // czyli gdy jest parent
 
 
                             //TODO:pozniej: dotyczy zapisywania plikow na serwer w zaleznosci od nowego parenta (a może to zrobić w miejscu: (form.on('end',.....) )
