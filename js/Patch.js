@@ -36,7 +36,6 @@ define([], function () {
 
             if (parent) {
 
-                //TODO: tutaj wyskakuje bład: parentowi brakuje patcha!
 
                 var parentDOM = parent.patch.DOM;
 
@@ -223,27 +222,7 @@ define([], function () {
 
         };
 
-        exported.prototype.findMeById = function(IdNumber){
-            
-            console.log("jestem w find me by id a this, czyli nasz patch to: "+this); // this to patch
-            
-              //var localPatch = this; // tu bylo undefined: chyba nei mozna wsadzic w zmienna obiektu
-
-               if (this.image.id == IdNumber.toString()){
-                   console.log("jestem w patchu o id" + IdNumber+", oto on:" + this);
-                   return this;
-               }
-               else return;
-
-        }; //TODO: 2.03.2018 ta cala funkcja do poprawy, info w todo w Viewer
-        //console.log(exported.positionable);
-        //console.log(exported.positionable[0]);
-        //console.log(exported.positionable[0].__proto__); // constructor
-        //console.log(exported.positionable[0].__proto__.constructor.name); //"Patch"
-        //console.log(exported.positionable[0].constructor.name); // "Patch"
-        //console.log(exported.positionable[0].constructor); // to wyświetla całą treść funkcji Patch
-        //if (exported.positionable[0].__proto__.constructor.name ===exported.positionable[0].constructor.name){console.log("to samo")}; // działa
-    
+        //exported.prototype.findMeById = function(IdNumber){}; // ta funkcja jest już napisana w pliku wiever (findPatchById)
 
 
             return exported;

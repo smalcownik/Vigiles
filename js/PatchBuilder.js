@@ -36,6 +36,12 @@ define(["./Patch"], function (Patch) {
                 
             };
 
+    exported.buildSinglePatch = function(image,parent,data,i){ // wywolany w ImageDataAdding
+
+                viewer.positionable.push(new Patch(image,parent,data,i))
+
+    };
+
 
             return exported;
         }

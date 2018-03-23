@@ -9,7 +9,7 @@ define(['./MapData'], function (MapData) {
 
         function makeRequest(fullUrl,cb) { // url to http://192.168.55.102:4246
            // console.log(fullUrl);
-
+            
             http_request = false;
 
             if (window.XMLHttpRequest) { // Mozilla, Safari,...

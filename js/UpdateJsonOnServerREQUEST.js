@@ -21,7 +21,7 @@ define([], function () {
         http_request.setRequestHeader("Content-Type","application/json;charset=UTF-8");
 
         /*http_request.onload = function(){ console.log("as as asas a");};*/ // to może byc ale i bez tego działa
-
+        //TODO: 21.03.2018 komentarz z linijki wyzej jest chyba piętą achillesową tych ładowań - zobaczyć co się wcześniej tu wykonuje to czy niższa linijka ?
         http_request.send(json); // to ma forme JSON'A , serwer to zapisuje i nie robi nic więcej -
                                 // (nie odświeża zawartości - to jest robione przy dodaniu do positionables przy dodawaniu punktu)
         
