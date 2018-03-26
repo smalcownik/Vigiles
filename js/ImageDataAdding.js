@@ -542,8 +542,9 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
         }
 
         //todo 21.03.2018: dopiero tutaj jest wykonywany formidable - Patcha trzeba zbudowac po wyjsciu z tej funkcji  ... czyli ją wrzucić jako callback dla formidable ?
-        // TODO:21.03.2018 lub Have you missed { enctype='multipart/form-data' } in form tag in your html file? Adding that might work
-        // TODO: 22.03.2018 : wzor uzycia callbacka jest w MapDataProviderREQUEST - tam wrzucic debuggera i przyjrzec sie kiedy i jak pojawia sie request
+        // todo: a formidabla jako callbacka dla wyslania danych do niego w sekwencji jak z tego pliku
+        //lub Have you missed { enctype='multipart/form-data' } in form tag in your html file? Adding that might work - sprawdzone, to nie przyczyna !
+        // TODO: 22.03.2018 : wzor uzycia callbacka jest w MapDataProviderREQUEST - tam wrzucic debuggera i przyjrzec sie kiedy pojawia sie request, czy w miedzyczasie cos sie innego dzieje
 */
 
         console.log("lala");
