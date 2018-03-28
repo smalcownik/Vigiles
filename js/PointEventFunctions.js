@@ -13,7 +13,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
             var x = event.clientX;     // Get the horizontal coordinate
             var y = event.clientY;
 
-            //console.log(viewer);
+            //console.log("dupa 123");
 
             // console.log(event.target);
 
@@ -244,6 +244,7 @@ define(['./Camera', './Point'], function (Camera, Point) { //tworzy objekty doda
 
             var clickedElement = event.target; // to jest tylko element - zaraz znajdziemy dla niego Patch'a/Pointa
             var clickedElementPoint; // tu będzie Patch, który zawiera clickedPicture(img)
+            
 
             if (clickedElement.className === "point") {
 

@@ -77,11 +77,14 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
     
         exported.registerEventListeners = function(){
             
+            // TODO: z funkcjami poniżej zrobić porządek bo (jak w komentarzach przy nich) przy dowolnym kliknieciu odpala się kilka z nich - trzeba to uporządkowac zeby w zaleznosci
+            // w co sie kliknie odpalala sie tylko jedna z funkcji : pozamieniać 'document.body' przy AddEventListener na poszczególne elementy body np. document.getElementbyID ...
+            
             CameraEventListeners.cameraEvents();
-            PointEventListeners.addPoint();
-            PointEventListeners.showPointContent();
-            JsonBuilder.buildJSON(); // ponowne budowanie jsona z dodawanymi punktami i wysyłanie 
-            ImageDataAdding.addNewPatch(); //umozliwia dodawanie zdjęć z zewnątrz
+            PointEventListeners.addPoint();// przy dblclick
+            PointEventListeners.showPointContent(); // przy click
+            JsonBuilder.buildJSON(); // przy click powoduje updateJson// ponowne budowanie jsona z dodawanymi punktami i wysyłanie
+            ImageDataAdding.addNewPatch(); // przy click // umozliwia dodawanie zdjęć z zewnątrz
             
 
         };
@@ -115,13 +118,12 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
                     
                     exported.showMapData(exported.currentData); // w tej f-kcji będzie dopiero wołany PatchBuilder czyli cały widok, a currentData to obiekt new MapData(response)
                 }
+                
             );
-
 
         };
 
         exported.showMapData = function(data){ // jako data wchodzi new MapData(response) czyli cały OBIEKT z jSON'a
-
             
             PatchBuilder.build(data); //// jako data wchodzi new MapData(response) czyli cały OBIEKT jSON'a;  PatchBuilder traversuje całego JSON'a;
             
@@ -140,7 +142,7 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
             //console.log(exported.positionable[0].constructor); // to wyświetla całą treść funkcji Patch
             //if (exported.positionable[0].__proto__.constructor.name ===exported.positionable[0].constructor.name){console.log("to samo")}; // działa
         };
-
+    
 
             return exported;
         }

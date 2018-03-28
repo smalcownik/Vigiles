@@ -15,6 +15,8 @@ define(["./Camera", "./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJson
             //var viewer = this.viewer;
             // console.log(viewer.positionable);
 
+
+
             this.addSaveButton();
             this.updateJsonEventListener();
 
@@ -194,6 +196,7 @@ define(["./Camera", "./UpdateJsonOnServerREQUEST"], function (Camera, UpdateJson
 
 
         exported.updateJson = function (event) { // wywołana przez .updateJsonEventListener
+            //console.log("dupa 456");
 
             var viewer = exported.viewer; // tu nie mogłem dać "this.viewer" bo this tutaj to "body"
 

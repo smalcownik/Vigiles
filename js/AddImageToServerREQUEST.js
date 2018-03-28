@@ -11,7 +11,7 @@ define([], function () {
 
 
 
-    exported.makeRequest = function (imageUrl) { // f-kcja wywołana w ImageDataAdding.executeAddingNewImage
+    exported.makeRequest = function (imageUrl) { // f-kcja wywołana w ImageDataAdding.executeAddingJsonPathDataToNewImage
 
         console.log(imageUrl);
 

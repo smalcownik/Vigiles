@@ -45,7 +45,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
         // var saveButtonParagraph = document.createElement('p');
         // debugger;
-        var txt = "ADD PATCH";
+        var txt = "saveNewPatch";
         saveNewPatchButton.style.color = 'white';
         saveNewPatchButton.style.fontSize = '22px';
         saveNewPatchButton.style.textAlign = 'center';
@@ -121,7 +121,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
 
 
-    }; // dodaje przycisk i nadaje mu klasę, że jak wciśniesz to wywołujesz exported.addNewPatchEventListener (funkcja ponizej)
+    }; // wywolany w newPatchDataReceiverBuilder, dodaje przycisk i nadaje mu klasę, że jak wciśniesz to wywołujesz exported.addNewPatchEventListener (funkcja ponizej)
 
     exported.addNewPatchEventListener = function () { // wciśnięciu przycisku (wyskakuje cały prompt)
 
@@ -285,7 +285,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
     }; // zwraca tablice z ścieżką do zapisania [file path, folder path]
 
 
-    exported.executeAddingNewImage = function(newId,promptedData) { // tutaj maja byc czynnosci po prompcie // wywołane na końcu exp.newPatchDataReceiverBuilder
+    exported.executeAddingJsonPathDataToNewImage = function(newId, promptedData) { // tutaj maja byc czynnosci po prompcie // wywołane na końcu exp.newPatchDataReceiverBuilder
 
         var nextOriginalParent; // to jest numer koljenego folderu imgs[nr] a nie pliku w nim
         if (promptedData[2]==="newParent") { //wartosc "newParent" jest domyslnie dodawana w prompcie (w funckji newPatchDataReceiverBuilder)
@@ -304,9 +304,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
         var path = exported.buildPath(newId,promptedData[2],nextOriginalParent,promptedData[3]);// promptedData[2] to nr folderu ims["nr"] rodzica -!UWAGA nie Id tylko numer folderu imgs[nr]
                                                             //  promptedData: [ścieżka, dane jsona, parentImgsNumber,parentId] UWAGA - parent imgs number to numer folderu imgs[nr] a nie zdjecia
 
-        var dataToServer = [path, promptedData, nextOriginalParent]; // dane na serwer
-
-        //TODO: to trzecie wchodzi NULL
+        var dataToServer = [path, promptedData, nextOriginalParent]; // dane na serwer // to trzecie wchodzi NULL
 
         console.log(dataToServer);
 
@@ -323,8 +321,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
 
         //to sa wszystkie dane potrzebne do zapisania zdjęcia
-        
-        //tu już nie ma image requesta - tym się zajmuje formidable z osobnego requesta (z przegladarki wgranie zdjecia - patrz niżej )
+
 
     }; // dane z prompta - wysyla dane do zdjecia na serwer (samo zdjecie wysyla pozniej: w exported.newPatchDataReceiverBuilder)
 
@@ -345,7 +342,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             console.log("1. new id przy prompcie: "+exported.newId);
 
-            exported.formidableButton(); //pojawia się przycisk formidable //TODO: formidable button jest tutaj
+            exported.formidableButton(); //pojawia się przycisk formidable //TODO: formidable button pojawia sie tutaj
             //wybór zdjęcia - teraz tym zajmie się formidable:
             
             //var oldImgPath = prompt("Podaj ścieżkę zdjęcia","/home/marek/WebstormProjects/Vigiles/data/add_new_patch_test_data/jol.jpg"); // sciezka do pliku na dysku - uri zdjęcia ??
@@ -368,23 +365,26 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             //var newImgJsonData = prompt("Podaj dane do zdjęcia - JSONData");  // dane lokalizacji zdjęcia - teraz tym zajmie się formidable
             
             // to na razie puszczam z automatu f-kcją "setSampleJsonData" - te dane mają zostać podane z aplikacji lub zdjęcie może być osadzane ręcznie przez tryb #edit
-            exported.setSampleJsonData = function(imageId) { // ta funkcja zwraca obiekt
-                return ({
-                    "id": imageId,
-                    "size": {"w": 300, "h": 400},
-                    "pos": {"x": 0, "y": -0.5, "w": 0.6},
-                    "points": [{"x": 0, "y": 0.5}],
-                    "children": []
-                });
-            };
 
-            exported.newImgJsonData = null;
-            exported.newImgJsonData = exported.setSampleJsonData(exported.newId.toString()); // tutaj mozna dodać cudzysłowy ("\"" + exported.newId.toString()+ "\"") - tak ?
-                                                                                        // w razie potrzeby, zeby w json był z cudzysłowiem
+            //SetSampleJsonData i wrzuca go w newImgJsonData:
+            {
+                exported.setSampleJsonData = function (imageId) { // ta funkcja zwraca obiekt
+                    return ({
+                        "id": imageId,
+                        "size": {"w": 300, "h": 400},
+                        "pos": {"x": 0, "y": -0.5, "w": 0.6},
+                        "points": [{"x": 0, "y": 0.5}],
+                        "children": []
+                    });
+                };
 
+                exported.newImgJsonData = null;
+                exported.newImgJsonData = exported.setSampleJsonData(exported.newId.toString()); // tutaj mozna dodać cudzysłowy ("\"" + exported.newId.toString()+ "\"") - tak ?
+                // w razie potrzeby, zeby w json był z cudzysłowiem
+            }
             console.log(exported.newImgJsonData); // zwraca obiekt
             
-            // ponizej oldImgPath jest artefaktem - kiedys usunac go wraz z odwolaniami (uwaga to zmieni tez w pliku node)
+            // ponizej oldImgPath jest artefaktem, który stal sie zbedny po uzyciu formidable - kiedys usunac go wraz z odwolaniami (uwaga to zmieni tez w pliku node)
             var promptedData = [oldImgPath, exported.newImgJsonData, exported.newImgParentImgsNumber,exported.newDataParentIdNumber];// pD: [ścieżka pliku na dysku nadawcy, dane jsona, parentImgsNumber lub "newParent", parentId]
 
 
@@ -400,7 +400,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             console.log(promptedData);
 
 
-            exported.executeAddingNewImage(exported.newId, promptedData);
+            exported.executeAddingJsonPathDataToNewImage(exported.newId, promptedData);
 
         }
 
@@ -465,7 +465,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
 
 
-            UpdateJsonOnServerREQUEST.makeRequest(exported.JsonWithNewPatch); //TODO: 1 tutaj wprowadzić w requesta callbacka - żeby dopiero po jego wykonaniu szedł dalej prohgram
+            UpdateJsonOnServerREQUEST.makeRequest(exported.JsonWithNewPatch);
             //alert("wysyla nowy json z mapa na serwer:");
             //6. Teraz wprowadzić nowego Patcha do positionables
 
@@ -491,7 +491,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             //positionable przed dodaniem Patcha:
             console.log(" positionable przed dodaniem patcha: ");
             console.log(exported.viewer.positionable.length);
-            alert("xxxxxx"); // TODO: dzieki temu alertowi moze być budowany 5 linijek nizej Patch ma juz wgrany obraz na dysk,
+            alert("xxxxxx"); // dzieki temu alertowi moze być budowany 5 linijek nizej Patch ma juz wgrany obraz na dysk, a gówno dalej nie działa
             // bez tej pauzy wyskakiwal blad ze nie ma pliku jescze (wrzuconego firmaidablem)
             console.log("HA !");
 
@@ -505,10 +505,10 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             var newPatch = new Patch(exported.newImgJsonData , parentPatch.image , exported.viewer.currentData,exported.newImgParentImgsNumber);
             exported.viewer.positionable.push(newPatch);
 
-            //TODO:problem w linijce wyżej jest bo przy budowaniu patcha w linijce 19 Patch.js jest " imgHTML.src=",
+            //problem w linijce wyżej jest bo przy budowaniu patcha w linijce 19 Patch.js jest " imgHTML.src=",
             // co powduje odwołanie do pliku, który jeszcze nie jest wgrany - trzeba zaczekać aż się wgra i wtedy zbudować Patcha: zrobiono kilka linijek wyzej alert, ktory uspokoil sprawe
 
-            //TODO: do parentPatcha 2 dodać nowego patch.image jako childrena, inaczej dodane zdjęcie nie bedzie zmieniało opacity przy ruszaniu cameraS: to działa po zrobieniu
+            // do parentPatcha 2 dodać nowego patch.image jako childrena, inaczej dodane zdjęcie nie bedzie zmieniało opacity przy ruszaniu cameraS: to działa po zrobieniu
            // debugger;
 
             console.log(parentPatch.image.children);
@@ -541,10 +541,9 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
         }
 
-        //todo 21.03.2018: dopiero tutaj jest wykonywany formidable - Patcha trzeba zbudowac po wyjsciu z tej funkcji  ... czyli ją wrzucić jako callback dla formidable ?
-        // todo: a formidabla jako callbacka dla wyslania danych do niego w sekwencji jak z tego pliku
+
         //lub Have you missed { enctype='multipart/form-data' } in form tag in your html file? Adding that might work - sprawdzone, to nie przyczyna !
-        // TODO: 22.03.2018 : wzor uzycia callbacka jest w MapDataProviderREQUEST - tam wrzucic debuggera i przyjrzec sie kiedy pojawia sie request, czy w miedzyczasie cos sie innego dzieje
+
 */
 
         console.log("lala");
@@ -609,6 +608,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
 
             UpdateJsonOnServerREQUEST.makeRequest(exported.JsonWithNewPatch); //TODO: 1 tutaj wrzucic jakoś callbacka albo onload
+            // TODO: 22.03.2018 : wzor uzycia callbacka jest w MapDataProviderREQUEST - tam wrzucic debuggera i przyjrzec sie kiedy pojawia sie request, czy w miedzyczasie cos sie innego
             //alert("wysyla nowy json z mapa na serwer:");
             //6. Teraz wprowadzić nowego Patcha do positionables
 
@@ -645,8 +645,8 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
 
             //exported.viewer.positionable.push(new Patch(exported.newImgJsonData , parentPatch.image , exported.viewer.currentData,exported.newImgParentImgsNumber)); //TODO: 2
-            var newPatch = new Patch(exported.newImgJsonData , parentPatch.image , exported.viewer.currentData,exported.newImgParentImgsNumber);
-            exported.viewer.positionable.push(newPatch);
+            /*var newPatch = new Patch(exported.newImgJsonData , parentPatch.image , exported.viewer.currentData,exported.newImgParentImgsNumber);
+            exported.viewer.positionable.push(newPatch);*/
 
             //TODO:problem w linijce wyżej jest bo przy budowaniu patcha w linijce 19 Patch.js jest " imgHTML.src=",
             // co powduje odwołanie do pliku, który jeszcze nie jest wgrany - trzeba zaczekać aż się wgra i wtedy zbudować Patcha: zrobiono kilka linijek wyzej alert, ktory uspokoil sprawe
@@ -675,7 +675,8 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
 
 
-            exported.viewer.updateAllPositionables();
+            //exported.viewer.updateAllPositionables();
+            //TODO: to chwilowo komentuje
 
 
             console.log(exported.viewer.positionable);

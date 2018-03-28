@@ -184,7 +184,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                             exported.bodyObject = bodyObject;
 
                             process.stdout.write("9.2.1. nowa sciezka do pliku: " + exported.bodyObject[0][0]);
-                            console.log("    9.2.2. sciezka do folderu: " + exported.bodyObject[0][1]);
+                            process.stdout.write("    9.2.2. sciezka do folderu: " + exported.bodyObject[0][1]);
                             var currentPath = "." + exported.bodyObject[0][1];
 
                             if (exported.bodyObject[2] ==! null) { // czyli kiedy nie ma originalParent i trzeb utworzyć nowy folder na kolejnego patcha-matke
