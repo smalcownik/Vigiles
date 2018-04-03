@@ -120,7 +120,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
                             if (err) {
                                 console.error(err);
                             } else {
-                                console.log("   success!")
+                                console.log("   success!"); //TODO: ta linijka nie zdazy wejsc bez alertu w ImageDataAdding (w funckji AfterJsonUpdateThings)
                             }
                         });
                         //return;
@@ -255,7 +255,7 @@ define(['./NodeFunctions'], function (NodeFunctions) {
 
                 );
                 response.write(stat); // gdzie to idzie ? czy to jest zwrocone zdjecie w pliku Patch w linijce mgHTML.src=(...) ?
-                //response.write("lalala");
+                //response.write("lalala"); - nie dziala
                 response.end();
             }
 

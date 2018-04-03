@@ -104,7 +104,25 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
         input.style.top = Camera.position.x + 40 + 'px';
         input.style.right = Camera.position.y - 110 + 'px';
         input.multiple = "multiple";
-        var input2 = document.createElement('input');
+
+
+        input.onchange = function(){
+
+            formidableButton.submit();
+
+            console.log("dup1 dup1 dup1");
+
+            exported.afterSavingWork();
+
+            console.log("dup2 dup2 dup2");
+
+            document.body.removeChild(formidableButton);
+
+
+        };
+
+        //poszło w odstawkę dzieki input.onchange() powyżej
+        /*var input2 = document.createElement('input');
         this.DOM = input2;
         input2.classList.add("potwierdz");
         input2.style.position = 'absolute';
@@ -112,10 +130,10 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
         input2.style.top = Camera.position.x + 70 + 'px';
         input2.style.right = Camera.position.y + 65 + 'px'; // w poziomie
         input2.type = "submit";
-        input2.value = "Potwierdz";
+        input2.value = "Potwierdz";*/
 
         formidableButton.appendChild(input);
-        formidableButton.appendChild(input2);
+        //formidableButton.appendChild(input2);
         document.body.appendChild(formidableButton);
 
 
@@ -131,7 +149,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
     exported.addingPatch = function(){
     exported.newPatchDataReceiverBuilder();
     //debugger;
-    exported.afterSavingWork();
+    //exported.afterSavingWork(); //todo: to dalem w input
     };
     
     {
@@ -180,6 +198,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
     }; // funckja uzupełnia listę nodów:  exp.nodeList = [image.id, image, originalParent, parent.id]
     // wykorzystuje cały obiekt mapy i używa funkcji traverse
 
+    //todo: fillNodelList i getNodeById usunąć, a prepareNextId zmodyfikować
 
     exported.getNodeById = function (idNumber){ // ma znalexc noda w nodeList na podstawie ID
 
@@ -314,8 +333,8 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
 
 
-
-        AddDataForImageToServerREQUEST.makeRequest(dataToServerJSON); // tu wysyla dane do patcha na serwer
+        AddDataForImageToServerREQUEST.makeRequest(dataToServerJSON, exported.formidableButton); // tu wysyla dane do patcha na serwer
+        //TODO: tu pojawia sie formidable jako callback
 
         //opcjonalnie,tutaj dorzucić nowego jsona zamiast UpdateJsonOnServerREQUEST:
 
@@ -342,8 +361,8 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             console.log("1. new id przy prompcie: "+exported.newId);
 
-            exported.formidableButton(); //pojawia się przycisk formidable //TODO: formidable button pojawia sie tutaj
-            //wybór zdjęcia - teraz tym zajmie się formidable:
+            /*exported.formidableButton(); //pojawia się przycisk formidable
+            //wybór zdjęcia - teraz tym zajmie się formidable:*/ // to przeniosłem jako callback do AddDataForImageToServerREQUEST
             
             //var oldImgPath = prompt("Podaj ścieżkę zdjęcia","/home/marek/WebstormProjects/Vigiles/data/add_new_patch_test_data/jol.jpg"); // sciezka do pliku na dysku - uri zdjęcia ??
             //home/marek/Downloads/jol.jpg
@@ -404,10 +423,10 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
         }
 
-        else if (clickedElement.className === "potwierdz") {//czyli po kliknięciu "Potwierdź" - to jest drugi etap wysylania nowego zdjecia w saveNewPatchButton daje dane a tutaj wysyla jsona
+        /*else if (clickedElement.className === "potwierdz") {//czyli po kliknięciu "Potwierdź" - to jest drugi etap wysylania nowego zdjecia w saveNewPatchButton daje dane a tutaj wysyla jsona
 
             exported.formidableExecuted = 1;
-        }
+        }*/ //todo: to skomentowalem i zamiast tego dalem to w input
 
         /*if(exported.formidableExecuted){
 
@@ -550,8 +569,10 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
     }; // wywolane w exported.addNewPatchEventListener
 
-    exported.afterSavingWork = function(){ // wywołane na początku tego pliku w funkcji addingPatch (obecnie lin. 134)
-        if(exported.formidableExecuted){
+    exported.afterSavingWork = function(){
+
+        // wywołane na początku tego pliku w funkcji addingPatch (obecnie lin. 134)
+        //if(exported.formidableExecuted) {
 
             console.log("jestem w JsonBuider czas dodać Patcha do jSona");
 
@@ -561,16 +582,16 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             //2. znaleźć w tym obiekcie parent na podstawie wyboru Id parenta (ImageDataAdding.fillNodeList - analogicznie tylko wyłapać parenta zamiasta budować coś)
 
-            console.log("2. new id przy potwierdzeniu: "+ exported.newId);
+            console.log("2. new id przy potwierdzeniu: " + exported.newId);
             //zamiast fill dać {if object.id == "id",
             // return object}
 
-            console.log("3. Parent id przy potwierdzeniu: "+ exported.newDataParentIdNumber);
+            console.log("3. Parent id przy potwierdzeniu: " + exported.newDataParentIdNumber);
 
 
             //3. do tego parenta dodać nowy szkielet (setSampleJsonData)
 
-            exported.pushNewChildrenJsonDataToObject = function(wholeObject, idNumber, parentNumber){ // to bedzie visitFunction w exported.dig (wywolanej z traverse)
+            exported.pushNewChildrenJsonDataToObject = function (wholeObject, idNumber, parentNumber) { // to bedzie visitFunction w exported.dig (wywolanej z traverse)
 
                 function find(image) {
 
@@ -587,7 +608,7 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
             }; // f-kcja dodaje nowy setSampleJsonData do objektu
 
-            exported.pushNewChildrenJsonDataToObject(exported.originalJSONparsed,exported.newId,exported.newDataParentIdNumber);
+            exported.pushNewChildrenJsonDataToObject(exported.originalJSONparsed, exported.newId, exported.newDataParentIdNumber);
 
             //4. sprawdzic czy w obieckie po zmianie jest nowy children
 
@@ -603,11 +624,77 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             //5. UpdateJsonOnServerREQUEST.makeRequest(exported.json); // tym zakończyć, teraz trzeba przygotować paczkę danych do zdjęcia zeby przy jego wysłaniu
             // serwer miał dane
 
+            AfterJsonUpdateThings = function (){
+                console.log("AfterJsonUpdateThings:");
+                
 
 
+                console.log("numer Id parenta:");
+                console.log(exported.newDataParentIdNumber);
+
+                console.log("proba z findPatchById:");
+                var parentPatch = exported.viewer.findPatchById(exported.newDataParentIdNumber);
+                console.log(parentPatch);
 
 
-            UpdateJsonOnServerREQUEST.makeRequest(exported.JsonWithNewPatch); //TODO: 1 tutaj wrzucic jakoś callbacka albo onload
+                //PIERWOTNIE: viewer.positionable.push(new Patch(image,parent,data,i));
+                //szczególnie:
+                //console.log(exported.newImgJsonData,parentPatch, exported.viewer.currentData,exported.newImgParentImgsNumber );
+
+
+                //6.2. stworzyć Patcha
+
+                //positionable przed dodaniem Patcha:
+                console.log(" positionable przed dodaniem patcha: ");
+                console.log(exported.viewer.positionable.length);
+                alert("xxxxxx"); // TODO: dzieki temu alertowi moze być budowany 5 linijek nizej Patch ma juz wgrany obraz na dysk,
+                // bez tej pauzy wyskakiwal blad ze nie ma pliku jescze (wrzuconego firmaidablem)
+                console.log("HA !");
+
+
+                // tu zwrocic uwage na mala zmiane: jest w drugiej zmiennej parentPatch.image - dodalem image bo dokladnie to jest potrzebne do zbudowania Patcha, inaczej wyskakiwal blad w budowaniu patcha
+
+
+                //exported.viewer.positionable.push(new Patch(exported.newImgJsonData , parentPatch.image , exported.viewer.currentData,exported.newImgParentImgsNumber)); //TODO: 2
+                var newPatch = new Patch(exported.newImgJsonData , parentPatch.image , exported.viewer.currentData,exported.newImgParentImgsNumber);
+                 exported.viewer.positionable.push(newPatch);
+
+                //TODO:problem w linijce wyżej jest bo przy budowaniu patcha w linijce 19 Patch.js jest " imgHTML.src=",
+                // co powduje odwołanie do pliku, który jeszcze nie jest wgrany - trzeba zaczekać aż się wgra i wtedy zbudować Patcha: zrobiono kilka linijek wyzej alert, ktory uspokoil sprawe - ale też nei dziala
+
+                //do patcha 2 dodano nowego patch.image jako childrena, inaczej dodane zdjęcie nie bedzie zmieniało opacity przy ruszaniu cameraS:
+                // debugger;
+
+                console.log(parentPatch.image.children);
+                console.log(newPatch.image);
+                parentPatch.image.children.push(newPatch.image);
+                console.log(parentPatch.image.children);
+
+
+                //positionable po dodaniu Patcha:
+                console.log("po dodaniu patcha: ");
+                console.log(exported.viewer.positionable.length);
+
+
+                //7. Update positionables
+
+
+                //artefakt: exported.viewer.loadURL(exported.viewer.serverURL,exported.viewer.DataPath, exported.viewer.JsonFile);
+
+                console.log("teraz ładnie odświeża positionables");
+
+
+                //exported.viewer.updateAllPositionables();
+                //TODO: to chwilowo komentuje
+
+
+                console.log(exported.viewer.positionable);
+                exported.formidableExecuted = 0;
+
+            };
+
+
+            UpdateJsonOnServerREQUEST.makeRequest(exported.JsonWithNewPatch, AfterJsonUpdateThings); //TODO: 1 tutaj wrzucic jakoś callbacka albo onload
             // TODO: 22.03.2018 : wzor uzycia callbacka jest w MapDataProviderREQUEST - tam wrzucic debuggera i przyjrzec sie kiedy pojawia sie request, czy w miedzyczasie cos sie innego
             //alert("wysyla nowy json z mapa na serwer:");
             //6. Teraz wprowadzić nowego Patcha do positionables
@@ -615,75 +702,9 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
             // 6.1.zebrać zmienne do Patcha:
 
 
-            console.log("numer Id parenta:");
-            console.log(exported.newDataParentIdNumber);
-
-            console.log("proba z findPatchById:");
-            var parentPatch = exported.viewer.findPatchById(exported.newDataParentIdNumber);
-            console.log(parentPatch);
 
 
-
-            //PIERWOTNIE: viewer.positionable.push(new Patch(image,parent,data,i));
-            //szczególnie:
-            //console.log(exported.newImgJsonData,parentPatch, exported.viewer.currentData,exported.newImgParentImgsNumber );
-
-
-            //6.2. stworzyć Patcha
-
-            //positionable przed dodaniem Patcha:
-            console.log(" positionable przed dodaniem patcha: ");
-            console.log(exported.viewer.positionable.length);
-            alert("xxxxxx"); // TODO: dzieki temu alertowi moze być budowany 5 linijek nizej Patch ma juz wgrany obraz na dysk,
-            // bez tej pauzy wyskakiwal blad ze nie ma pliku jescze (wrzuconego firmaidablem)
-            console.log("HA !");
-
-
-
-
-            // tu zwrocic uwage na mala zmiane: jest w drugiej zmiennej parentPatch.image - dodalem image bo dokladnie to jest potrzebne do zbudowania Patcha, inaczej wyskakiwal blad w budowaniu patcha
-
-
-            //exported.viewer.positionable.push(new Patch(exported.newImgJsonData , parentPatch.image , exported.viewer.currentData,exported.newImgParentImgsNumber)); //TODO: 2
-            /*var newPatch = new Patch(exported.newImgJsonData , parentPatch.image , exported.viewer.currentData,exported.newImgParentImgsNumber);
-            exported.viewer.positionable.push(newPatch);*/
-
-            //TODO:problem w linijce wyżej jest bo przy budowaniu patcha w linijce 19 Patch.js jest " imgHTML.src=",
-            // co powduje odwołanie do pliku, który jeszcze nie jest wgrany - trzeba zaczekać aż się wgra i wtedy zbudować Patcha: zrobiono kilka linijek wyzej alert, ktory uspokoil sprawe
-
-            //TODO: do patcha 2 dodać nowego patch.image jako childrena, inaczej dodane zdjęcie nie bedzie zmieniało opacity przy ruszaniu cameraS:
-            // debugger;
-
-            console.log(parentPatch.image.children);
-            console.log(newPatch.image);
-            parentPatch.image.children.push(newPatch.image);
-            console.log(parentPatch.image.children);
-            
-
-            //positionable po dodaniu Patcha:
-            console.log("po dodaniu patcha: ");
-            console.log(exported.viewer.positionable.length);
-
-
-            //7. Update positionables
-
-
-            //artefakt: exported.viewer.loadURL(exported.viewer.serverURL,exported.viewer.DataPath, exported.viewer.JsonFile);
-
-            console.log("teraz ładnie odświeża positionables");
-
-
-
-
-            //exported.viewer.updateAllPositionables();
-            //TODO: to chwilowo komentuje
-
-
-            console.log(exported.viewer.positionable);
-            exported.formidableExecuted = 0;
-
-
-        } // dopiero tutaj jest wykonywany formidable - Patcha trzeba zbudowac po wyjsciu z tej funkcji ... lub jako callback formidable'a
+        // dopiero tutaj jest wykonywany formidable - Patcha trzeba zbudowac po wyjsciu z tej funkcji ... lub jako callback formidable'a
 
 
     };

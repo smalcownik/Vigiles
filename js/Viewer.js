@@ -79,7 +79,6 @@ define(["./MapDataProviderREQUEST","./PatchBuilder","./PatchEditor","./PointsBui
             
             // TODO: z funkcjami poniżej zrobić porządek bo (jak w komentarzach przy nich) przy dowolnym kliknieciu odpala się kilka z nich - trzeba to uporządkowac zeby w zaleznosci
             // w co sie kliknie odpalala sie tylko jedna z funkcji : pozamieniać 'document.body' przy AddEventListener na poszczególne elementy body np. document.getElementbyID ...
-            
             CameraEventListeners.cameraEvents();
             PointEventListeners.addPoint();// przy dblclick
             PointEventListeners.showPointContent(); // przy click
