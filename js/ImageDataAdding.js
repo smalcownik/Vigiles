@@ -174,6 +174,8 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
     } // f-kcje dig i trwverse do trawersowania mapy imgs'ów
 
+    //todo: fillNodelList i getNodeById usunąć, a prepareNextId zmodyfikować
+
     exported.fillNodeList = function(wholeObject){ // to bedzie visitFunction w exported.dig (wywolanej z traverse)
 
         exported.nodeList = []; // ma być tablica, ktora umozliwi znalezienie referencji do objektu Patch po ID .. no właśnie nie do Patch tylko do oiektu z jsona - brak mu Patcha
@@ -197,8 +199,6 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
 
     }; // funckja uzupełnia listę nodów:  exp.nodeList = [image.id, image, originalParent, parent.id]
     // wykorzystuje cały obiekt mapy i używa funkcji traverse
-
-    //todo: fillNodelList i getNodeById usunąć, a prepareNextId zmodyfikować
 
     exported.getNodeById = function (idNumber){ // ma znalexc noda w nodeList na podstawie ID
 
@@ -426,144 +426,8 @@ define(["./Camera","./AddDataForImageToServerREQUEST", "./UpdateJsonOnServerREQU
         /*else if (clickedElement.className === "potwierdz") {//czyli po kliknięciu "Potwierdź" - to jest drugi etap wysylania nowego zdjecia w saveNewPatchButton daje dane a tutaj wysyla jsona
 
             exported.formidableExecuted = 1;
-        }*/ //todo: to skomentowalem i zamiast tego dalem to w input
+        }*/ //todo: to skomentowalem i zamiast tego dalem to w formidable.button - input.onchange.submit()
 
-        /*if(exported.formidableExecuted){
-
-            console.log("jestem w JsonBuider czas dodać Patcha do jSona");
-
-            // 1. znaleźć obiekt :)
-            console.log(exported.originalJSONparsed);// używa pliku z Viewera:objekt MapData (JSOn - string)
-
-
-            //2. znaleźć w tym obiekcie parent na podstawie wyboru Id parenta (ImageDataAdding.fillNodeList - analogicznie tylko wyłapać parenta zamiasta budować coś)
-
-            console.log("2. new id przy potwierdzeniu: "+ exported.newId);
-            //zamiast fill dać {if object.id == "id",
-            // return object}
-
-            console.log("3. Parent id przy potwierdzeniu: "+ exported.newDataParentIdNumber);
-
-
-            //3. do tego parenta dodać nowy szkielet (setSampleJsonData)
-
-            exported.pushNewChildrenJsonDataToObject = function(wholeObject, idNumber, parentNumber){ // to bedzie visitFunction w exported.dig (wywolanej z traverse)
-
-                function find(image) {
-
-                    if (image.id == parentNumber) { // znajduje rodzica naszego parenta - rodzic jest podany w prompcie w exported.newDataParentIdNumber
-
-                        image.children.push(exported.setSampleJsonData(idNumber)); // temu rodzicowi dodaje childrena (szkielet z nowym Id)
-
-                        return;
-
-                    }
-                }
-
-                this.traverse(wholeObject, find);
-
-            }; // f-kcja dodaje nowy setSampleJsonData do objektu
-
-            exported.pushNewChildrenJsonDataToObject(exported.originalJSONparsed,exported.newId,exported.newDataParentIdNumber);
-
-            //4. sprawdzic czy w obieckie po zmianie jest nowy children
-
-            console.log(exported.originalJSONparsed); // to zadzialalo - pokazuje w oiekcie nowy id :14
-
-            //4.zrobić z tego obiektu  var exported.json = JSON.stringify(obiekt);
-
-            exported.JsonWithNewPatch = JSON.stringify(exported.originalJSONparsed); // objScheme zbudowany w buildPatchesTree
-
-            console.log(exported.JsonWithNewPatch);
-            
-
-            //5. UpdateJsonOnServerREQUEST.makeRequest(exported.json); // tym zakończyć, teraz trzeba przygotować paczkę danych do zdjęcia zeby przy jego wysłaniu
-            // serwer miał dane
-
-
-
-
-
-            UpdateJsonOnServerREQUEST.makeRequest(exported.JsonWithNewPatch);
-            //alert("wysyla nowy json z mapa na serwer:");
-            //6. Teraz wprowadzić nowego Patcha do positionables
-
-                // 6.1.zebrać zmienne do Patcha:
-
-
-            console.log("numer Id parenta:");
-            console.log(exported.newDataParentIdNumber);
-
-            console.log("proba z findPatchById:");
-            var parentPatch = exported.viewer.findPatchById(exported.newDataParentIdNumber);
-            console.log(parentPatch);
-
-
-
-            //PIERWOTNIE: viewer.positionable.push(new Patch(image,parent,data,i));
-            //szczególnie:
-            //console.log(exported.newImgJsonData,parentPatch, exported.viewer.currentData,exported.newImgParentImgsNumber );
-
-
-                //6.2. stworzyć Patcha
-
-            //positionable przed dodaniem Patcha:
-            console.log(" positionable przed dodaniem patcha: ");
-            console.log(exported.viewer.positionable.length);
-            alert("xxxxxx"); // dzieki temu alertowi moze być budowany 5 linijek nizej Patch ma juz wgrany obraz na dysk, a gówno dalej nie działa
-            // bez tej pauzy wyskakiwal blad ze nie ma pliku jescze (wrzuconego firmaidablem)
-            console.log("HA !");
-
-
-
-
- // tu zwrocic uwage na mala zmiane: jest w drugiej zmiennej parentPatch.image - dodalem image bo dokladnie to jest potrzebne do zbudowania Patcha, inaczej wyskakiwal blad w budowaniu patcha
-
-
-            //exported.viewer.positionable.push(new Patch(exported.newImgJsonData , parentPatch.image , exported.viewer.currentData,exported.newImgParentImgsNumber)); //TODO: 2
-            var newPatch = new Patch(exported.newImgJsonData , parentPatch.image , exported.viewer.currentData,exported.newImgParentImgsNumber);
-            exported.viewer.positionable.push(newPatch);
-
-            //problem w linijce wyżej jest bo przy budowaniu patcha w linijce 19 Patch.js jest " imgHTML.src=",
-            // co powduje odwołanie do pliku, który jeszcze nie jest wgrany - trzeba zaczekać aż się wgra i wtedy zbudować Patcha: zrobiono kilka linijek wyzej alert, ktory uspokoil sprawe
-
-            // do parentPatcha 2 dodać nowego patch.image jako childrena, inaczej dodane zdjęcie nie bedzie zmieniało opacity przy ruszaniu cameraS: to działa po zrobieniu
-           // debugger;
-
-            console.log(parentPatch.image.children);
-            console.log(newPatch.image);
-            parentPatch.image.children.push(newPatch.image);
-            console.log(parentPatch.image.children);
-
-
-            //positionable po dodaniu Patcha:
-            console.log("po dodaniu patcha: ");
-            console.log(exported.viewer.positionable.length);
-
-
-            //7. Update positionables
-
-
-            //artefakt: exported.viewer.loadURL(exported.viewer.serverURL,exported.viewer.DataPath, exported.viewer.JsonFile);
-
-            console.log("teraz ładnie odświeża positionables");
-
-
-
-
-            exported.viewer.updateAllPositionables();
-
-
-            console.log(exported.viewer.positionable);
-            exported.formidableExecuted = 0;
-
-
-        }
-
-
-        //lub Have you missed { enctype='multipart/form-data' } in form tag in your html file? Adding that might work - sprawdzone, to nie przyczyna !
-
-*/
 
         console.log("lala");
 
